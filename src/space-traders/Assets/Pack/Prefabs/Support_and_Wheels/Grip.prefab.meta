@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1e117a9504a84b641824accffe2367bd
+timeCreated: 1499359288
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Support_and_Wheels/Grip.prefab
+  uploadId: 190753

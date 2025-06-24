@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 03bf4de005ad69743839c632f813e590
+timeCreated: 1499362156
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Guns/Radar1Double.prefab
+  uploadId: 190753

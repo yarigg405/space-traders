@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 19cdb8f820efda84faae0ef681e74894
+timeCreated: 1497606631
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/FBX/Front2/Materials/Front2.mat
+  uploadId: 190753

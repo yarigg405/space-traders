@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f96a601bc92237a4a867769b0e576aba
+timeCreated: 1496225467
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Scripts/RotateAround.cs
+  uploadId: 190753

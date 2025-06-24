@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8b827addc849a094080dc0deb7ae2c0e
+timeCreated: 1498064456
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/FBX/CylinderLight/Materials/CylinderLight.mat
+  uploadId: 190753

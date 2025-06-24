@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 29e99b100e9b3f54f966ad1fb847d8e5
+timeCreated: 1499362074
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Wings/Wing4.prefab
+  uploadId: 190753

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a99783fd14f6d154998cc5e507bd5eee
+timeCreated: 1496834181
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/FBX/Truck_Body/Materials/TruckBody.mat
+  uploadId: 190753
