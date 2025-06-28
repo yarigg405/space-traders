@@ -23,7 +23,8 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         private void EnterHomeScreenScene()
         {
-            _stateMachine.Enter<MenuSceneState>();
+            //_stateMachine.Enter<MenuSceneState>();
+            _stateMachine.Enter<LoadBattleState, string>("GameScene");
         }
     }
 }

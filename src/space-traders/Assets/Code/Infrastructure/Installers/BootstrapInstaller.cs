@@ -5,6 +5,7 @@ using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
+using Assets.Code.Infrastructure.Systems;
 using VContainer;
 using VContainer.Unity;
 
@@ -39,6 +40,7 @@ namespace Assets.Code.Infrastructure.Installers
             _builder.Register<IdentifierService>(Lifetime.Singleton).AsSelf();
             _builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
+            _builder.Register<SystemFactory>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
         private void BindStates()
