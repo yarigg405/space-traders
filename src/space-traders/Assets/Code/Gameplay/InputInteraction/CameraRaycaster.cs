@@ -6,8 +6,7 @@ namespace Assets.Code.Gameplay.InputInteraction
     internal sealed class CameraRaycaster
     {
         private const float _rayDistance = 1000f;
-        private const string _layerName = "ClickPanel";
-        private readonly LayerMask _layerMask;
+        private readonly LayerMask _layerMask = LayerMask.GetMask("ClickPanel");
 
         private Camera _mainCamera;
         private Camera _camera
@@ -21,14 +20,9 @@ namespace Assets.Code.Gameplay.InputInteraction
             }
         }
 
-        public CameraRaycaster()
-        {
-            _layerMask = LayerMask.NameToLayer(_layerName);
-        }
-
         internal bool RaycastFromCameraToMouse(out RaycastHit hit)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, _rayDistance, _layerMask))
             {
                 return true;
