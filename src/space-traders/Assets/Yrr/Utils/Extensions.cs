@@ -85,7 +85,7 @@ namespace Yrr.Utils
         public static float GetRandomValue(this Vector2 vector)
         {
             return Random.Range(vector.x, vector.y);
-        }       
+        }
 
         public static T GetRandomItem<T>(this T[] list)
         {
@@ -145,7 +145,7 @@ namespace Yrr.Utils
             return ((ulong)value).ToShortMoneyString();
         }
 
-        private static string[] _moneyPrefix = { string.Empty, "K", "M", "B" };
+        private static string[] _moneyPrefix = { string.Empty, "K", "M", "B", "T", "Q", "E", "Z" };
 
         public static string ToShortMoneyString(this float value)
         {
@@ -154,7 +154,7 @@ namespace Yrr.Utils
 
         public static string ToShortMoneyString(this ulong value)
         {
-            if (value == 0) return "0";            
+            if (value == 0) return "0";
             var absolute = Mathf.Abs(value);
             int add;
             if (absolute < 1)
@@ -246,7 +246,27 @@ namespace Yrr.Utils
                 sb.Append(hours.ToString("00"));
                 sb.Append(":");
             }
-            sb.Append(minutes.ToString("0"));
+            sb.Append(minutes.ToString("00"));
+            sb.Append(":");
+            sb.Append(seconds.ToString("00"));
+
+            return sb.ToString();
+        }
+
+        public static string ToLongTimeString(this float timeValue)
+        {
+            var time = (int)timeValue + 1;
+
+            var seconds = time % 60f;
+            var minutes = time / 60;
+            var hours = minutes / 60;
+            minutes = minutes % 60;
+
+            var sb = new StringBuilder();
+
+            sb.Append(hours.ToString("00"));
+            sb.Append(":");
+            sb.Append(minutes.ToString("00"));
             sb.Append(":");
             sb.Append(seconds.ToString("00"));
 

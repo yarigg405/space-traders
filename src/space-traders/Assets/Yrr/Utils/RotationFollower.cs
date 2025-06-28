@@ -7,7 +7,7 @@ namespace Yrr.Utils
     {
         [SerializeField] private Transform _target;
 
-        private void Update()
+        private void LateUpdate()
         {
             transform.rotation = _target.rotation;
         }

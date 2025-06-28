@@ -14,7 +14,7 @@ namespace Yrr.Utils
             _offset = transform.position - _target.position;
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             var point = _target.transform.position + _offset;
             transform.position = Vector3.MoveTowards(transform.position, point, _smoothModificator * Time.fixedDeltaTime * 100f);

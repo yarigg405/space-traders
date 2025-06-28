@@ -13,7 +13,7 @@ namespace Yrr.Utils
             _offset = transform.position - _target.position;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             transform.position = _target.transform.position + _offset;
         }
