@@ -14,12 +14,16 @@ public static class GameComponentsLookup {
     public const int ViewPrefab = 3;
     public const int Active = 4;
     public const int EntityLink = 5;
-    public const int Id = 6;
-    public const int Rigidbody = 7;
-    public const int Transform = 8;
-    public const int WorldPosition = 9;
+    public const int GlobalPosition = 6;
+    public const int Id = 7;
+    public const int LocalPosition = 8;
+    public const int Rigidbody = 9;
+    public const int Transform = 10;
+    public const int CurrentRotationY = 11;
+    public const int DirectionalMovement = 12;
+    public const int Moving = 13;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -28,10 +32,14 @@ public static class GameComponentsLookup {
         "ViewPrefab",
         "Active",
         "EntityLink",
+        "GlobalPosition",
         "Id",
+        "LocalPosition",
         "Rigidbody",
         "Transform",
-        "WorldPosition"
+        "CurrentRotationY",
+        "DirectionalMovement",
+        "Moving"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -41,9 +49,13 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.ViewPrefab),
         typeof(Assets.Code.Gameplay.Common.Active),
         typeof(Assets.Code.Gameplay.Common.EntityLink),
+        typeof(Assets.Code.Gameplay.Common.GlobalPosition),
         typeof(Assets.Code.Gameplay.Common.Id),
+        typeof(Assets.Code.Gameplay.Common.LocalPosition),
         typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
-        typeof(Assets.Code.Gameplay.Common.WorldPosition)
+        typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
+        typeof(Assets.Code.Gameplay.Features.Movement.DirectionalMovement),
+        typeof(Assets.Code.Gameplay.Features.Movement.Moving)
     };
 }

@@ -1,4 +1,5 @@
-﻿using Assets.Code.Infrastructure.Systems;
+﻿using Assets.Code.Gameplay.Features.Movement;
+using Assets.Code.Infrastructure.Systems;
 
 
 namespace Assets.Code.Gameplay
@@ -7,7 +8,7 @@ namespace Assets.Code.Gameplay
     {
         public GameFeature(ISystemFactory systems)
         {
-
+            Add(systems.Create<MovementFeature>());
         }
     }
 }

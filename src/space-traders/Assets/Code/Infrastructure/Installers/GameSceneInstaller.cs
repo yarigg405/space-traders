@@ -1,8 +1,10 @@
 ﻿using Assets.Code.Gameplay.CameraSystem;
 using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.DI;
+using Assets.Code.Infrastructure.Loading;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 
 namespace Assets.Code.Infrastructure.Installers
@@ -20,6 +22,8 @@ namespace Assets.Code.Infrastructure.Installers
 
             RegisterCamera();
             RegisterInput();
+
+            _builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
         }
 
         private void RegisterCamera()

@@ -2,7 +2,7 @@
 
 namespace Assets.Code.Infrastructure.Systems
 {
-    internal interface ISystemFactory
+    public interface ISystemFactory
     {
         T Create<T>() where T : ISystem;
     }

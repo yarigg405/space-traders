@@ -1,6 +1,5 @@
 ﻿using Assets.Code.Gameplay;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
-using Assets.Code.Infrastructure.Systems;
 using VContainer.Unity;
 
 
@@ -9,29 +8,21 @@ namespace Assets.Code.Infrastructure.States.GameStates
     internal sealed class GameLoopState : GameState, IUpdatableState, IPostLateTickable
     {
         private readonly GameContext _game;
-        private readonly ISystemFactory _systems;
-
-        private GameFeature _gameFeature;
+        private readonly FeaturesContainer _featuresContainer;
         private bool _isExit;
 
-        public GameLoopState(GameContext game, ISystemFactory systems)
+        public GameLoopState(GameContext game, FeaturesContainer featuresContainer)
         {
             _game = game;
-            _systems = systems;
-        }
-
-        public override void Enter()
-        {
-            _gameFeature = _systems.Create<GameFeature>();
-            _gameFeature.Initialize();
+            _featuresContainer = featuresContainer;
         }
 
         void IUpdatableState.Update()
         {
             if (_isExit) return;
+            if (!_featuresContainer.IsInitialized) return;
 
-            _gameFeature.Execute();
-            _gameFeature.Cleanup();
+            _featuresContainer.Tick();
         }
 
         public override void Exit()
@@ -43,13 +34,9 @@ namespace Assets.Code.Infrastructure.States.GameStates
         {
             if (!_isExit) return;
 
-            _gameFeature.DeactivateReactiveSystems();
-            _gameFeature.ClearReactiveSystems();
-
+            _featuresContainer.Stop();
             DestructEntities();
-
-            _gameFeature.Cleanup();
-            _gameFeature.TearDown();
+            _featuresContainer.Cleanup();
         }
 
         private void DestructEntities()
