@@ -18,7 +18,7 @@ namespace Assets.Code.Gameplay.InputInteraction
 
         void ITickable.Tick()
         {
-            if (Input.GetMouseButtonUp(0))
+            if (UnityEngine.Input.GetMouseButtonUp(0))
             {
                 if (_raycaster.RaycastFromCameraToMouse(out var raycastHit))
                 {

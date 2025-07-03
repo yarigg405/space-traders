@@ -5,13 +5,16 @@ using VContainer.Unity;
 
 namespace Assets.Code.Gameplay.InputInteraction
 {
-    internal sealed class InputListener : IStartable, IDisposable
+    internal sealed class InputService : IStartable, IDisposable
     {
         private readonly MouseClickNotificator _mouseClickNotificator;
+        private readonly InputDataContainer _inputDataContainer;
 
-        public InputListener(MouseClickNotificator mouseClickNotificator)
+
+        public InputService(MouseClickNotificator mouseClickNotificator, InputDataContainer inputDataContainer)
         {
             _mouseClickNotificator = mouseClickNotificator;
+            _inputDataContainer = inputDataContainer;
         }
 
         void IStartable.Start()
@@ -26,7 +29,7 @@ namespace Assets.Code.Gameplay.InputInteraction
 
         private void OnMouseClickHandler(Vector3 vector)
         {
-            Debug.Log("### Clicked in: " + vector);
+            _inputDataContainer.SetInput(vector);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Assets.Code.Gameplay.InputInteraction
 
         internal bool RaycastFromCameraToMouse(out RaycastHit hit)
         {
-            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _camera.ScreenPointToRay(UnityEngine.Input.mousePosition);
             if (Physics.Raycast(ray, out hit, _rayDistance, _layerMask))
             {
                 return true;

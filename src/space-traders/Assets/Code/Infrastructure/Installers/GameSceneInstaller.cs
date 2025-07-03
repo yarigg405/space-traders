@@ -36,7 +36,7 @@ namespace Assets.Code.Infrastructure.Installers
         {
             _builder.Register<CameraRaycaster>(Lifetime.Scoped).AsSelf();
             _builder.Register<MouseClickNotificator>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
-            _builder.Register<InputListener>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
+            _builder.Register<InputService>(Lifetime.Scoped).AsImplementedInterfaces();
         }
     }
 }

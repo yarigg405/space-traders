@@ -22,8 +22,11 @@ public static class GameComponentsLookup {
     public const int CurrentRotationY = 11;
     public const int DirectionalMovement = 12;
     public const int Moving = 13;
+    public const int Player = 14;
+    public const int ClickedPosition = 15;
+    public const int Input = 16;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -39,7 +42,10 @@ public static class GameComponentsLookup {
         "Transform",
         "CurrentRotationY",
         "DirectionalMovement",
-        "Moving"
+        "Moving",
+        "Player",
+        "ClickedPosition",
+        "Input"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -56,6 +62,9 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
         typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
         typeof(Assets.Code.Gameplay.Features.Movement.DirectionalMovement),
-        typeof(Assets.Code.Gameplay.Features.Movement.Moving)
+        typeof(Assets.Code.Gameplay.Features.Movement.Moving),
+        typeof(Assets.Code.Gameplay.Features.Player.Player),
+        typeof(Assets.Code.Gameplay.InputInteraction.ClickedPosition),
+        typeof(Assets.Code.Gameplay.InputInteraction.Input)
     };
 }

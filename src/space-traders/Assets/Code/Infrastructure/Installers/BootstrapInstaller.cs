@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Gameplay;
 using Assets.Code.Gameplay.Common.Collisions;
 using Assets.Code.Gameplay.Common.Time;
+using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.Infrastructure.Loading;
@@ -55,6 +56,7 @@ namespace Assets.Code.Infrastructure.Installers
 
         private void BindCommonServices()
         {
+            _builder.Register<InputDataContainer>(Lifetime.Singleton).AsSelf();
             _builder.Register<SystemFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<CollisionRegistry>(Lifetime.Singleton).AsImplementedInterfaces();
