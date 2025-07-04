@@ -14,11 +14,18 @@ namespace Assets.Code.Gameplay.Features.Player.Registrars
             _entity = CreateEntity
                 .Empty()
                 .AddGlobalPosition(new Common.Vector2Double(transform.position.x, transform.position.z))
-                .AddDirectionalMovement(Vector2.zero)
+                .AddLocalPosition(Vector3.zero)
                 .AddTransform(transform)
+
+                .AddVelocity(Vector2.zero)
+                .AddVelocityAgility(50f)
+
+                .AddCurrentRotationY(0)
+                .AddTargetRotation(0)
+                .AddRotationSpeed(50f)
+
                 .With(x => x.isPlayer = true)
             ;
-
         }
     }
 }

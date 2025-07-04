@@ -30,7 +30,6 @@ namespace Yrr.Utils
             }
         }
 
-
         #region Vectors  
         public static Vector3 GetRandomCoordinatesAroundPointZX(this Vector3 originalPoint, float radius,
                 bool pointOnRadiusLine = false)

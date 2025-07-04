@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Assets.Code.Gameplay.Common.LocalPosition localPosition { get { return (Assets.Code.Gameplay.Common.LocalPosition)GetComponent(GameComponentsLookup.LocalPosition); } }
-    public UnityEngine.Vector2 LocalPosition { get { return localPosition.Value; } }
+    public UnityEngine.Vector3 LocalPosition { get { return localPosition.Value; } }
     public bool hasLocalPosition { get { return HasComponent(GameComponentsLookup.LocalPosition); } }
 
-    public GameEntity AddLocalPosition(UnityEngine.Vector2 newValue) {
+    public GameEntity AddLocalPosition(UnityEngine.Vector3 newValue) {
         var index = GameComponentsLookup.LocalPosition;
         var component = (Assets.Code.Gameplay.Common.LocalPosition)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.LocalPosition));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceLocalPosition(UnityEngine.Vector2 newValue) {
+    public GameEntity ReplaceLocalPosition(UnityEngine.Vector3 newValue) {
         var index = GameComponentsLookup.LocalPosition;
         var component = (Assets.Code.Gameplay.Common.LocalPosition)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.LocalPosition));
         component.Value = newValue;

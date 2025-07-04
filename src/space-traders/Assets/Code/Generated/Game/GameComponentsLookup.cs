@@ -17,16 +17,21 @@ public static class GameComponentsLookup {
     public const int GlobalPosition = 6;
     public const int Id = 7;
     public const int LocalPosition = 8;
-    public const int Rigidbody = 9;
-    public const int Transform = 10;
-    public const int CurrentRotationY = 11;
-    public const int DirectionalMovement = 12;
-    public const int Moving = 13;
-    public const int Player = 14;
-    public const int ClickedPosition = 15;
-    public const int Input = 16;
+    public const int QuadrantIndex = 9;
+    public const int Rigidbody = 10;
+    public const int Transform = 11;
+    public const int CurrentRotationY = 12;
+    public const int MoveSpeed = 13;
+    public const int Moving = 14;
+    public const int RotationSpeed = 15;
+    public const int TargetRotation = 16;
+    public const int Velocity = 17;
+    public const int VelocityAgility = 18;
+    public const int Player = 19;
+    public const int ClickedPosition = 20;
+    public const int Input = 21;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -38,11 +43,16 @@ public static class GameComponentsLookup {
         "GlobalPosition",
         "Id",
         "LocalPosition",
+        "QuadrantIndex",
         "Rigidbody",
         "Transform",
         "CurrentRotationY",
-        "DirectionalMovement",
+        "MoveSpeed",
         "Moving",
+        "RotationSpeed",
+        "TargetRotation",
+        "Velocity",
+        "VelocityAgility",
         "Player",
         "ClickedPosition",
         "Input"
@@ -58,11 +68,16 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Common.GlobalPosition),
         typeof(Assets.Code.Gameplay.Common.Id),
         typeof(Assets.Code.Gameplay.Common.LocalPosition),
+        typeof(Assets.Code.Gameplay.Common.QuadrantIndex),
         typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
         typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
-        typeof(Assets.Code.Gameplay.Features.Movement.DirectionalMovement),
+        typeof(Assets.Code.Gameplay.Features.Movement.MoveSpeed),
         typeof(Assets.Code.Gameplay.Features.Movement.Moving),
+        typeof(Assets.Code.Gameplay.Features.Movement.RotationSpeed),
+        typeof(Assets.Code.Gameplay.Features.Movement.TargetRotation),
+        typeof(Assets.Code.Gameplay.Features.Movement.Velocity),
+        typeof(Assets.Code.Gameplay.Features.Movement.VelocityAgility),
         typeof(Assets.Code.Gameplay.Features.Player.Player),
         typeof(Assets.Code.Gameplay.InputInteraction.ClickedPosition),
         typeof(Assets.Code.Gameplay.InputInteraction.Input)

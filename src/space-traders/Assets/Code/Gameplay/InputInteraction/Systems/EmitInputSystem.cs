@@ -22,10 +22,10 @@ namespace Assets.Code.Gameplay.InputInteraction.Systems
                 {
                     input.ReplaceClickedPosition(_inputContainer.GetInputValue());
                 }
-                //else if (input.hasClickedPosition)
-                //{
-                //    input.RemoveClickedPosition();
-                //}
+                else if (input.hasClickedPosition)
+                {
+                    input.RemoveClickedPosition();
+                }
             }
         }
     }

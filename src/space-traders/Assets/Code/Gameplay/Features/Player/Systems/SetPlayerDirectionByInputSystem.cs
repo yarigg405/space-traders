@@ -14,8 +14,8 @@ namespace Assets.Code.Gameplay.Features.Player.Systems
         {
             _players = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Player,
-                GameMatcher.Transform,
-                GameMatcher.DirectionalMovement
+                GameMatcher.TargetRotation,
+                GameMatcher.LocalPosition
             ));
             _inputs = game.GetGroup(GameMatcher.Input);
         }
@@ -26,10 +26,10 @@ namespace Assets.Code.Gameplay.Features.Player.Systems
             {
                 foreach (var player in _players)
                 {
-                    player.Transform.position = input.ClickedPosition;
-
-                    //var direction = (input.ClickedPosition - player.Transform.position).ToVector2XZ().normalized;
-                    //player.ReplaceDirectionalMovement(direction);
+                    var targetRotation = AnglesUtil.GetAngleDirectionY(player.LocalPosition, input.ClickedPosition);
+                    player.ReplaceTargetRotation(targetRotation);
+                    player.ReplaceMoveSpeed(15f);
+                    player.isMoving = true;
                 }
             }
         }
