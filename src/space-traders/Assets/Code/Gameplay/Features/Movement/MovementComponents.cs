@@ -13,4 +13,6 @@ namespace Assets.Code.Gameplay.Features.Movement
     [Game] public class CurrentRotationY : IComponent { public float Value; }
     [Game] public class TargetRotation : IComponent { public float Value; }
     [Game] public class RotationSpeed : IComponent { public float Value; }
+
+    [Game] public class ChaseTarget : IComponent { public GameEntity Value; }
 }

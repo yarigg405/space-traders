@@ -8,6 +8,8 @@ namespace Assets.Code.Gameplay.Features.Movement
     {
         public MovementFeature(ISystemFactory systems)
         {
+            Add(systems.Create<ChaseTargetSystem>());
+
             Add(systems.Create<RotationSystem>());
             Add(systems.Create<HandleVelocitySystem>());
             Add(systems.Create<PhysicsMovingSystem>());

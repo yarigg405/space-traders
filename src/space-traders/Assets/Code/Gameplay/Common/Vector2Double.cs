@@ -12,5 +12,15 @@ namespace Assets.Code.Gameplay.Common
 
         public double X;
         public double Y;
+
+        public static Vector2Double operator +(Vector2Double left, Vector2Double right)
+        {
+            return new Vector2Double(left.X+right.X, left.Y+right.Y);
+        }
+
+        public static Vector2Double operator -(Vector2Double left, Vector2Double right)
+        {
+            return new Vector2Double(left.X - right.X, left.Y - right.Y);
+        }
     }
 }

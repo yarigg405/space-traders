@@ -20,18 +20,19 @@ public static class GameComponentsLookup {
     public const int QuadrantIndex = 9;
     public const int Rigidbody = 10;
     public const int Transform = 11;
-    public const int CurrentRotationY = 12;
-    public const int MoveSpeed = 13;
-    public const int Moving = 14;
-    public const int RotationSpeed = 15;
-    public const int TargetRotation = 16;
-    public const int Velocity = 17;
-    public const int VelocityAgility = 18;
-    public const int Player = 19;
-    public const int ClickedPosition = 20;
-    public const int Input = 21;
+    public const int ChaseTarget = 12;
+    public const int CurrentRotationY = 13;
+    public const int MoveSpeed = 14;
+    public const int Moving = 15;
+    public const int RotationSpeed = 16;
+    public const int TargetRotation = 17;
+    public const int Velocity = 18;
+    public const int VelocityAgility = 19;
+    public const int Player = 20;
+    public const int ClickedPosition = 21;
+    public const int Input = 22;
 
-    public const int TotalComponents = 22;
+    public const int TotalComponents = 23;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -46,6 +47,7 @@ public static class GameComponentsLookup {
         "QuadrantIndex",
         "Rigidbody",
         "Transform",
+        "ChaseTarget",
         "CurrentRotationY",
         "MoveSpeed",
         "Moving",
@@ -71,6 +73,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Common.QuadrantIndex),
         typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
+        typeof(Assets.Code.Gameplay.Features.Movement.ChaseTarget),
         typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
         typeof(Assets.Code.Gameplay.Features.Movement.MoveSpeed),
         typeof(Assets.Code.Gameplay.Features.Movement.Moving),

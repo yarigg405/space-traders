@@ -1,31 +1,34 @@
 ﻿using Assets.Code.View;
-using Code.Common.Extensions;
 using UnityEngine;
 
 
-namespace Assets.Code.Gameplay.Features.Player.Registrars
+namespace Assets.Code.Gameplay.Features.Enemy
 {
-    internal sealed class HeroRegistrar : EntityComponentRegistrar
+    internal sealed class EnemyRegistrar : EntityComponentRegistrar
     {
+        [SerializeField] private EntityBehaviour _chaseTarget;
+
         public override void RegisterComponents()
         {
             Entity
                 .AddGlobalPosition(new Common.Vector2Double(transform.position.x, transform.position.z))
-                .AddLocalPosition(Vector3.zero)
+                .AddLocalPosition(transform.position)
 
                 .AddVelocity(Vector2.zero)
-                .AddVelocityAgility(50f)
+                .AddVelocityAgility(30f)
+                .AddMoveSpeed(4f)
 
                 .AddCurrentRotationY(0)
                 .AddTargetRotation(0)
-                .AddRotationSpeed(50f)
+                .AddRotationSpeed(30f)
 
-                .With(x => x.isPlayer = true);
+                .AddChaseTarget(_chaseTarget.Entity);
+                ;
         }
 
         public override void UnRegisterComponents()
         {
-
+           
         }
     }
 }
