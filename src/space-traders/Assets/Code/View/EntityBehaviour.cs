@@ -24,7 +24,7 @@ namespace Assets.Code.View
             _entity.AddView(this);
             _entity.Retain(this);
 
-            foreach (var registrar in GetComponentsInChildren<EntityComponentRegistrar>())
+            foreach (var registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
             {
                 registrar.RegisterComponents();
             }
@@ -42,7 +42,7 @@ namespace Assets.Code.View
                 _collisionRegistry.UnRegister(collider.GetInstanceID());
             }
 
-            foreach (var registrar in GetComponentsInChildren<EntityComponentRegistrar>())
+            foreach (var registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
             {
                 registrar.UnRegisterComponents();
             }

@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common.Entity;
+﻿ using Assets.Code.Common.Entity;
 using Code.Common.Extensions;
 using UnityEngine;
 

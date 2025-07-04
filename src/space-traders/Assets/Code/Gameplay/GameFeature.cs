@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Features.Movement;
+﻿using Assets.Code.Common.Destruct;
+using Assets.Code.Gameplay.Features.Movement;
 using Assets.Code.Gameplay.Features.Player;
 using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.Systems;
@@ -11,8 +12,10 @@ namespace Assets.Code.Gameplay
         public GameFeature(ISystemFactory systems)
         {
             Add(systems.Create<InputFeature>());
-            Add(systems.Create<MovementFeature>());
             Add(systems.Create<PlayerFeature>());
+            Add(systems.Create<MovementFeature>());
+
+            Add(systems.Create<ProcessDestructedFeature>());
         }
     }
 }
