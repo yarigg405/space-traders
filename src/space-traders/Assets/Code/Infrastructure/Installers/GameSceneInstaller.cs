@@ -2,6 +2,7 @@
 using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Loading;
+using Assets.Code.Infrastructure.Systems;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -20,15 +21,16 @@ namespace Assets.Code.Infrastructure.Installers
         {
             _builder = builder;
 
-            RegisterCamera();
+            RegisterInfrastructure();
             RegisterInput();
 
             _builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
         }
 
-        private void RegisterCamera()
+        private void RegisterInfrastructure()
         {
-            var cameraService = new SameraService(_cameraMover, _cameraController);
+            _builder.Register<SystemFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            var cameraService = new CameraService(_cameraMover, _cameraController);
             _builder.RegisterInstance(cameraService);
         }
 

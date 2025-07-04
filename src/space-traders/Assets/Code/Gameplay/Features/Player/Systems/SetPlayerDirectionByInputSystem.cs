@@ -17,7 +17,10 @@ namespace Assets.Code.Gameplay.Features.Player.Systems
                 GameMatcher.TargetRotation,
                 GameMatcher.LocalPosition
             ));
-            _inputs = game.GetGroup(GameMatcher.Input);
+            _inputs = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Input,
+                GameMatcher.ClickedPosition)
+                );
         }
 
         void IExecuteSystem.Execute()

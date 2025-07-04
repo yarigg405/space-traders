@@ -21,7 +21,7 @@ namespace Assets.Code.Gameplay.CameraSystem
             DOTween.Kill(gameObject);
 
             var seq = DOTween.Sequence(gameObject).SetUpdate(true)
-                .Append(transform.DOMove(_target.position, 1f))
+                .Append(transform.DOMove(newTarget.position, 1f))
                 .AppendCallback(() => _target = newTarget);
         }
     }

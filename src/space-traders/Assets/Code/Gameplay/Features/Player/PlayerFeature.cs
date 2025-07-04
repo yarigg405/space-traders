@@ -8,6 +8,7 @@ namespace Assets.Code.Gameplay.Features.Player
     {
         public PlayerFeature(ISystemFactory systems)
         {
+            Add(systems.Create<SetupCameraOnPlayerSystem>());
             Add(systems.Create<SetPlayerDirectionByInputSystem>());
         }
     }

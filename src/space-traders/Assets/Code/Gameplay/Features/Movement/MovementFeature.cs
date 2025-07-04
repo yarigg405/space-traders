@@ -13,7 +13,8 @@ namespace Assets.Code.Gameplay.Features.Movement
             Add(systems.Create<PhysicsMovingSystem>());
 
             Add(systems.Create<LocalPositionRecalculateSystem>());
-            Add(systems.Create<UpdateTransformSystem>());
+            Add(systems.Create<UpdateTransformRotationSystem>());
+            Add(systems.Create<UpdateTransformPositionSystem>());
         }
     }
 }
