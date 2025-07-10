@@ -20,6 +20,10 @@ namespace Assets.Code.Gameplay.Features.Player.Registrars
                 .AddTargetRotation(0)
                 .AddRotationSpeed(50f)
 
+                .AddRadius(10f)
+                .AddMaxHp(50f)
+                .AddCurrentHp(50f)
+
                 .With(x => x.isPlayer = true);
         }
 

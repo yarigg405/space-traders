@@ -16,19 +16,27 @@ namespace Assets.Code.Gameplay.Features.Enemy
 
                 .AddVelocity(Vector2.zero)
                 .AddVelocityAgility(30f)
-                .AddMoveSpeed(4f)
+                .AddMoveSpeed(20f)
 
                 .AddCurrentRotationY(0)
                 .AddTargetRotation(0)
                 .AddRotationSpeed(30f)
 
+                .AddMaxHp(50f)
+                .AddCurrentHp(50f)
+                .AddDamage(30f)
+
+                .AddRadius(10f)
+                .AddCollectTargetsInterval(0.5f)
+                .AddCollectTargetsTimer(0f)
+
                 .AddChaseTarget(_chaseTarget.Entity);
-                ;
+            ;
         }
 
         public override void UnRegisterComponents()
         {
-           
+
         }
     }
 }

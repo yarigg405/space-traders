@@ -13,26 +13,34 @@ public static class GameComponentsLookup {
     public const int View = 2;
     public const int ViewPrefab = 3;
     public const int Active = 4;
-    public const int EntityLink = 5;
-    public const int GlobalPosition = 6;
-    public const int Id = 7;
-    public const int LocalPosition = 8;
-    public const int QuadrantIndex = 9;
-    public const int Rigidbody = 10;
-    public const int Transform = 11;
-    public const int ChaseTarget = 12;
-    public const int CurrentRotationY = 13;
-    public const int MoveSpeed = 14;
-    public const int Moving = 15;
-    public const int RotationSpeed = 16;
-    public const int TargetRotation = 17;
-    public const int Velocity = 18;
-    public const int VelocityAgility = 19;
-    public const int Player = 20;
-    public const int ClickedPosition = 21;
-    public const int Input = 22;
+    public const int Damage = 5;
+    public const int EntityLink = 6;
+    public const int GlobalPosition = 7;
+    public const int Id = 8;
+    public const int LocalPosition = 9;
+    public const int QuadrantIndex = 10;
+    public const int Rigidbody = 11;
+    public const int Transform = 12;
+    public const int CurrentHp = 13;
+    public const int MaxHp = 14;
+    public const int ChaseTarget = 15;
+    public const int CurrentRotationY = 16;
+    public const int MoveSpeed = 17;
+    public const int Moving = 18;
+    public const int RotationSpeed = 19;
+    public const int TargetRotation = 20;
+    public const int Velocity = 21;
+    public const int VelocityAgility = 22;
+    public const int Player = 23;
+    public const int CollectTargetsInterval = 24;
+    public const int CollectTargetsTimer = 25;
+    public const int Radius = 26;
+    public const int ReadyToCollectTargets = 27;
+    public const int TargetsBuffer = 28;
+    public const int ClickedPosition = 29;
+    public const int Input = 30;
 
-    public const int TotalComponents = 23;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -40,6 +48,7 @@ public static class GameComponentsLookup {
         "View",
         "ViewPrefab",
         "Active",
+        "Damage",
         "EntityLink",
         "GlobalPosition",
         "Id",
@@ -47,6 +56,8 @@ public static class GameComponentsLookup {
         "QuadrantIndex",
         "Rigidbody",
         "Transform",
+        "CurrentHp",
+        "MaxHp",
         "ChaseTarget",
         "CurrentRotationY",
         "MoveSpeed",
@@ -56,6 +67,11 @@ public static class GameComponentsLookup {
         "Velocity",
         "VelocityAgility",
         "Player",
+        "CollectTargetsInterval",
+        "CollectTargetsTimer",
+        "Radius",
+        "ReadyToCollectTargets",
+        "TargetsBuffer",
         "ClickedPosition",
         "Input"
     };
@@ -66,6 +82,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.View),
         typeof(Assets.Code.Common.ViewPrefab),
         typeof(Assets.Code.Gameplay.Common.Active),
+        typeof(Assets.Code.Gameplay.Common.Damage),
         typeof(Assets.Code.Gameplay.Common.EntityLink),
         typeof(Assets.Code.Gameplay.Common.GlobalPosition),
         typeof(Assets.Code.Gameplay.Common.Id),
@@ -73,6 +90,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Common.QuadrantIndex),
         typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
+        typeof(Assets.Code.Gameplay.Features.Lifetime.CurrentHp),
+        typeof(Assets.Code.Gameplay.Features.Lifetime.MaxHp),
         typeof(Assets.Code.Gameplay.Features.Movement.ChaseTarget),
         typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
         typeof(Assets.Code.Gameplay.Features.Movement.MoveSpeed),
@@ -82,6 +101,11 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Features.Movement.Velocity),
         typeof(Assets.Code.Gameplay.Features.Movement.VelocityAgility),
         typeof(Assets.Code.Gameplay.Features.Player.Player),
+        typeof(Assets.Code.Gameplay.Features.TargetCollection.CollectTargetsInterval),
+        typeof(Assets.Code.Gameplay.Features.TargetCollection.CollectTargetsTimer),
+        typeof(Assets.Code.Gameplay.Features.TargetCollection.Radius),
+        typeof(Assets.Code.Gameplay.Features.TargetCollection.ReadyToCollectTargets),
+        typeof(Assets.Code.Gameplay.Features.TargetCollection.TargetsBuffer),
         typeof(Assets.Code.Gameplay.InputInteraction.ClickedPosition),
         typeof(Assets.Code.Gameplay.InputInteraction.Input)
     };
