@@ -22,25 +22,27 @@ public static class GameComponentsLookup {
     public const int Rigidbody = 11;
     public const int Transform = 12;
     public const int CurrentHp = 13;
-    public const int MaxHp = 14;
-    public const int ChaseTarget = 15;
-    public const int CurrentRotationY = 16;
-    public const int MoveSpeed = 17;
-    public const int Moving = 18;
-    public const int RotationSpeed = 19;
-    public const int TargetRotation = 20;
-    public const int Velocity = 21;
-    public const int VelocityAgility = 22;
-    public const int Player = 23;
-    public const int CollectTargetsInterval = 24;
-    public const int CollectTargetsTimer = 25;
-    public const int Radius = 26;
-    public const int ReadyToCollectTargets = 27;
-    public const int TargetsBuffer = 28;
-    public const int ClickedPosition = 29;
-    public const int Input = 30;
+    public const int Dead = 14;
+    public const int MaxHp = 15;
+    public const int ProcessingDeath = 16;
+    public const int ChaseTarget = 17;
+    public const int CurrentRotationY = 18;
+    public const int MoveSpeed = 19;
+    public const int Moving = 20;
+    public const int RotationSpeed = 21;
+    public const int TargetRotation = 22;
+    public const int Velocity = 23;
+    public const int VelocityAgility = 24;
+    public const int Player = 25;
+    public const int CollectTargetsInterval = 26;
+    public const int CollectTargetsTimer = 27;
+    public const int Radius = 28;
+    public const int ReadyToCollectTargets = 29;
+    public const int TargetsBuffer = 30;
+    public const int ClickedPosition = 31;
+    public const int Input = 32;
 
-    public const int TotalComponents = 31;
+    public const int TotalComponents = 33;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -57,7 +59,9 @@ public static class GameComponentsLookup {
         "Rigidbody",
         "Transform",
         "CurrentHp",
+        "Dead",
         "MaxHp",
+        "ProcessingDeath",
         "ChaseTarget",
         "CurrentRotationY",
         "MoveSpeed",
@@ -91,7 +95,9 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
         typeof(Assets.Code.Gameplay.Features.Lifetime.CurrentHp),
+        typeof(Assets.Code.Gameplay.Features.Lifetime.Dead),
         typeof(Assets.Code.Gameplay.Features.Lifetime.MaxHp),
+        typeof(Assets.Code.Gameplay.Features.Lifetime.ProcessingDeath),
         typeof(Assets.Code.Gameplay.Features.Movement.ChaseTarget),
         typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
         typeof(Assets.Code.Gameplay.Features.Movement.MoveSpeed),
