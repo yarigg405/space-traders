@@ -3,12 +3,13 @@ using Assets.Code.Gameplay.Common.Collisions;
 using Assets.Code.Gameplay.Common.Physics;
 using Assets.Code.Gameplay.Common.Time;
 using Assets.Code.Gameplay.InputInteraction;
+using Assets.Code.Infrastructure.AssetManagement;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
-using Assets.Code.Infrastructure.Systems;
+using Assets.Code.View.Factories;
 using VContainer;
 using VContainer.Unity;
 
@@ -40,7 +41,9 @@ namespace Assets.Code.Infrastructure.Installers
 
         private void BindInfrastructureServices()
         {
-            _builder.Register<IdentifierService>(Lifetime.Singleton).AsSelf();
+            _builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces();
+            _builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            _builder.Register<IdentifierService>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
         }

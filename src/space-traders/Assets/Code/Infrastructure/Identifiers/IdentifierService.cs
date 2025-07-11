@@ -1,6 +1,6 @@
 ﻿namespace Assets.Code.Infrastructure.Identifiers
 {
-    internal sealed class IdentifierService : IIdentifierService
+    public sealed class IdentifierService : IIdentifierService
     {
         private int _lastId = 1;
         public int Next() =>

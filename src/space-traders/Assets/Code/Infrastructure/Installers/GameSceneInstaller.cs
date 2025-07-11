@@ -1,4 +1,6 @@
 ﻿using Assets.Code.Gameplay.CameraSystem;
+using Assets.Code.Gameplay.Features.Player;
+using Assets.Code.Gameplay.Features.Player.Factory;
 using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Loading;
@@ -22,6 +24,7 @@ namespace Assets.Code.Infrastructure.Installers
             _builder = builder;
 
             RegisterInfrastructure();
+            RegisterFactories();
             RegisterInput();
 
             _builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
@@ -29,9 +32,16 @@ namespace Assets.Code.Infrastructure.Installers
 
         private void RegisterInfrastructure()
         {
-            _builder.Register<SystemFactory>(Lifetime.Singleton).AsImplementedInterfaces();
+            _builder.Register<PlayerProvider>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
             var cameraService = new CameraService(_cameraMover, _cameraController);
             _builder.RegisterInstance(cameraService);
+            _builder.Register<PlayerBindService>(Lifetime.Scoped).AsImplementedInterfaces();
+        }
+
+        private void RegisterFactories()
+        {
+            _builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
+            _builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf();
         }
 
         private void RegisterInput()

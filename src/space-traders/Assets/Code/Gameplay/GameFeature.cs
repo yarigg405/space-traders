@@ -5,6 +5,7 @@ using Assets.Code.Gameplay.Features.Player;
 using Assets.Code.Gameplay.Features.TargetCollection;
 using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.Systems;
+using Assets.Code.View;
 
 
 namespace Assets.Code.Gameplay
@@ -13,6 +14,7 @@ namespace Assets.Code.Gameplay
     {
         public GameFeature(ISystemFactory systems)
         {
+            Add(systems.Create<BindViewFeature>());
             Add(systems.Create<InputFeature>());
             Add(systems.Create<PlayerFeature>());
             Add(systems.Create<MovementFeature>());

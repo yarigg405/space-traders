@@ -11,43 +11,45 @@ public static class GameComponentsLookup {
     public const int Destructed = 0;
     public const int SelfDestructTimer = 1;
     public const int View = 2;
-    public const int ViewPrefab = 3;
-    public const int Active = 4;
-    public const int Damage = 5;
-    public const int EntityLink = 6;
-    public const int GlobalPosition = 7;
-    public const int Id = 8;
-    public const int LocalPosition = 9;
-    public const int QuadrantIndex = 10;
-    public const int Rigidbody = 11;
-    public const int Transform = 12;
-    public const int CurrentHp = 13;
-    public const int Dead = 14;
-    public const int MaxHp = 15;
-    public const int ProcessingDeath = 16;
-    public const int ChaseTarget = 17;
-    public const int CurrentRotationY = 18;
-    public const int MoveSpeed = 19;
-    public const int Moving = 20;
-    public const int RotationSpeed = 21;
-    public const int TargetRotation = 22;
-    public const int Velocity = 23;
-    public const int VelocityAgility = 24;
-    public const int Player = 25;
-    public const int CollectTargetsInterval = 26;
-    public const int CollectTargetsTimer = 27;
-    public const int Radius = 28;
-    public const int ReadyToCollectTargets = 29;
-    public const int TargetsBuffer = 30;
-    public const int ClickedPosition = 31;
-    public const int Input = 32;
+    public const int ViewPath = 3;
+    public const int ViewPrefab = 4;
+    public const int Active = 5;
+    public const int Damage = 6;
+    public const int EntityLink = 7;
+    public const int GlobalPosition = 8;
+    public const int Id = 9;
+    public const int LocalPosition = 10;
+    public const int QuadrantIndex = 11;
+    public const int Rigidbody = 12;
+    public const int Transform = 13;
+    public const int CurrentHp = 14;
+    public const int Dead = 15;
+    public const int MaxHp = 16;
+    public const int ProcessingDeath = 17;
+    public const int ChaseTarget = 18;
+    public const int CurrentRotationY = 19;
+    public const int MoveSpeed = 20;
+    public const int Moving = 21;
+    public const int RotationSpeed = 22;
+    public const int TargetRotation = 23;
+    public const int Velocity = 24;
+    public const int VelocityAgility = 25;
+    public const int Player = 26;
+    public const int CollectTargetsInterval = 27;
+    public const int CollectTargetsTimer = 28;
+    public const int Radius = 29;
+    public const int ReadyToCollectTargets = 30;
+    public const int TargetsBuffer = 31;
+    public const int ClickedPosition = 32;
+    public const int Input = 33;
 
-    public const int TotalComponents = 33;
+    public const int TotalComponents = 34;
 
     public static readonly string[] componentNames = {
         "Destructed",
         "SelfDestructTimer",
         "View",
+        "ViewPath",
         "ViewPrefab",
         "Active",
         "Damage",
@@ -84,6 +86,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Destructed),
         typeof(Assets.Code.Common.SelfDestructTimer),
         typeof(Assets.Code.Common.View),
+        typeof(Assets.Code.Common.ViewPath),
         typeof(Assets.Code.Common.ViewPrefab),
         typeof(Assets.Code.Gameplay.Common.Active),
         typeof(Assets.Code.Gameplay.Common.Damage),

@@ -1,6 +1,6 @@
 ﻿namespace Assets.Code.Infrastructure.Identifiers
 {
-    internal interface IIdentifierService
+    public interface IIdentifierService
     {
         int Next();
     }
