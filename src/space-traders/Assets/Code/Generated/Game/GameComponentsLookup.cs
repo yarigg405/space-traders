@@ -27,23 +27,26 @@ public static class GameComponentsLookup {
     public const int MaxHp = 16;
     public const int ProcessingDeath = 17;
     public const int ChaseTarget = 18;
-    public const int CurrentRotationY = 19;
-    public const int MoveSpeed = 20;
-    public const int Moving = 21;
-    public const int RotationSpeed = 22;
-    public const int TargetRotation = 23;
-    public const int Velocity = 24;
-    public const int VelocityAgility = 25;
-    public const int Player = 26;
-    public const int CollectTargetsInterval = 27;
-    public const int CollectTargetsTimer = 28;
-    public const int Radius = 29;
-    public const int ReadyToCollectTargets = 30;
-    public const int TargetsBuffer = 31;
-    public const int ClickedPosition = 32;
-    public const int Input = 33;
+    public const int CurrentMoveSpeed = 19;
+    public const int CurrentRotationY = 20;
+    public const int CurrentSpeedModifier = 21;
+    public const int MaxMoveSpeed = 22;
+    public const int Moving = 23;
+    public const int MovingAcceleration = 24;
+    public const int RotationSpeed = 25;
+    public const int TargetRotation = 26;
+    public const int Velocity = 27;
+    public const int VelocityAgility = 28;
+    public const int Player = 29;
+    public const int CollectTargetsInterval = 30;
+    public const int CollectTargetsTimer = 31;
+    public const int Radius = 32;
+    public const int ReadyToCollectTargets = 33;
+    public const int TargetsBuffer = 34;
+    public const int ClickedPosition = 35;
+    public const int Input = 36;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 37;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -65,9 +68,12 @@ public static class GameComponentsLookup {
         "MaxHp",
         "ProcessingDeath",
         "ChaseTarget",
+        "CurrentMoveSpeed",
         "CurrentRotationY",
-        "MoveSpeed",
+        "CurrentSpeedModifier",
+        "MaxMoveSpeed",
         "Moving",
+        "MovingAcceleration",
         "RotationSpeed",
         "TargetRotation",
         "Velocity",
@@ -102,9 +108,12 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Features.Lifetime.MaxHp),
         typeof(Assets.Code.Gameplay.Features.Lifetime.ProcessingDeath),
         typeof(Assets.Code.Gameplay.Features.Movement.ChaseTarget),
+        typeof(Assets.Code.Gameplay.Features.Movement.CurrentMoveSpeed),
         typeof(Assets.Code.Gameplay.Features.Movement.CurrentRotationY),
-        typeof(Assets.Code.Gameplay.Features.Movement.MoveSpeed),
+        typeof(Assets.Code.Gameplay.Features.Movement.CurrentSpeedModifier),
+        typeof(Assets.Code.Gameplay.Features.Movement.MaxMoveSpeed),
         typeof(Assets.Code.Gameplay.Features.Movement.Moving),
+        typeof(Assets.Code.Gameplay.Features.Movement.MovingAcceleration),
         typeof(Assets.Code.Gameplay.Features.Movement.RotationSpeed),
         typeof(Assets.Code.Gameplay.Features.Movement.TargetRotation),
         typeof(Assets.Code.Gameplay.Features.Movement.Velocity),

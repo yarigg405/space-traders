@@ -31,7 +31,8 @@ namespace Assets.Code.Gameplay.Features.Player.Systems
                 {
                     var targetRotation = AnglesUtil.GetAngleDirectionY(player.LocalPosition, input.ClickedPosition);
                     player.ReplaceTargetRotation(targetRotation);
-                    player.ReplaceMoveSpeed(15f);
+                    if (player.CurrentSpeedModifier == 0)
+                        player.ReplaceCurrentSpeedModifier(1f);
                     player.isMoving = true;
                 }
             }

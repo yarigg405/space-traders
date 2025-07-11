@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using VContainer.Unity;
 
 
@@ -22,6 +23,7 @@ namespace Assets.Code.Gameplay.InputInteraction
             {
                 if (_raycaster.RaycastFromCameraToMouse(out var raycastHit))
                 {
+                    if (EventSystem.current.IsPointerOverGameObject()) return;
                     var clickPos = raycastHit.point;
                     OnMouseClickEvent?.Invoke(clickPos);
                 }

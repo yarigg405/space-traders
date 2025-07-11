@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace Assets.Code.Gameplay.Features.Player
+
+namespace Assets.Code.Gameplay.Features.Player.Infrastructure
 {
     public interface IPlayerProvider
     {

@@ -16,7 +16,7 @@ namespace Assets.Code.Gameplay.Features.Enemy
 
                 .AddVelocity(Vector2.zero)
                 .AddVelocityAgility(30f)
-                .AddMoveSpeed(20f)
+                .AddMaxMoveSpeed(20)
 
                 .AddCurrentRotationY(0)
                 .AddTargetRotation(0)

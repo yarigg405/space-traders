@@ -1,10 +1,11 @@
 ﻿using Assets.Code.Gameplay.CameraSystem;
-using Assets.Code.Gameplay.Features.Player;
 using Assets.Code.Gameplay.Features.Player.Factory;
+using Assets.Code.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Gameplay.InputInteraction;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.Systems;
+using Assets.Code.UI.Elements;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -16,6 +17,7 @@ namespace Assets.Code.Infrastructure.Installers
     {
         [SerializeField] private CameraMover _cameraMover;
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private PlayerShipControlView _playerShipControlView;
 
         private IContainerBuilder _builder;
 
@@ -25,6 +27,7 @@ namespace Assets.Code.Infrastructure.Installers
 
             RegisterInfrastructure();
             RegisterFactories();
+            RegisterUi();
             RegisterInput();
 
             _builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
@@ -43,6 +46,12 @@ namespace Assets.Code.Infrastructure.Installers
             _builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
             _builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf();
         }
+
+        private void RegisterUi()
+        {
+            _builder.RegisterInstance(_playerShipControlView);
+        }
+
 
         private void RegisterInput()
         {

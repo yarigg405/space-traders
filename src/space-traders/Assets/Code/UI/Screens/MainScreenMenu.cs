@@ -1,10 +1,9 @@
-using Yrr.UI;
+using Assets.Code.Infrastructure.States.GameStates;
+using Assets.Code.Infrastructure.States.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using VContainer;
-using Assets.Code.Infrastructure.States.StateMachine;
-using Assets.Code.Infrastructure.States.GameStates;
+using Yrr.UI;
 
 
 namespace Assets.Code.UI.Screens

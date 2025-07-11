@@ -4,7 +4,7 @@ using System.Threading;
 using VContainer.Unity;
 
 
-namespace Assets.Code.Gameplay.Features.Player
+namespace Assets.Code.Gameplay.Features.Player.Infrastructure
 {
     public sealed class PlayerProvider : IAsyncStartable, IPlayerProvider
     {

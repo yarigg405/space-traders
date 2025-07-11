@@ -14,7 +14,7 @@ namespace Assets.Code.Gameplay.Features.Movement.Systems
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.CurrentRotationY,
-                GameMatcher.MoveSpeed,
+                GameMatcher.CurrentMoveSpeed,
                 GameMatcher.Velocity,
                 GameMatcher.VelocityAgility
             ));
@@ -29,7 +29,7 @@ namespace Assets.Code.Gameplay.Features.Movement.Systems
 
                 var targetVelocity = new Vector2(
                     Mathf.Sin(currentRadAngle),
-                    Mathf.Cos(currentRadAngle)) * entity.MoveSpeed;
+                    Mathf.Cos(currentRadAngle)) * entity.CurrentMoveSpeed;
 
                 var newVelocity = Vector3.MoveTowards(entity.Velocity, targetVelocity, entity.VelocityAgility * _time.DeltaTime);
                 entity.ReplaceVelocity(newVelocity);

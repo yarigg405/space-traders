@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Common.Entity;
 using Assets.Code.Gameplay.Common;
+using Assets.Code.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Infrastructure.Identifiers;
 using Code.Common.Extensions;
 using UnityEngine;
@@ -35,6 +36,11 @@ namespace Assets.Code.Gameplay.Features.Player.Factory
                 .AddRadius(10f)
                 .AddMaxHp(50f)
                 .AddCurrentHp(50f)
+
+                .AddMaxMoveSpeed(15f)
+                .AddCurrentSpeedModifier(0f)
+                .AddCurrentMoveSpeed(0f)
+                .AddMovingAcceleration(3f)
 
                 .AddViewPath("Prefabs/PlayerShip")
 

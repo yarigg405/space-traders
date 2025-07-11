@@ -10,6 +10,7 @@ namespace Assets.Code.Gameplay.Features.Movement
         {
             Add(systems.Create<ChaseTargetSystem>());
 
+            Add(systems.Create<UpdateMovingSpeedSystem>());
             Add(systems.Create<RotationSystem>());
             Add(systems.Create<HandleVelocitySystem>());
             Add(systems.Create<PhysicsMovingSystem>());
