@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 139a2706008508444b56b31540e17ecd
+timeCreated: 1497287412
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/FBX/Gun3/Materials/Gun3.mat
+  uploadId: 190753

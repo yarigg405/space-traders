@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 77189031510568f44a3300ab551be7ae
+timeCreated: 1499359195
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Support_and_Wheels/Sup_Wheel.prefab
+  uploadId: 190753

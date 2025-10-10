@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b12c81440089dbc43953589065e07977
+timeCreated: 1499361524
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/ShipBodies/Body7.prefab
+  uploadId: 190753

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3827ae446b435ce47ac73415d64c1a0b
+timeCreated: 1499360926
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Addons/Truck_Body.prefab
+  uploadId: 190753

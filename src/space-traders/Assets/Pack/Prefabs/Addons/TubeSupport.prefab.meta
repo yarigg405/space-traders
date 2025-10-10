@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f9268f32f62c84b4392c7fbccda8bcd7
+timeCreated: 1499360644
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Addons/TubeSupport.prefab
+  uploadId: 190753

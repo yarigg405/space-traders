@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d4ce74b197c8d3148ab2766101f8e3bf
+timeCreated: 1499361319
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 95792
+  packageName: SpaceShip low poly Kit
+  packageVersion: 1.0
+  assetPath: Assets/Pack/Prefabs/Engines/Engine_Double.prefab
+  uploadId: 190753
