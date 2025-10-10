@@ -21,26 +21,16 @@ namespace Yrr.Utils
             }
         }
 
-
-        #region Vectors
-
-        public static Vector2 GetRandomCoordinatesAroundPoint(this Vector2 originalPoint, float radius,
-               bool pointOnRadiusLine = false)
+        public static void ChangeLayerRecursively(this GameObject gameObject, int layer)
         {
-            float angle = Random.Range(0, 360);
-            var lenght = pointOnRadiusLine ? radius :
-                (Random.Range(0, radius));
-
-            var x = Mathf.Cos(angle * Mathf.Deg2Rad) * lenght;
-            var y = Mathf.Sin(angle * Mathf.Deg2Rad) * lenght;
-
-
-            var result = new Vector2(originalPoint.x + x, originalPoint.y + y);
-
-
-            return result;
+            gameObject.layer = layer;
+            foreach (Transform child in gameObject.transform)
+            {
+                ChangeLayerRecursively(child.gameObject, layer);
+            }
         }
 
+        #region Vectors  
         public static Vector3 GetRandomCoordinatesAroundPointZX(this Vector3 originalPoint, float radius,
                 bool pointOnRadiusLine = false)
         {
@@ -96,11 +86,6 @@ namespace Yrr.Utils
             return Random.Range(vector.x, vector.y);
         }
 
-        public static T GetRandomItem<T>(this List<T> list)
-        {
-            return list.Count < 1 ? default : list[Random.Range(0, list.Count)];
-        }
-
         public static T GetRandomItem<T>(this T[] list)
         {
             return list.Length < 1 ? default : list[Random.Range(0, list.Length)];
@@ -116,12 +101,6 @@ namespace Yrr.Utils
 
 
         #region Collections
-
-        public static T GetLast<T>(this List<T> list)
-        {
-            return list.Count < 1 ? default : list[^1];
-        }
-
         public static void Shuffle<T>(this IList<T> list)
         {
             var n = list.Count;
@@ -165,7 +144,7 @@ namespace Yrr.Utils
             return ((ulong)value).ToShortMoneyString();
         }
 
-        private static string[] _moneyPrefix = { string.Empty, "K", "M", "B" };
+        private static string[] _moneyPrefix = { string.Empty, "K", "M", "B", "T", "Q", "E", "Z" };
 
         public static string ToShortMoneyString(this float value)
         {
@@ -175,7 +154,6 @@ namespace Yrr.Utils
         public static string ToShortMoneyString(this ulong value)
         {
             if (value == 0) return "0";
-            string[] prefix = { string.Empty, "K", "M", "B" };
             var absolute = Mathf.Abs(value);
             int add;
             if (absolute < 1)
@@ -194,12 +172,16 @@ namespace Yrr.Utils
             shortNumber /= 100;
 
             if (shortNumber > 100f)
-                return $"{(int)shortNumber}{prefix[add]}";
+                return $"{(int)shortNumber}{_moneyPrefix[add]}";
             else if (shortNumber > 10f)
-                return $"{shortNumber:0.#}{prefix[add]}";
+                return $"{shortNumber:0.#}{_moneyPrefix[add]}";
             else
-                return $"{shortNumber:0.##}{prefix[add]}";
+                return $"{shortNumber:0.##}{_moneyPrefix[add]}";
+        }
 
+        public static string ToShortMoneyString(this double value)
+        {
+            return ((ulong)value).ToShortMoneyString();
         }
 
         public static ulong ToRounded(this ulong value)
@@ -268,15 +250,32 @@ namespace Yrr.Utils
                 sb.Append(hours.ToString("00"));
                 sb.Append(":");
             }
-            sb.Append(minutes.ToString("0"));
+            sb.Append(minutes.ToString("00"));
             sb.Append(":");
             sb.Append(seconds.ToString("00"));
 
             return sb.ToString();
         }
 
+        public static string ToLongTimeString(this float timeValue)
+        {
+            var time = (int)timeValue + 1;
 
+            var seconds = time % 60f;
+            var minutes = time / 60;
+            var hours = minutes / 60;
+            minutes = minutes % 60;
+
+            var sb = new StringBuilder();
+
+            sb.Append(hours.ToString("00"));
+            sb.Append(":");
+            sb.Append(minutes.ToString("00"));
+            sb.Append(":");
+            sb.Append(seconds.ToString("00"));
+
+            return sb.ToString();
+        }
         #endregion
-
     }
 }
