@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Infrastructure.Loading
 {
-    internal sealed class ScenesLoader : IScenesLoader
+    public sealed class ScenesLoader : IScenesLoader
     {
         public void LoadScene(string name, Action onLoaded = null)
         {
