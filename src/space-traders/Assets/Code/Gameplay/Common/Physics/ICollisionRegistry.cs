@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 
-namespace Assets.Code.Gameplay.Common.Collisions
+namespace Assets.Code.Gameplay.Common.Physics
 {
     internal interface ICollisionRegistry
     {

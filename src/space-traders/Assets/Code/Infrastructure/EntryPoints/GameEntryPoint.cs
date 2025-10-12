@@ -3,7 +3,7 @@ using Assets.Code.Infrastructure.States.StateMachine;
 using VContainer.Unity;
 
 
-namespace Assets.Code.Infrastructure.Loading
+namespace Assets.Code.Infrastructure.EntryPoints
 {
     internal sealed class GameEntryPoint : IStartable
     {

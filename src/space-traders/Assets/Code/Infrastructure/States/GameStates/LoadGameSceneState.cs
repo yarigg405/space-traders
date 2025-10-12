@@ -1,26 +1,27 @@
-﻿using Assets.Code.Infrastructure.Loading;
-using Assets.Code.Infrastructure.States.StateMachine;
+﻿using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
 using UnityEngine.SceneManagement;
+using Assets.Code.Networking;
 
 
 namespace Assets.Code.Infrastructure.States.GameStates
 {
-    internal sealed class LoadBattleState : GamePayloadState<string>
+    internal sealed class LoadGameSceneState : GamePayloadState<string>
     {
         private readonly IStateMachine _stateMachine;
-        private readonly IScenesLoader _scenesLoader;
+        private readonly NetworkManager _networkManager;
 
-        public LoadBattleState(IStateMachine stateMachine, IScenesLoader scenesLoader)
+        public LoadGameSceneState(IStateMachine stateMachine, NetworkManager networkManager)
         {
             _stateMachine = stateMachine;
-            _scenesLoader = scenesLoader;
+            _networkManager = networkManager;
         }
 
         public override void Enter(string sceneName)
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
-            _scenesLoader.LoadScene(sceneName);
+            _networkManager.DisconnectCurrentScene();
+            _networkManager.ConnectToScene(sceneName);  
         }
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)

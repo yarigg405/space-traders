@@ -1,4 +1,4 @@
-﻿using Assets.Code.Gameplay.Common.Collisions;
+﻿using Assets.Code.Gameplay.Common.Physics;
 using UnityEngine;
 using VContainer;
 

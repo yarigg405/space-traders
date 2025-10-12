@@ -1,5 +1,5 @@
 ﻿using Assets.Code.Infrastructure.Systems;
-//using Assets.Code.View.Systems;
+using Assets.Code.View.Systems;
 
 
 namespace Assets.Code.View
@@ -8,8 +8,8 @@ namespace Assets.Code.View
     {
         public BindViewFeature(ISystemFactory systems)
         {
-            //Add(systems.Create<BindEntityViewFromPathSystem>());
-            //Add(systems.Create<BindEntityViewFromPrefabSystem>());
+            Add(systems.Create<BindEntityViewFromPathSystem>());
+            Add(systems.Create<BindEntityViewFromPrefabSystem>());
         }
     }
 }

@@ -41,8 +41,8 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         private void DestructEntities()
         {
-            //foreach (var entity in _game.GetEntities())
-            //    entity.isDestructed = true;
+            foreach (var entity in _game.GetEntities())
+                entity.isDestructed = true;
         }
     }
 }

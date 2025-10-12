@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Assets.Code.Gameplay.Common.Collisions
+namespace Assets.Code.Gameplay.Common.Physics
 {
     internal sealed class CollisionRegistry : ICollisionRegistry
     {

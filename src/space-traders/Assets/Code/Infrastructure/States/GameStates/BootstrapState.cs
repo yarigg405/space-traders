@@ -17,7 +17,7 @@ namespace Assets.Code.Infrastructure.States.GameStates
         {
             // load data, saves etc...
 
-            _stateMachine.Enter<LoadHomeScreenState>();
+            _stateMachine.Enter<MenuSceneState>();
         }
     }
 }
