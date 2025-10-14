@@ -21,7 +21,7 @@ namespace Assets.Code.Infrastructure.States.GameStates
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
             _networkManager.DisconnectCurrentScene();
-            _networkManager.ConnectToScene(sceneName);  
+            _networkManager.RequestConnectToScene(sceneName);  
         }
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)

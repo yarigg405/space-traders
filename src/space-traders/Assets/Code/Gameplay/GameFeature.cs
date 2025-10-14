@@ -1,4 +1,6 @@
-﻿using Assets.Code.Infrastructure.Systems;
+﻿using Assets.Code.Gameplay.Features.Player;
+using Assets.Code.Infrastructure.Systems;
+using Assets.Code.View;
 
 
 namespace Assets.Code.Gameplay
@@ -7,17 +9,8 @@ namespace Assets.Code.Gameplay
     {
         public GameFeature(ISystemFactory systems)
         {
-            //Add(systems.Create<BindViewFeature>());
-            //Add(systems.Create<InputFeature>());
-
-            //Add(systems.Create<PlayerFeature>());
-            //Add(systems.Create<SpaceObjectsFeature>());
-
-            //Add(systems.Create<MovementFeature>());
-            //Add(systems.Create<CollectTargetsFeature>());
-            //Add(systems.Create<DamageApplicationFeature>());
-
-            //Add(systems.Create<ProcessDestructedFeature>());
+            Add(systems.Create<BindViewFeature>());
+            Add(systems.Create<PlayerFeature>());
         }
     }
 }

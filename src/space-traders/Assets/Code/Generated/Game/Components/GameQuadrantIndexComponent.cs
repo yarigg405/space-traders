@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Assets.Code.Gameplay.Common.QuadrantIndex quadrantIndex { get { return (Assets.Code.Gameplay.Common.QuadrantIndex)GetComponent(GameComponentsLookup.QuadrantIndex); } }
-    public UnityEngine.Vector2Int QuadrantIndex { get { return quadrantIndex.Value; } }
+    public Unity.Mathematics.int2 QuadrantIndex { get { return quadrantIndex.Value; } }
     public bool hasQuadrantIndex { get { return HasComponent(GameComponentsLookup.QuadrantIndex); } }
 
-    public GameEntity AddQuadrantIndex(UnityEngine.Vector2Int newValue) {
+    public GameEntity AddQuadrantIndex(Unity.Mathematics.int2 newValue) {
         var index = GameComponentsLookup.QuadrantIndex;
         var component = (Assets.Code.Gameplay.Common.QuadrantIndex)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.QuadrantIndex));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceQuadrantIndex(UnityEngine.Vector2Int newValue) {
+    public GameEntity ReplaceQuadrantIndex(Unity.Mathematics.int2 newValue) {
         var index = GameComponentsLookup.QuadrantIndex;
         var component = (Assets.Code.Gameplay.Common.QuadrantIndex)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.QuadrantIndex));
         component.Value = newValue;

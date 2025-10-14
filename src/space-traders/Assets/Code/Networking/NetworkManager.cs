@@ -18,7 +18,7 @@ namespace Assets.Code.Networking
         // sceneName, playerIds
         private readonly Dictionary<string, List<int>> _playerOnScenesMap = new();
 
-        public Server Server { get; private set; }
+        public static Server Server { get; private set; }
         public Client Client { get; private set; }
 
         void IInitializable.Initialize()
@@ -27,11 +27,6 @@ namespace Assets.Code.Networking
 
             Server = new Server();
             Server.ClientConnected += PlayerJoined;
-            Server.RelayFilter = new MessageRelayFilter(
-                typeof(MessageId),
-                MessageId.ConnectToGameScene,
-                MessageId.DisconnectCurrentScene
-                );
 
             Client = new Client();
             Client.Connected += DidConnect;
@@ -74,7 +69,7 @@ namespace Assets.Code.Networking
         {
             Client.Connect($"{_ipAddress}:{_port}");
             await UniTask.WaitUntil(() => Client.IsConnected);
-            Debug.Log("<color=#6BCCFF>### CLIENT started");
+            Debug.Log("<color=#6BCCFF>### CLIENT Connected");
         }
 
 
@@ -103,40 +98,53 @@ namespace Assets.Code.Networking
             Debug.Log("<color=#6BCCFF>### PlayerLeft");
         }
 
-        internal void ConnectToScene(string sceneName)
+        internal void RequestConnectToScene(string sceneName)
         {
             Debug.Log("### TryConnectToScene");
-            var message = Message.Create(MessageSendMode.Reliable, MessageId.ConnectToGameScene)
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessage.RequestConnectToGameScene)
                 .AddUShort(Client.Id)
                 .AddString(sceneName);
             Client.Send(message);
-            Server.Send(message, Client.Id);
+        }
+
+        private static void ConnectPlayerToScene(ushort clientId, string sceneName)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessage.ConnectToGameSceneCommand)
+                .AddString(sceneName);
+
+            Server.Send(message, clientId);
         }
 
         internal void DisconnectCurrentScene()
         {
-            Debug.Log("### TryDisconnectCurrentScene");
-            var message = Message.Create(MessageSendMode.Reliable, MessageId.DisconnectCurrentScene)
-                .AddUShort(Client.Id);
-            Client.Send(message);
-            Server.Send(message, Client.Id);
+
         }
 
-        [MessageHandler((ushort)MessageId.ConnectToGameScene)]
-        private static void HandleConnectToGameScene(Message message)
+
+
+        #region Messages
+
+        ////////  Client to server
+        [MessageHandler((ushort)ClientToServerMessage.RequestConnectToGameScene)]
+        private static void HandleConnectToGameScene(ushort fromClientId, Message message)
         {
             var id = message.GetUShort();
             var sceneName = message.GetString();
 
-            Debug.Log($"<color=yellow>### PLAYER {id} CONNECT to scene {sceneName}");
+            Debug.Log($"<color=yellow>### PLAYER {fromClientId} CONNECT to scene {sceneName}");
+
+            ConnectPlayerToScene(fromClientId, sceneName);
         }
 
-        [MessageHandler((ushort)MessageId.DisconnectCurrentScene)]
-        private static void HandleDisconnectCurrentScene(Message message)
+
+        ////////  Server to client
+        [MessageHandler((ushort)ServerToClientMessage.ConnectToGameSceneCommand)]
+        private static void HandleSceneConnectoinCommand(Message message)
         {
-            var id = message.GetUShort();
-
-            Debug.Log($"<color=yellow>### Player {id} Disconnect");
+            Debug.Log($"<color=orange>### Need connect to scene {message.GetString()}");
         }
+
+
+        #endregion
     }
 }
