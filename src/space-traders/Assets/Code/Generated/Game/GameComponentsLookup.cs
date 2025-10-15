@@ -22,8 +22,9 @@ public static class GameComponentsLookup {
     public const int Rigidbody = 11;
     public const int Transform = 12;
     public const int Player = 13;
+    public const int PlayerNetworkId = 14;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -39,7 +40,8 @@ public static class GameComponentsLookup {
         "QuadrantIndex",
         "Rigidbody",
         "Transform",
-        "Player"
+        "Player",
+        "PlayerNetworkId"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -56,6 +58,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Gameplay.Common.QuadrantIndex),
         typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
         typeof(Assets.Code.Gameplay.Common.TransformComponent),
-        typeof(Assets.Code.Gameplay.Features.Player.Player)
+        typeof(Assets.Code.Gameplay.Features.Player.Player),
+        typeof(Assets.Code.Gameplay.Features.Player.PlayerNetworkId)
     };
 }

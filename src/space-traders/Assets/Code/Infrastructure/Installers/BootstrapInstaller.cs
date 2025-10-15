@@ -9,6 +9,7 @@ using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Networking;
+using Assets.Code.Networking.Messaging;
 using Assets.Code.View.Factory;
 using VContainer;
 using VContainer.Unity;
@@ -53,6 +54,8 @@ namespace Assets.Code.Infrastructure.Installers
         private void BindNetworking()
         {
             _builder.Register<NetworkManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            _builder.Register<ClientMessenger>(Lifetime.Singleton).AsSelf();
+            _builder.Register<ServerMessenger>(Lifetime.Singleton).AsSelf();
         }
 
         private void BindStates()

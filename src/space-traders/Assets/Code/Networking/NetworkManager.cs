@@ -19,7 +19,7 @@ namespace Assets.Code.Networking
         private readonly Dictionary<string, List<int>> _playerOnScenesMap = new();
 
         public static Server Server { get; private set; }
-        public Client Client { get; private set; }
+        public static Client Client { get; private set; }
 
         void IInitializable.Initialize()
         {
@@ -114,37 +114,5 @@ namespace Assets.Code.Networking
 
             Server.Send(message, clientId);
         }
-
-        internal void DisconnectCurrentScene()
-        {
-
-        }
-
-
-
-        #region Messages
-
-        ////////  Client to server
-        [MessageHandler((ushort)ClientToServerMessage.RequestConnectToGameScene)]
-        private static void HandleConnectToGameScene(ushort fromClientId, Message message)
-        {
-            var id = message.GetUShort();
-            var sceneName = message.GetString();
-
-            Debug.Log($"<color=yellow>### PLAYER {fromClientId} CONNECT to scene {sceneName}");
-
-            ConnectPlayerToScene(fromClientId, sceneName);
-        }
-
-
-        ////////  Server to client
-        [MessageHandler((ushort)ServerToClientMessage.ConnectToGameSceneCommand)]
-        private static void HandleSceneConnectoinCommand(Message message)
-        {
-            Debug.Log($"<color=orange>### Need connect to scene {message.GetString()}");
-        }
-
-
-        #endregion
     }
 }

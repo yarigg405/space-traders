@@ -35,15 +35,15 @@ namespace Assets.Code.UI
             OnHostClickAsync().Forget();
         }
 
+        private void OnClientClick()
+        {
+            OnClientClickedAsync().Forget();
+        }
+
         private async UniTask OnHostClickAsync()
         {
             await _networkManager.StartHost();
             _stateMachine.Enter<LoadGameSceneState, string>(SceneNames.GameScene1);
-        }
-
-        private void OnClientClick()
-        {
-            OnClientClickedAsync().Forget();
         }
 
         private async UniTask OnClientClickedAsync()
