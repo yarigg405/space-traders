@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Features.Player;
+﻿using Assets.Code.Common.Destruct;
+using Assets.Code.Gameplay.Features.Player;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.View;
 
@@ -11,6 +12,8 @@ namespace Assets.Code.Gameplay
         {
             Add(systems.Create<BindViewFeature>());
             Add(systems.Create<PlayerFeature>());
+
+            Add(systems.Create<ProcessDestructedFeature>());
         }
     }
 }

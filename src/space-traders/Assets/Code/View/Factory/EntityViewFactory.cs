@@ -2,11 +2,12 @@
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using Yrr.Utils;
 
 
 namespace Assets.Code.View.Factory
 {
-    internal sealed class EntityViewFactory: IEntityViewFactory
+    internal sealed class EntityViewFactory : IEntityViewFactory
     {
         private readonly IObjectResolver _instantiator;
         private readonly IAssetProvider _assetProvider;
@@ -21,7 +22,8 @@ namespace Assets.Code.View.Factory
         EntityBehaviour IEntityViewFactory.CreateViewForEntityFromPath(GameEntity entity)
         {
             EntityBehaviour prefab = _assetProvider.LoadAsset<EntityBehaviour>(entity.ViewPath);
-            var view = _instantiator.Instantiate<EntityBehaviour>(prefab, _farAwayPos, Quaternion.identity);
+            var view = _instantiator.Instantiate<EntityBehaviour>(prefab,
+                _farAwayPos.GetRandomCoordinatesAroundPointZX(15f), Quaternion.identity);
             view.SetEntity(entity);
 
             return view;
@@ -30,7 +32,8 @@ namespace Assets.Code.View.Factory
         EntityBehaviour IEntityViewFactory.CreateViewForEntityFromPrefab(GameEntity entity)
         {
             EntityBehaviour prefab = entity.ViewPrefab;
-            var view = _instantiator.Instantiate<EntityBehaviour>(prefab, _farAwayPos, Quaternion.identity);
+            var view = _instantiator.Instantiate<EntityBehaviour>(prefab,
+                _farAwayPos.GetRandomCoordinatesAroundPointZX(15f), Quaternion.identity);
             view.SetEntity(entity);
 
             return view;

@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Gameplay.Common.CameraSystem;
 using Assets.Code.Gameplay.Features.Player.Factory;
+using Assets.Code.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
 using Assets.Code.Infrastructure.Systems;
@@ -12,19 +13,26 @@ namespace Assets.Code.Infrastructure.Installers
     internal sealed class GameSceneInstaller : MonoInstaller
     {
         private IContainerBuilder _builder;
+
         public override void Install(IContainerBuilder builder)
         {
             _builder = builder;
 
-            RegisterInfrastructure();
+            RegisterCommonServices();
+            RegisterPlayerServices();
             RegisterFactories();
 
             _builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
         }
 
-        private void RegisterInfrastructure()
+        private void RegisterCommonServices()
         {
             _builder.Register<CameraService>(Lifetime.Scoped).AsSelf();
+        }
+
+        private void RegisterPlayerServices()
+        {
+            _builder.Register<PlayerProvider>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void RegisterFactories()
