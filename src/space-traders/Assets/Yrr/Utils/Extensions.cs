@@ -128,6 +128,11 @@ namespace Yrr.Utils
 
         #region Strings
 
+        public static bool IsNulOrEmpty(this string value)
+        {
+            return value == null || value.Length == 0;
+        }
+
         public static string ToIntString(this float value)
         {
             return ((int)value).ToString();

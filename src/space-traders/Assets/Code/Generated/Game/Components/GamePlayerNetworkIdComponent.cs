@@ -33,24 +33,28 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Gameplay.Features.Player.PlayerNetworkId playerNetworkIdComponent = new Assets.Code.Gameplay.Features.Player.PlayerNetworkId();
+    public Assets.Code.Gameplay.Features.Player.PlayerNetworkId playerNetworkId { get { return (Assets.Code.Gameplay.Features.Player.PlayerNetworkId)GetComponent(GameComponentsLookup.PlayerNetworkId); } }
+    public ushort PlayerNetworkId { get { return playerNetworkId.Value; } }
+    public bool hasPlayerNetworkId { get { return HasComponent(GameComponentsLookup.PlayerNetworkId); } }
 
-    public bool isPlayerNetworkId {
-        get { return HasComponent(GameComponentsLookup.PlayerNetworkId); }
-        set {
-            if (value != isPlayerNetworkId) {
-                var index = GameComponentsLookup.PlayerNetworkId;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : playerNetworkIdComponent;
+    public GameEntity AddPlayerNetworkId(ushort newValue) {
+        var index = GameComponentsLookup.PlayerNetworkId;
+        var component = (Assets.Code.Gameplay.Features.Player.PlayerNetworkId)CreateComponent(index, typeof(Assets.Code.Gameplay.Features.Player.PlayerNetworkId));
+        component.Value = newValue;
+        AddComponent(index, component);
+        return this;
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public GameEntity ReplacePlayerNetworkId(ushort newValue) {
+        var index = GameComponentsLookup.PlayerNetworkId;
+        var component = (Assets.Code.Gameplay.Features.Player.PlayerNetworkId)CreateComponent(index, typeof(Assets.Code.Gameplay.Features.Player.PlayerNetworkId));
+        component.Value = newValue;
+        ReplaceComponent(index, component);
+        return this;
+    }
+
+    public GameEntity RemovePlayerNetworkId() {
+        RemoveComponent(GameComponentsLookup.PlayerNetworkId);
+        return this;
     }
 }

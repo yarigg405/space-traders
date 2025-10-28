@@ -8,12 +8,12 @@
 //------------------------------------------------------------------------------
 public partial interface IIdEntity<TEntity> : Entitas.IEntity where TEntity : Entitas.IEntity  {
 
-    int Id { get; }
+    ulong Id { get; }
     Assets.Code.Gameplay.Common.Id id { get; }
     bool hasId { get; }
 
-    TEntity AddId(int newValue);
-    TEntity ReplaceId(int newValue);
+    TEntity AddId(ulong newValue);
+    TEntity ReplaceId(ulong newValue);
     TEntity RemoveId();
 }
 

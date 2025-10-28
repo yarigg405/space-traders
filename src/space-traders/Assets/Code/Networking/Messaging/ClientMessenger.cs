@@ -1,30 +1,42 @@
 ﻿using Cysharp.Threading.Tasks;
 using Riptide;
+using System.Threading;
 using UnityEngine;
 
 
 namespace Assets.Code.Networking.Messaging
 {
-    public sealed class ClientMessenger
+    public static class ClientMessenger
     {
-        private static string _sceneToConnect = "";
+        private static CancellationTokenSource _cancellationTokenSource = new();
+        private static string _sceneToConnect = string.Empty;
 
-        public async UniTask<string> RequestForConnectGame()
+        private static NetworkManager _networkManager;
+
+
+        public static void SetupDependencies(NetworkManager networkManager)
         {
-            _sceneToConnect = string.Empty;
-            Debug.Log("<color=orange>### Request for connect game()");
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessage.RequestConnectToGameScene);
-            NetworkManager.Client.Send(message);
-
-            await UniTask.WaitWhile(() => _sceneToConnect.Length == 0);
-            return _sceneToConnect;
+            _networkManager = networkManager;
         }
+
 
         [MessageHandler((ushort)ServerToClientMessage.ConnectToGameSceneCommand)]
         private static void HandleSceneConnectionCommand(Message message)
         {
             _sceneToConnect = message.GetString();
             Debug.Log($"<color=orange>### Need connect to scene {_sceneToConnect}");
+        }
+
+        public static async UniTask<string> RequestForConnectGame()
+        {
+            _sceneToConnect = string.Empty;
+            Debug.Log("<color=orange>### Request for connect game()");
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessage.RequestConnectToGame);
+            _networkManager.Client.Send(message);
+
+            await UniTask.WaitWhile(() => _sceneToConnect.Length == 0)
+                .AttachExternalCancellation(_cancellationTokenSource.Token); ;
+            return _sceneToConnect;
         }
     }
 }

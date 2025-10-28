@@ -1,6 +1,4 @@
-﻿using Assets.Code.Gameplay.Common.Physics;
-using UnityEngine;
-using VContainer;
+﻿using UnityEngine;
 
 
 namespace Assets.Code.View
@@ -8,15 +6,8 @@ namespace Assets.Code.View
     public sealed class EntityBehaviour : MonoBehaviour
     {
         private GameEntity _entity;
-        private ICollisionRegistry _collisionRegistry;
 
         public GameEntity Entity => _entity;
-
-        [Inject]
-        private void Construct(ICollisionRegistry collisionRegistry)
-        {
-            _collisionRegistry = collisionRegistry;
-        }
 
         public void SetEntity(GameEntity entity)
         {
@@ -28,20 +19,10 @@ namespace Assets.Code.View
             {
                 registrar.RegisterComponents();
             }
-
-            foreach (var collider in GetComponentsInChildren<Collider>(true))
-            {
-                _collisionRegistry.Register(collider.GetInstanceID(), _entity);
-            }
         }
 
         public void ReleaseEntity()
         {
-            foreach (var collider in GetComponentsInChildren<Collider>(true))
-            {
-                _collisionRegistry.UnRegister(collider.GetInstanceID());
-            }
-
             foreach (var registrar in GetComponentsInChildren<IEntityComponentRegistrar>())
             {
                 registrar.UnRegisterComponents();

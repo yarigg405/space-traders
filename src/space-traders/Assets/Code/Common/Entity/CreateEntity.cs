@@ -2,7 +2,7 @@
 {
     public static class CreateEntity
     {
-        public static GameEntity Empty() =>
-          Contexts.sharedInstance.game.CreateEntity();
+        public static GameEntity Empty(Contexts contexts) =>
+          contexts.game.CreateEntity();
     }
 }

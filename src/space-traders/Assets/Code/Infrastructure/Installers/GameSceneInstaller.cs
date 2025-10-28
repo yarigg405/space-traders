@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Gameplay.Common.CameraSystem;
 using Assets.Code.Gameplay.Features.Player.Factory;
 using Assets.Code.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.Gameplay.Worlds;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
 using Assets.Code.Infrastructure.Systems;
@@ -37,7 +38,6 @@ namespace Assets.Code.Infrastructure.Installers
 
         private void RegisterFactories()
         {
-            _builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
             _builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf();
         }
     }

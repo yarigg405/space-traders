@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Riptide;
 using Riptide.Utils;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -15,11 +14,10 @@ namespace Assets.Code.Networking
         private const ushort _port = 40501;
         private const ushort _maxPlayers = 4;
 
-        // sceneName, playerIds
-        private readonly Dictionary<string, List<int>> _playerOnScenesMap = new();
+        public Server Server { get; private set; }
+        public Client Client { get; private set; }
 
-        public static Server Server { get; private set; }
-        public static Client Client { get; private set; }
+        public NetworkConnectionType ConnectionType { get; private set; }
 
         void IInitializable.Initialize()
         {
@@ -62,6 +60,7 @@ namespace Assets.Code.Networking
             Client.Connect($"{_ipAddress}:{_port}");
             await UniTask.WaitUntil(() => Client.IsConnected);
 
+            ConnectionType = NetworkConnectionType.Host;
             Debug.Log("<color=#6BCCFF>### HOST started");
         }
 
@@ -69,6 +68,7 @@ namespace Assets.Code.Networking
         {
             Client.Connect($"{_ipAddress}:{_port}");
             await UniTask.WaitUntil(() => Client.IsConnected);
+            ConnectionType = NetworkConnectionType.Client;
             Debug.Log("<color=#6BCCFF>### CLIENT Connected");
         }
 
@@ -97,22 +97,12 @@ namespace Assets.Code.Networking
         {
             Debug.Log("<color=#6BCCFF>### PlayerLeft");
         }
+    }
 
-        internal void RequestConnectToScene(string sceneName)
-        {
-            Debug.Log("### TryConnectToScene");
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessage.RequestConnectToGameScene)
-                .AddUShort(Client.Id)
-                .AddString(sceneName);
-            Client.Send(message);
-        }
-
-        private static void ConnectPlayerToScene(ushort clientId, string sceneName)
-        {
-            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessage.ConnectToGameSceneCommand)
-                .AddString(sceneName);
-
-            Server.Send(message, clientId);
-        }
+    public enum NetworkConnectionType
+    {
+        None = 0,
+        Host = 1,
+        Client = 2,
     }
 }

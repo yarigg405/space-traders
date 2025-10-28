@@ -5,21 +5,26 @@ using UnityEngine;
 
 namespace Assets.Code.Networking.Messaging
 {
-    public sealed class ServerMessenger
+    public static class ServerMessenger
     {
-        private readonly NetworkManager _networkManager;
+        private static NetworkManager _networkManager;
+        private static ClientsScenesContainer _clientsScenesContainer;
 
-        public ServerMessenger(NetworkManager networkManager)
+        public static void SetupDependencies(NetworkManager networkManager, ClientsScenesContainer clientsScenesContainer)
         {
             _networkManager = networkManager;
+            _clientsScenesContainer = clientsScenesContainer;
         }
 
-        [MessageHandler((ushort)ClientToServerMessage.RequestConnectToGameScene)]
+
+        [MessageHandler((ushort)ClientToServerMessage.RequestConnectToGame)]
         private static void HandleConnectToGameScene(ushort fromClientId, Message message)
         {
-            Debug.Log($"<color=yellow>### PLAYER {fromClientId} request CONNECT to scene ");
+            Debug.Log($"<color=yellow>### PLAYER {fromClientId} request CONNECT to game");
+            var sceneName = SceneNames.GameScene1;
 
-            ConnectPlayerToScene(fromClientId, SceneNames.GameScene1);
+            _clientsScenesContainer.ConnectClientToScene(fromClientId, sceneName);
+            ConnectPlayerToScene(fromClientId, sceneName);
         }
 
         private static void ConnectPlayerToScene(ushort clientId, string sceneName)
@@ -28,7 +33,7 @@ namespace Assets.Code.Networking.Messaging
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessage.ConnectToGameSceneCommand)
                 .AddString(sceneName);
 
-            NetworkManager.Server.Send(message, clientId);
+            _networkManager.Server.Send(message, clientId);
         }
     }
 }

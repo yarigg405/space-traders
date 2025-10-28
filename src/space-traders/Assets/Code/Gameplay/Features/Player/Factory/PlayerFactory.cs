@@ -2,7 +2,6 @@
 using Assets.Code.Infrastructure.Identifiers;
 using Code.Common.Extensions;
 using Unity.Mathematics;
-using UnityEngine;
 
 
 namespace Assets.Code.Gameplay.Features.Player.Factory
@@ -16,13 +15,13 @@ namespace Assets.Code.Gameplay.Features.Player.Factory
             _identifier = identifier;
         }
 
-        public GameEntity CreatePlayer(double2 at)
+        public GameEntity CreatePlayer(ushort playerNetworkId, string sceneForPlayer,  double2 at, Contexts contexts)
         {
-            var player = CreateEntity.Empty()
+            var player = CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
+                .AddCurrentScene(sceneForPlayer)
+                .AddPlayerNetworkId(playerNetworkId)
                 .AddGlobalPosition(at)
-                .AddLocalPosition(Vector3.zero)
-
                 .AddViewPath("Prefabs/PlayerShip")
 
                 .With(x => x.isPlayer = true);

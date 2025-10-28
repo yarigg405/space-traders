@@ -7,27 +7,27 @@ using VContainer.Unity;
 
 namespace Assets.Code.Infrastructure.EntryPoints
 {
-    internal sealed class SpaceSceneEntryPoint : IStartable
+    internal sealed class SpaceSceneEntryPoint //: IStartable
     {
         private readonly IStateMachine _stateMachine;
         private readonly ISystemFactory _systems;
-        private readonly FeaturesContainer _featuresContainer;
+        //   private readonly ClientFeaturesContainer _featuresContainer;
 
-        public SpaceSceneEntryPoint(IStateMachine stateMachine, ISystemFactory systems, FeaturesContainer featuresContainer)
-        {
-            _stateMachine = stateMachine;
-            _systems = systems;
-            _featuresContainer = featuresContainer;
-        }
+        //public SpaceSceneEntryPoint(IStateMachine stateMachine, ISystemFactory systems, ClientFeaturesContainer featuresContainer)
+        //{
+        //    _stateMachine = stateMachine;
+        //    _systems = systems;
+        //    _featuresContainer = featuresContainer;
+        //}
 
-        void IStartable.Start()
-        {
-            _stateMachine.Enter<GameLoopState>();
+        //void IStartable.Start()
+        //{
+        //    _stateMachine.Enter<GameLoopState>();
 
-            var feature = _systems.Create<GameFeature>();
-            _featuresContainer.Cleanup();
-            _featuresContainer.Add(feature);
-            _featuresContainer.Initialize();
-        }
+        //    var feature = _systems.Create<GameFeature>();
+        //    _featuresContainer.Cleanup();
+        //    _featuresContainer.Add(feature);
+        //    _featuresContainer.Initialize();
+        //}
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Assets.Code.Networking
+﻿namespace Assets.Code.Networking.Messaging
 {
     public enum ServerToClientMessage:ushort
     {

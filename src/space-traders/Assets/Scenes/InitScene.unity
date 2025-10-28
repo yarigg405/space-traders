@@ -208,7 +208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1891047625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fce2dcb976ab69843b5b221debefe65d, type: 3}
+  m_Script: {fileID: 11500000, guid: abb270e7d5819e94e9ec5e38f8e60568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Code.Infrastructure.Installers.BootstrapInstaller
 --- !u!4 &1891047627

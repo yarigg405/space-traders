@@ -1,6 +1,5 @@
-﻿using Assets.Code.Gameplay;
-using Assets.Code.Gameplay.Common.Physics;
-using Assets.Code.Gameplay.Common.Time;
+﻿using Assets.Code.Gameplay.Common.Time;
+using Assets.Code.Gameplay.Worlds;
 using Assets.Code.Infrastructure.AssetManagement;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
@@ -24,7 +23,7 @@ namespace Assets.Code.Infrastructure.Installers
         public override void Install(IContainerBuilder builder)
         {
             _builder = builder;
-            BindContexts();
+
             BindGameServices();
             BindNetworking();
             BindStates();
@@ -32,30 +31,23 @@ namespace Assets.Code.Infrastructure.Installers
             RegisterEntryPoint();
         }
 
-        private void BindContexts()
-        {
-            _builder.RegisterInstance(Contexts.sharedInstance).AsSelf();
-            _builder.RegisterInstance(Contexts.sharedInstance.game).AsSelf();
-            _builder.RegisterInstance(Contexts.sharedInstance.input).AsSelf();
-            _builder.RegisterInstance(Contexts.sharedInstance.meta).AsSelf();
-        }
-
         private void BindGameServices()
         {
             _builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces();
+            _builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<IdentifierService>(Lifetime.Singleton).AsImplementedInterfaces();
             _builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
-            _builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces(); 
             _builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
-            _builder.Register<CollisionRegistry>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
         private void BindNetworking()
         {
             _builder.Register<NetworkManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            _builder.Register<ClientMessenger>(Lifetime.Singleton).AsSelf();
-            _builder.Register<ServerMessenger>(Lifetime.Singleton).AsSelf();
+            _builder.Register<NetworkDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
+            _builder.Register<ClientsScenesContainer>(Lifetime.Singleton).AsSelf();
+            _builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();
+            _builder.Register<ServerWorldsController>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
         private void BindStates()
@@ -64,7 +56,6 @@ namespace Assets.Code.Infrastructure.Installers
             _builder.Register<MenuSceneState>(Lifetime.Transient).AsSelf();
             _builder.Register<LoadGameSceneState>(Lifetime.Transient).AsSelf();
             _builder.Register<GameLoopState>(Lifetime.Transient).AsSelf();
-            _builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
         }
 
         private void RegisterEntryPoint()

@@ -34,10 +34,10 @@ public sealed partial class GameMatcher {
 public partial class GameEntity {
 
     public Assets.Code.Gameplay.Common.EntityLink entityLink { get { return (Assets.Code.Gameplay.Common.EntityLink)GetComponent(GameComponentsLookup.EntityLink); } }
-    public int EntityLink { get { return entityLink.Value; } }
+    public ulong EntityLink { get { return entityLink.Value; } }
     public bool hasEntityLink { get { return HasComponent(GameComponentsLookup.EntityLink); } }
 
-    public GameEntity AddEntityLink(int newValue) {
+    public GameEntity AddEntityLink(ulong newValue) {
         var index = GameComponentsLookup.EntityLink;
         var component = (Assets.Code.Gameplay.Common.EntityLink)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.EntityLink));
         component.Value = newValue;
@@ -45,7 +45,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceEntityLink(int newValue) {
+    public GameEntity ReplaceEntityLink(ulong newValue) {
         var index = GameComponentsLookup.EntityLink;
         var component = (Assets.Code.Gameplay.Common.EntityLink)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.EntityLink));
         component.Value = newValue;

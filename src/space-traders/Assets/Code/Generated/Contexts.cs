@@ -65,16 +65,16 @@ public partial class Contexts {
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
-        game.AddEntityIndex(new Entitas.EntityIndex<GameEntity, int>(
+        game.AddEntityIndex(new Entitas.EntityIndex<GameEntity, ulong>(
             EntityLink,
             game.GetGroup(GameMatcher.EntityLink),
             (e, c) => ((Assets.Code.Gameplay.Common.EntityLink)c).Value));
 
-        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, int>(
+        game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, ulong>(
             Id,
             game.GetGroup(GameMatcher.Id),
             (e, c) => ((Assets.Code.Gameplay.Common.Id)c).Value));
-        meta.AddEntityIndex(new Entitas.PrimaryEntityIndex<MetaEntity, int>(
+        meta.AddEntityIndex(new Entitas.PrimaryEntityIndex<MetaEntity, ulong>(
             Id,
             meta.GetGroup(MetaMatcher.Id),
             (e, c) => ((Assets.Code.Gameplay.Common.Id)c).Value));
@@ -83,16 +83,16 @@ public partial class Contexts {
 
 public static class ContextsExtensions {
 
-    public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithEntityLink(this GameContext context, int Value) {
-        return ((Entitas.EntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.EntityLink)).GetEntities(Value);
+    public static System.Collections.Generic.HashSet<GameEntity> GetEntitiesWithEntityLink(this GameContext context, ulong Value) {
+        return ((Entitas.EntityIndex<GameEntity, ulong>)context.GetEntityIndex(Contexts.EntityLink)).GetEntities(Value);
     }
 
-    public static GameEntity GetEntityWithId(this GameContext context, int Value) {
-        return ((Entitas.PrimaryEntityIndex<GameEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
+    public static GameEntity GetEntityWithId(this GameContext context, ulong Value) {
+        return ((Entitas.PrimaryEntityIndex<GameEntity, ulong>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
     }
 
-    public static MetaEntity GetEntityWithId(this MetaContext context, int Value) {
-        return ((Entitas.PrimaryEntityIndex<MetaEntity, int>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
+    public static MetaEntity GetEntityWithId(this MetaContext context, ulong Value) {
+        return ((Entitas.PrimaryEntityIndex<MetaEntity, ulong>)context.GetEntityIndex(Contexts.Id)).GetEntity(Value);
     }
 }
 //------------------------------------------------------------------------------
