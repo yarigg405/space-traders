@@ -26,7 +26,7 @@ namespace Assets.Code.Gameplay.Worlds
                 builder.RegisterInstance(contexts.input).AsSelf();
                 builder.RegisterInstance(contexts.meta).AsSelf();
 
-                builder.Register<SystemFactory>(Lifetime.Scoped).AsSelf();
+                builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
             });
 
             var container = worldScope.Container;

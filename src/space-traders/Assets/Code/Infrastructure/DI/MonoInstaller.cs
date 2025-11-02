@@ -7,6 +7,14 @@ namespace Assets.Code.Infrastructure.DI
 {
     public abstract class MonoInstaller : MonoBehaviour, IInstaller
     {
-        public abstract void Install(IContainerBuilder builder);
+        protected IContainerBuilder Builder;
+
+        public void Install(IContainerBuilder builder)
+        {
+            Builder = builder;
+            Install();
+        }
+
+        protected abstract void Install();
     }
 }

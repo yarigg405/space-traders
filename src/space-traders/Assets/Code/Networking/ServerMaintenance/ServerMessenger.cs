@@ -1,9 +1,10 @@
 ﻿using Assets.Code.Infrastructure.Loading;
+using Assets.Code.Networking.MessageTypes;
 using Riptide;
 using UnityEngine;
 
 
-namespace Assets.Code.Networking.Messaging
+namespace Assets.Code.Networking.ServerMaintenance
 {
     public static class ServerMessenger
     {
@@ -17,7 +18,7 @@ namespace Assets.Code.Networking.Messaging
         }
 
 
-        [MessageHandler((ushort)ClientToServerMessage.RequestConnectToGame)]
+        [MessageHandler((ushort)ClientToServerMessageType.RequestConnectToGame)]
         private static void HandleConnectToGameScene(ushort fromClientId, Message message)
         {
             Debug.Log($"<color=yellow>### PLAYER {fromClientId} request CONNECT to game");
@@ -30,7 +31,7 @@ namespace Assets.Code.Networking.Messaging
         private static void ConnectPlayerToScene(ushort clientId, string sceneName)
         {
             Debug.Log($"<color=yellow>### ConnectPlayerToScene {sceneName} ");
-            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessage.ConnectToGameSceneCommand)
+            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ConnectToGameSceneCommand)
                 .AddString(sceneName);
 
             _networkManager.Server.Send(message, clientId);

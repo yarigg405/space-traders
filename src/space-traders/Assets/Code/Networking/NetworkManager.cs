@@ -1,8 +1,10 @@
+using Assets.Code.Networking.ServerMaintenance;
 using Cysharp.Threading.Tasks;
 using Riptide;
 using Riptide.Utils;
 using System;
 using UnityEngine;
+using VContainer;
 using VContainer.Unity;
 
 
@@ -13,6 +15,15 @@ namespace Assets.Code.Networking
         private const string _ipAddress = "127.0.0.1";
         private const ushort _port = 40501;
         private const ushort _maxPlayers = 4;
+
+        private readonly IObjectResolver _resolver;
+
+        public NetworkManager(IObjectResolver resolver)
+        {
+            _resolver = resolver;
+        }
+
+        private ServerStartup _serverStartup;
 
         public Server Server { get; private set; }
         public Client Client { get; private set; }
@@ -44,6 +55,7 @@ namespace Assets.Code.Networking
         void IDisposable.Dispose()
         {
             Server.Stop();
+            _serverStartup.StopServer();
 
             Client.Connected -= DidConnect;
             Client.ConnectionFailed -= FailedToConnect;
@@ -59,6 +71,9 @@ namespace Assets.Code.Networking
 
             Client.Connect($"{_ipAddress}:{_port}");
             await UniTask.WaitUntil(() => Client.IsConnected);
+
+
+            _serverStartup = new(_resolver.Resolve<LifetimeScope>());
 
             ConnectionType = NetworkConnectionType.Host;
             Debug.Log("<color=#6BCCFF>### HOST started");

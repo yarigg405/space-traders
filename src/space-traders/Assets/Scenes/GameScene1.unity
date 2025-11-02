@@ -520,8 +520,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 400316108}
-  _monoInstallers:
-  - {fileID: 875115693}
+  _monoInstallers: []
 --- !u!4 &875115692
 Transform:
   m_ObjectHideFlags: 0

@@ -1,10 +1,11 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using Assets.Code.Networking.MessageTypes;
+using Cysharp.Threading.Tasks;
 using Riptide;
 using System.Threading;
 using UnityEngine;
 
 
-namespace Assets.Code.Networking.Messaging
+namespace Assets.Code.Networking.ClientMaintenance
 {
     public static class ClientMessenger
     {
@@ -20,7 +21,7 @@ namespace Assets.Code.Networking.Messaging
         }
 
 
-        [MessageHandler((ushort)ServerToClientMessage.ConnectToGameSceneCommand)]
+        [MessageHandler((ushort)ServerToClientMessageType.ConnectToGameSceneCommand)]
         private static void HandleSceneConnectionCommand(Message message)
         {
             _sceneToConnect = message.GetString();
@@ -31,7 +32,7 @@ namespace Assets.Code.Networking.Messaging
         {
             _sceneToConnect = string.Empty;
             Debug.Log("<color=orange>### Request for connect game()");
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessage.RequestConnectToGame);
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestConnectToGame);
             _networkManager.Client.Send(message);
 
             await UniTask.WaitWhile(() => _sceneToConnect.Length == 0)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Yrr.Utils;
 
 
-namespace Assets.Code.Networking
+namespace Assets.Code.Networking.ServerMaintenance
 {
     public sealed class ClientsScenesContainer
     {
