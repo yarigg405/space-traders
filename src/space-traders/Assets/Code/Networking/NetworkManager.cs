@@ -1,3 +1,4 @@
+using Assets.Code.Infrastructure.DI;
 using Assets.Code.Networking.ServerMaintenance;
 using Cysharp.Threading.Tasks;
 using Riptide;
@@ -73,7 +74,7 @@ namespace Assets.Code.Networking
             await UniTask.WaitUntil(() => Client.IsConnected);
 
 
-            _serverStartup = new(_resolver.Resolve<LifetimeScope>());
+            _serverStartup = new(_resolver.Resolve<GameLifetimeScope>());
 
             ConnectionType = NetworkConnectionType.Host;
             Debug.Log("<color=#6BCCFF>### HOST started");

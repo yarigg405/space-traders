@@ -3,5 +3,6 @@
     public enum ServerToClientMessageType:ushort
     {
         ConnectToGameSceneCommand = 1,
+        SendEntitiesJson = 2,
     }
 }

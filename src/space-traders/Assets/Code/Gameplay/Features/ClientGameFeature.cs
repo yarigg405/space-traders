@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Assets.Code.Infrastructure.Systems;
 
 
 namespace Assets.Code.Gameplay.Features
 {
-    public sealed class ClientGameFeature:Feature
+    public sealed class ClientGameFeature : Feature
     {
-
+        public ClientGameFeature(ISystemFactory systems)
+        {
+            
+        }
     }
 }

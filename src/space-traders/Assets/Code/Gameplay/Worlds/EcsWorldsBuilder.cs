@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Gameplay.Features;
+using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Systems;
 using VContainer;
 using VContainer.Unity;
@@ -8,9 +9,9 @@ namespace Assets.Code.Gameplay.Worlds
 {
     public sealed class EcsWorldsBuilder
     {
-        private readonly LifetimeScope _scope;
+        private readonly GameLifetimeScope _scope;
 
-        public EcsWorldsBuilder(LifetimeScope scope)
+        internal EcsWorldsBuilder(GameLifetimeScope scope)
         {
             _scope = scope;
         }

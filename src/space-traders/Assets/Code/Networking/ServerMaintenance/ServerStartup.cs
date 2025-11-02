@@ -1,6 +1,8 @@
 ﻿using Assets.Code.Gameplay.Features.Player.Factory;
 using Assets.Code.Gameplay.Worlds;
+using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,23 +13,24 @@ namespace Assets.Code.Networking.ServerMaintenance
     {
         private readonly LifetimeScope _serverScope;
 
-        public ServerStartup(LifetimeScope rootLifetimeScope)
+        internal ServerStartup(GameLifetimeScope rootLifetimeScope)
         {
+            Debug.Log("Server Startup");
             _serverScope = rootLifetimeScope.CreateChild(builder =>
             {
-                builder.Register<IdentifierService>(Lifetime.Singleton).AsImplementedInterfaces();
+                builder.Register<IdentifierService>(Lifetime.Scoped).AsImplementedInterfaces();
                 builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf();
 
-                builder.Register<ClientsScenesContainer>(Lifetime.Transient).AsSelf();
-                builder.Register<ServerMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
-                builder.Register<EcsWorldsBuilder>(Lifetime.Transient).AsSelf();
-                builder.Register<ServerWorldsController>(Lifetime.Singleton).AsImplementedInterfaces();
+                builder.Register<ClientsScenesContainer>(Lifetime.Scoped).AsSelf();
+                builder.Register<EcsWorldsBuilder>(Lifetime.Scoped).AsSelf();
+                builder.Register<ServerWorldsController>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
+                builder.Register<ServerMessengerDependencySetupper>(Lifetime.Scoped).AsImplementedInterfaces();
             });
         }
 
         public void StopServer()
         {
-            _serverScope.Dispose();   
+            _serverScope.Dispose();
         }
     }
 }

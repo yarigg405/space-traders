@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 
-namespace Assets.Code.Serialization
+namespace Assets.Code.Serialization.Extensions
 {
     public static class SerializeEntityExtensions
     {

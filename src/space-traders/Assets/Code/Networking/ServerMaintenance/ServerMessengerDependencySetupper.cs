@@ -1,23 +1,21 @@
-﻿using VContainer.Unity;
+﻿using VContainer;
+using VContainer.Unity;
 
 
 namespace Assets.Code.Networking.ServerMaintenance
 {
     public sealed class ServerMessengerDependencySetupper : IInitializable
     {
-        private readonly NetworkManager _networkManager;
-        private readonly ClientsScenesContainer _clientsScenesContainer;
+        private readonly IObjectResolver _resolver;
 
-        public ServerMessengerDependencySetupper(ClientsScenesContainer clientsScenesContainer, NetworkManager networkManager)
+        public ServerMessengerDependencySetupper(IObjectResolver resolver)
         {
-            _clientsScenesContainer = clientsScenesContainer;
-            _networkManager = networkManager;
+            _resolver = resolver;
         }
 
         void IInitializable.Initialize()
         {
-            ServerMessenger.SetupDependencies(_networkManager,
-                _clientsScenesContainer);
+            ServerMessenger.SetupDependencies(_resolver);
         }
     }
 }

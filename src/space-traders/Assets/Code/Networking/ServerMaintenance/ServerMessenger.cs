@@ -1,7 +1,10 @@
-﻿using Assets.Code.Infrastructure.Loading;
+﻿using Assets.Code.Gameplay.Worlds;
+using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Networking.MessageTypes;
+using Assets.Code.Serialization.Services;
 using Riptide;
 using UnityEngine;
+using VContainer;
 
 
 namespace Assets.Code.Networking.ServerMaintenance
@@ -10,11 +13,15 @@ namespace Assets.Code.Networking.ServerMaintenance
     {
         private static NetworkManager _networkManager;
         private static ClientsScenesContainer _clientsScenesContainer;
+        private static ServerWorldsController _serverWorldsController;
+        private static WorldSerializationService _worldSerializationService;
 
-        public static void SetupDependencies(NetworkManager networkManager, ClientsScenesContainer clientsScenesContainer)
+        public static void SetupDependencies(IObjectResolver resolver)
         {
-            _networkManager = networkManager;
-            _clientsScenesContainer = clientsScenesContainer;
+            _networkManager = resolver.Resolve<NetworkManager>();
+            _clientsScenesContainer = resolver.Resolve<ClientsScenesContainer>();   
+            _serverWorldsController = resolver.Resolve<ServerWorldsController>();
+            _worldSerializationService = resolver.Resolve<WorldSerializationService>();
         }
 
 
@@ -33,6 +40,25 @@ namespace Assets.Code.Networking.ServerMaintenance
             Debug.Log($"<color=yellow>### ConnectPlayerToScene {sceneName} ");
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ConnectToGameSceneCommand)
                 .AddString(sceneName);
+
+            _networkManager.Server.Send(message, clientId);
+        }
+
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
+        private static void HandleEntitiesLoading(ushort fromClientId, Message message)
+        {
+            var clientScene = _clientsScenesContainer.GetSceneForClient(fromClientId);
+            var world = _serverWorldsController.GetWorld(clientScene);
+            var json = _worldSerializationService.SerializeGameWorld(world);
+
+            SendJsonEntitiesForPlayer(fromClientId, json);
+        }
+
+        private static void SendJsonEntitiesForPlayer(ushort clientId, string json)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.SendEntitiesJson)
+                 .AddString(json);
 
             _networkManager.Server.Send(message, clientId);
         }
