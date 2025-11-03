@@ -18,25 +18,21 @@ namespace Assets.Code.Networking.ServerMaintenance
         public ClientsScenesContainer()
         {
             _guid = Guid.NewGuid().ToString();
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
         }  
 
         public void ConnectClientToScene(ushort clientId, string sceneName)
         {
-            Debug.Log($"<color=red>ConnectClientToScene {clientId}-{sceneName}");
             TryDisconnectClientFromCurrentScene(clientId);
             SetSceneForClient(clientId, sceneName);
             AddClientToScene(clientId, sceneName);
 
             OnClientConnectedToScene?.Invoke(sceneName, clientId);
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
         }
 
         public void RemoveClientFromGame(ushort clientId)
         {
             TryDisconnectClientFromCurrentScene(clientId);
             _sceneForClientsMap.Remove(clientId);
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
         }
 
         public int PlayersCount(string sceneName)
@@ -46,7 +42,6 @@ namespace Assets.Code.Networking.ServerMaintenance
 
         public string GetSceneForClient(ushort clientId)
         {
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
             return _sceneForClientsMap[clientId];
         }
 
@@ -62,13 +57,11 @@ namespace Assets.Code.Networking.ServerMaintenance
             _sceneForClientsMap[clientID] = string.Empty;
 
             OnClientDisconnectedFromScene?.Invoke(sceneName, clientID);
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
         }
 
         private void SetSceneForClient(ushort clientId, string sceneName)
         {
             _sceneForClientsMap[clientId] = sceneName;
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
         }
 
         private void AddClientToScene(ushort clientId, string sceneName)
@@ -77,7 +70,6 @@ namespace Assets.Code.Networking.ServerMaintenance
                 _clientsOnScenesMap[sceneName] = new List<ushort>();
 
             _clientsOnScenesMap[sceneName].Add(clientId);
-            Debug.Log($"<color=green>{_guid}: {_sceneForClientsMap.Count}");
         }
     }
 }

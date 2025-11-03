@@ -32,14 +32,12 @@ namespace Assets.Code.Gameplay.Worlds
 
         void IInitializable.Initialize()
         {
-            Debug.Log("Initialize");
             _clientsScenesContainer.OnClientConnectedToScene += OnClientConnected;
             _clientsScenesContainer.OnClientDisconnectedFromScene += OnClientDisconnected;
         }
 
         void IDisposable.Dispose()
         {
-            Debug.Log("Dispose");
             _clientsScenesContainer.OnClientConnectedToScene -= OnClientConnected;
             _clientsScenesContainer.OnClientDisconnectedFromScene -= OnClientDisconnected;
         }
@@ -60,7 +58,6 @@ namespace Assets.Code.Gameplay.Worlds
 
         private void OnClientConnected(string sceneName, ushort clientId)
         {
-            Debug.Log("<color=red> OnClientConnected");
             if (!_scenesWorldsDict.ContainsKey(sceneName))
             {
                 _scenesWorldsDict[sceneName] = _worldsBuilder.CreateNewServerWorld(sceneName);

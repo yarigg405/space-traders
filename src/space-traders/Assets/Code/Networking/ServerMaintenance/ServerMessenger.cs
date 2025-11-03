@@ -28,7 +28,6 @@ namespace Assets.Code.Networking.ServerMaintenance
         [MessageHandler((ushort)ClientToServerMessageType.RequestConnectToGame)]
         private static void HandleConnectToGameScene(ushort fromClientId, Message message)
         {
-            Debug.Log($"<color=yellow>### PLAYER {fromClientId} request CONNECT to game");
             var sceneName = SceneNames.GameScene1;
 
             _clientsScenesContainer.ConnectClientToScene(fromClientId, sceneName);
@@ -37,7 +36,6 @@ namespace Assets.Code.Networking.ServerMaintenance
 
         private static void ConnectPlayerToScene(ushort clientId, string sceneName)
         {
-            Debug.Log($"<color=yellow>### ConnectPlayerToScene {sceneName} ");
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ConnectToGameSceneCommand)
                 .AddString(sceneName);
 

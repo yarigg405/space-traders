@@ -15,7 +15,6 @@ namespace Assets.Code.Networking.ServerMaintenance
 
         internal ServerStartup(GameLifetimeScope rootLifetimeScope)
         {
-            Debug.Log("Server Startup");
             _serverScope = rootLifetimeScope.CreateChild(builder =>
             {
                 builder.Register<IdentifierService>(Lifetime.Scoped).AsImplementedInterfaces();

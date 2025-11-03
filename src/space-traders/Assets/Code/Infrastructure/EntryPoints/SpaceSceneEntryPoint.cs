@@ -41,10 +41,8 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
         private async UniTask LoadEntitiesAsync()
         {
-            Debug.Log("### Fill context");
             var jsonForEntities = await ClientMessenger.RequestForLoadingSceneEntities();
             _worldSerialization.FillContext(jsonForEntities, _gameContext);
-            Debug.Log("### Fill context");
 
             _featuresContainer.Initialize();
             _stateMachine.Enter<GameLoopState>();

@@ -77,7 +77,6 @@ namespace Assets.Code.Networking
             _serverStartup = new(_resolver.Resolve<GameLifetimeScope>());
 
             ConnectionType = NetworkConnectionType.Host;
-            Debug.Log("<color=#6BCCFF>### HOST started");
         }
 
         public async UniTask StartClient()
@@ -85,7 +84,6 @@ namespace Assets.Code.Networking
             Client.Connect($"{_ipAddress}:{_port}");
             await UniTask.WaitUntil(() => Client.IsConnected);
             ConnectionType = NetworkConnectionType.Client;
-            Debug.Log("<color=#6BCCFF>### CLIENT Connected");
         }
 
 
