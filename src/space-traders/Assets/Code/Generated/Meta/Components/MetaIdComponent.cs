@@ -33,12 +33,12 @@ public sealed partial class MetaMatcher {
 //------------------------------------------------------------------------------
 public partial class MetaEntity : IIdEntity<MetaEntity>, IIdEntity
 {
-    Entitas.IEntity IIdEntity<Entitas.IEntity>.AddId(ulong newValue)
+    Entitas.IEntity IIdEntity<Entitas.IEntity>.AddId(uint newValue)
     {
         return AddId(newValue);
     }
 
-    Entitas.IEntity IIdEntity<Entitas.IEntity>.ReplaceId(ulong newValue)
+    Entitas.IEntity IIdEntity<Entitas.IEntity>.ReplaceId(uint newValue)
     {
         return ReplaceId(newValue);
     }
@@ -60,10 +60,10 @@ public partial class MetaEntity : IIdEntity<MetaEntity>, IIdEntity
 public partial class MetaEntity {
 
     public Assets.Code.Gameplay.Common.Id id { get { return (Assets.Code.Gameplay.Common.Id)GetComponent(MetaComponentsLookup.Id); } }
-    public ulong Id { get { return id.Value; } }
+    public uint Id { get { return id.Value; } }
     public bool hasId { get { return HasComponent(MetaComponentsLookup.Id); } }
 
-    public MetaEntity AddId(ulong newValue) {
+    public MetaEntity AddId(uint newValue) {
         var index = MetaComponentsLookup.Id;
         var component = (Assets.Code.Gameplay.Common.Id)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.Id));
         component.Value = newValue;
@@ -71,7 +71,7 @@ public partial class MetaEntity {
         return this;
     }
 
-    public MetaEntity ReplaceId(ulong newValue) {
+    public MetaEntity ReplaceId(uint newValue) {
         var index = MetaComponentsLookup.Id;
         var component = (Assets.Code.Gameplay.Common.Id)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.Id));
         component.Value = newValue;

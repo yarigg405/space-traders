@@ -1,8 +1,12 @@
-﻿using Assets.Code.Networking.MessageTypes;
+﻿using Assets.Code.Common.Entity;
+using Assets.Code.Networking.MessageTypes;
+using Assets.Code.Serialization;
+using Assets.Code.Serialization.Data;
 using Cysharp.Threading.Tasks;
 using Riptide;
 using System.Threading;
 using UnityEngine;
+using VContainer;
 
 
 namespace Assets.Code.Networking.ClientMaintenance
@@ -11,14 +15,15 @@ namespace Assets.Code.Networking.ClientMaintenance
     {
         private static CancellationTokenSource _cancellationTokenSource = new();
         private static NetworkManager _networkManager;
+        private static ClientEntitiesController _clientEntitiesController;
 
         private static string _sceneToConnect = string.Empty;
-        private static string _jsonToSceneLoading = string.Empty;
 
 
-        public static void SetupDependencies(NetworkManager networkManager)
+        public static void SetupDependencies(IObjectResolver resolver)
         {
-            _networkManager = networkManager;
+            _networkManager = resolver.Resolve<NetworkManager>();
+            _clientEntitiesController = resolver.Resolve<ClientEntitiesController>();
         }
 
 
@@ -40,21 +45,19 @@ namespace Assets.Code.Networking.ClientMaintenance
         }
 
 
-        [MessageHandler((ushort)ServerToClientMessageType.SendEntitiesJson)]
+        [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]
         private static void HandleEntitiesJsonLoading(Message message)
         {
-            _jsonToSceneLoading = message.GetString();
+            var json = message.GetString();
+            var snapshot = JsonSerializator.FromJson<EntitySnapshot>(json);
+
+            _clientEntitiesController.CreateEntityFromSnapshot(snapshot);
         }
 
-        public static async UniTask<string> RequestForLoadingSceneEntities()
+        public static void RequestForLoadingSceneEntities()
         {
-            _jsonToSceneLoading = string.Empty;
             var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
             _networkManager.Client.Send(message);
-
-            await UniTask.WaitWhile(() => _jsonToSceneLoading.Length == 0)
-                   .AttachExternalCancellation(_cancellationTokenSource.Token);
-            return _jsonToSceneLoading;
         }
     }
 }

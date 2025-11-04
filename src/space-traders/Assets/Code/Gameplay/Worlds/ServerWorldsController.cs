@@ -1,45 +1,23 @@
-﻿using Assets.Code.Gameplay.Common;
-using Assets.Code.Gameplay.Features.Player.Factory;
-using Assets.Code.Networking.ServerMaintenance;
-using System;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using VContainer.Unity;
 
 
 namespace Assets.Code.Gameplay.Worlds
 {
-    internal sealed class ServerWorldsController : ITickable, IInitializable, IDisposable
+    public sealed class ServerWorldsController : ITickable
     {
-        private readonly ClientsScenesContainer _clientsScenesContainer;
-        private readonly PlayerFactory _playerFactory;
         private readonly EcsWorldsBuilder _worldsBuilder;
+        private readonly EcsWorldDestoyer _destoyer;
 
-        private readonly Dictionary<string, EcsWorldInstance> _scenesWorldsDict = new();
-        private readonly Dictionary<ushort, GameEntity> _playersEntities = new();
-        private readonly EcsWorldDestoyer _destoyer = new();
+        private readonly Dictionary<string, EcsWorldInstance> _scenesWorldsDict;
 
 
-        public ServerWorldsController(ClientsScenesContainer clientsScenesContainer,
-            PlayerFactory playerFactory,
-            EcsWorldsBuilder worldsBuilder)
+        public ServerWorldsController(EcsWorldsBuilder worldsBuilder)
         {
-            _clientsScenesContainer = clientsScenesContainer;
-            _playerFactory = playerFactory;
             _worldsBuilder = worldsBuilder;
-        }
+            _destoyer = new();
 
-        void IInitializable.Initialize()
-        {
-            _clientsScenesContainer.OnClientConnectedToScene += OnClientConnected;
-            _clientsScenesContainer.OnClientDisconnectedFromScene += OnClientDisconnected;
-        }
-
-        void IDisposable.Dispose()
-        {
-            _clientsScenesContainer.OnClientConnectedToScene -= OnClientConnected;
-            _clientsScenesContainer.OnClientDisconnectedFromScene -= OnClientDisconnected;
+            _scenesWorldsDict = new();
         }
 
         void ITickable.Tick()
@@ -51,34 +29,20 @@ namespace Assets.Code.Gameplay.Worlds
             }
         }
 
-        public EcsWorldInstance GetWorld(string sceneName)
-        {
-              return _scenesWorldsDict[sceneName];
-        }
-
-        private void OnClientConnected(string sceneName, ushort clientId)
+        public EcsWorldInstance GetOrCreateWorld(string sceneName)
         {
             if (!_scenesWorldsDict.ContainsKey(sceneName))
             {
                 _scenesWorldsDict[sceneName] = _worldsBuilder.CreateNewServerWorld(sceneName);
             }
 
-            var ctxs = _scenesWorldsDict[sceneName].Contexts;
-            var spawnPoint = double2.zero.GetRandomCoordinatesAroundPointZX(25f);
-
-            _playersEntities[clientId] =
-                _playerFactory.CreatePlayer(clientId, sceneName, spawnPoint, ctxs);
+            return _scenesWorldsDict[sceneName];
         }
 
-        private void OnClientDisconnected(string sceneName, ushort clientId)
+        public void DestroyWorld(string sceneName)
         {
-            _playersEntities[clientId].isDestructed = true;
-            _playersEntities.Remove(clientId);
-            if (_clientsScenesContainer.PlayersCount(sceneName) < 1)
-            {
-                _destoyer.DestroyWorld(_scenesWorldsDict[sceneName]);
-                _scenesWorldsDict.Remove(sceneName);
-            }
+            _destoyer.DestroyWorld(_scenesWorldsDict[sceneName]);
+            _scenesWorldsDict.Remove(sceneName);
         }
     }
 }

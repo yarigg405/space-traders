@@ -3,9 +3,7 @@ using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.Networking.ClientMaintenance;
-using Assets.Code.Serialization.Services;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer.Unity;
 
 
@@ -16,17 +14,14 @@ namespace Assets.Code.Infrastructure.EntryPoints
         private readonly IStateMachine _stateMachine;
         private readonly ISystemFactory _systems;
         private readonly FeaturesContainer _featuresContainer;
-        private readonly WorldSerializationService _worldSerialization;
         private readonly GameContext _gameContext;
 
         public SpaceSceneEntryPoint(IStateMachine stateMachine,
-            ISystemFactory systems, FeaturesContainer featuresContainer,
-            WorldSerializationService worldSerialization, GameContext gameContext)
+            ISystemFactory systems, FeaturesContainer featuresContainer, GameContext gameContext)
         {
             _stateMachine = stateMachine;
             _systems = systems;
             _featuresContainer = featuresContainer;
-            _worldSerialization = worldSerialization;
             _gameContext = gameContext;
         }
 
@@ -35,17 +30,9 @@ namespace Assets.Code.Infrastructure.EntryPoints
             var feature = _systems.Create<ClientGameFeature>();
             _featuresContainer.Cleanup();
             _featuresContainer.Add(feature);
-
-            LoadEntitiesAsync().Forget();
-        }
-
-        private async UniTask LoadEntitiesAsync()
-        {
-            var jsonForEntities = await ClientMessenger.RequestForLoadingSceneEntities();
-            _worldSerialization.FillContext(jsonForEntities, _gameContext);
-
             _featuresContainer.Initialize();
             _stateMachine.Enter<GameLoopState>();
-        }            
+            ClientMessenger.RequestForLoadingSceneEntities();
+        }
     }
 }

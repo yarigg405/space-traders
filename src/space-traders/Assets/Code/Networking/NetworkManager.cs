@@ -56,7 +56,8 @@ namespace Assets.Code.Networking
         void IDisposable.Dispose()
         {
             Server.Stop();
-            _serverStartup.StopServer();
+            if (_serverStartup != null)
+                _serverStartup.StopServer();
 
             Client.Connected -= DidConnect;
             Client.ConnectionFailed -= FailedToConnect;

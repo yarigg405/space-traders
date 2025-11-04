@@ -2,6 +2,6 @@
 {
     public interface IIdentifierService
     {
-        ulong Next();
+        uint Next();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Common.Time;
+﻿using Assets.Code.Common.Entity;
+using Assets.Code.Gameplay.Common.Time;
 using Assets.Code.Gameplay.Features;
 using Assets.Code.Infrastructure.AssetManagement;
 using Assets.Code.Infrastructure.DI;
@@ -44,8 +45,8 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
-            Builder.Register<WorldSerializationService>(Lifetime.Singleton).AsSelf();
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
+            Builder.Register<ClientEntitiesController>(Lifetime.Singleton).AsSelf();
         }
 
         private void BindNetworking()

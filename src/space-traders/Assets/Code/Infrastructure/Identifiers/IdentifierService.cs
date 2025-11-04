@@ -2,8 +2,8 @@
 {
     public sealed class IdentifierService : IIdentifierService
     {
-        private ulong _lastId = 1;
-        public ulong Next() =>
+        private uint _lastId = 1;
+        public uint Next() =>
             ++_lastId;
     }
 }

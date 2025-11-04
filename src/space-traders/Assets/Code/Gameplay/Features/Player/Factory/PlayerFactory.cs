@@ -15,11 +15,10 @@ namespace Assets.Code.Gameplay.Features.Player.Factory
             _identifier = identifier;
         }
 
-        public GameEntity CreatePlayer(ushort playerNetworkId, string sceneForPlayer,  double2 at, Contexts contexts)
+        public GameEntity CreatePlayer(ushort playerNetworkId, double2 at, Contexts contexts)
         {
             var player = CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
-                .AddCurrentScene(sceneForPlayer)
                 .AddPlayerNetworkId(playerNetworkId)
                 .AddGlobalPosition(at)
                 .AddViewPath("Prefabs/PlayerShip")

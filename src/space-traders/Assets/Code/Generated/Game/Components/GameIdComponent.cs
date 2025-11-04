@@ -33,12 +33,12 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity : IIdEntity<GameEntity>, IIdEntity
 {
-    Entitas.IEntity IIdEntity<Entitas.IEntity>.AddId(ulong newValue)
+    Entitas.IEntity IIdEntity<Entitas.IEntity>.AddId(uint newValue)
     {
         return AddId(newValue);
     }
 
-    Entitas.IEntity IIdEntity<Entitas.IEntity>.ReplaceId(ulong newValue)
+    Entitas.IEntity IIdEntity<Entitas.IEntity>.ReplaceId(uint newValue)
     {
         return ReplaceId(newValue);
     }
@@ -60,10 +60,10 @@ public partial class GameEntity : IIdEntity<GameEntity>, IIdEntity
 public partial class GameEntity {
 
     public Assets.Code.Gameplay.Common.Id id { get { return (Assets.Code.Gameplay.Common.Id)GetComponent(GameComponentsLookup.Id); } }
-    public ulong Id { get { return id.Value; } }
+    public uint Id { get { return id.Value; } }
     public bool hasId { get { return HasComponent(GameComponentsLookup.Id); } }
 
-    public GameEntity AddId(ulong newValue) {
+    public GameEntity AddId(uint newValue) {
         var index = GameComponentsLookup.Id;
         var component = (Assets.Code.Gameplay.Common.Id)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.Id));
         component.Value = newValue;
@@ -71,7 +71,7 @@ public partial class GameEntity {
         return this;
     }
 
-    public GameEntity ReplaceId(ulong newValue) {
+    public GameEntity ReplaceId(uint newValue) {
         var index = GameComponentsLookup.Id;
         var component = (Assets.Code.Gameplay.Common.Id)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.Id));
         component.Value = newValue;

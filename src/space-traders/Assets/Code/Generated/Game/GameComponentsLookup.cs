@@ -14,18 +14,17 @@ public static class GameComponentsLookup {
     public const int ViewPath = 3;
     public const int ViewPrefab = 4;
     public const int Active = 5;
-    public const int CurrentScene = 6;
-    public const int EntityLink = 7;
-    public const int GlobalPosition = 8;
-    public const int Id = 9;
-    public const int LocalPosition = 10;
-    public const int QuadrantIndex = 11;
-    public const int Rigidbody = 12;
-    public const int Transform = 13;
-    public const int Player = 14;
-    public const int PlayerNetworkId = 15;
+    public const int EntityLink = 6;
+    public const int GlobalPosition = 7;
+    public const int Id = 8;
+    public const int LocalPosition = 9;
+    public const int QuadrantIndex = 10;
+    public const int Rigidbody = 11;
+    public const int Transform = 12;
+    public const int Player = 13;
+    public const int PlayerNetworkId = 14;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "Destructed",
@@ -34,7 +33,6 @@ public static class GameComponentsLookup {
         "ViewPath",
         "ViewPrefab",
         "Active",
-        "CurrentScene",
         "EntityLink",
         "GlobalPosition",
         "Id",
@@ -53,7 +51,6 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.ViewPath),
         typeof(Assets.Code.Common.ViewPrefab),
         typeof(Assets.Code.Gameplay.Common.Active),
-        typeof(Assets.Code.Gameplay.Common.CurrentScene),
         typeof(Assets.Code.Gameplay.Common.EntityLink),
         typeof(Assets.Code.Gameplay.Common.GlobalPosition),
         typeof(Assets.Code.Gameplay.Common.Id),
