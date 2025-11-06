@@ -1,0 +1,10 @@
+namespace Namespace
+{
+    using UnityEngine;
+
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(Transform))]
+    public class #SCRIPTNAME# : MonoBehaviour
+    {
+    }
+}
