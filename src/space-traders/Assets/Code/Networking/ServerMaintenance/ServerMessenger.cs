@@ -1,10 +1,7 @@
 ﻿using Assets.Code.Networking.MessageTypes;
 using Assets.Code.Serialization;
 using Assets.Code.Serialization.Data;
-using Assets.Code.Serialization.Extensions;
-using Entitas;
 using Riptide;
-using System.Linq;
 using VContainer;
 
 
@@ -51,5 +48,13 @@ namespace Assets.Code.Networking.ServerMaintenance
 
             _networkManager.Server.Send(message, clientId);
         }
+
+        public static void DestroyEntityOnClient(ushort clientId,  uint entityId)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.DestroyEntity)
+                .AddUInt(entityId);
+
+            _networkManager.Server.Send(message, clientId);
+        }            
     }
 }

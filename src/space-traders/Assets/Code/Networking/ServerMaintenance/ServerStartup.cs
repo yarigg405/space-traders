@@ -17,15 +17,15 @@ namespace Assets.Code.Networking.ServerMaintenance
         {
             _serverScope = rootLifetimeScope.CreateChild(builder =>
             {
-                builder.Register<IdentifierService>(Lifetime.Scoped).AsImplementedInterfaces();
-                builder.Register<PlayerFactory>(Lifetime.Scoped).AsSelf();
+                builder.Register<IdentifierService>(Lifetime.Singleton).AsImplementedInterfaces();
+                builder.Register<PlayerFactory>(Lifetime.Singleton).AsSelf();
 
-                builder.Register<PlayerBuilder>(Lifetime.Scoped).AsSelf();
-                builder.Register<PlayerDataProvider>(Lifetime.Scoped).AsSelf();
-                builder.Register<ClientSceneConnector>(Lifetime.Scoped).AsSelf();
-                builder.Register<EcsWorldsBuilder>(Lifetime.Scoped).AsSelf();
-                builder.Register<ServerWorldsController>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
-                builder.Register<ServerMessengerDependencySetupper>(Lifetime.Scoped).AsImplementedInterfaces();
+                builder.Register<PlayerBuilder>(Lifetime.Singleton).AsSelf();
+                builder.Register<PlayerDataProvider>(Lifetime.Singleton).AsSelf();
+                builder.Register<ClientSceneConnector>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+                builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();
+                builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+                builder.Register<ServerMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
             });
         }
 

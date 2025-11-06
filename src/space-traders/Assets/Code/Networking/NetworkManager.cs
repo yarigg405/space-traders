@@ -19,6 +19,8 @@ namespace Assets.Code.Networking
 
         private readonly IObjectResolver _resolver;
 
+        public event Action<ushort> OnClientDisconnected;
+
         public NetworkManager(IObjectResolver resolver)
         {
             _resolver = resolver;
@@ -35,14 +37,8 @@ namespace Assets.Code.Networking
         {
             RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
 
-            Server = new Server();
-            Server.ClientConnected += PlayerJoined;
-
-            Client = new Client();
-            Client.Connected += DidConnect;
-            Client.ConnectionFailed += FailedToConnect;
-            Client.ClientDisconnected += PlayerLeft;
-            Client.Disconnected += DidDisconnect;
+            Server = new();
+            Client = new();
         }
 
         void IFixedTickable.FixedTick()
@@ -59,10 +55,6 @@ namespace Assets.Code.Networking
             if (_serverStartup != null)
                 _serverStartup.StopServer();
 
-            Client.Connected -= DidConnect;
-            Client.ConnectionFailed -= FailedToConnect;
-            Client.ClientDisconnected -= PlayerLeft;
-            Client.Disconnected -= DidDisconnect;
             Client.Disconnect();
         }
 
@@ -85,32 +77,6 @@ namespace Assets.Code.Networking
             Client.Connect($"{_ipAddress}:{_port}");
             await UniTask.WaitUntil(() => Client.IsConnected);
             ConnectionType = NetworkConnectionType.Client;
-        }
-
-
-        private void PlayerJoined(object sender, ServerConnectedEventArgs e)
-        {
-            Debug.Log("<color=#6BCCFF>### Player Joined");
-        }
-
-        private void DidConnect(object sender, EventArgs e)
-        {
-            Debug.Log("<color=#6BCCFF>### Did Connect");
-        }
-
-        private void FailedToConnect(object sender, ConnectionFailedEventArgs e)
-        {
-            Debug.Log("<color=#6BCCFF>### FailedToConnect");
-        }
-
-        private void DidDisconnect(object sender, DisconnectedEventArgs e)
-        {
-            Debug.Log("<color=#6BCCFF>### DidDisconnect");
-        }
-
-        private void PlayerLeft(object sender, ClientDisconnectedEventArgs e)
-        {
-            Debug.Log("<color=#6BCCFF>### PlayerLeft");
         }
     }
 

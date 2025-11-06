@@ -22,8 +22,10 @@ namespace Assets.Code.Common.Entity
 
         public void DestroyEntity(uint entityId)
         {
-            _gameContext.GetEntityWithId(entityId)
-                .With(x => x.isDestructed = true);
+            var destroyEntity = _gameContext.GetEntityWithId(entityId);
+            if (destroyEntity == null) return;
+
+            destroyEntity.With(x => x.isDestructed = true);
         }
     }
 }

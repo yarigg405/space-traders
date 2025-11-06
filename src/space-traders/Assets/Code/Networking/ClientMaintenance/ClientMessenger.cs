@@ -27,12 +27,6 @@ namespace Assets.Code.Networking.ClientMaintenance
         }
 
 
-        [MessageHandler((ushort)ServerToClientMessageType.ConnectToGameSceneCommand)]
-        private static void HandleSceneConnectionCommand(Message message)
-        {
-            _sceneToConnect = message.GetString();
-        }
-
         public static async UniTask<string> RequestForConnectGame()
         {
             _sceneToConnect = string.Empty;
@@ -44,9 +38,26 @@ namespace Assets.Code.Networking.ClientMaintenance
             return _sceneToConnect;
         }
 
+        public static void RequestForLoadingSceneEntities()
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
+            _networkManager.Client.Send(message);
+        }
+
+
+
+        #region MessageHandlers
+
+
+        [MessageHandler((ushort)ServerToClientMessageType.ConnectToGameSceneCommand)]
+        private static void HandleSceneConnectionCommand(Message message)
+        {
+            _sceneToConnect = message.GetString();
+        }
+
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]
-        private static void HandleEntitiesJsonLoading(Message message)
+        private static void HandleCreateEntity(Message message)
         {
             var json = message.GetString();
             var snapshot = JsonSerializator.FromJson<EntitySnapshot>(json);
@@ -54,10 +65,13 @@ namespace Assets.Code.Networking.ClientMaintenance
             _clientEntitiesController.CreateEntityFromSnapshot(snapshot);
         }
 
-        public static void RequestForLoadingSceneEntities()
+        [MessageHandler((ushort)ServerToClientMessageType.DestroyEntity)]
+        private static void HandleDestroyEntity(Message message)
         {
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
-            _networkManager.Client.Send(message);
+            var entityId = message.GetUInt();
+            _clientEntitiesController.DestroyEntity(entityId);
         }
+
+        #endregion
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Assets.Code.Gameplay.Features;
-using Assets.Code.Infrastructure.DI;
+using Assets.Code.Gameplay.Worlds.GameSynchronization;
 using Assets.Code.Infrastructure.Systems;
 using VContainer;
 using VContainer.Unity;
@@ -9,9 +9,9 @@ namespace Assets.Code.Gameplay.Worlds
 {
     public sealed class EcsWorldsBuilder
     {
-        private readonly GameLifetimeScope _scope;
+        private readonly LifetimeScope _scope;
 
-        internal EcsWorldsBuilder(GameLifetimeScope scope)
+        internal EcsWorldsBuilder(LifetimeScope scope)
         {
             _scope = scope;
         }
@@ -28,6 +28,9 @@ namespace Assets.Code.Gameplay.Worlds
                 builder.RegisterInstance(contexts.meta).AsSelf();
 
                 builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
+                builder.Register<ServerEntitiesConditionSender>(Lifetime.Scoped)
+                .AsImplementedInterfaces()
+                .WithParameter(sceneName);
             });
 
             var container = worldScope.Container;

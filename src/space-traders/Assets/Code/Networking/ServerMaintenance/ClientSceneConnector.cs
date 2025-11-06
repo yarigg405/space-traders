@@ -1,19 +1,25 @@
 ﻿using Assets.Code.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Gameplay.Worlds;
+using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Serialization;
 using Assets.Code.Serialization.Extensions;
+using Riptide;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using VContainer.Unity;
 using Yrr.Utils;
 
 
 namespace Assets.Code.Networking.ServerMaintenance
 {
-    internal class ClientSceneConnector
+    internal class ClientSceneConnector : IInitializable, IDisposable
     {
         private readonly PlayerBuilder _playerBuilder;
         private readonly PlayerDataProvider _playerDataProvider;
         private readonly ServerWorldsController _serverWorldsController;
+        private readonly NetworkManager _networkManager;
 
         private readonly Dictionary<ushort, string> _sceneForClientsMap = new();
         private readonly Dictionary<string, List<ushort>> _clientsOnScenesMap = new();
@@ -21,11 +27,24 @@ namespace Assets.Code.Networking.ServerMaintenance
 
         public ClientSceneConnector(PlayerBuilder playerBuilder,
             PlayerDataProvider playerDataProvider,
-            ServerWorldsController serverWorldsController)
+            ServerWorldsController serverWorldsController,
+            NetworkManager networkManager)
         {
             _playerBuilder = playerBuilder;
             _playerDataProvider = playerDataProvider;
             _serverWorldsController = serverWorldsController;
+
+            _networkManager = networkManager;
+        }
+
+        void IInitializable.Initialize()
+        {
+            _networkManager.Server.ClientDisconnected += OnClientDisconnected;
+        }
+
+        void IDisposable.Dispose()
+        {
+            _networkManager.Server.ClientDisconnected -= OnClientDisconnected;
         }
 
 
@@ -47,8 +66,9 @@ namespace Assets.Code.Networking.ServerMaintenance
             ServerMessenger.SendConnectionDataToPlayer(clientId, sceneName);
         }
 
-        public void DisconnectPlayerFromGame(ushort clientId)
+        private void OnClientDisconnected(object sender, ServerDisconnectedEventArgs e)
         {
+            var clientId = e.Client.Id;
             TryDisconnectClientFromCurrentScene(clientId);
             _sceneForClientsMap.Remove(clientId);
         }
@@ -69,6 +89,14 @@ namespace Assets.Code.Networking.ServerMaintenance
             }
         }
 
+        public IEnumerable<ushort> GetClientsOnScene(string sceneName)
+        {
+            if (_clientsOnScenesMap.TryGetValue(sceneName, out var clients))
+                return clients;
+
+            return Enumerable.Empty<ushort>();
+        }
+
         private void EnsureClientsListExist(string sceneName)
         {
             if (!_clientsOnScenesMap.ContainsKey(sceneName))
@@ -87,6 +115,12 @@ namespace Assets.Code.Networking.ServerMaintenance
             _clientsOnScenesMap[sceneName].Remove(clientId);
             if (_clientsOnScenesMap[sceneName].Count < 1)
                 _serverWorldsController.DestroyWorld(sceneName);
+
+            var entityId = _playerEntities[clientId].Id;
+            foreach (var client in _clientsOnScenesMap[sceneName])
+            {
+                ServerMessenger.DestroyEntityOnClient(client, entityId);
+            }
 
             _sceneForClientsMap[clientId] = string.Empty;
             _playerEntities[clientId].isDestructed = true;
