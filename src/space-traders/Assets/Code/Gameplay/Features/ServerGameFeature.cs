@@ -1,4 +1,5 @@
-﻿using Assets.Code.Infrastructure.Systems;
+﻿using Assets.Code.Common.Destruct;
+using Assets.Code.Infrastructure.Systems;
 
 
 namespace Assets.Code.Gameplay.Features
@@ -8,6 +9,8 @@ namespace Assets.Code.Gameplay.Features
         public ServerGameFeature(ISystemFactory systems)
         {
 
+
+            Add(systems.Create<ProcessDestructedServerFeature>());
         }
     }
 }

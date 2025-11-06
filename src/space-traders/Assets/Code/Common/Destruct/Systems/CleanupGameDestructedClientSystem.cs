@@ -1,16 +1,15 @@
-using Entitas;
+﻿using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 
 namespace Assets.Code.Common.Destruct.Systems
 {
-    internal sealed class CleanupGameDestructedSystem : ICleanupSystem
+    internal sealed class CleanupGameDestructedClientSystem : ICleanupSystem
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(32);
 
-        internal CleanupGameDestructedSystem(GameContext game)
+        internal CleanupGameDestructedClientSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.Destructed);
         }
