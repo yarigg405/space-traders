@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 namespace Assets.Code.Infrastructure.States.GameStates
 {
-    internal sealed class GameLoopState : GameState, IUpdatableState, IPostLateTickable
+    internal sealed class GameLoopState : GameState, IUpdatableState
     {
         private readonly GameContext _game;
         private readonly FeaturesContainer _featuresContainer;
@@ -27,22 +27,12 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         public override void Exit()
         {
-            _isExit = true;
-        }
-
-        void IPostLateTickable.PostLateTick()
-        {
-            if (!_isExit) return;
-
             _featuresContainer.Stop();
-            DestructEntities();
-            _featuresContainer.Cleanup();
-        }
 
-        private void DestructEntities()
-        {
             foreach (var entity in _game.GetEntities())
                 entity.isDestructed = true;
+
+            _featuresContainer.Cleanup();
         }
     }
 }

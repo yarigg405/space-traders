@@ -1,9 +1,6 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ClientPart.Networking;
-using Assets.Code.Infrastructure.States.GameStates;
-using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
-using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
 
@@ -11,18 +8,14 @@ namespace Assets.Code.Infrastructure.EntryPoints
 {
     internal sealed class SpaceSceneEntryPoint : IStartable
     {
-        private readonly IStateMachine _stateMachine;
         private readonly ISystemFactory _systems;
         private readonly FeaturesContainer _featuresContainer;
-        private readonly GameContext _gameContext;
 
-        public SpaceSceneEntryPoint(IStateMachine stateMachine,
-            ISystemFactory systems, FeaturesContainer featuresContainer, GameContext gameContext)
+        public SpaceSceneEntryPoint(ISystemFactory systems, 
+            FeaturesContainer featuresContainer)
         {
-            _stateMachine = stateMachine;
             _systems = systems;
             _featuresContainer = featuresContainer;
-            _gameContext = gameContext;
         }
 
         void IStartable.Start()
@@ -31,7 +24,6 @@ namespace Assets.Code.Infrastructure.EntryPoints
             _featuresContainer.Cleanup();
             _featuresContainer.Add(feature);
             _featuresContainer.Initialize();
-            _stateMachine.Enter<GameLoopState>();
             ClientMessenger.RequestForLoadingSceneEntities();
         }
     }

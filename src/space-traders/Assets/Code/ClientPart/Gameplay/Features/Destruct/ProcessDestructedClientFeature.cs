@@ -8,7 +8,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Destruct
     {
         public ProcessDestructedClientFeature(ISystemFactory systems)
         {
-
             Add(systems.Create<CleanupGameDestructedViewSystem>());
             Add(systems.Create<CleanupGameDestructedClientSystem>());
         }

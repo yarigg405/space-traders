@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 643501461}
   - component: {fileID: 643501460}
   m_Layer: 5
-  m_Name: hostBtn
+  m_Name: scene1Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,7 +680,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4502664, y: -0, z: -0, w: 0.89289427}
-  m_LocalPosition: {x: -99999, y: -99944.2, z: -100022}
+  m_LocalPosition: {x: 0, y: 61.7, z: -50.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1050,7 +1050,7 @@ GameObject:
   - component: {fileID: 1886745265}
   - component: {fileID: 1886745264}
   m_Layer: 5
-  m_Name: clientBtn
+  m_Name: scene2Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1165,5 +1165,5 @@ SceneRoots:
   - {fileID: 961739753}
   - {fileID: 203844589}
   - {fileID: 1593638936}
-  - {fileID: 400316113}
   - {fileID: 875115692}
+  - {fileID: 400316113}

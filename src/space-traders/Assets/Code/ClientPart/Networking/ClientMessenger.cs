@@ -45,6 +45,13 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager.Client.Send(message);
         }
 
+        public static void RequestForChangeScene(string sceneName)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForChangeScene)
+                .AddString(sceneName);
+            _networkManager.Client.Send(message);
+        }
+
 
 
         #region MessageHandlers

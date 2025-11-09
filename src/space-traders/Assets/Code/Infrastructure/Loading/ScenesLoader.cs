@@ -8,8 +8,11 @@ namespace Assets.Code.Infrastructure.Loading
 {
     internal sealed class ScenesLoader : IScenesLoader
     {
+        public string CurrentScene { get; private set; }
+
         public void LoadScene(string name, Action onLoaded = null)
         {
+            CurrentScene = name;
             LoadAsync(name, onLoaded).Forget();
         }
 

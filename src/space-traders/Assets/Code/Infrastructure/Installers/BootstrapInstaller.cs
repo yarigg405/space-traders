@@ -64,7 +64,8 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<BootstrapState>(Lifetime.Transient).AsSelf();
             Builder.Register<MenuSceneState>(Lifetime.Transient).AsSelf();
             Builder.Register<LoadGameSceneState>(Lifetime.Transient).AsSelf();
-            Builder.Register<GameLoopState>(Lifetime.Transient).AsSelf();
+            Builder.Register<ChangeGameSceneState>(Lifetime.Transient).AsSelf();
+            Builder.Register<GameLoopState>(Lifetime.Transient).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterEntryPoint()
