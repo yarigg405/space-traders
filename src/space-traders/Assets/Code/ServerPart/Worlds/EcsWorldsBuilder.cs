@@ -28,9 +28,13 @@ namespace Assets.Code.ServerPart.Worlds
                 builder.RegisterInstance(contexts.meta).AsSelf();
 
                 builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
+
                 builder.Register<ServerEntitiesConditionSender>(Lifetime.Scoped)
-                .AsImplementedInterfaces()
-                .WithParameter(sceneName);
+                    .AsImplementedInterfaces()
+                    .WithParameter(sceneName);
+
+                builder.Register<EntitiesSyncronizator>(Lifetime.Scoped)
+                    .WithParameter(sceneName);
             });
 
             var container = worldScope.Container;

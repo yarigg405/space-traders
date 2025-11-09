@@ -5,6 +5,7 @@ using Assets.Code.ServerPart.Networking;
 using Cysharp.Threading.Tasks;
 using Riptide;
 using System.Threading;
+using Unity.Mathematics;
 using UnityEngine;
 using VContainer;
 
@@ -70,6 +71,16 @@ namespace Assets.Code.ClientPart.Networking
         {
             var entityId = message.GetUInt();
             _clientEntitiesController.DestroyEntity(entityId);
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.UpdateGlobalPosition)]
+        private static void HandleUpdateGlobalPosition(Message message)
+        {
+            var entityId = message.GetUInt();
+            var x = message.GetDouble();
+            var y = message.GetDouble();
+
+            _clientEntitiesController.UpdateGlobalPosition(entityId, new double2(x, y));
         }
 
         #endregion

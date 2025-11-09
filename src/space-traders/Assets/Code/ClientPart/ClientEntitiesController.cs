@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Common.Extensions;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Common.Serialization.Extensions;
+using Unity.Mathematics;
 
 namespace Assets.Code.ClientPart
 {
@@ -25,6 +26,18 @@ namespace Assets.Code.ClientPart
             if (destroyEntity == null) return;
 
             destroyEntity.With(x => x.isDestructed = true);
+        }
+
+
+
+        ///      Update values
+           
+        public void UpdateGlobalPosition(uint entityId, double2 newGlobalPosition)
+        {
+            var entity = _gameContext.GetEntityWithId(entityId);
+            if (entity == null) return;
+
+            entity.ReplaceGlobalPosition(newGlobalPosition);
         }
     }
 }
