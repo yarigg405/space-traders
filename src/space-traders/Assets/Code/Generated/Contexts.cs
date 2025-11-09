@@ -68,16 +68,16 @@ public partial class Contexts {
         game.AddEntityIndex(new Entitas.EntityIndex<GameEntity, uint>(
             EntityLink,
             game.GetGroup(GameMatcher.EntityLink),
-            (e, c) => ((Assets.Code.Gameplay.Common.EntityLink)c).Value));
+            (e, c) => ((Assets.Code.Common.Components.EntityLink)c).Value));
 
         game.AddEntityIndex(new Entitas.PrimaryEntityIndex<GameEntity, uint>(
             Id,
             game.GetGroup(GameMatcher.Id),
-            (e, c) => ((Assets.Code.Gameplay.Common.Id)c).Value));
+            (e, c) => ((Assets.Code.Common.Components.Id)c).Value));
         meta.AddEntityIndex(new Entitas.PrimaryEntityIndex<MetaEntity, uint>(
             Id,
             meta.GetGroup(MetaMatcher.Id),
-            (e, c) => ((Assets.Code.Gameplay.Common.Id)c).Value));
+            (e, c) => ((Assets.Code.Common.Components.Id)c).Value));
     }
 }
 

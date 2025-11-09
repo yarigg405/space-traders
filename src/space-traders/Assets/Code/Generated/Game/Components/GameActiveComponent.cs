@@ -33,7 +33,7 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Gameplay.Common.Active activeComponent = new Assets.Code.Gameplay.Common.Active();
+    static readonly Assets.Code.Common.Components.Active activeComponent = new Assets.Code.Common.Components.Active();
 
     public bool isActive {
         get { return HasComponent(GameComponentsLookup.Active); }

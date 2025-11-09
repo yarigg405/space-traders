@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace Code.Common.Extensions
+
+namespace Assets.Code.Common.Extensions
 {
     public static class FunctionalExtensions
     {

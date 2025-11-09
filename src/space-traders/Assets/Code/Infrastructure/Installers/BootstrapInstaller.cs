@@ -1,7 +1,9 @@
-﻿using Assets.Code.Common.Entity;
-using Assets.Code.Gameplay.Common.Time;
-using Assets.Code.Gameplay.Features;
-using Assets.Code.Infrastructure.AssetManagement;
+﻿using Assets.Code.ClientPart;
+using Assets.Code.ClientPart.AssetManagement;
+using Assets.Code.ClientPart.Gameplay.Features;
+using Assets.Code.ClientPart.Networking;
+using Assets.Code.ClientPart.View.Factory;
+using Assets.Code.Common.Time;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
 using Assets.Code.Infrastructure.Loading;
@@ -9,9 +11,6 @@ using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.Networking;
-using Assets.Code.Networking.ClientMaintenance;
-using Assets.Code.Serialization.Services;
-using Assets.Code.View.Factory;
 using VContainer;
 using VContainer.Unity;
 

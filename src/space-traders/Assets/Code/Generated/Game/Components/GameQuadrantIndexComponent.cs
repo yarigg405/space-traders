@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Assets.Code.Gameplay.Common.QuadrantIndex quadrantIndex { get { return (Assets.Code.Gameplay.Common.QuadrantIndex)GetComponent(GameComponentsLookup.QuadrantIndex); } }
+    public Assets.Code.Common.Components.QuadrantIndex quadrantIndex { get { return (Assets.Code.Common.Components.QuadrantIndex)GetComponent(GameComponentsLookup.QuadrantIndex); } }
     public Unity.Mathematics.int2 QuadrantIndex { get { return quadrantIndex.Value; } }
     public bool hasQuadrantIndex { get { return HasComponent(GameComponentsLookup.QuadrantIndex); } }
 
     public GameEntity AddQuadrantIndex(Unity.Mathematics.int2 newValue) {
         var index = GameComponentsLookup.QuadrantIndex;
-        var component = (Assets.Code.Gameplay.Common.QuadrantIndex)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.QuadrantIndex));
+        var component = (Assets.Code.Common.Components.QuadrantIndex)CreateComponent(index, typeof(Assets.Code.Common.Components.QuadrantIndex));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplaceQuadrantIndex(Unity.Mathematics.int2 newValue) {
         var index = GameComponentsLookup.QuadrantIndex;
-        var component = (Assets.Code.Gameplay.Common.QuadrantIndex)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.QuadrantIndex));
+        var component = (Assets.Code.Common.Components.QuadrantIndex)CreateComponent(index, typeof(Assets.Code.Common.Components.QuadrantIndex));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

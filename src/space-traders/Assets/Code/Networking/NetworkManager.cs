@@ -1,5 +1,5 @@
 using Assets.Code.Infrastructure.DI;
-using Assets.Code.Networking.ServerMaintenance;
+using Assets.Code.ServerPart.Networking;
 using Cysharp.Threading.Tasks;
 using Riptide;
 using Riptide.Utils;
@@ -18,8 +18,6 @@ namespace Assets.Code.Networking
         private const ushort _maxPlayers = 4;
 
         private readonly IObjectResolver _resolver;
-
-        public event Action<ushort> OnClientDisconnected;
 
         public NetworkManager(IObjectResolver resolver)
         {

@@ -8,57 +8,57 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Destructed = 0;
-    public const int SelfDestructTimer = 1;
-    public const int View = 2;
-    public const int ViewPath = 3;
-    public const int ViewPrefab = 4;
-    public const int Active = 5;
-    public const int EntityLink = 6;
-    public const int GlobalPosition = 7;
-    public const int Id = 8;
-    public const int LocalPosition = 9;
-    public const int QuadrantIndex = 10;
-    public const int Rigidbody = 11;
-    public const int Transform = 12;
-    public const int Player = 13;
-    public const int PlayerNetworkId = 14;
+    public const int Active = 0;
+    public const int Destructed = 1;
+    public const int EntityLink = 2;
+    public const int GlobalPosition = 3;
+    public const int Id = 4;
+    public const int LocalPosition = 5;
+    public const int Player = 6;
+    public const int PlayerNetworkId = 7;
+    public const int QuadrantIndex = 8;
+    public const int Rigidbody = 9;
+    public const int SelfDestructTimer = 10;
+    public const int Transform = 11;
+    public const int View = 12;
+    public const int ViewPath = 13;
+    public const int ViewPrefab = 14;
 
     public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
-        "Destructed",
-        "SelfDestructTimer",
-        "View",
-        "ViewPath",
-        "ViewPrefab",
         "Active",
+        "Destructed",
         "EntityLink",
         "GlobalPosition",
         "Id",
         "LocalPosition",
+        "Player",
+        "PlayerNetworkId",
         "QuadrantIndex",
         "Rigidbody",
+        "SelfDestructTimer",
         "Transform",
-        "Player",
-        "PlayerNetworkId"
+        "View",
+        "ViewPath",
+        "ViewPrefab"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Assets.Code.Common.Destructed),
-        typeof(Assets.Code.Common.SelfDestructTimer),
-        typeof(Assets.Code.Common.View),
-        typeof(Assets.Code.Common.ViewPath),
-        typeof(Assets.Code.Common.ViewPrefab),
-        typeof(Assets.Code.Gameplay.Common.Active),
-        typeof(Assets.Code.Gameplay.Common.EntityLink),
-        typeof(Assets.Code.Gameplay.Common.GlobalPosition),
-        typeof(Assets.Code.Gameplay.Common.Id),
-        typeof(Assets.Code.Gameplay.Common.LocalPosition),
-        typeof(Assets.Code.Gameplay.Common.QuadrantIndex),
-        typeof(Assets.Code.Gameplay.Common.RigidbodyComponent),
-        typeof(Assets.Code.Gameplay.Common.TransformComponent),
-        typeof(Assets.Code.Gameplay.Features.Player.Player),
-        typeof(Assets.Code.Gameplay.Features.Player.PlayerNetworkId)
+        typeof(Assets.Code.Common.Components.Active),
+        typeof(Assets.Code.Common.Components.Destructed),
+        typeof(Assets.Code.Common.Components.EntityLink),
+        typeof(Assets.Code.Common.Components.GlobalPosition),
+        typeof(Assets.Code.Common.Components.Id),
+        typeof(Assets.Code.Common.Components.LocalPosition),
+        typeof(Assets.Code.Common.Components.Player),
+        typeof(Assets.Code.Common.Components.PlayerNetworkId),
+        typeof(Assets.Code.Common.Components.QuadrantIndex),
+        typeof(Assets.Code.Common.Components.RigidbodyComponent),
+        typeof(Assets.Code.Common.Components.SelfDestructTimer),
+        typeof(Assets.Code.Common.Components.TransformComponent),
+        typeof(Assets.Code.Common.Components.View),
+        typeof(Assets.Code.Common.Components.ViewPath),
+        typeof(Assets.Code.Common.Components.ViewPrefab)
     };
 }

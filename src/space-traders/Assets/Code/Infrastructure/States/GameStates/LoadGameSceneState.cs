@@ -1,7 +1,7 @@
-﻿using Assets.Code.Infrastructure.Loading;
+﻿using Assets.Code.ClientPart.Networking;
+using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
-using Assets.Code.Networking.ClientMaintenance;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 

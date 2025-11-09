@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Assets.Code.Gameplay.Common.EntityLink entityLink { get { return (Assets.Code.Gameplay.Common.EntityLink)GetComponent(GameComponentsLookup.EntityLink); } }
+    public Assets.Code.Common.Components.EntityLink entityLink { get { return (Assets.Code.Common.Components.EntityLink)GetComponent(GameComponentsLookup.EntityLink); } }
     public uint EntityLink { get { return entityLink.Value; } }
     public bool hasEntityLink { get { return HasComponent(GameComponentsLookup.EntityLink); } }
 
     public GameEntity AddEntityLink(uint newValue) {
         var index = GameComponentsLookup.EntityLink;
-        var component = (Assets.Code.Gameplay.Common.EntityLink)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.EntityLink));
+        var component = (Assets.Code.Common.Components.EntityLink)CreateComponent(index, typeof(Assets.Code.Common.Components.EntityLink));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplaceEntityLink(uint newValue) {
         var index = GameComponentsLookup.EntityLink;
-        var component = (Assets.Code.Gameplay.Common.EntityLink)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.EntityLink));
+        var component = (Assets.Code.Common.Components.EntityLink)CreateComponent(index, typeof(Assets.Code.Common.Components.EntityLink));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

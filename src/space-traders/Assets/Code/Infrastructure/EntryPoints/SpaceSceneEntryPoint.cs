@@ -1,8 +1,8 @@
-﻿using Assets.Code.Gameplay.Features;
+﻿using Assets.Code.ClientPart.Gameplay.Features;
+using Assets.Code.ClientPart.Networking;
 using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
-using Assets.Code.Networking.ClientMaintenance;
 using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 

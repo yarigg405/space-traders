@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Assets.Code.Gameplay.Features.Player.PlayerNetworkId playerNetworkId { get { return (Assets.Code.Gameplay.Features.Player.PlayerNetworkId)GetComponent(GameComponentsLookup.PlayerNetworkId); } }
+    public Assets.Code.Common.Components.PlayerNetworkId playerNetworkId { get { return (Assets.Code.Common.Components.PlayerNetworkId)GetComponent(GameComponentsLookup.PlayerNetworkId); } }
     public ushort PlayerNetworkId { get { return playerNetworkId.Value; } }
     public bool hasPlayerNetworkId { get { return HasComponent(GameComponentsLookup.PlayerNetworkId); } }
 
     public GameEntity AddPlayerNetworkId(ushort newValue) {
         var index = GameComponentsLookup.PlayerNetworkId;
-        var component = (Assets.Code.Gameplay.Features.Player.PlayerNetworkId)CreateComponent(index, typeof(Assets.Code.Gameplay.Features.Player.PlayerNetworkId));
+        var component = (Assets.Code.Common.Components.PlayerNetworkId)CreateComponent(index, typeof(Assets.Code.Common.Components.PlayerNetworkId));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplacePlayerNetworkId(ushort newValue) {
         var index = GameComponentsLookup.PlayerNetworkId;
-        var component = (Assets.Code.Gameplay.Features.Player.PlayerNetworkId)CreateComponent(index, typeof(Assets.Code.Gameplay.Features.Player.PlayerNetworkId));
+        var component = (Assets.Code.Common.Components.PlayerNetworkId)CreateComponent(index, typeof(Assets.Code.Common.Components.PlayerNetworkId));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

@@ -33,21 +33,21 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Assets.Code.Common.View view { get { return (Assets.Code.Common.View)GetComponent(GameComponentsLookup.View); } }
-    public Assets.Code.View.EntityBehaviour View { get { return view.Value; } }
+    public Assets.Code.Common.Components.View view { get { return (Assets.Code.Common.Components.View)GetComponent(GameComponentsLookup.View); } }
+    public Assets.Code.ClientPart.View.EntityBehaviour View { get { return view.Value; } }
     public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 
-    public GameEntity AddView(Assets.Code.View.EntityBehaviour newValue) {
+    public GameEntity AddView(Assets.Code.ClientPart.View.EntityBehaviour newValue) {
         var index = GameComponentsLookup.View;
-        var component = (Assets.Code.Common.View)CreateComponent(index, typeof(Assets.Code.Common.View));
+        var component = (Assets.Code.Common.Components.View)CreateComponent(index, typeof(Assets.Code.Common.Components.View));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceView(Assets.Code.View.EntityBehaviour newValue) {
+    public GameEntity ReplaceView(Assets.Code.ClientPart.View.EntityBehaviour newValue) {
         var index = GameComponentsLookup.View;
-        var component = (Assets.Code.Common.View)CreateComponent(index, typeof(Assets.Code.Common.View));
+        var component = (Assets.Code.Common.Components.View)CreateComponent(index, typeof(Assets.Code.Common.Components.View));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;

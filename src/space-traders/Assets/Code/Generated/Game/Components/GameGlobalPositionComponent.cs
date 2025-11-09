@@ -33,13 +33,13 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Assets.Code.Gameplay.Common.GlobalPosition globalPosition { get { return (Assets.Code.Gameplay.Common.GlobalPosition)GetComponent(GameComponentsLookup.GlobalPosition); } }
+    public Assets.Code.Common.Components.GlobalPosition globalPosition { get { return (Assets.Code.Common.Components.GlobalPosition)GetComponent(GameComponentsLookup.GlobalPosition); } }
     public Unity.Mathematics.double2 GlobalPosition { get { return globalPosition.Value; } }
     public bool hasGlobalPosition { get { return HasComponent(GameComponentsLookup.GlobalPosition); } }
 
     public GameEntity AddGlobalPosition(Unity.Mathematics.double2 newValue) {
         var index = GameComponentsLookup.GlobalPosition;
-        var component = (Assets.Code.Gameplay.Common.GlobalPosition)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.GlobalPosition));
+        var component = (Assets.Code.Common.Components.GlobalPosition)CreateComponent(index, typeof(Assets.Code.Common.Components.GlobalPosition));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
@@ -47,7 +47,7 @@ public partial class GameEntity {
 
     public GameEntity ReplaceGlobalPosition(Unity.Mathematics.double2 newValue) {
         var index = GameComponentsLookup.GlobalPosition;
-        var component = (Assets.Code.Gameplay.Common.GlobalPosition)CreateComponent(index, typeof(Assets.Code.Gameplay.Common.GlobalPosition));
+        var component = (Assets.Code.Common.Components.GlobalPosition)CreateComponent(index, typeof(Assets.Code.Common.Components.GlobalPosition));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;
