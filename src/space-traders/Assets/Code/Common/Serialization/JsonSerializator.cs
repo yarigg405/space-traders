@@ -9,9 +9,10 @@ namespace Assets.Code.Common.Serialization
         private static JsonSerializerSettings _serializationSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Auto,
-            Formatting = Formatting.Indented,
+            Formatting = Formatting.None,
             TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
             ContractResolver = UnityMathematicsFieldsOnlyResolver.Instance,
+            SerializationBinder = new ShortNameBinder(),
         };
 
         private static JsonSerializerSettings _deserializationSettings = new JsonSerializerSettings
@@ -19,6 +20,7 @@ namespace Assets.Code.Common.Serialization
             TypeNameHandling = TypeNameHandling.Auto,
             TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
             ContractResolver = UnityMathematicsFieldsOnlyResolver.Instance,
+            SerializationBinder = new ShortNameBinder(),
         };
 
         public static string ToJson(object self)
