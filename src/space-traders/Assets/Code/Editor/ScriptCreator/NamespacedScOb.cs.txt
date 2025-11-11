@@ -1,9 +1,0 @@
-namespace Namespace
-{
-    using UnityEngine;
-
-    [CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "ScObs/#SCRIPTNAME#", order = -9999)]
-    public class #SCRIPTNAME# : ScriptableObject
-    {
-    }
-}
