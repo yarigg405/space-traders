@@ -3,20 +3,21 @@
 
 namespace Assets.Code.ClientPart.CameraSystem
 {
-    internal class CameraService
+    public sealed class CameraService : ICameraService
     {
-        //private readonly CameraMover _mover;
-        //private readonly CameraController _controller;
+        private readonly CameraOrbitMoveController _moveController;
+        private readonly CameraTargetController _targetController;
 
-        //public CameraService(CameraMover mover, CameraController controller)
-        //{
-        //    _mover = mover;
-        //    _controller = controller;
-        //}
-
-        public void SetTarget(Transform target)
+        public CameraService(CameraOrbitMoveController moveController,
+            CameraTargetController cameraTargetController)
         {
-          //  _mover.SetNewTarget(target);
+            _moveController = moveController;
+            _targetController = cameraTargetController;
+        }
+
+        void ICameraService.SetTarget(Transform target)
+        {
+            _targetController.SetNewTarget(target);
         }
     }
 }
