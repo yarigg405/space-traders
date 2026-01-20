@@ -5,5 +5,7 @@
         RequestConnectToGame = 1,
         RequestForSceneEntities = 2,
         RequestForChangeScene = 3,
+
+        SendInput = 11,
     }
 }

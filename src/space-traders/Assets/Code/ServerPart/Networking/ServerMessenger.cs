@@ -5,6 +5,7 @@ using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Riptide;
 using Unity.Mathematics;
+using UnityEngine;
 using VContainer;
 
 
@@ -91,6 +92,13 @@ namespace Assets.Code.ServerPart.Networking
             _clientSceneConnector.ConnectPlayer(fromClientId);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.SendInput)]
+        private static void HandleClientInput(ushort fromClientId, Message message)
+        {
+            var clickPos = message.GetVector3();
+
+            Debug.Log("## Server: Clicked pos: " + clickPos);
+        }
 
         #endregion
     }

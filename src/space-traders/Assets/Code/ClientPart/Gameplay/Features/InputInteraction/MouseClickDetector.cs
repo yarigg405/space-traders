@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Code.Common;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,20 +8,23 @@ using VContainer.Unity;
 
 namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
 {
-    internal sealed class MouseClickNotificator : IInitializable, IDisposable
+    internal sealed class MouseClickDetector : IInitializable, IDisposable
     {
         private readonly CameraRaycaster _raycaster;
         private readonly InputReferencesContainer _inputReferencesContainer;
+        private readonly Contexts _ctx;
 
         public event Action<Vector3> OnMouseClickEvent;
         public event Action<ClickableEntity> OnObjectClicked;
 
 
-        public MouseClickNotificator(CameraRaycaster raycaster,
-            InputReferencesContainer inputReferencesContainer)
+        public MouseClickDetector(CameraRaycaster raycaster,
+            InputReferencesContainer inputReferencesContainer,
+            Contexts ctx)
         {
             _raycaster = raycaster;
             _inputReferencesContainer = inputReferencesContainer;
+            _ctx = ctx;
         }
 
         void IInitializable.Initialize()
@@ -51,7 +55,10 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
 
                 var clickPos = raycastHit.point;
                 OnMouseClickEvent?.Invoke(clickPos);
-                Debug.Log("CLicked: " + clickPos);
+
+                CreateEntity.EmptyInput(_ctx)
+                    .AddClickedPosition(clickPos)
+                    .isInput = true;
             }
         }
     }

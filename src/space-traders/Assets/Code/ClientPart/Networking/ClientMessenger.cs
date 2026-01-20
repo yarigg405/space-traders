@@ -52,6 +52,13 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager.Client.Send(message);
         }
 
+        public static void SendClickInputToServer(Vector3 input)
+        {
+            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendInput)
+                .AddVector3(input);
+            _networkManager.Client.Send(message);
+        }
+
 
 
         #region MessageHandlers

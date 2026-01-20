@@ -36,7 +36,7 @@ namespace Assets.Code.Infrastructure.Installers
         private void RegisterInputServices()
         {
             Builder.Register<CameraRaycaster>(Lifetime.Scoped).AsSelf();
-            Builder.Register<MouseClickNotificator>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
+            Builder.Register<MouseClickDetector>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterPlayerServices()
