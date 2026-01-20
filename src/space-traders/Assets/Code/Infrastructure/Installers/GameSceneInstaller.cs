@@ -1,4 +1,5 @@
 ﻿using Assets.Code.ClientPart.CameraSystem;
+using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
@@ -17,8 +18,9 @@ namespace Assets.Code.Infrastructure.Installers
         protected override void Install()
         {
             RegisterCommonServices();
+            RegisterInputServices();
             RegisterPlayerServices();
-           
+
 
             Builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
         }
@@ -29,6 +31,12 @@ namespace Assets.Code.Infrastructure.Installers
                 .WithParameter(_cameraOrbitMoveController)
                 .WithParameter(_cameraTargetController)
                 .AsImplementedInterfaces();
+        }
+
+        private void RegisterInputServices()
+        {
+            Builder.Register<CameraRaycaster>(Lifetime.Scoped).AsSelf();
+            Builder.Register<MouseClickNotificator>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterPlayerServices()

@@ -3,6 +3,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 namespace Assets.Code.ClientPart.CameraSystem
 {
     public sealed class CameraOrbitMoveController : MonoBehaviour
@@ -76,7 +77,7 @@ namespace Assets.Code.ClientPart.CameraSystem
             float t = Mathf.InverseLerp(min, max, value);
             float mult = Mathf.Clamp(_speedByRadius.Evaluate(t), _speedMultiplierClamp.x, _speedMultiplierClamp.y);
 
-            float input = _zoom.action.ReadValue<float>();
+            float input = -_zoom.action.ReadValue<float>();
             bool hasInput = Mathf.Abs(input) > 0.0001f;
 
             var ctrl = _zoom.action.activeControl;

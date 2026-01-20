@@ -1,6 +1,7 @@
 ﻿using Assets.Code.ClientPart;
 using Assets.Code.ClientPart.AssetManagement;
 using Assets.Code.ClientPart.Gameplay.Features;
+using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.ClientPart.View.Factory;
 using Assets.Code.Common.Time;
@@ -11,6 +12,7 @@ using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.Networking;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -19,6 +21,8 @@ namespace Assets.Code.Infrastructure.Installers
 {
     internal sealed class BootstrapInstaller : MonoInstaller
     {
+        [SerializeField] private InputReferencesContainer _inputReferencesContainer;
+
         protected override void Install()
         {
             BindContexts();
@@ -46,6 +50,8 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
             Builder.Register<ClientEntitiesController>(Lifetime.Singleton).AsSelf();
+
+            Builder.RegisterInstance(_inputReferencesContainer);
         }
 
         private void BindNetworking()
