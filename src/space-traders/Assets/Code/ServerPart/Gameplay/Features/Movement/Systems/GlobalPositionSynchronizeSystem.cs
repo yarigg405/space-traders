@@ -9,7 +9,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly EntitiesSyncronizator _syncronizator;
 
-        internal GlobalPositionSynchronizeSystem(GameContext game, EntitiesSyncronizator syncronizator)
+        public GlobalPositionSynchronizeSystem(GameContext game, EntitiesSyncronizator syncronizator)
         {
             _entities = game.GetGroup(GameMatcher.GlobalPosition);
             _syncronizator = syncronizator;

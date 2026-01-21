@@ -9,36 +9,66 @@
 public static class GameComponentsLookup {
 
     public const int Active = 0;
-    public const int Destructed = 1;
-    public const int EntityLink = 2;
-    public const int GlobalPosition = 3;
-    public const int Id = 4;
-    public const int LocalPosition = 5;
-    public const int Player = 6;
-    public const int PlayerNetworkId = 7;
-    public const int QuadrantIndex = 8;
-    public const int Rigidbody = 9;
-    public const int SelfDestructTimer = 10;
-    public const int Transform = 11;
-    public const int View = 12;
-    public const int ViewPath = 13;
-    public const int ViewPrefab = 14;
+    public const int Braking = 1;
+    public const int ChaseTarget = 2;
+    public const int CurrentMoveSpeed = 3;
+    public const int CurrentRotationY = 4;
+    public const int CurrentSpeedModifier = 5;
+    public const int Destructed = 6;
+    public const int EntityLink = 7;
+    public const int GlobalPosition = 8;
+    public const int Id = 9;
+    public const int KeepDistanceMinMax = 10;
+    public const int LocalPosition = 11;
+    public const int MaxMoveSpeed = 12;
+    public const int MovementTarget = 13;
+    public const int Moving = 14;
+    public const int MovingAcceleration = 15;
+    public const int OrbitingRadius = 16;
+    public const int Player = 17;
+    public const int PlayerNetworkId = 18;
+    public const int QuadrantIndex = 19;
+    public const int Rigidbody = 20;
+    public const int RotationSpeed = 21;
+    public const int SelfDestructTimer = 22;
+    public const int TargetRotation = 23;
+    public const int Transform = 24;
+    public const int Velocity = 25;
+    public const int VelocityAgility = 26;
+    public const int View = 27;
+    public const int ViewPath = 28;
+    public const int ViewPrefab = 29;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 30;
 
     public static readonly string[] componentNames = {
         "Active",
+        "Braking",
+        "ChaseTarget",
+        "CurrentMoveSpeed",
+        "CurrentRotationY",
+        "CurrentSpeedModifier",
         "Destructed",
         "EntityLink",
         "GlobalPosition",
         "Id",
+        "KeepDistanceMinMax",
         "LocalPosition",
+        "MaxMoveSpeed",
+        "MovementTarget",
+        "Moving",
+        "MovingAcceleration",
+        "OrbitingRadius",
         "Player",
         "PlayerNetworkId",
         "QuadrantIndex",
         "Rigidbody",
+        "RotationSpeed",
         "SelfDestructTimer",
+        "TargetRotation",
         "Transform",
+        "Velocity",
+        "VelocityAgility",
         "View",
         "ViewPath",
         "ViewPrefab"
@@ -46,17 +76,32 @@ public static class GameComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Common.Components.Active),
+        typeof(Assets.Code.Common.Components.Braking),
+        typeof(Assets.Code.Common.Components.ChaseTarget),
+        typeof(Assets.Code.Common.Components.CurrentMoveSpeed),
+        typeof(Assets.Code.Common.Components.CurrentRotationY),
+        typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
         typeof(Assets.Code.Common.Components.Destructed),
         typeof(Assets.Code.Common.Components.EntityLink),
         typeof(Assets.Code.Common.Components.GlobalPosition),
         typeof(Assets.Code.Common.Components.Id),
+        typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
         typeof(Assets.Code.Common.Components.LocalPosition),
+        typeof(Assets.Code.Common.Components.MaxMoveSpeed),
+        typeof(Assets.Code.Common.Components.MovementTarget),
+        typeof(Assets.Code.Common.Components.Moving),
+        typeof(Assets.Code.Common.Components.MovingAcceleration),
+        typeof(Assets.Code.Common.Components.OrbitingRadius),
         typeof(Assets.Code.Common.Components.Player),
         typeof(Assets.Code.Common.Components.PlayerNetworkId),
         typeof(Assets.Code.Common.Components.QuadrantIndex),
         typeof(Assets.Code.Common.Components.RigidbodyComponent),
+        typeof(Assets.Code.Common.Components.RotationSpeed),
         typeof(Assets.Code.Common.Components.SelfDestructTimer),
+        typeof(Assets.Code.Common.Components.TargetRotation),
         typeof(Assets.Code.Common.Components.TransformComponent),
+        typeof(Assets.Code.Common.Components.Velocity),
+        typeof(Assets.Code.Common.Components.VelocityAgility),
         typeof(Assets.Code.Common.Components.View),
         typeof(Assets.Code.Common.Components.ViewPath),
         typeof(Assets.Code.Common.Components.ViewPrefab)

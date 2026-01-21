@@ -9,6 +9,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
         public MovementClientFeature(ISystemFactory systems)
         {
             Add(systems.Create<UpdateLocalPositionSystem>());
+            Add(systems.Create<UpdateTransformRotationSystem>());
+            Add(systems.Create<UpdateTransformPositionSystem>());
         }
     }
 }
