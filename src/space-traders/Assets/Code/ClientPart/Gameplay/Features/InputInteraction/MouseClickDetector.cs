@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
 {
-    internal sealed class MouseClickDetector : IInitializable, IDisposable
+    internal sealed class MouseClickDetector : IInitializable, IDisposable, ITickable
     {
         private readonly CameraRaycaster _raycaster;
         private readonly InputReferencesContainer _inputReferencesContainer;
@@ -17,6 +17,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
         public event Action<Vector3> OnMouseClickEvent;
         public event Action<ClickableEntity> OnObjectClicked;
 
+        private bool _clickRequested;
 
         public MouseClickDetector(CameraRaycaster raycaster,
             InputReferencesContainer inputReferencesContainer,
@@ -39,13 +40,28 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
             _inputReferencesContainer.DoubleClick.action.Disable();
         }
 
+        void ITickable.Tick()
+        {
+            if (!_clickRequested) return;
+
+            _clickRequested = false;
+
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            PerformDoubleClick();
+        }
+
 
         private void OnDoubleClick(InputAction.CallbackContext ctx)
         {
+            _clickRequested = true;
+        }
+
+        private void PerformDoubleClick()
+        {
             if (_raycaster.RaycastFromCameraToMouse(out var raycastHit))
             {
-                if (EventSystem.current.IsPointerOverGameObject(Mouse.current.deviceId)) return;
-
                 var clickable = raycastHit.collider.gameObject.GetComponent<ClickableEntity>();
                 if (clickable)
                 {

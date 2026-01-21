@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Unity.Mathematics;
 using UnityEngine;
 using Yrr.Utils;
 
@@ -12,6 +13,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         public OrbitMovingSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.CurrentRotationY,
                 GameMatcher.OrbitingRadius,
                 GameMatcher.MovementTarget
             ));
@@ -30,7 +32,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
 
                 var angleToPoint = Mathf.Atan2(direction.z, direction.x);
 
-                if (IsClockwiseMoving(entity.Transform, entity.MovementTarget.Transform))
+                if (IsClockwiseMoving(entity.GlobalPosition, entity.GlobalPosition, entity.CurrentRotationY))
                 {
                     var tanAngle1 = angleToPoint - angleOffset;
                     var tx1 = entity.MovementTarget.Transform.position.x + radius * Mathf.Cos(tanAngle1);
@@ -52,13 +54,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             }
         }
 
-        private bool IsClockwiseMoving(Transform from, Transform to)
+        private bool IsClockwiseMoving(double2 from, double2 to, float forwardDirection)
         {
-            Vector3 directionFromFixedToCurrent = from.position - to.position;
-            Vector3 normalVector = new Vector3(-directionFromFixedToCurrent.z, 0, directionFromFixedToCurrent.x);
-            Vector3 movementVector = from.forward;
-            float dotProduct = Vector3.Dot(normalVector, movementVector);
-            return dotProduct < 0f;
+            var directionVector = from - to;
+            var rad = forwardDirection * math.TORADIANS_DBL;
+            var movingDirection = new double2(math.sin(rad), math.cos(rad));
+            var cross = movingDirection.x * movingDirection.y - directionVector.y * directionVector.x;
+
+            return cross < 0f;
         }
     }
 }

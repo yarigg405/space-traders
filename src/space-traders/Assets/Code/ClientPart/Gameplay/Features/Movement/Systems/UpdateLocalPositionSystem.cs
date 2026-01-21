@@ -15,7 +15,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement.Systems
             _players = game.GetGroup(GameMatcher.Player);
 
             _entities = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.GlobalPosition
+                GameMatcher.GlobalPosition,
+                GameMatcher.QuadrantIndex
             ));
         }
 
