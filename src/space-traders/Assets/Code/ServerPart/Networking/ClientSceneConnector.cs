@@ -111,9 +111,7 @@ namespace Assets.Code.ServerPart.Networking
             if (_sceneForClientsMap[clientId].IsNulOrEmpty()) return;
 
             var sceneName = _sceneForClientsMap[clientId];
-            _clientsOnScenesMap[sceneName].Remove(clientId);
-            if (_clientsOnScenesMap[sceneName].Count < 1)
-                _serverWorldsController.DestroyWorld(sceneName);
+            _clientsOnScenesMap[sceneName].Remove(clientId);           
 
             var entityId = _playerEntities[clientId].Id;
             foreach (var client in _clientsOnScenesMap[sceneName])
