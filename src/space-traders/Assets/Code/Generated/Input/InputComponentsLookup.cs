@@ -11,18 +11,21 @@ public static class InputComponentsLookup {
     public const int ClickedPosition = 0;
     public const int Input = 1;
     public const int InputPlayerTarget = 2;
+    public const int TargetRotation = 3;
 
-    public const int TotalComponents = 3;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
         "ClickedPosition",
         "Input",
-        "InputPlayerTarget"
+        "InputPlayerTarget",
+        "TargetRotation"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Common.Components.ClickedPosition),
         typeof(Assets.Code.Common.Components.Input),
-        typeof(Assets.Code.Common.Components.InputPlayerTarget)
+        typeof(Assets.Code.Common.Components.InputPlayerTarget),
+        typeof(Assets.Code.Common.Components.TargetRotation)
     };
 }

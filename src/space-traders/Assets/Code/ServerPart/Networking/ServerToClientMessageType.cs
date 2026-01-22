@@ -7,5 +7,6 @@
         DestroyEntity = 3,
 
         UpdateGlobalPosition = 30,
+        UpdateRotation = 31,
     }
 }

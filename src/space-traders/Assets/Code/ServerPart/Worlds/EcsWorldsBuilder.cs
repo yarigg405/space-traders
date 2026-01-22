@@ -33,7 +33,7 @@ namespace Assets.Code.ServerPart.Worlds
                     .AsImplementedInterfaces()
                     .WithParameter(sceneName);
 
-                builder.Register<EntitiesSyncronizator>(Lifetime.Scoped)
+                builder.Register<EntitiesSynchronizator>(Lifetime.Scoped)
                     .WithParameter(sceneName);
             });
 

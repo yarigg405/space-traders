@@ -31,13 +31,21 @@ namespace Assets.Code.ClientPart
 
 
         ///      Update values
-           
+
         public void UpdateGlobalPosition(uint entityId, double2 newGlobalPosition)
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
 
             entity.ReplaceGlobalPosition(newGlobalPosition);
+        }
+
+        public void UpdateRotation(uint entityId, float currentRotation)
+        {
+            var entity = _gameContext.GetEntityWithId(entityId);
+            if (entity == null) return;
+
+            entity.ReplaceCurrentRotationY(currentRotation);
         }
     }
 }

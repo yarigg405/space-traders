@@ -4,6 +4,7 @@ using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
+using DesperateDevs.Reflection;
 using Riptide;
 using Unity.Mathematics;
 using UnityEngine;
@@ -64,6 +65,16 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, client);
         }
 
+        public static void SendRotation(ushort client, uint entityId, float currentRotation)
+        {
+            var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.UpdateRotation)
+                .AddUInt(entityId)
+                .AddFloat(currentRotation)
+                ;
+
+            _networkManager.Server.Send(message, client);
+        }
+
         #endregion
 
 
@@ -95,11 +106,11 @@ namespace Assets.Code.ServerPart.Networking
             _clientSceneConnector.ConnectPlayer(fromClientId);
         }
 
-        [MessageHandler((ushort)ClientToServerMessageType.SendInput)]
+        [MessageHandler((ushort)ClientToServerMessageType.SendTargetRotation)]
         private static void HandleClientInput(ushort fromClientId, Message message)
         {
-            var clickPos = message.GetVector3();
-            _serverInputService.SetPlayerDoubleClick(fromClientId, clickPos);
+            var targetRotation = message.GetFloat();
+            _serverInputService.SetPlayerTargetRotation(fromClientId, targetRotation);
         }
 
         #endregion

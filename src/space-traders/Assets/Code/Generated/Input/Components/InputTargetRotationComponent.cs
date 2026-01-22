@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherTargetRotation;
+    static Entitas.IMatcher<InputEntity> _matcherTargetRotation;
 
-    public static Entitas.IMatcher<GameEntity> TargetRotation {
+    public static Entitas.IMatcher<InputEntity> TargetRotation {
         get {
             if (_matcherTargetRotation == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.TargetRotation);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.TargetRotation);
+                matcher.componentNames = InputComponentsLookup.componentNames;
                 _matcherTargetRotation = matcher;
             }
 
@@ -31,7 +31,7 @@ public sealed partial class GameMatcher {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity : ITargetRotationEntity<GameEntity>, ITargetRotationEntity
+public partial class InputEntity : ITargetRotationEntity<InputEntity>, ITargetRotationEntity
 {
     Entitas.IEntity ITargetRotationEntity<Entitas.IEntity>.AddTargetRotation(float newValue)
     {
@@ -57,30 +57,30 @@ public partial class GameEntity : ITargetRotationEntity<GameEntity>, ITargetRota
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class InputEntity {
 
-    public Assets.Code.Common.Components.TargetRotation targetRotation { get { return (Assets.Code.Common.Components.TargetRotation)GetComponent(GameComponentsLookup.TargetRotation); } }
+    public Assets.Code.Common.Components.TargetRotation targetRotation { get { return (Assets.Code.Common.Components.TargetRotation)GetComponent(InputComponentsLookup.TargetRotation); } }
     public float TargetRotation { get { return targetRotation.Value; } }
-    public bool hasTargetRotation { get { return HasComponent(GameComponentsLookup.TargetRotation); } }
+    public bool hasTargetRotation { get { return HasComponent(InputComponentsLookup.TargetRotation); } }
 
-    public GameEntity AddTargetRotation(float newValue) {
-        var index = GameComponentsLookup.TargetRotation;
+    public InputEntity AddTargetRotation(float newValue) {
+        var index = InputComponentsLookup.TargetRotation;
         var component = (Assets.Code.Common.Components.TargetRotation)CreateComponent(index, typeof(Assets.Code.Common.Components.TargetRotation));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceTargetRotation(float newValue) {
-        var index = GameComponentsLookup.TargetRotation;
+    public InputEntity ReplaceTargetRotation(float newValue) {
+        var index = InputComponentsLookup.TargetRotation;
         var component = (Assets.Code.Common.Components.TargetRotation)CreateComponent(index, typeof(Assets.Code.Common.Components.TargetRotation));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemoveTargetRotation() {
-        RemoveComponent(GameComponentsLookup.TargetRotation);
+    public InputEntity RemoveTargetRotation() {
+        RemoveComponent(InputComponentsLookup.TargetRotation);
         return this;
     }
 }

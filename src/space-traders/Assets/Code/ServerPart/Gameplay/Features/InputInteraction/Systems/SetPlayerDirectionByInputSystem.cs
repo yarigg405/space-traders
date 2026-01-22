@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using System;
 using Yrr.Utils;
 
 
@@ -14,13 +13,12 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
         {
             _players = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Player,
-                GameMatcher.PlayerNetworkId,
-                GameMatcher.LocalPosition
+                GameMatcher.PlayerNetworkId
                 ));
 
             _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
-                InputMatcher.ClickedPosition,
+                InputMatcher.TargetRotation,
                 InputMatcher.InputPlayerTarget
                 ));
 
@@ -34,8 +32,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                 {
                     if (input.InputPlayerTarget == player.PlayerNetworkId)
                     {
-                        var targetRotation = AnglesUtil.GetAngleDirectionY(player.LocalPosition, input.ClickedPosition);
-                        player.ReplaceTargetRotation(targetRotation);
+                        player.ReplaceTargetRotation(input.TargetRotation);
                         player.isBraking = false;
 
                         break;

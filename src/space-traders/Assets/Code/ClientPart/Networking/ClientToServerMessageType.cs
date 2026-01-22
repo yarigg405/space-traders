@@ -6,6 +6,6 @@
         RequestForSceneEntities = 2,
         RequestForChangeScene = 3,
 
-        SendInput = 11,
+        SendTargetRotation = 11,
     }
 }

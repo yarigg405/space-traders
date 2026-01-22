@@ -52,10 +52,10 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager.Client.Send(message);
         }
 
-        public static void SendClickInputToServer(Vector3 input)
+        public static void SendTargetRotationToServer(float targetRotation)
         {
-            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendInput)
-                .AddVector3(input);
+            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendTargetRotation)
+                .AddFloat(targetRotation);
             _networkManager.Client.Send(message);
         }
 
@@ -95,6 +95,15 @@ namespace Assets.Code.ClientPart.Networking
             var y = message.GetDouble();
 
             _clientEntitiesController.UpdateGlobalPosition(entityId, new double2(x, y));
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.UpdateRotation)]
+        private static void HandleUpdateRotation(Message message)
+        {
+            var entityId = message.GetUInt();
+            var rotation = message.GetFloat();
+
+            _clientEntitiesController.UpdateRotation(entityId, rotation);
         }
 
         #endregion

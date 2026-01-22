@@ -1,26 +1,35 @@
 ﻿using Assets.Code.ClientPart.Networking;
 using Entitas;
+using Yrr.Utils;
 
 
 namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
 {
     internal sealed class InputListenClientSystem : IExecuteSystem
     {
-        private readonly IGroup<InputEntity> _entities;
+        private readonly IGroup<InputEntity> _inputs;
+        private readonly IGroup<GameEntity> _players;
 
-        public InputListenClientSystem(InputContext input)
+        public InputListenClientSystem(InputContext input, GameContext game)
         {
-            _entities = input.GetGroup(InputMatcher.AllOf(
+            _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
                 InputMatcher.ClickedPosition));
+
+            _players = game.GetGroup(GameMatcher.ClientPlayer);
         }
 
         void IExecuteSystem.Execute()
         {
-            foreach (var entity in _entities)
+            foreach (var player in _players)
             {
-                var clickPos = entity.ClickedPosition;
-                ClientMessenger.SendClickInputToServer(clickPos);
+                foreach (var input in _inputs)
+                {
+                    var clickPos = input.ClickedPosition;
+                    var targetRotation = AnglesUtil.GetAngleDirectionY(player.LocalPosition, input.ClickedPosition);
+
+                    ClientMessenger.SendTargetRotationToServer(targetRotation);
+                }
             }
         }
     }

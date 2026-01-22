@@ -4,12 +4,12 @@ using Unity.Mathematics;
 
 namespace Assets.Code.ServerPart.Worlds.GameSynchronization
 {
-    public sealed class EntitiesSyncronizator
+    public sealed class EntitiesSynchronizator
     {
         private readonly string _sceneName;
         private readonly ClientSceneConnector _clientSceneConnector;
 
-        internal EntitiesSyncronizator(string sceneName, ClientSceneConnector clientSceneConnector)
+        internal EntitiesSynchronizator(string sceneName, ClientSceneConnector clientSceneConnector)
         {
             _sceneName = sceneName;
             _clientSceneConnector = clientSceneConnector;
@@ -20,6 +20,14 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
                 ServerMessenger.SendGlobalPosition(client, entityId, globalPosition);
+            }
+        }
+
+        public void SyncRotation(uint entityId, float rotation)
+        {
+            foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
+            {
+                ServerMessenger.SendRotation(client, entityId, rotation);
             }
         }
     }

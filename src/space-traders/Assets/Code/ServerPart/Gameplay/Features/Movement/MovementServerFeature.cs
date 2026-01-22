@@ -10,7 +10,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
     {
         public MovementServerFeature(ISystemFactory systems)
         {
-            Add(systems.Create<SetPlayerDirectionByInputSystem>());
             Add(systems.Create<OrbitMovingSystem>());
             Add(systems.Create<KeepDistanceSystem>());
 
@@ -26,7 +25,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             Add(systems.Create<UpdateQuadrantIndexSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());
 
-            Add(systems.Create<GlobalPositionSynchronizeSystem>());
+            Add(systems.Create<SetPlayerDirectionByInputSystem>());
+
+            Add(systems.Create<NetworkSynchronizationSystem>());
         }
     }
 }

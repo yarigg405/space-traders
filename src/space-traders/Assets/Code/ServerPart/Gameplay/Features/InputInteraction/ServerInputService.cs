@@ -1,7 +1,9 @@
 ﻿using Assets.Code.Common;
+using Assets.Code.Common.Components;
 using Assets.Code.Common.Extensions;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Worlds;
+using System;
 using UnityEngine;
 
 
@@ -31,5 +33,17 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
                 ;
         }
 
+        public void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
+        {
+            var sceneName = _playerDataProvider.GetSceneNameForPlayer(fromClientId);
+            var world = _worldsController.GetOrCreateWorld(sceneName);
+            var ctxs = world.Contexts;
+
+            var input = CreateEntity.EmptyInput(ctxs)
+                .With(x => x.isInput = true)
+                .AddTargetRotation(targetRotation)
+                .AddInputPlayerTarget(fromClientId)
+                ;
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
     internal sealed class InputCleanupSystem : ICleanupSystem
     {
         private readonly IGroup<InputEntity> _entities;
-        private readonly List<InputEntity> _buffer = new(4);
+        private readonly List<InputEntity> _buffer = new(8);
 
         public InputCleanupSystem(InputContext input)
         {
