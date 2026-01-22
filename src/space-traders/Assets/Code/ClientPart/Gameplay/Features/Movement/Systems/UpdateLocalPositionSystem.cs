@@ -12,7 +12,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement.Systems
 
         public UpdateLocalPositionSystem(GameContext game)
         {
-            _players = game.GetGroup(GameMatcher.Player);
+            _players = game.GetGroup(GameMatcher.ClientPlayer);
 
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.GlobalPosition,
@@ -22,24 +22,27 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement.Systems
 
         void IExecuteSystem.Execute()
         {
+            var quadrantSize = GameConstants.GAME_SCENE_QUADRANT_SIZE;
+
             foreach (var player in _players)
             {
+                var playerQuadrant = player.QuadrantIndex;
+
                 foreach (var entity in _entities)
                 {
-                    var quadrantDelta = (entity.QuadrantIndex - player.QuadrantIndex);
-                    var offsetX = quadrantDelta.x * GameConstants.GAME_SCENE_QUADRANT_SIZE;
-                    var offsetY = quadrantDelta.y * GameConstants.GAME_SCENE_QUADRANT_SIZE;
+                    var objectGlobalPos = entity.GlobalPosition;
+                    var objectQuadrant = entity.QuadrantIndex;
 
-                    var localX = entity.GlobalPosition.x % GameConstants.GAME_SCENE_QUADRANT_SIZE;
-                    var localY = entity.GlobalPosition.y % GameConstants.GAME_SCENE_QUADRANT_SIZE;
+                    double objectLocalX = objectGlobalPos.x - objectQuadrant.x * quadrantSize;
+                    double objectLocalY = objectGlobalPos.y - objectQuadrant.y * quadrantSize;
 
-                    if (localX < 0) localX += GameConstants.GAME_SCENE_QUADRANT_SIZE;
-                    if (localY < 0) localY += GameConstants.GAME_SCENE_QUADRANT_SIZE;
+                    int deltaX = objectQuadrant.x - playerQuadrant.x;
+                    int deltaY = objectQuadrant.y - playerQuadrant.y;
 
-                    var newLocal = new Vector3(
-                        (float)(localX + offsetX),
-                        0f,
-                        (float)(localY + offsetY));
+                    double relativeX = (objectLocalX) + deltaX * quadrantSize;
+                    double relativeY = (objectLocalY) + deltaY * quadrantSize;
+
+                    var newLocal = new Vector3((float)relativeX, 0f, (float)relativeY);
 
                     entity.ReplaceLocalPosition(newLocal);
                 }

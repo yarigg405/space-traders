@@ -1,4 +1,5 @@
-﻿using Assets.Code.Infrastructure.Systems;
+﻿using Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems;
+using Assets.Code.Infrastructure.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Destruct.Systems;
 
 
@@ -10,6 +11,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Destruct
         {
             Add(systems.Create<SelfDestructTimerSystem>());
             Add(systems.Create<CleanupGameDestructedServerSystem>());
+            Add(systems.Create<InputCleanupSystem>());
         }
     }
 }

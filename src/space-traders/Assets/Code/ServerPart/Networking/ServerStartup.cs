@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
+using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Worlds;
@@ -26,6 +27,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();
                 builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<ServerMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
+                builder.Register<ServerInputService>(Lifetime.Singleton).AsSelf();
             });
         }
 

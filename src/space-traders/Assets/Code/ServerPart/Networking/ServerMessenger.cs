@@ -2,6 +2,7 @@
 using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Networking;
+using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Riptide;
 using Unity.Mathematics;
@@ -16,12 +17,14 @@ namespace Assets.Code.ServerPart.Networking
         private static NetworkManager _networkManager;
         private static ClientSceneConnector _clientSceneConnector;
         private static PlayerDataProvider _playerDataProvider;
+        private static ServerInputService _serverInputService;
 
         public static void SetupDependencies(IObjectResolver resolver)
         {
             _networkManager = resolver.Resolve<NetworkManager>();
             _clientSceneConnector = resolver.Resolve<ClientSceneConnector>();
             _playerDataProvider = resolver.Resolve<PlayerDataProvider>();
+            _serverInputService = resolver.Resolve<ServerInputService>();
         }
 
         public static void SendConnectionDataToPlayer(ushort clientId, string sceneName)
@@ -96,8 +99,7 @@ namespace Assets.Code.ServerPart.Networking
         private static void HandleClientInput(ushort fromClientId, Message message)
         {
             var clickPos = message.GetVector3();
-
-            Debug.Log("## Server: Clicked pos: " + clickPos);
+            _serverInputService.SetPlayerDoubleClick(fromClientId, clickPos);
         }
 
         #endregion

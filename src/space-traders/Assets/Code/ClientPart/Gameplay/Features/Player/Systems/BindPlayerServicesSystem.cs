@@ -3,6 +3,7 @@ using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Networking;
 using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Assets.Code.ClientPart.Gameplay.Features.Player.Systems
@@ -44,6 +45,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Systems
             {
                 if (player.PlayerNetworkId == _networkManager.Client.Id)
                 {
+                    player.isClientPlayer = true;
                     _playerProvider.SetPlayer(player);
                     _cameraService.SetTarget(player.Transform);
                 }

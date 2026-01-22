@@ -12,6 +12,8 @@ namespace Assets.Code.ClientPart.CameraSystem
 
         internal void SetNewTarget(Transform newTarget)
         {
+            if (_currentTarget == newTarget) return;
+
             _currentTarget = newTarget;
             _vCam.LookAt = newTarget;
             _vCam.Follow = _currentTarget;

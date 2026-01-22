@@ -13,7 +13,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features
         public ClientGameFeature(ISystemFactory systems)
         {
             Add(systems.Create<BindViewFeature>());
-            Add(systems.Create<InputFeature>());
+            Add(systems.Create<InputClientFeature>());
 
             Add(systems.Create<PlayerFeature>());
 

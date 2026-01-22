@@ -1419,9 +1419,9 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   RadialAxis:
-    Value: 0.25
-    Center: 0.25
-    Range: {x: 0.25, y: 50}
+    Value: 3
+    Center: 3
+    Range: {x: 3, y: 150}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -1526,7 +1526,7 @@ MonoBehaviour:
   _look: {fileID: -5365270190713176715, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _orbitHold: {fileID: -5461235461543657633, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _zoom: {fileID: -6609570609706424200, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  _wheelImpulse: 1
+  _wheelImpulse: 5
   _analogAcceleration: 40
   _speedByRadius:
     serializedVersion: 2
