@@ -59,6 +59,13 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager.Client.Send(message);
         }
 
+        public static void SendSpeedModifierToServer(float speedModifier)
+        {
+            var message = Message.Create(MessageSendMode.Unreliable,ClientToServerMessageType.SendSpeedModifier)
+                .AddFloat(speedModifier);
+            _networkManager.Client.Send(message);
+        }
+
 
 
         #region MessageHandlers

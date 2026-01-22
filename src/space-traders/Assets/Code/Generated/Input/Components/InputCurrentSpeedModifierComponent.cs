@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherCurrentSpeedModifier;
+    static Entitas.IMatcher<InputEntity> _matcherCurrentSpeedModifier;
 
-    public static Entitas.IMatcher<GameEntity> CurrentSpeedModifier {
+    public static Entitas.IMatcher<InputEntity> CurrentSpeedModifier {
         get {
             if (_matcherCurrentSpeedModifier == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.CurrentSpeedModifier);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.CurrentSpeedModifier);
+                matcher.componentNames = InputComponentsLookup.componentNames;
                 _matcherCurrentSpeedModifier = matcher;
             }
 
@@ -31,7 +31,7 @@ public sealed partial class GameMatcher {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity : ICurrentSpeedModifierEntity<GameEntity>, ICurrentSpeedModifierEntity
+public partial class InputEntity : ICurrentSpeedModifierEntity<InputEntity>, ICurrentSpeedModifierEntity
 {
     Entitas.IEntity ICurrentSpeedModifierEntity<Entitas.IEntity>.AddCurrentSpeedModifier(float newValue)
     {
@@ -57,30 +57,30 @@ public partial class GameEntity : ICurrentSpeedModifierEntity<GameEntity>, ICurr
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class InputEntity {
 
-    public Assets.Code.Common.Components.CurrentSpeedModifier currentSpeedModifier { get { return (Assets.Code.Common.Components.CurrentSpeedModifier)GetComponent(GameComponentsLookup.CurrentSpeedModifier); } }
+    public Assets.Code.Common.Components.CurrentSpeedModifier currentSpeedModifier { get { return (Assets.Code.Common.Components.CurrentSpeedModifier)GetComponent(InputComponentsLookup.CurrentSpeedModifier); } }
     public float CurrentSpeedModifier { get { return currentSpeedModifier.Value; } }
-    public bool hasCurrentSpeedModifier { get { return HasComponent(GameComponentsLookup.CurrentSpeedModifier); } }
+    public bool hasCurrentSpeedModifier { get { return HasComponent(InputComponentsLookup.CurrentSpeedModifier); } }
 
-    public GameEntity AddCurrentSpeedModifier(float newValue) {
-        var index = GameComponentsLookup.CurrentSpeedModifier;
+    public InputEntity AddCurrentSpeedModifier(float newValue) {
+        var index = InputComponentsLookup.CurrentSpeedModifier;
         var component = (Assets.Code.Common.Components.CurrentSpeedModifier)CreateComponent(index, typeof(Assets.Code.Common.Components.CurrentSpeedModifier));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceCurrentSpeedModifier(float newValue) {
-        var index = GameComponentsLookup.CurrentSpeedModifier;
+    public InputEntity ReplaceCurrentSpeedModifier(float newValue) {
+        var index = InputComponentsLookup.CurrentSpeedModifier;
         var component = (Assets.Code.Common.Components.CurrentSpeedModifier)CreateComponent(index, typeof(Assets.Code.Common.Components.CurrentSpeedModifier));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemoveCurrentSpeedModifier() {
-        RemoveComponent(GameComponentsLookup.CurrentSpeedModifier);
+    public InputEntity RemoveCurrentSpeedModifier() {
+        RemoveComponent(InputComponentsLookup.CurrentSpeedModifier);
         return this;
     }
 }

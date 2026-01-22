@@ -1,9 +1,7 @@
 ﻿using Assets.Code.Common;
-using Assets.Code.Common.Components;
 using Assets.Code.Common.Extensions;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Worlds;
-using System;
 using UnityEngine;
 
 
@@ -35,15 +33,29 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 
         public void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
         {
-            var sceneName = _playerDataProvider.GetSceneNameForPlayer(fromClientId);
+            var input = CreateNewInputEntityForPlayer(fromClientId)
+                .AddTargetRotation(targetRotation);
+        }
+
+        public void SetPlayerSpeedModifier(ushort fromClientId, float targetSpeedModifier)
+        {
+            var input = CreateNewInputEntityForPlayer(fromClientId)
+                .AddCurrentSpeedModifier(targetSpeedModifier);
+        }
+
+
+
+        private InputEntity CreateNewInputEntityForPlayer(ushort playerNetworkId)
+        {
+            var sceneName = _playerDataProvider.GetSceneNameForPlayer(playerNetworkId);
             var world = _worldsController.GetOrCreateWorld(sceneName);
             var ctxs = world.Contexts;
 
             var input = CreateEntity.EmptyInput(ctxs)
-                .With(x => x.isInput = true)
-                .AddTargetRotation(targetRotation)
-                .AddInputPlayerTarget(fromClientId)
-                ;
+               .With(x => x.isInput = true)
+               .AddInputPlayerTarget(playerNetworkId);
+
+            return input;
         }
     }
 }

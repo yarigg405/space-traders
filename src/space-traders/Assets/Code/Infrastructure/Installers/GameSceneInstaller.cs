@@ -42,6 +42,7 @@ namespace Assets.Code.Infrastructure.Installers
         private void RegisterPlayerServices()
         {
             Builder.Register<PlayerProvider>(Lifetime.Scoped).AsImplementedInterfaces();
+            Builder.Register<PlayerShipController>(Lifetime.Scoped).AsSelf();
         }
     }
 }

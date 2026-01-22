@@ -3,21 +3,21 @@
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
 {
-    internal sealed class SetPlayerDirectionByInputSystem : IExecuteSystem
+    internal sealed class SetPlayerSpeedByInputSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _players;
         private readonly IGroup<InputEntity> _inputs;
 
-        public SetPlayerDirectionByInputSystem(GameContext game, InputContext input)
+        public SetPlayerSpeedByInputSystem(GameContext game, InputContext input)
         {
             _players = game.GetGroup(GameMatcher.AllOf(
-                GameMatcher.Player,
-                GameMatcher.PlayerNetworkId
-                ));
+            GameMatcher.Player,
+            GameMatcher.PlayerNetworkId
+            ));
 
             _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
-                InputMatcher.TargetRotation,
+                InputMatcher.CurrentSpeedModifier,
                 InputMatcher.InputPlayerTarget
                 ));
         }
@@ -30,7 +30,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                 {
                     if (input.InputPlayerTarget == player.PlayerNetworkId)
                     {
-                        player.ReplaceTargetRotation(input.TargetRotation);
+                        player.ReplaceCurrentSpeedModifier(input.CurrentSpeedModifier);
                         player.isBraking = false;
 
                         break;

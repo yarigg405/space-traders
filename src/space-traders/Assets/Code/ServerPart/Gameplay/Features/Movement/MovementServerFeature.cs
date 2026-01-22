@@ -1,6 +1,5 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features.Movement.Systems;
 using Assets.Code.Infrastructure.Systems;
-using Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Movement.Systems;
 
 
@@ -24,8 +23,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
 
             Add(systems.Create<UpdateQuadrantIndexSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());
-
-            Add(systems.Create<SetPlayerDirectionByInputSystem>());
 
             Add(systems.Create<NetworkSynchronizationSystem>());
         }

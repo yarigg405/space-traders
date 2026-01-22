@@ -107,10 +107,17 @@ namespace Assets.Code.ServerPart.Networking
         }
 
         [MessageHandler((ushort)ClientToServerMessageType.SendTargetRotation)]
-        private static void HandleClientInput(ushort fromClientId, Message message)
+        private static void HandleClientTargetRotation(ushort fromClientId, Message message)
         {
             var targetRotation = message.GetFloat();
             _serverInputService.SetPlayerTargetRotation(fromClientId, targetRotation);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.SendSpeedModifier)]
+        private static void HandleClientSpeedModifier(ushort fromClientId, Message message)
+        {
+            var speedModifier = message.GetFloat();
+            _serverInputService.SetPlayerSpeedModifier(fromClientId, speedModifier);
         }
 
         #endregion

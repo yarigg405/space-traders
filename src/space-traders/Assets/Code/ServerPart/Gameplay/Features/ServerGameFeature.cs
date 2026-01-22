@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Infrastructure.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Destruct;
+using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Movement;
 
 
@@ -9,6 +10,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features
     {
         public ServerGameFeature(ISystemFactory systems)
         {
+            Add(systems.Create<InputServerFeature>());
             Add(systems.Create<MovementServerFeature>());
 
             Add(systems.Create<ProcessDestructedServerFeature>());
