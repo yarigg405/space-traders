@@ -11,7 +11,7 @@ public static class InputComponentsLookup {
     public const int ClickedPosition = 0;
     public const int CurrentSpeedModifier = 1;
     public const int Input = 2;
-    public const int InputPlayerTarget = 3;
+    public const int InputConsumerEntityId = 3;
     public const int TargetRotation = 4;
 
     public const int TotalComponents = 5;
@@ -20,7 +20,7 @@ public static class InputComponentsLookup {
         "ClickedPosition",
         "CurrentSpeedModifier",
         "Input",
-        "InputPlayerTarget",
+        "InputConsumerEntityId",
         "TargetRotation"
     };
 
@@ -28,7 +28,7 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Common.Components.ClickedPosition),
         typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
         typeof(Assets.Code.Common.Components.Input),
-        typeof(Assets.Code.Common.Components.InputPlayerTarget),
+        typeof(Assets.Code.Common.Components.InputConsumerEntityId),
         typeof(Assets.Code.Common.Components.TargetRotation)
     };
 }

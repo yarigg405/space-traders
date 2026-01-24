@@ -8,5 +8,8 @@
 
         SendTargetRotation = 31,
         SendSpeedModifier = 32,
+        SendKeepDistance = 33,
+        SendSetOrbit = 34,
+        SendSetWarpTo = 35,
     }
 }

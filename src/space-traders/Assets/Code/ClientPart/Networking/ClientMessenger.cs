@@ -54,15 +54,39 @@ namespace Assets.Code.ClientPart.Networking
 
         public static void SendTargetRotationToServer(float targetRotation)
         {
-            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendTargetRotation)
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendTargetRotation)
                 .AddFloat(targetRotation);
             _networkManager.Client.Send(message);
         }
 
         public static void SendSpeedModifierToServer(float speedModifier)
         {
-            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendSpeedModifier)
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendSpeedModifier)
                 .AddFloat(speedModifier);
+            _networkManager.Client.Send(message);
+        }
+
+        public static void SendKeepDistance(uint targetId, Vector2 minMaxDistance)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendKeepDistance)
+                .AddUInt(targetId)
+                .AddVector2(minMaxDistance);
+            _networkManager.Client.Send(message);
+        }
+
+        public static void SendSetOrbit(uint targetId, float orbitRadius)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendSetOrbit)
+                 .AddUInt(targetId)
+                 .AddFloat(orbitRadius);
+            _networkManager.Client.Send(message);
+        }
+
+        public static void SendSetWarpTo(double2 coordinates)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendSetWarpTo)
+                .AddDouble(coordinates.x)
+                .AddDouble(coordinates.y);
             _networkManager.Client.Send(message);
         }
 
