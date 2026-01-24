@@ -6,6 +6,7 @@ using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using DesperateDevs.Reflection;
 using Riptide;
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using VContainer;
@@ -54,9 +55,9 @@ namespace Assets.Code.ServerPart.Networking
         }
 
         #region Update of components
-        public static void SendGlobalPosition(ushort client, uint entityId, double2 globalPosition)
+        public static void SynchronizeGlobalPosition(ushort client, uint entityId, double2 globalPosition)
         {
-            var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.UpdateGlobalPosition)
+            var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.SynchronizeGlobalPosition)
                 .AddUInt(entityId)
                 .AddDouble(globalPosition.x)
                 .AddDouble(globalPosition.y)
@@ -65,12 +66,21 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, client);
         }
 
-        public static void SendRotation(ushort client, uint entityId, float currentRotation)
+        public static void SynchronizeRotation(ushort client, uint entityId, float currentRotation)
         {
-            var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.UpdateRotation)
+            var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.SynchronizeRotation)
                 .AddUInt(entityId)
                 .AddFloat(currentRotation)
                 ;
+
+            _networkManager.Server.Send(message, client);
+        }
+
+        public static void UpdateComponentsForEntity(ushort client, uint entityId, string snapshotJson)
+        {
+            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.UpdateComponentsForEntity)
+                .AddUInt(entityId)
+                .AddString(snapshotJson);
 
             _networkManager.Server.Send(message, client);
         }

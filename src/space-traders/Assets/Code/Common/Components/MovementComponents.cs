@@ -13,14 +13,14 @@ namespace Assets.Code.Common.Components
     [Game] public class MovingAcceleration : ISerializeComponent { public float Value; }
     [Game] public class CurrentMoveSpeed : IComponent { public float Value; }
     [Game] public class Moving : ISerializeComponent { }
-    [Game] public class Braking : ISerializeComponent { }
+    [Game] public class Braking : ISerializeComponent { public bool Value; }
 
     [Game, Input] public class TargetRotation : ISerializeComponent { public float Value; }
     [Game] public class CurrentRotationY : IComponent { public float Value; }
     [Game] public class RotationSpeed : ISerializeComponent { public float Value; }
 
-    [Game] public class ChaseTarget : ISerializeComponent { public GameEntity Value; }
-    [Game] public class MovementTarget : ISerializeComponent { public GameEntity Value; }
+    [Game] public class ChaseTargetId : ISerializeComponent { public uint Value; }
+    [Game] public class MovementTargetId : ISerializeComponent { public uint Value; }
     [Game] public class OrbitingRadius : ISerializeComponent { public float Value; }
     [Game] public class KeepDistanceMinMax : ISerializeComponent { public Vector2 Value; }
 }

@@ -12,6 +12,7 @@ namespace Assets.Code.Common.Serialization.Extensions
         public static EntitySnapshot AsSerializedEntity(this IEntity entity)
         {
             var components = entity.GetComponents();
+
             return new EntitySnapshot
             {
                 Components = components
@@ -21,11 +22,25 @@ namespace Assets.Code.Common.Serialization.Extensions
             };
         }
 
+        public static EntitySnapshot AsSerializedEntity(this IEntity entity, int[] components)
+        {
+            var entitySnapshot = new EntitySnapshot();
+            entitySnapshot.Components = new(components.Length);
+
+            foreach (var componentIndex in components)
+            {
+                var component = entity.GetComponent(componentIndex) as ISerializeComponent;
+                entitySnapshot.Components.Add(component);
+            }
+
+            return entitySnapshot;
+        }
+
         public static IEntity FillEntityWith(this IEntity entity, EntitySnapshot snapshot)
         {
             foreach (ISerializeComponent component in snapshot.Components)
             {
-                var lookupIndex = Array.IndexOf(GameComponentsLookup.componentTypes, component.GetType());
+                var lookupIndex = ComponentIndexByType.IndexByType(component.GetType());
                 entity.With(x => x.ReplaceComponent(lookupIndex, component), when: lookupIndex >= 0);
             }
 

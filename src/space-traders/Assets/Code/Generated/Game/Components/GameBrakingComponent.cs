@@ -33,24 +33,28 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Common.Components.Braking brakingComponent = new Assets.Code.Common.Components.Braking();
+    public Assets.Code.Common.Components.Braking braking { get { return (Assets.Code.Common.Components.Braking)GetComponent(GameComponentsLookup.Braking); } }
+    public bool Braking { get { return braking.Value; } }
+    public bool hasBraking { get { return HasComponent(GameComponentsLookup.Braking); } }
 
-    public bool isBraking {
-        get { return HasComponent(GameComponentsLookup.Braking); }
-        set {
-            if (value != isBraking) {
-                var index = GameComponentsLookup.Braking;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : brakingComponent;
+    public GameEntity AddBraking(bool newValue) {
+        var index = GameComponentsLookup.Braking;
+        var component = (Assets.Code.Common.Components.Braking)CreateComponent(index, typeof(Assets.Code.Common.Components.Braking));
+        component.Value = newValue;
+        AddComponent(index, component);
+        return this;
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public GameEntity ReplaceBraking(bool newValue) {
+        var index = GameComponentsLookup.Braking;
+        var component = (Assets.Code.Common.Components.Braking)CreateComponent(index, typeof(Assets.Code.Common.Components.Braking));
+        component.Value = newValue;
+        ReplaceComponent(index, component);
+        return this;
+    }
+
+    public GameEntity RemoveBraking() {
+        RemoveComponent(GameComponentsLookup.Braking);
+        return this;
     }
 }

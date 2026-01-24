@@ -6,7 +6,8 @@
         CreateEntity = 2,
         DestroyEntity = 3,
 
-        UpdateGlobalPosition = 30,
-        UpdateRotation = 31,
+        UpdateComponentsForEntity = 30,
+        SynchronizeGlobalPosition = 31,
+        SynchronizeRotation = 32,
     }
 }

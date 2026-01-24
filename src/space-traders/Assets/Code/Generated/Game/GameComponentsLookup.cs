@@ -10,7 +10,7 @@ public static class GameComponentsLookup {
 
     public const int Active = 0;
     public const int Braking = 1;
-    public const int ChaseTarget = 2;
+    public const int ChaseTargetId = 2;
     public const int ClientPlayer = 3;
     public const int CurrentMoveSpeed = 4;
     public const int CurrentRotationY = 5;
@@ -22,7 +22,7 @@ public static class GameComponentsLookup {
     public const int KeepDistanceMinMax = 11;
     public const int LocalPosition = 12;
     public const int MaxMoveSpeed = 13;
-    public const int MovementTarget = 14;
+    public const int MovementTargetId = 14;
     public const int Moving = 15;
     public const int MovingAcceleration = 16;
     public const int OrbitingRadius = 17;
@@ -45,7 +45,7 @@ public static class GameComponentsLookup {
     public static readonly string[] componentNames = {
         "Active",
         "Braking",
-        "ChaseTarget",
+        "ChaseTargetId",
         "ClientPlayer",
         "CurrentMoveSpeed",
         "CurrentRotationY",
@@ -57,7 +57,7 @@ public static class GameComponentsLookup {
         "KeepDistanceMinMax",
         "LocalPosition",
         "MaxMoveSpeed",
-        "MovementTarget",
+        "MovementTargetId",
         "Moving",
         "MovingAcceleration",
         "OrbitingRadius",
@@ -79,7 +79,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Common.Components.Active),
         typeof(Assets.Code.Common.Components.Braking),
-        typeof(Assets.Code.Common.Components.ChaseTarget),
+        typeof(Assets.Code.Common.Components.ChaseTargetId),
         typeof(Assets.Code.Common.Components.ClientPlayer),
         typeof(Assets.Code.Common.Components.CurrentMoveSpeed),
         typeof(Assets.Code.Common.Components.CurrentRotationY),
@@ -91,7 +91,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
         typeof(Assets.Code.Common.Components.LocalPosition),
         typeof(Assets.Code.Common.Components.MaxMoveSpeed),
-        typeof(Assets.Code.Common.Components.MovementTarget),
+        typeof(Assets.Code.Common.Components.MovementTargetId),
         typeof(Assets.Code.Common.Components.Moving),
         typeof(Assets.Code.Common.Components.MovingAcceleration),
         typeof(Assets.Code.Common.Components.OrbitingRadius),

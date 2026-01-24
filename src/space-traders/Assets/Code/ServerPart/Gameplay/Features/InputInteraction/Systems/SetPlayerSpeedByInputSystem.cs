@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Assets.Code.ServerPart.Worlds.GameSynchronization;
+using Entitas;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
@@ -8,7 +9,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
         private readonly IGroup<GameEntity> _players;
         private readonly IGroup<InputEntity> _inputs;
 
-        public SetPlayerSpeedByInputSystem(GameContext game, InputContext input)
+        private readonly EntitiesSynchronizator _synchronizator;
+
+        public SetPlayerSpeedByInputSystem(GameContext game, InputContext input,
+            EntitiesSynchronizator synchronizator)
         {
             _players = game.GetGroup(GameMatcher.AllOf(
             GameMatcher.Player,
@@ -20,6 +24,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                 InputMatcher.CurrentSpeedModifier,
                 InputMatcher.InputPlayerTarget
                 ));
+            _synchronizator = synchronizator;
         }
 
         void IExecuteSystem.Execute()
@@ -31,8 +36,11 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                     if (input.InputPlayerTarget == player.PlayerNetworkId)
                     {
                         player.ReplaceCurrentSpeedModifier(input.CurrentSpeedModifier);
-                        player.isBraking = false;
+                        player.ReplaceBraking(false);
 
+                        _synchronizator.UpdateComponentsForEntity(player,
+                            GameComponentsLookup.CurrentSpeedModifier,
+                            GameComponentsLookup.Braking);
                         break;
                     }
                 }

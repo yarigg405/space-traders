@@ -9,22 +9,25 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class OrbitMovingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
+        private readonly GameContext _game;
 
         public OrbitMovingSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.CurrentRotationY,
                 GameMatcher.OrbitingRadius,
-                GameMatcher.MovementTarget
+                GameMatcher.MovementTargetId
             ));
+            _game = game;
         }
 
         void IExecuteSystem.Execute()
         {
             foreach (var entity in _entities)
             {
+                var target = _game.GetEntityWithId(entity.MovementTargetId).Transform;
                 var radius = entity.OrbitingRadius;
-                var direction = entity.Transform.position - entity.MovementTarget.Transform.position;
+                var direction = entity.Transform.position - target.position;
                 var distance = direction.magnitude;
 
                 if (distance <= radius) return;
@@ -35,8 +38,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 if (IsClockwiseMoving(entity.GlobalPosition, entity.GlobalPosition, entity.CurrentRotationY))
                 {
                     var tanAngle1 = angleToPoint - angleOffset;
-                    var tx1 = entity.MovementTarget.Transform.position.x + radius * Mathf.Cos(tanAngle1);
-                    var ty1 = entity.MovementTarget.Transform.position.z + radius * Mathf.Sin(tanAngle1);
+                    var tx1 = target.position.x + radius * Mathf.Cos(tanAngle1);
+                    var ty1 = target.position.z + radius * Mathf.Sin(tanAngle1);
                     var point1 = new Vector3(tx1, 0, ty1);
                     var angle = AnglesUtil.GetAngleDirectionY(entity.Transform.position, point1);
                     entity.ReplaceTargetRotation(angle);
@@ -45,8 +48,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 else
                 {
                     var tanAngle2 = angleToPoint + angleOffset;
-                    var tx2 = entity.MovementTarget.Transform.position.x + radius * Mathf.Cos(tanAngle2);
-                    var ty2 = entity.MovementTarget.Transform.position.z + radius * Mathf.Sin(tanAngle2);
+                    var tx2 = target.position.x + radius * Mathf.Cos(tanAngle2);
+                    var ty2 = target.position.z + radius * Mathf.Sin(tanAngle2);
                     var point2 = new Vector3(tx2, 0, ty2);
                     var angle = AnglesUtil.GetAngleDirectionY(entity.Transform.position, point2);
                     entity.ReplaceTargetRotation(angle);

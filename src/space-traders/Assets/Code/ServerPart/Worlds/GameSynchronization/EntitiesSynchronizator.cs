@@ -1,5 +1,6 @@
-﻿using Assets.Code.ServerPart.Networking;
-using System.Collections.Generic;
+﻿using Assets.Code.Common.Serialization;
+using Assets.Code.Common.Serialization.Extensions;
+using Assets.Code.ServerPart.Networking;
 using Unity.Mathematics;
 
 
@@ -20,7 +21,7 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
         {
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.SendGlobalPosition(client, entityId, globalPosition);
+                ServerMessenger.SynchronizeGlobalPosition(client, entityId, globalPosition);
             }
         }
 
@@ -28,10 +29,19 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
         {
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.SendRotation(client, entityId, rotation);
+                ServerMessenger.SynchronizeRotation(client, entityId, rotation);
             }
         }
 
-      //  public void SyncComponentsForEntity(GameEntity entity, List<int> comp
+        public void UpdateComponentsForEntity(GameEntity entity, params int[] components)
+        {
+            var snapshot = entity.AsSerializedEntity(components);
+            var json = JsonSerializator.ToJson(snapshot);
+
+            foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
+            {
+                ServerMessenger.UpdateComponentsForEntity(client, entity.Id, json);
+            }
+        }
     }
 }

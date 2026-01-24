@@ -1,7 +1,11 @@
 ﻿using Assets.Code.Common.Extensions;
+using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Common.Serialization.Extensions;
 using Unity.Mathematics;
+using UnityEngine;
+using Yrr.Utils;
+
 
 namespace Assets.Code.ClientPart
 {
@@ -17,7 +21,12 @@ namespace Assets.Code.ClientPart
         public void CreateEntityFromSnapshot(EntitySnapshot snapshot)
         {
             _gameContext.CreateEntity()
-                .FillEntityWith(snapshot);
+                .AddCurrentRotationY(0)
+                .AddVelocity(Vector2.zero)
+                .AddCurrentMoveSpeed(0)
+
+                .FillEntityWith(snapshot)
+                ;
         }
 
         public void DestroyEntity(uint entityId)
@@ -32,20 +41,39 @@ namespace Assets.Code.ClientPart
 
         ///      Update values
 
-        public void UpdateGlobalPosition(uint entityId, double2 newGlobalPosition)
+        public void UpdateGlobalPosition(uint entityId, double2 serverGlobalPosition)
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
 
-            entity.ReplaceGlobalPosition(newGlobalPosition);
+            var delta = serverGlobalPosition - entity.GlobalPosition;
+
+            if (math.abs(delta.x) > 5 ||
+                math.abs(delta.y) > 5)
+                entity.ReplaceGlobalPosition(serverGlobalPosition);
         }
 
-        public void UpdateRotation(uint entityId, float currentRotation)
+        public void UpdateRotation(uint entityId, float serverRotation)
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
 
-            entity.ReplaceCurrentRotationY(currentRotation);
+            var current = entity.CurrentRotationY;
+
+            if (AnglesUtil.GetMinAngledDelta(current, serverRotation) > 15)
+                entity.ReplaceCurrentRotationY(serverRotation);
+        }
+
+        public void UpdateEntityComponents(uint entityId, EntitySnapshot snapshot)
+        {
+            var entity = _gameContext.GetEntityWithId(entityId);
+            if (entity == null) return;
+
+            foreach (var component in snapshot.Components)
+            {
+                var lookupIndex = ComponentIndexByType.IndexByType(component.GetType());
+                entity.With(x => x.ReplaceComponent(lookupIndex, component), when: lookupIndex >= 0);
+            }
         }
     }
 }

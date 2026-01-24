@@ -61,7 +61,7 @@ namespace Assets.Code.ClientPart.Networking
 
         public static void SendSpeedModifierToServer(float speedModifier)
         {
-            var message = Message.Create(MessageSendMode.Unreliable,ClientToServerMessageType.SendSpeedModifier)
+            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendSpeedModifier)
                 .AddFloat(speedModifier);
             _networkManager.Client.Send(message);
         }
@@ -94,7 +94,7 @@ namespace Assets.Code.ClientPart.Networking
             _clientEntitiesController.DestroyEntity(entityId);
         }
 
-        [MessageHandler((ushort)ServerToClientMessageType.UpdateGlobalPosition)]
+        [MessageHandler((ushort)ServerToClientMessageType.SynchronizeGlobalPosition)]
         private static void HandleUpdateGlobalPosition(Message message)
         {
             var entityId = message.GetUInt();
@@ -104,13 +104,23 @@ namespace Assets.Code.ClientPart.Networking
             _clientEntitiesController.UpdateGlobalPosition(entityId, new double2(x, y));
         }
 
-        [MessageHandler((ushort)ServerToClientMessageType.UpdateRotation)]
+        [MessageHandler((ushort)ServerToClientMessageType.SynchronizeRotation)]
         private static void HandleUpdateRotation(Message message)
         {
             var entityId = message.GetUInt();
             var rotation = message.GetFloat();
 
             _clientEntitiesController.UpdateRotation(entityId, rotation);
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.UpdateComponentsForEntity)]
+        private static void HandleUpdateComponentsForEntity(Message message)
+        {
+            var entityId = message.GetUInt();
+            var json = message.GetString();
+            var snapshot = JsonSerializator.FromJson<EntitySnapshot>(json);
+
+            _clientEntitiesController.UpdateEntityComponents(entityId, snapshot);
         }
 
         #endregion

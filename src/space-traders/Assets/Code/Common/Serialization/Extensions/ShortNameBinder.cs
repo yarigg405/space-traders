@@ -25,6 +25,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(VelocityAgility)] = "va",
             [typeof(CurrentSpeedModifier)] = "csm",
             [typeof(Moving)] = "m",
+            [typeof(TargetRotation)] = "tr",
+            [typeof(Braking)] = "b",
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;
