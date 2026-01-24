@@ -19,6 +19,12 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(GlobalPosition)] = "gp",
             [typeof(Player)] = "p",
             [typeof(PlayerNetworkId)] = "pnid",
+            [typeof(MaxMoveSpeed)] = "mms",
+            [typeof(MovingAcceleration)] = "ma",
+            [typeof(RotationSpeed)] = "rs",
+            [typeof(VelocityAgility)] = "va",
+            [typeof(CurrentSpeedModifier)] = "csm",
+            [typeof(Moving)] = "m",
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

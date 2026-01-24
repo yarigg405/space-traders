@@ -20,19 +20,16 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Factory
         {
             var player = CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
-                .AddLocalPosition(Vector3.zero)
                 .AddPlayerNetworkId(playerNetworkId)
                 .AddViewPath("Prefabs/PlayerShip")
                 .With(x => x.isPlayer = true)
 
                 .AddGlobalPosition(at)
-                .With(x => x.isMoving = true)
-                .AddVelocity(Vector2.zero)
-                .AddCurrentRotationY(0)
-                .AddTargetRotation(0)
-
                 .AddCurrentSpeedModifier(0)
+                .AddCurrentRotationY(0)
                 .AddCurrentMoveSpeed(0)
+                .AddVelocity(Vector2.zero)
+                .With(x => x.isMoving = true)
 
                 .AddVelocityAgility(2.5f)
                 .AddRotationSpeed(250f)

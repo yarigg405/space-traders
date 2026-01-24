@@ -1,4 +1,5 @@
 ﻿using Assets.Code.ServerPart.Networking;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 
@@ -30,5 +31,7 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
                 ServerMessenger.SendRotation(client, entityId, rotation);
             }
         }
+
+      //  public void SyncComponentsForEntity(GameEntity entity, List<int> comp
     }
 }

@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Assets.Code.ServerPart.Worlds.GameSynchronization;
+using Entitas;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
@@ -7,8 +8,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
     {
         private readonly IGroup<GameEntity> _players;
         private readonly IGroup<InputEntity> _inputs;
+        private readonly EntitiesSynchronizator _synchronizator;
 
-        public SetPlayerDirectionByInputSystem(GameContext game, InputContext input)
+        public SetPlayerDirectionByInputSystem(GameContext game, 
+            InputContext input, EntitiesSynchronizator synchronizator)
         {
             _players = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Player,
@@ -20,6 +23,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                 InputMatcher.TargetRotation,
                 InputMatcher.InputPlayerTarget
                 ));
+            _synchronizator = synchronizator;
         }
 
         void IExecuteSystem.Execute()
@@ -32,6 +36,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                     {
                         player.ReplaceTargetRotation(input.TargetRotation);
                         player.isBraking = false;
+
+                       // _synchronizator
 
                         break;
                     }

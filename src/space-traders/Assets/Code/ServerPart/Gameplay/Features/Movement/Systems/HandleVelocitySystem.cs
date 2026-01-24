@@ -15,7 +15,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.CurrentRotationY,
                 GameMatcher.CurrentMoveSpeed,
-                GameMatcher.Velocity,
                 GameMatcher.VelocityAgility
             ));
             _time = time;
