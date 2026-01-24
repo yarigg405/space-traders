@@ -3,7 +3,7 @@ using Entitas;
 
 namespace Assets.Code.Common.Components
 {
-    [Game] public class Player : ISerializeComponent { }
-    [Game] public class ClientPlayer : IComponent { }
-    [Game] public class PlayerNetworkId : ISerializeComponent { public ushort Value; }
+    [Game] public sealed class Player : ISerializeComponent { }
+    [Game] public sealed class ClientPlayer : IComponent { }
+    [Game] public sealed class PlayerNetworkId : ISerializeComponent { public ushort Value; }
 }
