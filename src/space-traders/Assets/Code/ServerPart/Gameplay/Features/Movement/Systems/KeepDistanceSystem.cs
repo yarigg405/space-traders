@@ -31,7 +31,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 {
                     var angle = AnglesUtil.GetAngleDirectionY(target.position, entity.Transform.position);
                     entity.ReplaceTargetRotation(angle);
-                    entity.ReplaceBraking(false);
 
                     if (entity.CurrentSpeedModifier == 0)
                         entity.ReplaceCurrentSpeedModifier(1f);
@@ -41,7 +40,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 {
                     var angle = AnglesUtil.GetAngleDirectionY(entity.Transform.position, target.position);
                     entity.ReplaceTargetRotation(angle);
-                    entity.ReplaceBraking(false);
 
                     if (entity.CurrentSpeedModifier == 0)
                         entity.ReplaceCurrentSpeedModifier(1f);
@@ -50,7 +48,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 else
                 {
                     entity.ReplaceCurrentSpeedModifier(0);
-                    entity.ReplaceBraking(true);
                 }
             }
         }

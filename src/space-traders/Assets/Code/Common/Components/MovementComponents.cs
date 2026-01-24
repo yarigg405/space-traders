@@ -13,7 +13,6 @@ namespace Assets.Code.Common.Components
     [Game] public class MovingAcceleration : ISerializeComponent { public float Value; }
     [Game] public class CurrentMoveSpeed : IComponent { public float Value; }
     [Game] public class Moving : ISerializeComponent { }
-    [Game] public class Braking : ISerializeComponent { public bool Value; }
 
     [Game, Input] public class TargetRotation : ISerializeComponent { public float Value; }
     [Game] public class CurrentRotationY : IComponent { public float Value; }

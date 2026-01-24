@@ -37,11 +37,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                     if (input.InputPlayerTarget == player.PlayerNetworkId)
                     {
                         player.ReplaceTargetRotation(input.TargetRotation);
-                        player.ReplaceBraking(false);
 
                         _synchronizator.UpdateComponentsForEntity(player,
-                            GameComponentsLookup.TargetRotation,
-                            GameComponentsLookup.Braking);
+                            GameComponentsLookup.TargetRotation);
 
                         break;
                     }

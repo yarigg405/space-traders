@@ -36,11 +36,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                     if (input.InputPlayerTarget == player.PlayerNetworkId)
                     {
                         player.ReplaceCurrentSpeedModifier(input.CurrentSpeedModifier);
-                        player.ReplaceBraking(false);
 
                         _synchronizator.UpdateComponentsForEntity(player,
-                            GameComponentsLookup.CurrentSpeedModifier,
-                            GameComponentsLookup.Braking);
+                            GameComponentsLookup.CurrentSpeedModifier);
                         break;
                     }
                 }

@@ -26,7 +26,6 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(CurrentSpeedModifier)] = "csm",
             [typeof(Moving)] = "m",
             [typeof(TargetRotation)] = "tr",
-            [typeof(Braking)] = "b",
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;
