@@ -10,13 +10,19 @@ namespace Assets.Code.ClientPart.CameraSystem
 
         private Transform _currentTarget;
 
+        internal void LateUpdate()
+        {
+            if (_currentTarget == null) return;
+
+            transform.position = _currentTarget.position;
+        }
+
         internal void SetNewTarget(Transform newTarget)
         {
             if (_currentTarget == newTarget) return;
 
             _currentTarget = newTarget;
-            _vCam.LookAt = newTarget;
-            _vCam.Follow = _currentTarget;
+            transform.position = _currentTarget.position;
         }
     }
 }

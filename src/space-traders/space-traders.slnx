@@ -20,6 +20,7 @@
   <Project Path="Game.csproj" />
   <Project Path="Unity.Burst.Editor.csproj" />
   <Project Path="Unity.Postprocessing.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="DOTween.Modules.csproj" />
   <Project Path="Unity.ProBuilder.KdTree.csproj" />
   <Project Path="Unity.ProBuilder.AddOns.Editor.csproj" />
@@ -33,6 +34,5 @@
   <Project Path="Unity.InputSystem.TestFramework.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
   <Project Path="Unity.ProBuilder.Stl.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.Collections.Editor.csproj" />
 </Solution>
