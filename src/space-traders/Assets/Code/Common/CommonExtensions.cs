@@ -53,5 +53,30 @@ namespace Assets.Code.Common
 
             return new double2(originalPoint.x + x, originalPoint.y + y);
         }
+
+        public static double2 MoveTowards(double2 current, double2 target, double maxDistanceDelta)
+        {
+            var num = target.x - current.x;
+            var num2 = target.y - current.y;
+            var num3 = num * num + num2 * num2;
+
+            if (num3 == 0f || (maxDistanceDelta >= 0f && num3 <= maxDistanceDelta * maxDistanceDelta))
+            {
+                return target;
+            }
+
+            float num4 = (float)Math.Sqrt(num3);
+            return new double2(current.x + num / num4 * maxDistanceDelta, current.y + num2 / num4 * maxDistanceDelta);
+        }
+
+        public static double Magnitude(this double2 vector)
+        {
+            return math.length(vector);
+        }
+
+        public static double SqrMagnitude(this double2 vector)
+        {
+            return math.lengthsq(vector);
+        }
     }
 }

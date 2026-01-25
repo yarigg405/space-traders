@@ -38,8 +38,12 @@ public static class GameComponentsLookup {
     public const int View = 27;
     public const int ViewPath = 28;
     public const int ViewPrefab = 29;
+    public const int WarpDataContainer = 30;
+    public const int WarpFinishCoordinates = 31;
+    public const int Warping = 32;
+    public const int WarpPreparation = 33;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 34;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -71,7 +75,11 @@ public static class GameComponentsLookup {
         "VelocityAgility",
         "View",
         "ViewPath",
-        "ViewPrefab"
+        "ViewPrefab",
+        "WarpDataContainer",
+        "WarpFinishCoordinates",
+        "Warping",
+        "WarpPreparation"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -104,6 +112,10 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.VelocityAgility),
         typeof(Assets.Code.Common.Components.View),
         typeof(Assets.Code.Common.Components.ViewPath),
-        typeof(Assets.Code.Common.Components.ViewPrefab)
+        typeof(Assets.Code.Common.Components.ViewPrefab),
+        typeof(Assets.Code.Common.Components.WarpDataContainerComponent),
+        typeof(Assets.Code.Common.Components.WarpFinishCoordinates),
+        typeof(Assets.Code.Common.Components.Warping),
+        typeof(Assets.Code.Common.Components.WarpPreparation)
     };
 }

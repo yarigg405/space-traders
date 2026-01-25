@@ -13,7 +13,7 @@ using Yrr.Utils;
 
 namespace Assets.Code.ServerPart.Networking
 {
-    internal class ClientSceneConnector : IInitializable, IDisposable
+    public sealed class ClientSceneConnector : IInitializable, IDisposable
     {
         private readonly PlayerBuilder _playerBuilder;
         private readonly PlayerDataProvider _playerDataProvider;
@@ -111,7 +111,7 @@ namespace Assets.Code.ServerPart.Networking
             if (_sceneForClientsMap[clientId].IsNulOrEmpty()) return;
 
             var sceneName = _sceneForClientsMap[clientId];
-            _clientsOnScenesMap[sceneName].Remove(clientId);           
+            _clientsOnScenesMap[sceneName].Remove(clientId);
 
             var entityId = _playerEntities[clientId].Id;
             foreach (var client in _clientsOnScenesMap[sceneName])
@@ -128,6 +128,14 @@ namespace Assets.Code.ServerPart.Networking
         {
             _sceneForClientsMap[clientId] = sceneName;
             _clientsOnScenesMap[sceneName].Add(clientId);
+        }
+
+        public uint GetEntityIdForPlayer(ushort clientId)
+        {
+            if (_playerEntities.TryGetValue(clientId, out var entity))
+                return entity.Id;
+
+            return 0;
         }
     }
 }

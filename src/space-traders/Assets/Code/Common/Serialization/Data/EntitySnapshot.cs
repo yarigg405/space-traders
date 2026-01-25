@@ -8,5 +8,8 @@ namespace Assets.Code.Common.Serialization.Data
     {
         [JsonProperty("c")]
         public List<ISerializeComponent> Components;
+
+        [JsonProperty("r")]
+        public List<int> ComponentsForRemoving = new();
     }
 }

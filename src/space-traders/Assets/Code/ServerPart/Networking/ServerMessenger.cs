@@ -4,11 +4,8 @@ using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
-using DesperateDevs.Reflection;
 using Riptide;
-using System;
 using Unity.Mathematics;
-using UnityEngine;
 using VContainer;
 
 
@@ -130,6 +127,33 @@ namespace Assets.Code.ServerPart.Networking
             _serverInputService.SetPlayerSpeedModifier(fromClientId, speedModifier);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.SendKeepDistance)]
+        private static void HandleKeepDistance(ushort fromClientId, Message message)
+        {
+            var targetId = message.GetUInt();
+            var minMaxDistance = message.GetVector2();
+
+            _serverInputService.SetPlayerKeepDistance(fromClientId, targetId, minMaxDistance);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.SendSetOrbit)]
+        private static void HandleSetOrbig(ushort fromClientId, Message message)
+        {
+            var targetId = message.GetUInt();
+            var orbitRadius = message.GetFloat();
+
+            _serverInputService.SetPlayerOrbitMoving(fromClientId, targetId, orbitRadius);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.SendSetWarpTo)]
+        private static void HandleSetWarpTo(ushort fromClientId, Message message)
+        {
+            var x = message.GetDouble();
+            var y = message.GetDouble();
+            var coordinates = new double2(x, y);
+
+            _serverInputService.SetPlayerWarpTo(fromClientId, coordinates);
+        }
         #endregion
     }
 }

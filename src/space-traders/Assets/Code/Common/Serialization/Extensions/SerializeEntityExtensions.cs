@@ -29,8 +29,15 @@ namespace Assets.Code.Common.Serialization.Extensions
 
             foreach (var componentIndex in components)
             {
-                var component = entity.GetComponent(componentIndex) as ISerializeComponent;
-                entitySnapshot.Components.Add(component);
+                if (!entity.HasComponent(componentIndex))
+                {
+                    entitySnapshot.ComponentsForRemoving.Add(componentIndex);
+                }
+                else
+                {
+                    var component = entity.GetComponent(componentIndex) as ISerializeComponent;
+                    entitySnapshot.Components.Add(component);
+                }
             }
 
             return entitySnapshot;

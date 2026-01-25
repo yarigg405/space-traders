@@ -11,24 +11,36 @@ public static class InputComponentsLookup {
     public const int ClickedPosition = 0;
     public const int CurrentSpeedModifier = 1;
     public const int Input = 2;
-    public const int InputPlayerTarget = 3;
-    public const int TargetRotation = 4;
+    public const int InputConsumerEntityId = 3;
+    public const int KeepDistanceMinMax = 4;
+    public const int MovementTargetId = 5;
+    public const int OrbitingRadius = 6;
+    public const int TargetRotation = 7;
+    public const int WarpFinishCoordinates = 8;
 
-    public const int TotalComponents = 5;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "ClickedPosition",
         "CurrentSpeedModifier",
         "Input",
-        "InputPlayerTarget",
-        "TargetRotation"
+        "InputConsumerEntityId",
+        "KeepDistanceMinMax",
+        "MovementTargetId",
+        "OrbitingRadius",
+        "TargetRotation",
+        "WarpFinishCoordinates"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Common.Components.ClickedPosition),
         typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
         typeof(Assets.Code.Common.Components.Input),
-        typeof(Assets.Code.Common.Components.InputPlayerTarget),
-        typeof(Assets.Code.Common.Components.TargetRotation)
+        typeof(Assets.Code.Common.Components.InputConsumerEntityId),
+        typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
+        typeof(Assets.Code.Common.Components.MovementTargetId),
+        typeof(Assets.Code.Common.Components.OrbitingRadius),
+        typeof(Assets.Code.Common.Components.TargetRotation),
+        typeof(Assets.Code.Common.Components.WarpFinishCoordinates)
     };
 }

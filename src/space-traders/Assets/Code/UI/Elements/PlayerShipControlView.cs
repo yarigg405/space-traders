@@ -1,12 +1,10 @@
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
-using VContainer.Unity;
 
 
-namespace Assets.Code.ClientPart.UI
+namespace Assets.Code.UI.Elements
 {
     public class PlayerShipControlView : MonoBehaviour
     {
@@ -31,7 +29,9 @@ namespace Assets.Code.ClientPart.UI
 
         private void Update()
         {
-          //  _showSpeedSlider.value = _playerProvider.PlayerEntity.CurrentSpeedModifier;
+            if (_playerProvider.PlayerEntity == null) return;
+            if (!_playerProvider.PlayerEntity.hasCurrentSpeedModifier) return;
+            _showSpeedSlider.value = _playerProvider.PlayerEntity.CurrentSpeedModifier;
         }
 
         private void OnSliderValueChanged(float arg0)
