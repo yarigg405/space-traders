@@ -18,7 +18,9 @@ namespace Assets.Code.Common.Serialization.Extensions
 
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
-            if (type.Namespace != null && type.Namespace.StartsWith("Unity.Mathematics"))
+            if (type.Namespace != null && (
+                type.Namespace.StartsWith("Unity.Mathematics") ||
+                type.Namespace.StartsWith("UnityEngine")))
             {
                 var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
 

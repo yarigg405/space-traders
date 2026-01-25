@@ -12,15 +12,21 @@ public static class InputComponentsLookup {
     public const int CurrentSpeedModifier = 1;
     public const int Input = 2;
     public const int InputConsumerEntityId = 3;
-    public const int TargetRotation = 4;
+    public const int KeepDistanceMinMax = 4;
+    public const int MovementTargetId = 5;
+    public const int OrbitingRadius = 6;
+    public const int TargetRotation = 7;
 
-    public const int TotalComponents = 5;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "ClickedPosition",
         "CurrentSpeedModifier",
         "Input",
         "InputConsumerEntityId",
+        "KeepDistanceMinMax",
+        "MovementTargetId",
+        "OrbitingRadius",
         "TargetRotation"
     };
 
@@ -29,6 +35,9 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
         typeof(Assets.Code.Common.Components.Input),
         typeof(Assets.Code.Common.Components.InputConsumerEntityId),
+        typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
+        typeof(Assets.Code.Common.Components.MovementTargetId),
+        typeof(Assets.Code.Common.Components.OrbitingRadius),
         typeof(Assets.Code.Common.Components.TargetRotation)
     };
 }

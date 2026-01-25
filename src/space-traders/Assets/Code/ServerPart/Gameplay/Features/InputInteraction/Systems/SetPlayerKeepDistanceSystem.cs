@@ -5,35 +5,38 @@ using Entitas;
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
 {
-    internal sealed class SetPlayerDirectionByInputSystem : IExecuteSystem
+    internal sealed class SetPlayerKeepDistanceSystem : IExecuteSystem
     {
         private readonly IGroup<InputEntity> _inputs;
-        private readonly EntitiesSynchronizator _synchronizator;
         private readonly GameContext _game;
+        private readonly EntitiesSynchronizator _synchronizator;
 
-        public SetPlayerDirectionByInputSystem(GameContext game,
-            InputContext input, EntitiesSynchronizator synchronizator)
+        public SetPlayerKeepDistanceSystem(GameContext game, InputContext input,
+            EntitiesSynchronizator synchronizator)
         {
             _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
-                InputMatcher.TargetRotation,
+                InputMatcher.MovementTargetId,
+                InputMatcher.KeepDistanceMinMax,
                 InputMatcher.InputConsumerEntityId
                 ));
             _synchronizator = synchronizator;
             _game = game;
         }
 
+
         void IExecuteSystem.Execute()
         {
             foreach (var input in _inputs)
             {
                 var player = _game.GetEntityWithId(input.InputConsumerEntityId);
-                player.ResetMovingComponents();
+                var target = _game.GetEntityWithId(input.MovementTargetId);
+                if (target == null) continue;
 
-                player.ReplaceTargetRotation(input.TargetRotation);
+                player.StartKeepDistance(target, input.KeepDistanceMinMax);
 
                 _synchronizator.UpdateComponentsForEntity(player,
-                   MovementExtensions.GetMovementComponentsForReset());
+                    MovementExtensions.GetMovementComponentsForReset());
             }
         }
     }

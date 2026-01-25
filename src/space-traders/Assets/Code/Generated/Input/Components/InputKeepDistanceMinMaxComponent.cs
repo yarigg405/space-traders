@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherKeepDistanceMinMax;
+    static Entitas.IMatcher<InputEntity> _matcherKeepDistanceMinMax;
 
-    public static Entitas.IMatcher<GameEntity> KeepDistanceMinMax {
+    public static Entitas.IMatcher<InputEntity> KeepDistanceMinMax {
         get {
             if (_matcherKeepDistanceMinMax == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.KeepDistanceMinMax);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.KeepDistanceMinMax);
+                matcher.componentNames = InputComponentsLookup.componentNames;
                 _matcherKeepDistanceMinMax = matcher;
             }
 
@@ -31,7 +31,7 @@ public sealed partial class GameMatcher {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity : IKeepDistanceMinMaxEntity<GameEntity>, IKeepDistanceMinMaxEntity
+public partial class InputEntity : IKeepDistanceMinMaxEntity<InputEntity>, IKeepDistanceMinMaxEntity
 {
     Entitas.IEntity IKeepDistanceMinMaxEntity<Entitas.IEntity>.AddKeepDistanceMinMax(UnityEngine.Vector2 newValue)
     {
@@ -57,30 +57,30 @@ public partial class GameEntity : IKeepDistanceMinMaxEntity<GameEntity>, IKeepDi
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class InputEntity {
 
-    public Assets.Code.Common.Components.KeepDistanceMinMax keepDistanceMinMax { get { return (Assets.Code.Common.Components.KeepDistanceMinMax)GetComponent(GameComponentsLookup.KeepDistanceMinMax); } }
+    public Assets.Code.Common.Components.KeepDistanceMinMax keepDistanceMinMax { get { return (Assets.Code.Common.Components.KeepDistanceMinMax)GetComponent(InputComponentsLookup.KeepDistanceMinMax); } }
     public UnityEngine.Vector2 KeepDistanceMinMax { get { return keepDistanceMinMax.Value; } }
-    public bool hasKeepDistanceMinMax { get { return HasComponent(GameComponentsLookup.KeepDistanceMinMax); } }
+    public bool hasKeepDistanceMinMax { get { return HasComponent(InputComponentsLookup.KeepDistanceMinMax); } }
 
-    public GameEntity AddKeepDistanceMinMax(UnityEngine.Vector2 newValue) {
-        var index = GameComponentsLookup.KeepDistanceMinMax;
+    public InputEntity AddKeepDistanceMinMax(UnityEngine.Vector2 newValue) {
+        var index = InputComponentsLookup.KeepDistanceMinMax;
         var component = (Assets.Code.Common.Components.KeepDistanceMinMax)CreateComponent(index, typeof(Assets.Code.Common.Components.KeepDistanceMinMax));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceKeepDistanceMinMax(UnityEngine.Vector2 newValue) {
-        var index = GameComponentsLookup.KeepDistanceMinMax;
+    public InputEntity ReplaceKeepDistanceMinMax(UnityEngine.Vector2 newValue) {
+        var index = InputComponentsLookup.KeepDistanceMinMax;
         var component = (Assets.Code.Common.Components.KeepDistanceMinMax)CreateComponent(index, typeof(Assets.Code.Common.Components.KeepDistanceMinMax));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemoveKeepDistanceMinMax() {
-        RemoveComponent(GameComponentsLookup.KeepDistanceMinMax);
+    public InputEntity RemoveKeepDistanceMinMax() {
+        RemoveComponent(InputComponentsLookup.KeepDistanceMinMax);
         return this;
     }
 }

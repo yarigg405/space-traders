@@ -25,7 +25,11 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(VelocityAgility)] = "va",
             [typeof(CurrentSpeedModifier)] = "csm",
             [typeof(Moving)] = "m",
+            [typeof(MovementTargetId)] = "mtid",
+            [typeof(OrbitingRadius)] = "or",
+            [typeof(KeepDistanceMinMax)] = "kd",
             [typeof(TargetRotation)] = "tr",
+
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

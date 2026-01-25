@@ -69,6 +69,12 @@ namespace Assets.Code.ClientPart
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
 
+            foreach (var component in snapshot.ComponentsForRemoving)
+            {
+                if (entity.HasComponent(component))
+                    entity.RemoveComponent(component);
+            }
+
             foreach (var component in snapshot.Components)
             {
                 var lookupIndex = ComponentIndexByType.IndexByType(component.GetType());

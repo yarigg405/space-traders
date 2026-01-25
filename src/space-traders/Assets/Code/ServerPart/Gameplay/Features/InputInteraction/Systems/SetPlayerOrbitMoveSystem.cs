@@ -5,18 +5,19 @@ using Entitas;
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
 {
-    internal sealed class SetPlayerDirectionByInputSystem : IExecuteSystem
+    internal sealed class SetPlayerOrbitMoveSystem : IExecuteSystem
     {
         private readonly IGroup<InputEntity> _inputs;
-        private readonly EntitiesSynchronizator _synchronizator;
         private readonly GameContext _game;
+        private readonly EntitiesSynchronizator _synchronizator;
 
-        public SetPlayerDirectionByInputSystem(GameContext game,
-            InputContext input, EntitiesSynchronizator synchronizator)
+        public SetPlayerOrbitMoveSystem(GameContext game, InputContext input,
+            EntitiesSynchronizator synchronizator)
         {
             _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
-                InputMatcher.TargetRotation,
+                InputMatcher.MovementTargetId,
+                InputMatcher.OrbitingRadius,
                 InputMatcher.InputConsumerEntityId
                 ));
             _synchronizator = synchronizator;
@@ -28,12 +29,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
             foreach (var input in _inputs)
             {
                 var player = _game.GetEntityWithId(input.InputConsumerEntityId);
-                player.ResetMovingComponents();
+                var target = _game.GetEntityWithId(input.MovementTargetId);
+                if (target == null) continue;
 
-                player.ReplaceTargetRotation(input.TargetRotation);
+                player.StartOrbitMoving(input.OrbitingRadius, target);
 
                 _synchronizator.UpdateComponentsForEntity(player,
-                   MovementExtensions.GetMovementComponentsForReset());
+                    MovementExtensions.GetMovementComponentsForReset());
             }
         }
     }

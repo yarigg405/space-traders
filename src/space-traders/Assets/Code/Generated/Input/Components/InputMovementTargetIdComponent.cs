@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherMovementTargetId;
+    static Entitas.IMatcher<InputEntity> _matcherMovementTargetId;
 
-    public static Entitas.IMatcher<GameEntity> MovementTargetId {
+    public static Entitas.IMatcher<InputEntity> MovementTargetId {
         get {
             if (_matcherMovementTargetId == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.MovementTargetId);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.MovementTargetId);
+                matcher.componentNames = InputComponentsLookup.componentNames;
                 _matcherMovementTargetId = matcher;
             }
 
@@ -31,7 +31,7 @@ public sealed partial class GameMatcher {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity : IMovementTargetIdEntity<GameEntity>, IMovementTargetIdEntity
+public partial class InputEntity : IMovementTargetIdEntity<InputEntity>, IMovementTargetIdEntity
 {
     Entitas.IEntity IMovementTargetIdEntity<Entitas.IEntity>.AddMovementTargetId(uint newValue)
     {
@@ -57,30 +57,30 @@ public partial class GameEntity : IMovementTargetIdEntity<GameEntity>, IMovement
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class InputEntity {
 
-    public Assets.Code.Common.Components.MovementTargetId movementTargetId { get { return (Assets.Code.Common.Components.MovementTargetId)GetComponent(GameComponentsLookup.MovementTargetId); } }
+    public Assets.Code.Common.Components.MovementTargetId movementTargetId { get { return (Assets.Code.Common.Components.MovementTargetId)GetComponent(InputComponentsLookup.MovementTargetId); } }
     public uint MovementTargetId { get { return movementTargetId.Value; } }
-    public bool hasMovementTargetId { get { return HasComponent(GameComponentsLookup.MovementTargetId); } }
+    public bool hasMovementTargetId { get { return HasComponent(InputComponentsLookup.MovementTargetId); } }
 
-    public GameEntity AddMovementTargetId(uint newValue) {
-        var index = GameComponentsLookup.MovementTargetId;
+    public InputEntity AddMovementTargetId(uint newValue) {
+        var index = InputComponentsLookup.MovementTargetId;
         var component = (Assets.Code.Common.Components.MovementTargetId)CreateComponent(index, typeof(Assets.Code.Common.Components.MovementTargetId));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceMovementTargetId(uint newValue) {
-        var index = GameComponentsLookup.MovementTargetId;
+    public InputEntity ReplaceMovementTargetId(uint newValue) {
+        var index = InputComponentsLookup.MovementTargetId;
         var component = (Assets.Code.Common.Components.MovementTargetId)CreateComponent(index, typeof(Assets.Code.Common.Components.MovementTargetId));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemoveMovementTargetId() {
-        RemoveComponent(GameComponentsLookup.MovementTargetId);
+    public InputEntity RemoveMovementTargetId() {
+        RemoveComponent(InputComponentsLookup.MovementTargetId);
         return this;
     }
 }

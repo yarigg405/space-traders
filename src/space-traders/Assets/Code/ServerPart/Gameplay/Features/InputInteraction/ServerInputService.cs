@@ -37,12 +37,16 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 
         public void SetPlayerKeepDistance(ushort fromClientId, uint targetId, Vector2 minMaxDistance)
         {
-
+            var input = CreateNewInputEntityForPlayer(fromClientId)
+                 .AddMovementTargetId(targetId)
+                 .AddKeepDistanceMinMax(minMaxDistance);
         }
 
         public void SetPlayerOrbitMoving(ushort fromClientId, uint targetId, float orbitRadius)
         {
-
+            var input = CreateNewInputEntityForPlayer(fromClientId)
+                .AddMovementTargetId(targetId)
+                .AddOrbitingRadius(orbitRadius);
         }
 
         public void SetPlayerWarpTo(ushort fromClientId, double2 coordinates)

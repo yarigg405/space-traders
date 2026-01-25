@@ -10,6 +10,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
         {
             Add(systems.Create<SetPlayerDirectionByInputSystem>());
             Add(systems.Create<SetPlayerSpeedByInputSystem>());
+            Add(systems.Create<SetPlayerKeepDistanceSystem>());
+            Add(systems.Create<SetPlayerOrbitMoveSystem>());
         }
     }
 }

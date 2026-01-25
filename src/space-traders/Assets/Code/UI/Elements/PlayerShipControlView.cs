@@ -1,9 +1,7 @@
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
-using VContainer.Unity;
 
 
 namespace Assets.Code.UI.Elements
@@ -31,6 +29,8 @@ namespace Assets.Code.UI.Elements
 
         private void Update()
         {
+            if (_playerProvider.PlayerEntity == null) return;
+            if (!_playerProvider.PlayerEntity.hasCurrentSpeedModifier) return;
             _showSpeedSlider.value = _playerProvider.PlayerEntity.CurrentSpeedModifier;
         }
 

@@ -1,5 +1,6 @@
 ﻿using Entitas;
-using Yrr.Utils;
+using System.Collections.Generic;
+using Unity.Mathematics;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -7,6 +8,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class KeepDistanceSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
+        private readonly List<GameEntity> _buffer = new(8);
         private readonly GameContext _game;
 
         public KeepDistanceSystem(GameContext game)
@@ -15,21 +17,27 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.MovementTargetId,
                 GameMatcher.KeepDistanceMinMax
                 ));
-            _game =     game;
+            _game = game;
         }
 
         void IExecuteSystem.Execute()
         {
-            foreach (var entity in _entities)
+            foreach (var entity in _entities.GetEntities(_buffer))
             {
-                var target = _game.GetEntityWithId(entity.MovementTargetId).Transform;
+                var target = _game.GetEntityWithId(entity.MovementTargetId);
+                if (target == null)
+                {
+                    entity.ResetMovingComponents();
+                    continue;
+                }
+
                 var minMaxDistance = entity.KeepDistanceMinMax;
 
-                var distance = (entity.Transform.position - target.position).magnitude;
+                var distance = math.length(entity.GlobalPosition - target.GlobalPosition);
 
                 if (distance < minMaxDistance.x)
                 {
-                    var angle = AnglesUtil.GetAngleDirectionY(target.position, entity.Transform.position);
+                    var angle = MovementExtensions.GetAngleDirectionY(target.GlobalPosition, entity.GlobalPosition);
                     entity.ReplaceTargetRotation(angle);
 
                     if (entity.CurrentSpeedModifier == 0)
@@ -38,7 +46,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
 
                 else if (distance > minMaxDistance.y)
                 {
-                    var angle = AnglesUtil.GetAngleDirectionY(entity.Transform.position, target.position);
+                    var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, target.GlobalPosition);
                     entity.ReplaceTargetRotation(angle);
 
                     if (entity.CurrentSpeedModifier == 0)

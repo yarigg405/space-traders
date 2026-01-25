@@ -6,15 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class GameMatcher {
+public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherOrbitingRadius;
+    static Entitas.IMatcher<InputEntity> _matcherOrbitingRadius;
 
-    public static Entitas.IMatcher<GameEntity> OrbitingRadius {
+    public static Entitas.IMatcher<InputEntity> OrbitingRadius {
         get {
             if (_matcherOrbitingRadius == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.OrbitingRadius);
-                matcher.componentNames = GameComponentsLookup.componentNames;
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.OrbitingRadius);
+                matcher.componentNames = InputComponentsLookup.componentNames;
                 _matcherOrbitingRadius = matcher;
             }
 
@@ -31,7 +31,7 @@ public sealed partial class GameMatcher {
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity : IOrbitingRadiusEntity<GameEntity>, IOrbitingRadiusEntity
+public partial class InputEntity : IOrbitingRadiusEntity<InputEntity>, IOrbitingRadiusEntity
 {
     Entitas.IEntity IOrbitingRadiusEntity<Entitas.IEntity>.AddOrbitingRadius(float newValue)
     {
@@ -57,30 +57,30 @@ public partial class GameEntity : IOrbitingRadiusEntity<GameEntity>, IOrbitingRa
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public partial class GameEntity {
+public partial class InputEntity {
 
-    public Assets.Code.Common.Components.OrbitingRadius orbitingRadius { get { return (Assets.Code.Common.Components.OrbitingRadius)GetComponent(GameComponentsLookup.OrbitingRadius); } }
+    public Assets.Code.Common.Components.OrbitingRadius orbitingRadius { get { return (Assets.Code.Common.Components.OrbitingRadius)GetComponent(InputComponentsLookup.OrbitingRadius); } }
     public float OrbitingRadius { get { return orbitingRadius.Value; } }
-    public bool hasOrbitingRadius { get { return HasComponent(GameComponentsLookup.OrbitingRadius); } }
+    public bool hasOrbitingRadius { get { return HasComponent(InputComponentsLookup.OrbitingRadius); } }
 
-    public GameEntity AddOrbitingRadius(float newValue) {
-        var index = GameComponentsLookup.OrbitingRadius;
+    public InputEntity AddOrbitingRadius(float newValue) {
+        var index = InputComponentsLookup.OrbitingRadius;
         var component = (Assets.Code.Common.Components.OrbitingRadius)CreateComponent(index, typeof(Assets.Code.Common.Components.OrbitingRadius));
         component.Value = newValue;
         AddComponent(index, component);
         return this;
     }
 
-    public GameEntity ReplaceOrbitingRadius(float newValue) {
-        var index = GameComponentsLookup.OrbitingRadius;
+    public InputEntity ReplaceOrbitingRadius(float newValue) {
+        var index = InputComponentsLookup.OrbitingRadius;
         var component = (Assets.Code.Common.Components.OrbitingRadius)CreateComponent(index, typeof(Assets.Code.Common.Components.OrbitingRadius));
         component.Value = newValue;
         ReplaceComponent(index, component);
         return this;
     }
 
-    public GameEntity RemoveOrbitingRadius() {
-        RemoveComponent(GameComponentsLookup.OrbitingRadius);
+    public InputEntity RemoveOrbitingRadius() {
+        RemoveComponent(InputComponentsLookup.OrbitingRadius);
         return this;
     }
 }

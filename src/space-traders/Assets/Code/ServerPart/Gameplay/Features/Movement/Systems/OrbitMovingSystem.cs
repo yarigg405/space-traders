@@ -1,7 +1,6 @@
 ﻿using Entitas;
+using System.Collections.Generic;
 using Unity.Mathematics;
-using UnityEngine;
-using Yrr.Utils;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -9,6 +8,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class OrbitMovingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
+        private readonly List<GameEntity> _buffer = new(8);
         private readonly GameContext _game;
 
         public OrbitMovingSystem(GameContext game)
@@ -25,46 +25,53 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         {
             foreach (var entity in _entities)
             {
-                var target = _game.GetEntityWithId(entity.MovementTargetId).Transform;
+                var target = _game.GetEntityWithId(entity.MovementTargetId);
+                if (target == null)
+                {
+                    entity.ResetMovingComponents();
+                    continue;
+                }
+
                 var radius = entity.OrbitingRadius;
-                var direction = entity.Transform.position - target.position;
-                var distance = direction.magnitude;
+                var direction = entity.GlobalPosition - target.GlobalPosition;
+                var distance = math.length(direction);
 
                 if (distance <= radius) return;
-                var angleOffset = Mathf.Acos(radius / distance);
+                var angleOffset = math.acos(radius / distance);
 
-                var angleToPoint = Mathf.Atan2(direction.z, direction.x);
+                var angleToPoint = math.atan2(direction.y, direction.x);
 
-                if (IsClockwiseMoving(entity.GlobalPosition, entity.GlobalPosition, entity.CurrentRotationY))
+                if (IsClockwiseMoving(entity.GlobalPosition, target.GlobalPosition, entity.CurrentRotationY))
                 {
                     var tanAngle1 = angleToPoint - angleOffset;
-                    var tx1 = target.position.x + radius * Mathf.Cos(tanAngle1);
-                    var ty1 = target.position.z + radius * Mathf.Sin(tanAngle1);
-                    var point1 = new Vector3(tx1, 0, ty1);
-                    var angle = AnglesUtil.GetAngleDirectionY(entity.Transform.position, point1);
+                    var tx1 = target.GlobalPosition.x + radius * math.cos(tanAngle1);
+                    var ty1 = target.GlobalPosition.y + radius * math.sin(tanAngle1);
+                    var point1 = new double2(tx1, ty1);
+                    var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, point1);
                     entity.ReplaceTargetRotation(angle);
                 }
 
                 else
                 {
                     var tanAngle2 = angleToPoint + angleOffset;
-                    var tx2 = target.position.x + radius * Mathf.Cos(tanAngle2);
-                    var ty2 = target.position.z + radius * Mathf.Sin(tanAngle2);
-                    var point2 = new Vector3(tx2, 0, ty2);
-                    var angle = AnglesUtil.GetAngleDirectionY(entity.Transform.position, point2);
+                    var tx2 = target.GlobalPosition.x + radius * math.cos(tanAngle2);
+                    var ty2 = target.GlobalPosition.y + radius * math.sin(tanAngle2);
+                    var point2 = new double2(tx2, ty2);
+                    var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, point2);
                     entity.ReplaceTargetRotation(angle);
                 }
             }
         }
 
-        private bool IsClockwiseMoving(double2 from, double2 to, float forwardDirection)
+        private bool IsClockwiseMoving(double2 movable, double2 center, float forwardDirection)
         {
-            var directionVector = from - to;
-            var rad = forwardDirection * math.TORADIANS_DBL;
-            var movingDirection = new double2(math.sin(rad), math.cos(rad));
-            var cross = movingDirection.x * movingDirection.y - directionVector.y * directionVector.x;
+            double2 rVector = movable - center;
+            var andleRadians = math.TORADIANS_DBL * forwardDirection;
+            double vx = math.sin(andleRadians);
+            double vy = math.cos(andleRadians);
+            double cross = rVector.x * vy - rVector.y * vx;
 
-            return cross < 0f;
+            return cross < 0;
         }
     }
 }
