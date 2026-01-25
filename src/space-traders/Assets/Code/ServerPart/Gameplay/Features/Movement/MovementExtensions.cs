@@ -1,4 +1,5 @@
-﻿using Unity.Mathematics;
+﻿using Assets.Code.Common.Extensions;
+using Unity.Mathematics;
 using UnityEngine;
 using Yrr.Utils;
 
@@ -35,6 +36,27 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             return entity;
         }
 
+        public static GameEntity SetWarpTo(this GameEntity entity, double2 warpCoordinates)
+        {
+            entity
+                .ResetMovingComponents()
+                .AddWarpFinishCoordinates(warpCoordinates)
+                .isWarpPreparation = true
+                ;
+            return entity;
+        }
+
+        public static GameEntity SetWarpFinished(this GameEntity entity)
+        {
+            entity
+                .RemoveWarpDataContainer()
+                .With(x => x.isWarpPreparation = false)
+                .With(x => x.isMoving = true)
+                ;
+
+            return entity;
+        }
+
 
         public static GameEntity ResetMovingComponents(this GameEntity entity)
         {
@@ -59,6 +81,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
                 GameComponentsLookup.MovementTargetId,
                 GameComponentsLookup.OrbitingRadius,
                 GameComponentsLookup.KeepDistanceMinMax,
+                GameComponentsLookup.WarpPreparation,
+                GameComponentsLookup.WarpFinishCoordinates,
             };
 
             return array;

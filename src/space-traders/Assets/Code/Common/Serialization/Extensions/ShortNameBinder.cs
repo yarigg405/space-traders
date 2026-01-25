@@ -29,6 +29,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(OrbitingRadius)] = "or",
             [typeof(KeepDistanceMinMax)] = "kd",
             [typeof(TargetRotation)] = "tr",
+            [typeof(WarpPreparation)] = "wp",
+            [typeof(WarpFinishCoordinates)] = "wfc",
 
         };
 

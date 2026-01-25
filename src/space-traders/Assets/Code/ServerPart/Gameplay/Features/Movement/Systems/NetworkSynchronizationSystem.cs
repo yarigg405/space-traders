@@ -13,7 +13,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
 
         public NetworkSynchronizationSystem(GameContext game, EntitiesSynchronizator syncronizator)
         {
-            _entities = game.GetGroup(GameMatcher.GlobalPosition);
+            _entities = game.GetGroup(
+                GameMatcher.AllOf(GameMatcher.GlobalPosition)
+                .NoneOf(GameMatcher.Warping));
+
             _synchronizator = syncronizator;
         }
 

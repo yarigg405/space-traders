@@ -16,8 +16,9 @@ public static class InputComponentsLookup {
     public const int MovementTargetId = 5;
     public const int OrbitingRadius = 6;
     public const int TargetRotation = 7;
+    public const int WarpFinishCoordinates = 8;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "ClickedPosition",
@@ -27,7 +28,8 @@ public static class InputComponentsLookup {
         "KeepDistanceMinMax",
         "MovementTargetId",
         "OrbitingRadius",
-        "TargetRotation"
+        "TargetRotation",
+        "WarpFinishCoordinates"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -38,6 +40,7 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
         typeof(Assets.Code.Common.Components.MovementTargetId),
         typeof(Assets.Code.Common.Components.OrbitingRadius),
-        typeof(Assets.Code.Common.Components.TargetRotation)
+        typeof(Assets.Code.Common.Components.TargetRotation),
+        typeof(Assets.Code.Common.Components.WarpFinishCoordinates)
     };
 }

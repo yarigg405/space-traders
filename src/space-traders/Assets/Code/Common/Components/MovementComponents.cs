@@ -1,5 +1,7 @@
-﻿using Assets.Code.Common.Serialization;
+﻿using Assets.Code.Common.DataContainers;
+using Assets.Code.Common.Serialization;
 using Entitas;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -22,4 +24,9 @@ namespace Assets.Code.Common.Components
     [Game, Input] public sealed class MovementTargetId : ISerializeComponent { public uint Value; }
     [Game, Input] public sealed class OrbitingRadius : ISerializeComponent { public float Value; }
     [Game, Input] public sealed class KeepDistanceMinMax : ISerializeComponent { public Vector2 Value; }
+
+    [Game] public sealed class WarpPreparation : ISerializeComponent { }
+    [Game, Input] public sealed class WarpFinishCoordinates : ISerializeComponent { public double2 Value; }
+    [Game] public sealed class WarpDataContainerComponent : IComponent { public WarpDataContainer Value; }
+    [Game] public sealed class Warping : IComponent { }
 }

@@ -51,7 +51,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 
         public void SetPlayerWarpTo(ushort fromClientId, double2 coordinates)
         {
-
+            var input = CreateNewInputEntityForPlayer(fromClientId)
+                .AddWarpFinishCoordinates(coordinates);
         }
 
         private InputEntity CreateNewInputEntityForPlayer(ushort playerNetworkId)
