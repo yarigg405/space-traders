@@ -10,10 +10,12 @@ namespace Assets.Code.ServerPart.Worlds
     public sealed class EcsWorldsBuilder
     {
         private readonly LifetimeScope _scope;
+        private readonly GameWorldFiller _gameWorldFiller;
 
-        internal EcsWorldsBuilder(LifetimeScope scope)
+        internal EcsWorldsBuilder(LifetimeScope scope, GameWorldFiller gameWorldFiller)
         {
             _scope = scope;
+            _gameWorldFiller = gameWorldFiller;
         }
 
         public EcsWorldInstance CreateNewServerWorld(string sceneName)
@@ -44,6 +46,7 @@ namespace Assets.Code.ServerPart.Worlds
             var newWorld = new EcsWorldInstance(sceneName, feature, contexts);
             feature.Initialize();
 
+            _gameWorldFiller.FillWorld(sceneName, contexts);
             return newWorld;
         }
     }

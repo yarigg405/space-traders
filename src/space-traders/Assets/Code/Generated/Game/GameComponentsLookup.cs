@@ -31,19 +31,21 @@ public static class GameComponentsLookup {
     public const int Rigidbody = 20;
     public const int RotationSpeed = 21;
     public const int SelfDestructTimer = 22;
-    public const int TargetRotation = 23;
-    public const int Transform = 24;
-    public const int Velocity = 25;
-    public const int VelocityAgility = 26;
-    public const int View = 27;
-    public const int ViewPath = 28;
-    public const int ViewPrefab = 29;
-    public const int WarpDataContainer = 30;
-    public const int WarpFinishCoordinates = 31;
-    public const int Warping = 32;
-    public const int WarpPreparation = 33;
+    public const int Ship = 23;
+    public const int Station = 24;
+    public const int TargetRotation = 25;
+    public const int Transform = 26;
+    public const int Velocity = 27;
+    public const int VelocityAgility = 28;
+    public const int View = 29;
+    public const int ViewPath = 30;
+    public const int ViewPrefab = 31;
+    public const int WarpDataContainer = 32;
+    public const int WarpFinishCoordinates = 33;
+    public const int Warping = 34;
+    public const int WarpPreparation = 35;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -69,6 +71,8 @@ public static class GameComponentsLookup {
         "Rigidbody",
         "RotationSpeed",
         "SelfDestructTimer",
+        "Ship",
+        "Station",
         "TargetRotation",
         "Transform",
         "Velocity",
@@ -106,6 +110,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.RigidbodyComponent),
         typeof(Assets.Code.Common.Components.RotationSpeed),
         typeof(Assets.Code.Common.Components.SelfDestructTimer),
+        typeof(Assets.Code.Common.Components.Ship),
+        typeof(Assets.Code.Common.Components.Station),
         typeof(Assets.Code.Common.Components.TargetRotation),
         typeof(Assets.Code.Common.Components.TransformComponent),
         typeof(Assets.Code.Common.Components.Velocity),

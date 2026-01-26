@@ -26,7 +26,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
             var sceneName = _playerDataProvider.GetSceneNameForPlayer(clientId);
             var world = _worldsController.GetOrCreateWorld(sceneName);
             var ctxs = world.Contexts;
-            var spawnPoint = new double2(100_450_900_000_000, 100_450_900_000_000).GetRandomCoordinatesAroundPointZX(50f);
+            var spawnPoint = new double2(0, 10).GetRandomCoordinatesAroundPointZX(50f);
 
             var newPlayerEntity = _playerFactory.CreatePlayer(clientId, spawnPoint, ctxs);
             return newPlayerEntity;

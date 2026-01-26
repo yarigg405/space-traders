@@ -31,6 +31,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(TargetRotation)] = "tr",
             [typeof(WarpPreparation)] = "wp",
             [typeof(WarpFinishCoordinates)] = "wfc",
+            [typeof(Ship)] = "s",
+            [typeof(Station)] = "st",
 
         };
 
