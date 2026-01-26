@@ -1,7 +1,6 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ServerPart.Gameplay.Features.PointsOfInteres.Factories;
 using Unity.Mathematics;
-using UnityEngine;
 
 
 namespace Assets.Code.ServerPart.Worlds
@@ -15,8 +14,6 @@ namespace Assets.Code.ServerPart.Worlds
             SpaceStationsFactory spaceStationsFactory)
         {
             _featuresContainer = featuresContainer;
-
-            Debug.Log("### FeaturesContainer: " + _featuresContainer == null);
             _spaceStationsFactory = spaceStationsFactory;
         }
 

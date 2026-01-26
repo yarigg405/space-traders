@@ -4,6 +4,7 @@ using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.ClientPart.View.Factory;
+using Assets.Code.Common.StaticData;
 using Assets.Code.Common.Time;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
@@ -22,6 +23,7 @@ namespace Assets.Code.Infrastructure.Installers
     internal sealed class BootstrapInstaller : MonoInstaller
     {
         [SerializeField] private InputReferencesContainer _inputReferencesContainer;
+        [SerializeField] private ConfigsStorage _configsStorage;
 
         protected override void Install()
         {
@@ -52,6 +54,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<ClientEntitiesController>(Lifetime.Singleton).AsSelf();
 
             Builder.RegisterInstance(_inputReferencesContainer);
+            Builder.RegisterInstance(_configsStorage);
         }
 
         private void BindNetworking()

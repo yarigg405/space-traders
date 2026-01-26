@@ -11,10 +11,13 @@ namespace Assets.Code.Common.DataContainers
         public double2 WarpFinishPosition;
         public double WarpTotalDistance;
 
-        public double WarpSpeed;
-        public double TopSpeed;
-        public double Acceleration;
-        public double TopDistance;
+        public double WarpMaxSpeed;
+        public float WarpAccelerationMaxTime;
+
+        public double WarpSpeedCurrent;
+        public float CurrentWarpingTime;
+
+        public int WarpGear;
 
         public WarpDataContainer(double2 startPosition, double2 finishPosition)
         {
@@ -22,7 +25,7 @@ namespace Assets.Code.Common.DataContainers
             WarpFinishPosition = finishPosition;
             WarpTotalDistance = math.length(WarpFinishPosition - WarpStartPosition);
 
-            WarpSpeed = 0;
+            WarpGear = 1;
         }
     }
 }

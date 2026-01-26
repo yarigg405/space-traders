@@ -20,6 +20,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             ));
         }
 
+
+        private const double _auValue = 14_959_787_070 * 0.1;
+        private const float _warpAccelerationTime = 3;
         void IExecuteSystem.Execute()
         {
             foreach (var entity in _entities.GetEntities(_buffer))
@@ -35,6 +38,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     if (deltaAngle < 5f)
                     {
                         var container = new WarpDataContainer(entity.GlobalPosition, entity.WarpFinishCoordinates);
+                        container.WarpMaxSpeed = _auValue; 
+                        container.WarpAccelerationMaxTime = _warpAccelerationTime;
+
                         entity.ReplaceWarpDataContainer(container);
 
                         entity.RemoveWarpFinishCoordinates();

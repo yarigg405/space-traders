@@ -1,8 +1,9 @@
 ﻿using Assets.Code.Common;
+using Assets.Code.Common.StaticData;
 using Assets.Code.Common.Time;
 using Entitas;
+using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -12,8 +13,21 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(64);
         private readonly ITimeService _time;
+        private readonly ConfigsStorage _configsStorage;
 
-        public WarpMovingSystem(GameContext game, ITimeService time)
+        private readonly WarpMovingTransmissionGear[] _transmissionSetup = new WarpMovingTransmissionGear[]
+        {
+            new WarpMovingTransmissionGear(0, 0),
+            new WarpMovingTransmissionGear(7, 5),
+            new WarpMovingTransmissionGear(7, 1000),
+            new WarpMovingTransmissionGear(6, 50000),
+            new WarpMovingTransmissionGear(5, 500000),
+            new WarpMovingTransmissionGear(15, 1000000),
+            new WarpMovingTransmissionGear(15, 100000000),
+            new WarpMovingTransmissionGear(999999, 1000000000),
+        };
+
+        public WarpMovingSystem(GameContext game, ITimeService time, ConfigsStorage configsStorage)
         {
             _time = time;
 
@@ -21,6 +35,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.WarpDataContainer,
                 GameMatcher.GlobalPosition
             ));
+            _configsStorage = configsStorage;
         }
 
         void IExecuteSystem.Execute()
@@ -31,31 +46,25 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 var currentDistance = (container.WarpFinishPosition - entity.GlobalPosition).Magnitude();
                 var distanceModifier = currentDistance / container.WarpTotalDistance;
 
+                container.CurrentWarpingTime += _time.DeltaTime;
 
-                if (distanceModifier > 0.3)
+                var currentGear = _transmissionSetup[container.WarpGear];
+                var previous = _transmissionSetup[container.WarpGear - 1];
+
+                var targetSpeed = entity.MaxMoveSpeed * currentGear.MaxSpeedModifier;
+                var speedT = container.CurrentWarpingTime / currentGear.GearTime;
+                var evaluated = _configsStorage.WarpAccelerationCurve.Evaluate(speedT);
+                container.WarpSpeedCurrent = previous.MaxSpeedModifier * entity.MaxMoveSpeed + evaluated * targetSpeed;
+
+                var deltaMove = container.WarpSpeedCurrent * _time.DeltaTime;
+                var newPos = CommonExtensions
+                    .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
+                entity.ReplaceGlobalPosition(newPos);
+
+                if (evaluated >= 1)
                 {
-                    container.Acceleration += _time.DeltaTime * 0.65;
-                    container.WarpSpeed += math.pow(container.Acceleration, 4);
-                    container.TopSpeed = container.WarpSpeed;
-                    container.TopDistance = currentDistance;
-
-                    var deltaMove = container.WarpSpeed * _time.DeltaTime;
-                    var newPos = CommonExtensions
-                        .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
-                    entity.ReplaceGlobalPosition(newPos);
-                }
-
-                else
-                {
-                    var t = currentDistance / container.TopDistance;
-                    container.WarpSpeed =
-                        CommonExtensions.DoubleLerp(entity.MaxMoveSpeed * entity.CurrentSpeedModifier * 0.5f,
-                        container.TopSpeed, t);
-
-                    var deltaMove = container.WarpSpeed * _time.DeltaTime;
-                    var newPos = CommonExtensions
-                         .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
-                    entity.ReplaceGlobalPosition(newPos);
+                    container.WarpGear++;
+                    container.CurrentWarpingTime = 0;
                 }
 
                 if (currentDistance < 100)
@@ -63,6 +72,19 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     entity.SetWarpFinished();
                 }
             }
+        }
+    }
+
+    [Serializable]
+    public struct WarpMovingTransmissionGear
+    {
+        public float GearTime;
+        public int MaxSpeedModifier;
+
+        public WarpMovingTransmissionGear(float gearTime, int maxSpeedModifier)
+        {
+            GearTime = gearTime;
+            MaxSpeedModifier = maxSpeedModifier;
         }
     }
 }
