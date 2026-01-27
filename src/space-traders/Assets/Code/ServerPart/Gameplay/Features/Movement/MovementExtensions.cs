@@ -41,7 +41,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                 .ResetMovingComponents()
                 .AddWarpFinishCoordinates(warpCoordinates)
-                .isWarpPreparation = true
+                .With(x=>x.isWarpPreparation  = true)
+                .With(x=>x.isMoving  = false)
                 ;
             return entity;
         }

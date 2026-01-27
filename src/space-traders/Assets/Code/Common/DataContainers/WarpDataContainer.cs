@@ -16,6 +16,12 @@ namespace Assets.Code.Common.DataContainers
 
         public double WarpSpeedCurrent;
         public float CurrentWarpingTime;
+        public double EstimatedTime;
+
+        public bool IsBraking;
+        public double BrakingStartSpeed;
+        public double BrakingDuration;
+        public double2 StartBrakingPos;
 
         public int WarpGear;
 
@@ -26,6 +32,7 @@ namespace Assets.Code.Common.DataContainers
             WarpTotalDistance = math.length(WarpFinishPosition - WarpStartPosition);
 
             WarpGear = 1;
+            IsBraking = false;
         }
     }
 }
