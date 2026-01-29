@@ -7,5 +7,7 @@
 
         public const float DISTANCE_UI_TO_REAL = 0.1f;
         public const float DISTANCE_REAL_TO_UI = 10f;
+
+        public const float SKYBOX_OBJECTS_POSITION_MODIFIER = 0.0001f;
     }
 }

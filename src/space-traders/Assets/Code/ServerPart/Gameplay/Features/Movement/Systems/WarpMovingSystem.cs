@@ -45,19 +45,21 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             {
                 var container = entity.WarpDataContainer;
                 var remainingDistance = (container.WarpFinishPosition - entity.GlobalPosition).Magnitude();
-                var distanceModifier = remainingDistance / container.WarpTotalDistance;
+                //entity.ReplaceGlobalPosition(container.WarpFinishPosition);
+                //entity.SetWarpFinished();
+
+
 
                 var currentGear = _transmissionSetup[container.WarpGear];
                 var previous = _transmissionSetup[container.WarpGear - 1];
 
-                container.IsBraking = distanceModifier <= 0.5;
 
-                if(container.IsBraking) 
+                if (container.IsBraking)
                     container.CurrentWarpingTime -= _time.DeltaTime;
                 else
                     container.CurrentWarpingTime += _time.DeltaTime;
 
-                
+
                 if (container.IsBraking)
                 {
                     var targetSpeed = entity.MaxMoveSpeed + currentGear.MaxSpeedModifier;

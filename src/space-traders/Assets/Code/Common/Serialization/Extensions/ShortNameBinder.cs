@@ -33,6 +33,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(WarpFinishCoordinates)] = "wfc",
             [typeof(Ship)] = "s",
             [typeof(Station)] = "st",
+            [typeof(SkyboxCoordinates)] = "sc",
+            [typeof(QuadrantIndex)] = "qi",
 
         };
 

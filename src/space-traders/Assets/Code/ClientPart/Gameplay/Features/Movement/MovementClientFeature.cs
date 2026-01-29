@@ -1,6 +1,7 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features.Movement.Systems;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Movement.Systems;
+using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Systems;
 
 
 namespace Assets.Code.ClientPart.Gameplay.Features.Movement
@@ -23,6 +24,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
             Add(systems.Create<UpdateQuadrantIndexSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());
 
+            Add(systems.Create<UpdateSkyboxSpaceStateSystem>());
+            Add(systems.Create<UpdateSkyboxLocalPositionSystem>());
             Add(systems.Create<UpdateTransformRotationSystem>());
             Add(systems.Create<UpdateTransformPositionSystem>());
         }

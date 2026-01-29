@@ -24,5 +24,5 @@ namespace Assets.Code.Common.Components
 
     [Game] public sealed class GlobalPosition : ISerializeComponent { public double2 Value; }
     [Game] public sealed class LocalPosition : IComponent { public Vector3 Value; }
-    [Game] public sealed class QuadrantIndex : IComponent { public int2 Value; }
+    [Game] public sealed class QuadrantIndex : ISerializeComponent { public int2 Value; }
 }

@@ -1,32 +1,54 @@
+using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.Common;
+using Unity.Mathematics;
 using UnityEngine;
+using VContainer;
 
 
 namespace Assets.Code.ClientPart.CameraSystem
 {
     public sealed class SkyboxCamera : MonoBehaviour
     {
-        private const float SKYBOX_OBJECTS_POSITION_MODIFIER = 0.0001f;
-
         [SerializeField] private Transform _skyboxCameraRoot;
-        private Camera _mainCamera
+        [Inject] private readonly IPlayerProvider _playerProvider;
+        [Inject] private readonly SkyboxSpaceState _skyboxSpaceState;
+
+
+        private Camera _mainCamera;
+        private Camera MainCamera
         {
             get
             {
-                if (!m_mainCamera)
-                    m_mainCamera = Camera.main;
-                return m_mainCamera;
+                if (!_mainCamera)
+                    _mainCamera = Camera.main;
+                return _mainCamera;
             }
         }
-        private Camera m_mainCamera;
 
-
-        private void LateUpdate()
+        internal void ManualUpdate()
         {
-            var pos = _mainCamera.transform.position * SKYBOX_OBJECTS_POSITION_MODIFIER;
-            _skyboxCameraRoot.position = pos;
+            if (_playerProvider.PlayerEntity == null) return;
 
-            var rotation = _mainCamera.transform.rotation;
-            _skyboxCameraRoot.rotation = rotation;
+            UpdateCameraPosition(_playerProvider.PlayerEntity.GlobalPosition);
+            UpdateCameraRotation();
+        }
+
+        private void UpdateCameraPosition(double2 playerPosition)
+        {
+            double dx = playerPosition.x - _skyboxSpaceState.SkyboxAnchor.x;
+            double dy = playerPosition.y - _skyboxSpaceState.SkyboxAnchor.y;
+
+            float scale = GameConstants.SKYBOX_OBJECTS_POSITION_MODIFIER;
+
+            _skyboxCameraRoot.position = new Vector3(
+            (float)(dx * scale),
+            _skyboxCameraRoot.position.y,
+            (float)(dy * scale));
+        }
+
+        private void UpdateCameraRotation()
+        {
+            _skyboxCameraRoot.rotation = MainCamera.transform.rotation;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Assets.Code.Infrastructure.Installers
     {
         [SerializeField] private CameraOrbitMoveController _cameraOrbitMoveController;
         [SerializeField] private CameraTargetController _cameraTargetController;
+        [SerializeField] private SkyboxCamera _skyboxCamera;
 
         protected override void Install()
         {
@@ -30,7 +31,10 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<CameraService>(Lifetime.Scoped)
                 .WithParameter(_cameraOrbitMoveController)
                 .WithParameter(_cameraTargetController)
+                .WithParameter(_skyboxCamera)
                 .AsImplementedInterfaces();
+
+            Builder.Register<SkyboxSpaceState>(Lifetime.Scoped);
         }
 
         private void RegisterInputServices()

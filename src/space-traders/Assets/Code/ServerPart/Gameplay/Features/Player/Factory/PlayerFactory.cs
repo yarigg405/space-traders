@@ -23,7 +23,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Factory
                 .AddPlayerNetworkId(playerNetworkId)
                 .AddViewPath("Prefabs/PlayerShip")
                 .With(x => x.isPlayer = true)
-                .With(x=>x.isShip = true)
+                .With(x => x.isShip = true)
 
                 .AddGlobalPosition(at)
                 .AddCurrentSpeedModifier(0)
