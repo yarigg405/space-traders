@@ -15,7 +15,7 @@ namespace Assets.Code.Common.DataContainers
         public float WarpAccelerationMaxTime;
 
         public double WarpSpeedCurrent;
-        public double WarpSpeedPrevious;
+        public double WarpSpeedTarget;
         public float CurrentWarpingTime;
         public double DistanceModifier;
 
