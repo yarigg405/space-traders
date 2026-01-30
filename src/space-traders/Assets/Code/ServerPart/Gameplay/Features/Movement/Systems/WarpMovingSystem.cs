@@ -5,6 +5,7 @@ using Entitas;
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEngine;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -16,17 +17,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         private readonly ITimeService _time;
         private readonly ConfigsStorage _configsStorage;
 
-        private readonly WarpMovingTransmissionGear[] _transmissionSetup = new WarpMovingTransmissionGear[]
-        {
-            new WarpMovingTransmissionGear(0, 0),
-            new WarpMovingTransmissionGear(7, 5),
-            new WarpMovingTransmissionGear(7, 1000),
-            new WarpMovingTransmissionGear(6, 50000),
-            new WarpMovingTransmissionGear(5, 500000),
-            new WarpMovingTransmissionGear(15, 1000000),
-            new WarpMovingTransmissionGear(15, 100000000),
-            new WarpMovingTransmissionGear(999999, 1000000000),
-        };
+
 
         public WarpMovingSystem(GameContext game, ITimeService time, ConfigsStorage configsStorage)
         {
@@ -36,71 +27,53 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.WarpDataContainer,
                 GameMatcher.GlobalPosition
             ));
+
             _configsStorage = configsStorage;
         }
+
+
+        private const float _warpAccelerationTime = 35f;
+        private const float _warpMaxSpeed = 14959787070;
 
         void IExecuteSystem.Execute()
         {
             foreach (var entity in _entities.GetEntities(_buffer))
             {
                 var container = entity.WarpDataContainer;
+                var deltaTime = _time.DeltaTime;                
+
+                if (container.IsBraking)
+                    container.CurrentWarpingTime -= deltaTime;
+                else
+                    container.CurrentWarpingTime += deltaTime;
+
+                var t = container.CurrentWarpingTime / _warpAccelerationTime;
+                t = Mathf.Clamp(t, 0f, 1f);
+                t = Mathf.Pow(t, 4);
+
+
+                container.WarpSpeedPrevious = container.WarpSpeedCurrent;
+                container.WarpSpeedCurrent =
+                    _configsStorage.WarpAccelerationCurve.Evaluate(t) * _warpMaxSpeed;
+
+                var deltaMove = container.WarpSpeedCurrent * deltaTime;
+                double2 newPos = CommonExtensions
+                    .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
+                entity.ReplaceGlobalPosition(newPos);
+
                 var remainingDistance = (container.WarpFinishPosition - entity.GlobalPosition).Magnitude();
-                //entity.ReplaceGlobalPosition(container.WarpFinishPosition);
-                //entity.SetWarpFinished();
+                var distanceModifier = remainingDistance / container.WarpTotalDistance;     //1 to 0                 
 
+                container.DistanceModifier = distanceModifier;
 
-
-                var currentGear = _transmissionSetup[container.WarpGear];
-                var previous = _transmissionSetup[container.WarpGear - 1];
-
-
-                if (container.IsBraking)
-                    container.CurrentWarpingTime -= _time.DeltaTime;
-                else
-                    container.CurrentWarpingTime += _time.DeltaTime;
-
-
-                if (container.IsBraking)
+                if (distanceModifier < 0.5 && !container.IsBraking)
                 {
-                    var targetSpeed = entity.MaxMoveSpeed + currentGear.MaxSpeedModifier;
-                    var speedT = container.CurrentWarpingTime / currentGear.GearTime;
-                    var evaluated = _configsStorage.WarpAccelerationCurve.Evaluate(speedT);
-                    if (evaluated < 0)
-                    {
-                        container.WarpGear--;
-                        var ccurrentGear = _transmissionSetup[container.WarpGear];
-                        container.CurrentWarpingTime = ccurrentGear.GearTime;
-                        continue;
-                    }
-
-                    container.WarpSpeedCurrent = previous.MaxSpeedModifier + entity.MaxMoveSpeed + evaluated * targetSpeed;
-                    container.BrakingStartSpeed = container.WarpSpeedCurrent;
-                    double deltaMove = container.WarpSpeedCurrent * _time.DeltaTime;
-                    double2 newPos = CommonExtensions
-                        .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
-                    entity.ReplaceGlobalPosition(newPos);
+                    container.IsBraking = true;
+                    entity.ReplaceGlobalPosition(
+                       (container.WarpStartPosition + container.WarpFinishPosition) / 2);
                 }
 
-                else
-                {
-                    var targetSpeed = entity.MaxMoveSpeed + currentGear.MaxSpeedModifier;
-                    var speedT = container.CurrentWarpingTime / currentGear.GearTime;
-                    var evaluated = _configsStorage.WarpAccelerationCurve.Evaluate(speedT);
-                    container.WarpSpeedCurrent = previous.MaxSpeedModifier * entity.MaxMoveSpeed + evaluated * targetSpeed;
-                    container.BrakingStartSpeed = container.WarpSpeedCurrent;
-                    double deltaMove = container.WarpSpeedCurrent * _time.DeltaTime;
-                    double2 newPos = CommonExtensions
-                        .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
-                    entity.ReplaceGlobalPosition(newPos);
-
-                    if (evaluated >= 1)
-                    {
-                        container.WarpGear++;
-                        container.CurrentWarpingTime = 0;
-                    }
-                }
-
-                if (remainingDistance < 100)
+                if (remainingDistance < 100 || container.WarpSpeedCurrent <= 0)
                 {
                     entity.SetWarpFinished();
                 }
@@ -112,12 +85,12 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     public struct WarpMovingTransmissionGear
     {
         public float GearTime;
-        public int MaxSpeedModifier;
+        public float MaxGearSpeed;
 
-        public WarpMovingTransmissionGear(float gearTime, int maxSpeedModifier)
+        public WarpMovingTransmissionGear(float gearTime, float maxGearSpeed)
         {
             GearTime = gearTime;
-            MaxSpeedModifier = maxSpeedModifier;
+            MaxGearSpeed = maxGearSpeed;
         }
     }
 }

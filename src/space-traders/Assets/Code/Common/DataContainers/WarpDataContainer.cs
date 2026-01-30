@@ -15,15 +15,14 @@ namespace Assets.Code.Common.DataContainers
         public float WarpAccelerationMaxTime;
 
         public double WarpSpeedCurrent;
+        public double WarpSpeedPrevious;
         public float CurrentWarpingTime;
-        public double EstimatedTime;
+        public double DistanceModifier;
 
         public bool IsBraking;
         public double BrakingStartSpeed;
         public double BrakingDuration;
         public double2 StartBrakingPos;
-
-        public int WarpGear;
 
         public WarpDataContainer(double2 startPosition, double2 finishPosition)
         {
@@ -31,7 +30,6 @@ namespace Assets.Code.Common.DataContainers
             WarpFinishPosition = finishPosition;
             WarpTotalDistance = math.length(WarpFinishPosition - WarpStartPosition);
 
-            WarpGear = 1;
             IsBraking = false;
         }
     }
