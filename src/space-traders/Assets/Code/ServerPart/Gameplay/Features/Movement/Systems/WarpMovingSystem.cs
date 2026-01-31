@@ -40,7 +40,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             foreach (var entity in _entities.GetEntities(_buffer))
             {
                 var container = entity.WarpDataContainer;
-                var deltaTime = _time.DeltaTime;                
+                var deltaTime = _time.DeltaTime / 2;
 
                 if (container.IsBraking)
                     container.CurrentWarpingTime -= deltaTime;
@@ -51,26 +51,35 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 t = Mathf.Clamp(t, 0f, 1f);
                 t = Mathf.Pow(t, 4);
 
+                if (container.IsBraking)
+                {
+                    var brakingMod = container.CurrentWarpingTime / container.StartBrakingTime;
+                    brakingMod = Mathf.Pow(brakingMod, 4);
+                    var newPos = math.lerp(container.WarpFinishPosition, container.StartBrakingPos, brakingMod);
 
-                container.WarpSpeedPrevious = container.WarpSpeedCurrent;
-                container.WarpSpeedCurrent =
-                    _configsStorage.WarpAccelerationCurve.Evaluate(t) * _warpMaxSpeed;
+                    entity.ReplaceGlobalPosition(newPos);
+                }
 
-                var deltaMove = container.WarpSpeedCurrent * deltaTime;
-                double2 newPos = CommonExtensions
-                    .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
-                entity.ReplaceGlobalPosition(newPos);
+                else
+                {
+                    container.WarpSpeedCurrent =
+                        _configsStorage.WarpAccelerationCurve.Evaluate(t) * _warpMaxSpeed;
+
+                    var deltaMove = container.WarpSpeedCurrent * deltaTime;
+                    double2 newPos = CommonExtensions
+                        .MoveTowards(entity.GlobalPosition, container.WarpFinishPosition, deltaMove);
+                    entity.ReplaceGlobalPosition(newPos);
+                }
 
                 var remainingDistance = (container.WarpFinishPosition - entity.GlobalPosition).Magnitude();
                 var distanceModifier = remainingDistance / container.WarpTotalDistance;     //1 to 0                 
 
-                container.DistanceModifier = distanceModifier;
 
                 if (distanceModifier < 0.5 && !container.IsBraking)
                 {
                     container.IsBraking = true;
-                    entity.ReplaceGlobalPosition(
-                       (container.WarpStartPosition + container.WarpFinishPosition) / 2);
+                    container.StartBrakingPos = entity.GlobalPosition;
+                    container.StartBrakingTime = container.CurrentWarpingTime;
                 }
 
                 if (remainingDistance < 100 || container.WarpSpeedCurrent <= 0)

@@ -7,28 +7,20 @@ namespace Assets.Code.Common.DataContainers
     [Serializable]
     public sealed class WarpDataContainer
     {
-        public double2 WarpStartPosition;
         public double2 WarpFinishPosition;
         public double WarpTotalDistance;
 
-        public double WarpMaxSpeed;
-        public float WarpAccelerationMaxTime;
-
         public double WarpSpeedCurrent;
-        public double WarpSpeedTarget;
         public float CurrentWarpingTime;
-        public double DistanceModifier;
+        public float StartBrakingTime;
 
         public bool IsBraking;
-        public double BrakingStartSpeed;
-        public double BrakingDuration;
         public double2 StartBrakingPos;
 
         public WarpDataContainer(double2 startPosition, double2 finishPosition)
         {
-            WarpStartPosition = startPosition;
             WarpFinishPosition = finishPosition;
-            WarpTotalDistance = math.length(WarpFinishPosition - WarpStartPosition);
+            WarpTotalDistance = math.length(finishPosition - startPosition);
 
             IsBraking = false;
         }
