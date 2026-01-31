@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,90 +16,59 @@ namespace Assets.Code.ClientPart.CameraSystem
         [SerializeField] private InputActionReference _orbitHold;
         [SerializeField] private InputActionReference _zoom;
 
-        [Header("Base Speeds")]
-        [SerializeField] private float _wheelImpulse = 120f;
-        [SerializeField] private float _analogAcceleration = 40f;
+        [Header("Values")]
+        [SerializeField] private float _zoomAcceleration;
+        [SerializeField] private float _zoomDeceleration;
 
-        [Header("Speed vs Radius")]
-        [SerializeField] private AnimationCurve _speedByRadius = AnimationCurve.Linear(0, 1, 1, 2);
-        [SerializeField] private Vector2 _speedMultiplierClamp = new(0.1f, 5f);
+        private float _currentZoomSpeed;
 
-        [Header("Inertia")]
-        [SerializeField] private float _damping = 10f;
-        [SerializeField] private float _maxSpeed = 60f;
-        [SerializeField] private float _stopThreshold = 0.02f;
-
-        private float _zoomSpeed;
-        private bool _hasMouseScrollBinding;
+        private Vector2 _zoomRange;
 
 
         private void OnEnable()
         {
+            _zoomRange = _orbitalFollow.RadialAxis.Range;
+
             _look?.action.Enable();
             _orbitHold?.action.Enable();
             _zoom?.action.Enable();
-
-            _hasMouseScrollBinding = false;
-            if (_zoom?.action != null)
-            {
-                _hasMouseScrollBinding = _zoom.action.controls.Any(c => c.path.Contains("/scroll/")) ||
-                                         _zoom.action.bindings.Any(b => b.path.Contains("/scroll/"));
-            }
         }
 
         private void OnDisable()
         {
             _look?.action.Disable();
             _orbitHold?.action.Disable();
-            _zoom?.action.Disable();
+            _zoom?.action?.Disable();
         }
 
         private void Update()
         {
-            if (_axisController != null && _look != null)
-            {
-                var ld = _look.action.activeControl?.device;
-                bool isGamepadLook = ld is Gamepad;
-                bool holdPressed = _orbitHold != null && _orbitHold.action.IsPressed();
-                _axisController.enabled = isGamepadLook || holdPressed;
-            }
+            HandleLook();
+            HandleZoom();
+        }
 
-            if (_orbitalFollow == null || _zoom?.action == null) return;
+        private void HandleLook()
+        {
+            var ld = _look.action.activeControl?.device;
+            bool isGamepadLook = ld is Gamepad;
+            bool holdPressed = _orbitHold.action.IsPressed();
+            _axisController.enabled = isGamepadLook || holdPressed;
+        }
 
-            var range = _orbitalFollow.RadialAxis.Range;
-            float min = range.x;
-            float max = range.y;
-            if (max <= min) return;
+        private void HandleZoom()
+        {
+            var deltaTime = Time.unscaledDeltaTime;
 
-            float value = _orbitalFollow.RadialAxis.Value;
+            float input = _zoom.action.ReadValue<float>();
+            _currentZoomSpeed += input * _zoomAcceleration * deltaTime;
 
-            float t = Mathf.InverseLerp(min, max, value);
-            float mult = Mathf.Clamp(_speedByRadius.Evaluate(t), _speedMultiplierClamp.x, _speedMultiplierClamp.y);
 
-            float input = -_zoom.action.ReadValue<float>();
-            bool hasInput = Mathf.Abs(input) > 0.0001f;
-
-            var ctrl = _zoom.action.activeControl;
-            bool looksLikeScrollNow =
-                ctrl != null && ctrl.path.Contains("/scroll/") ||
-                ctrl == null && _hasMouseScrollBinding && Mouse.current != null;
-
-            if (hasInput)
-            {
-                if (looksLikeScrollNow)
-                    _zoomSpeed += input * _wheelImpulse * mult;
-                else
-                    _zoomSpeed += input * _analogAcceleration * mult * Time.deltaTime;
-            }
-
-            _zoomSpeed = Mathf.Clamp(_zoomSpeed, -_maxSpeed, _maxSpeed);
-
-            value = Mathf.Clamp(value - _zoomSpeed * Time.deltaTime, min, max);
-
-            _zoomSpeed *= Mathf.Exp(-_damping * Time.deltaTime);
-            if (Mathf.Abs(_zoomSpeed) < _stopThreshold) _zoomSpeed = 0f;
+            var value = _orbitalFollow.RadialAxis.Value + _currentZoomSpeed * deltaTime;
+            value = Mathf.Clamp(value, _zoomRange.x, _zoomRange.y);
 
             _orbitalFollow.RadialAxis.Value = value;
+
+            _currentZoomSpeed = Mathf.MoveTowards(_currentZoomSpeed, 0f, _zoomDeceleration * deltaTime);
         }
     }
 }

@@ -295,36 +295,8 @@ MonoBehaviour:
   _look: {fileID: -5365270190713176715, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _orbitHold: {fileID: -5461235461543657633, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _zoom: {fileID: -6609570609706424200, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  _wheelImpulse: 5
-  _analogAcceleration: 40
-  _speedByRadius:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 2
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _speedMultiplierClamp: {x: 0.1, y: 3}
-  _damping: 3
-  _maxSpeed: 15
-  _stopThreshold: 0.02
+  _zoomAcceleration: 750
+  _zoomDeceleration: 100
 --- !u!114 &2604499606711798212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,8 +1832,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9009380399095259448}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0328168, y: 0.78372025, z: -0.041559484, w: 0.6188525}
-  m_LocalPosition: {x: -11.575167, y: 1.2655855, z: 2.759371}
+  m_LocalRotation: {x: 0.19631153, y: -0.43617427, z: 0.098117426, w: 0.8726894}
+  m_LocalPosition: {x: 8.90183, y: 5.274229, z: -6.6807203}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1944,7 +1916,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: 103.408325
+    Value: -53.112198
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -1954,7 +1926,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 19.269547
+    Value: 25
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -1966,7 +1938,7 @@ MonoBehaviour:
   RadialAxis:
     Value: 3
     Center: 3
-    Range: {x: 3, y: 150}
+    Range: {x: 3, y: 500}
     Wrap: 0
     Recentering:
       Enabled: 0

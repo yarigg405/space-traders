@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f710d241438624695bc0ad5f74de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Yrr::Yrr.Utils.DontDestroyOnLoadScript
---- !u!114 &1616780352
+--- !u!114 &1762189099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27846ec57862fcb4191f22ffc76e9d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.ClientPart.Gameplay.Features.InputInteraction.InputReferencesContainer
-  <DoubleClick>k__BackingField: {fileID: 1616780352}
+  <DoubleClick>k__BackingField: {fileID: 1762189099}
 --- !u!4 &1994037448
 Transform:
   m_ObjectHideFlags: 0
