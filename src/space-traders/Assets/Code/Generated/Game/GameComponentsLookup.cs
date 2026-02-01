@@ -10,48 +10,54 @@ public static class GameComponentsLookup {
 
     public const int Active = 0;
     public const int ChaseTargetId = 1;
-    public const int ClientPlayer = 2;
-    public const int CurrentMoveSpeed = 3;
-    public const int CurrentRotationY = 4;
-    public const int CurrentSpeedModifier = 5;
-    public const int Destructed = 6;
-    public const int EntityLink = 7;
-    public const int GlobalPosition = 8;
-    public const int Id = 9;
-    public const int KeepDistanceMinMax = 10;
-    public const int LocalPosition = 11;
-    public const int MaxMoveSpeed = 12;
-    public const int MovementTargetId = 13;
-    public const int Moving = 14;
-    public const int MovingAcceleration = 15;
-    public const int OrbitingRadius = 16;
-    public const int Player = 17;
-    public const int PlayerNetworkId = 18;
-    public const int QuadrantIndex = 19;
-    public const int Rigidbody = 20;
-    public const int RotationSpeed = 21;
-    public const int SelfDestructTimer = 22;
-    public const int Ship = 23;
-    public const int SkyboxCoordinates = 24;
-    public const int Station = 25;
-    public const int TargetRotation = 26;
-    public const int Transform = 27;
-    public const int Velocity = 28;
-    public const int VelocityAgility = 29;
-    public const int View = 30;
-    public const int ViewPath = 31;
-    public const int ViewPrefab = 32;
-    public const int WarpDataContainer = 33;
-    public const int WarpFinishCoordinates = 34;
-    public const int Warping = 35;
-    public const int WarpPreparation = 36;
+    public const int ChildrenColliders = 2;
+    public const int ClientPlayer = 3;
+    public const int CollidersBuffer = 4;
+    public const int CurrentMoveSpeed = 5;
+    public const int CurrentRotationY = 6;
+    public const int CurrentSpeedModifier = 7;
+    public const int Destructed = 8;
+    public const int EntityLink = 9;
+    public const int GlobalPosition = 10;
+    public const int Id = 11;
+    public const int KeepDistanceMinMax = 12;
+    public const int LocalPosition = 13;
+    public const int MaxMoveSpeed = 14;
+    public const int MovementTargetId = 15;
+    public const int Moving = 16;
+    public const int MovingAcceleration = 17;
+    public const int OrbitingRadius = 18;
+    public const int PhysicRadius = 19;
+    public const int Planet = 20;
+    public const int Player = 21;
+    public const int PlayerNetworkId = 22;
+    public const int QuadrantIndex = 23;
+    public const int Rigidbody = 24;
+    public const int RotationSpeed = 25;
+    public const int SelfDestructTimer = 26;
+    public const int Ship = 27;
+    public const int SkyboxCoordinates = 28;
+    public const int Station = 29;
+    public const int TargetRotation = 30;
+    public const int Transform = 31;
+    public const int Velocity = 32;
+    public const int VelocityAgility = 33;
+    public const int View = 34;
+    public const int ViewPath = 35;
+    public const int ViewPrefab = 36;
+    public const int WarpDataContainer = 37;
+    public const int WarpFinishCoordinates = 38;
+    public const int Warping = 39;
+    public const int WarpPreparation = 40;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 41;
 
     public static readonly string[] componentNames = {
         "Active",
         "ChaseTargetId",
+        "ChildrenColliders",
         "ClientPlayer",
+        "CollidersBuffer",
         "CurrentMoveSpeed",
         "CurrentRotationY",
         "CurrentSpeedModifier",
@@ -66,6 +72,8 @@ public static class GameComponentsLookup {
         "Moving",
         "MovingAcceleration",
         "OrbitingRadius",
+        "PhysicRadius",
+        "Planet",
         "Player",
         "PlayerNetworkId",
         "QuadrantIndex",
@@ -91,7 +99,9 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Common.Components.Active),
         typeof(Assets.Code.Common.Components.ChaseTargetId),
+        typeof(Assets.Code.Common.Components.ChildrenColliders),
         typeof(Assets.Code.Common.Components.ClientPlayer),
+        typeof(Assets.Code.Common.Components.CollidersBuffer),
         typeof(Assets.Code.Common.Components.CurrentMoveSpeed),
         typeof(Assets.Code.Common.Components.CurrentRotationY),
         typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
@@ -106,6 +116,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.Moving),
         typeof(Assets.Code.Common.Components.MovingAcceleration),
         typeof(Assets.Code.Common.Components.OrbitingRadius),
+        typeof(Assets.Code.Common.Components.PhysicRadius),
+        typeof(Assets.Code.Common.Components.Planet),
         typeof(Assets.Code.Common.Components.Player),
         typeof(Assets.Code.Common.Components.PlayerNetworkId),
         typeof(Assets.Code.Common.Components.QuadrantIndex),

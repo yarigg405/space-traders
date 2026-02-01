@@ -25,6 +25,16 @@ namespace Assets.Code.Common
             return start + (end - start) * t;
         }
 
+        public static double2 ToDouble2(this Vector2 vector)
+        {
+            return new double2(vector.x, vector.y);
+        }
+
+        public static double2 ToDoble2XZ(this Vector3 vector)
+        {
+            return new double2(vector.x, vector.z);
+        }
+
         public static string ToDistanceText(this double distance)
         {
             if (distance < 1000)

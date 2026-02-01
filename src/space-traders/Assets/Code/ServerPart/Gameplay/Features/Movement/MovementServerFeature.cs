@@ -1,5 +1,4 @@
-﻿using Assets.Code.ClientPart.Gameplay.Features.Movement.Systems;
-using Assets.Code.Infrastructure.Systems;
+﻿using Assets.Code.Infrastructure.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Movement.Systems;
 
 

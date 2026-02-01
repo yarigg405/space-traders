@@ -35,6 +35,7 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(Station)] = "st",
             [typeof(SkyboxCoordinates)] = "sc",
             [typeof(QuadrantIndex)] = "qi",
+            [typeof(PhysicRadius)] = "pr",
 
         };
 

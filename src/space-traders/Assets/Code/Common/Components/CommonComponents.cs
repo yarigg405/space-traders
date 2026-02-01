@@ -1,7 +1,9 @@
 ﻿using Assets.Code.ClientPart.View;
+using Assets.Code.Common.Physics;
 using Assets.Code.Common.Serialization;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -25,4 +27,8 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class GlobalPosition : ISerializeComponent { public double2 Value; }
     [Game] public sealed class LocalPosition : IComponent { public Vector3 Value; }
     [Game] public sealed class QuadrantIndex : ISerializeComponent { public int2 Value; }
+
+    [Game] public sealed class PhysicRadius : ISerializeComponent { public float Value; }
+    [Game] public sealed class ChildrenColliders : IComponent { public ChildCollider[] Value; }
+    [Game] public sealed class CollidersBuffer : IComponent { public List<ColliderInteraction> Value; }
 }
