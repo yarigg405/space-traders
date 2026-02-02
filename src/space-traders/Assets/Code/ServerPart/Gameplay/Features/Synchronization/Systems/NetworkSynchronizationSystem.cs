@@ -2,7 +2,7 @@
 using Entitas;
 
 
-namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
+namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization.Systems
 {
     internal sealed class NetworkSynchronizationSystem : IExecuteSystem
     {

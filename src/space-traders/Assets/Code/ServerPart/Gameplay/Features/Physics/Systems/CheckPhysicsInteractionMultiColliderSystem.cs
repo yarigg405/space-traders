@@ -7,6 +7,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
     internal sealed class CheckPhysicsInteractionMultiColliderSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
+        private readonly IGroup<GameEntity> _multicollidersEntities;
 
         public CheckPhysicsInteractionMultiColliderSystem(GameContext game)
         {
@@ -14,11 +15,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
                 GameMatcher.CollidersBuffer,
                 GameMatcher.PhysicRadius
                 ));
+
+            _multicollidersEntities = game.GetGroup(GameMatcher.ChildrenColliders);
         }
 
         void IExecuteSystem.Execute()
         {
-         here  
+          
         }
     }
 }

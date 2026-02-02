@@ -32,6 +32,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInteres.Factories
                 .AddViewPath(stationPrefabName)
                 .AddGlobalPosition(at)
                 .AddCurrentRotationY(0)
+
+                .With(x => x.isNeedInit = true)
                 ;
 
             var stationPrefab = _assetProvider.LoadAsset<SpaceStationRegistrar>(stationPrefabName);

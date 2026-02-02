@@ -18,7 +18,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
 
         void IExecuteSystem.Execute()
         {
-            here
+            
         }
     }
 }

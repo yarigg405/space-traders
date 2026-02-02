@@ -12,6 +12,7 @@ namespace Assets.Code.Common.Components
 {
     [Game, Meta] public sealed class Id : ISerializeComponent { [PrimaryEntityIndex] public uint Value; }
     [Game] public sealed class EntityLink : IComponent { [EntityIndex] public uint Value; }
+    [Game] public sealed class NeedInit : IComponent { }
 
     [Game] public sealed class TransformComponent : IComponent { public Transform Value; }
     [Game] public sealed class RigidbodyComponent : IComponent { public Rigidbody Value; }

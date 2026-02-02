@@ -1,4 +1,5 @@
-﻿using Assets.Code.Infrastructure.Systems;
+﻿using Assets.Code.Common.Physics.Services;
+using Assets.Code.Infrastructure.Systems;
 using Assets.Code.ServerPart.Gameplay.Features;
 using Assets.Code.ServerPart.Worlds.GameSynchronization;
 using VContainer;
@@ -29,6 +30,7 @@ namespace Assets.Code.ServerPart.Worlds
                 builder.RegisterInstance(contexts.input).AsSelf();
                 builder.RegisterInstance(contexts.meta).AsSelf();
 
+                builder.Register<PhysicsService>(Lifetime.Scoped).AsImplementedInterfaces();
                 builder.Register<SystemFactory>(Lifetime.Scoped).AsImplementedInterfaces();
 
                 builder.Register<ServerEntitiesConditionSender>(Lifetime.Scoped)

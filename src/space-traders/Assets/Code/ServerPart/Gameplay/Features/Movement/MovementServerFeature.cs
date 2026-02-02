@@ -18,10 +18,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
 
             Add(systems.Create<WarpPreparationSystem>());
             Add(systems.Create<WarpMovingSystem>());
-
-            Add(systems.Create<UpdateQuadrantIndexSystem>());
-
-            Add(systems.Create<NetworkSynchronizationSystem>());
         }
     }
 }

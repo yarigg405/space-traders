@@ -3,7 +3,7 @@ using Entitas;
 using Unity.Mathematics;
 
 
-namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
+namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
 {
     internal sealed class UpdateQuadrantIndexSystem : IExecuteSystem
     {
