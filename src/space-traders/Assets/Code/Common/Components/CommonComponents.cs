@@ -1,5 +1,4 @@
 ﻿using Assets.Code.ClientPart.View;
-using Assets.Code.Common.Physics;
 using Assets.Code.Common.Serialization;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
@@ -30,6 +29,4 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class QuadrantIndex : ISerializeComponent { public int2 Value; }
 
     [Game] public sealed class PhysicRadius : ISerializeComponent { public float Value; }
-    [Game] public sealed class ChildrenColliders : IComponent { public ChildCollider[] Value; }
-    [Game] public sealed class CollidersBuffer : IComponent { public List<ColliderInteraction> Value; }
 }

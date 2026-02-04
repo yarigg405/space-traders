@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Code.Infrastructure.Installers.BootstrapInstaller
   _inputReferencesContainer: {fileID: 1994037447}
   _configsStorage: {fileID: 11400000, guid: 5d99eaadb9700dc4fa0a14bba0128913, type: 2}
+  _shapesStorage: {fileID: 11400000, guid: c88f0b2434f7b3d4eb6f5a67ee1e2b43, type: 2}
 --- !u!4 &1891047627
 Transform:
   m_ObjectHideFlags: 0

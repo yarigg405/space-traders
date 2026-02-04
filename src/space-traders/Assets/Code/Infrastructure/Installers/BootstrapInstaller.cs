@@ -13,6 +13,7 @@ using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.Networking;
+using Assets.Code.ServerPart.Physics.Data;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -24,6 +25,7 @@ namespace Assets.Code.Infrastructure.Installers
     {
         [SerializeField] private InputReferencesContainer _inputReferencesContainer;
         [SerializeField] private ConfigsStorage _configsStorage;
+        [SerializeField] private PhysicsShapesStorage _shapesStorage;
 
         protected override void Install()
         {
@@ -55,6 +57,7 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.RegisterInstance(_inputReferencesContainer);
             Builder.RegisterInstance(_configsStorage);
+            Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();
         }
 
         private void BindNetworking()

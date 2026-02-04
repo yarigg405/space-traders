@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 3263385209940115951}
   - component: {fileID: 7890786162349698697}
   - component: {fileID: 7128521006167173717}
-  - component: {fileID: 6805227933912418576}
+  - component: {fileID: 3734396646057432395}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -181,19 +181,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6805227933912418576
-MonoBehaviour:
+--- !u!135 &3734396646057432395
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3775654815644450474}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
-  _radius: 5
+  serializedVersion: 3
+  m_Radius: 0.75
+  m_Center: {x: 0.0000009536743, y: 0, z: 0}
 --- !u!1 &4845665521368745523
 GameObject:
   m_ObjectHideFlags: 0

@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 1791918479140341065}
   - component: {fileID: -5341652331776575614}
   - component: {fileID: -1241323026221268403}
-  - component: {fileID: 460765150534947048}
   m_Layer: 0
   m_Name: Station1
   m_TagString: Untagged
@@ -208,31 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.ClientPart.Gameplay.Features.InputInteraction.ClickableEntity
   _entityBehaviour: {fileID: 1791918479140341065}
---- !u!114 &460765150534947048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6642111941045937260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77271769e36adb04583ab7145a9831f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.Registrars.SpaceStationRegistrar
-  <DockingBays>k__BackingField:
-  - {fileID: 879323882772424921}
-  - {fileID: 1202088053832451563}
-  - {fileID: 6200546802146340678}
-  - {fileID: 7518171893685763226}
-  - {fileID: 8983321595075282742}
-  - {fileID: 8084932456180351675}
-  - {fileID: 2612571893429660786}
-  - {fileID: 4336051490987160652}
-  - {fileID: 6518545205926646594}
-  - {fileID: 5527486568571238679}
-  - {fileID: 24484676135236610}
-  - {fileID: 8177186041325482902}
 --- !u!1001 &290342073796598354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,7 +225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.000015
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -295,17 +269,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 290342073796598354}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6518545205926646594 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 290342073796598354}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &611859215148361302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,17 +331,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 611859215148361302}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6200546802146340678 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 611859215148361302}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &1352370163428896775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -389,7 +341,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -256.8
+      value: -256
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -397,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -369.8
+      value: -369
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -441,17 +393,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 1352370163428896775}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5527486568571238679 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 1352370163428896775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &2511369929742388774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -514,17 +455,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 2511369929742388774}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8983321595075282742 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 2511369929742388774}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &3333356398254902187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -535,7 +465,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 232.2
+      value: 232
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -543,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -185.79999
+      value: -185
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -587,17 +517,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 3333356398254902187}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8084932456180351675 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 3333356398254902187}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &3389580636616833670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,7 +527,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 165.20001
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -616,7 +535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -329.8
+      value: -329
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -664,17 +583,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 3389580636616833670}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8177186041325482902 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 3389580636616833670}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &3901506239848084874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -685,7 +593,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -189.8
+      value: -189
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -693,7 +601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -225.8
+      value: -225
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -737,17 +645,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
   m_PrefabInstance: {fileID: 3901506239848084874}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7518171893685763226 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 3901506239848084874}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!1001 &5683448684403412219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -758,7 +655,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.800003
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -766,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 385.8
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -805,17 +702,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
---- !u!114 &1202088053832451563 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 5683448684403412219}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!4 &5011226025021570590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
@@ -878,17 +764,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
---- !u!114 &879323882772424921 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 5927575665665679817}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!4 &6419357189136978732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
@@ -904,7 +779,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.999985
+      value: -46
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -912,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -124.999985
+      value: -124
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -951,17 +826,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
---- !u!114 &24484676135236610 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 6784666718155406610}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!4 &6157304274046799863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
@@ -977,7 +841,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.199997
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.y
@@ -985,7 +849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 241.8
+      value: 241
       objectReference: {fileID: 0}
     - target: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1024,17 +888,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
---- !u!114 &4336051490987160652 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 7088024916322024796}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!4 &7568687199326130105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
@@ -1097,17 +950,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
---- !u!114 &2612571893429660786 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6805227933912418576, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
-  m_PrefabInstance: {fileID: 8804746778309109090}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cbad5b92f8706c4e9fd92f769328e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.Common.Physics.EcsSphereCollider
 --- !u!4 &8170769389620926343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 816517073308791525, guid: abecf37d075e0ec4cb3f703f0b7e66ff, type: 3}
