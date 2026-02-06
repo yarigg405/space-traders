@@ -26,30 +26,32 @@ public static class GameComponentsLookup {
     public const int MovingAcceleration = 15;
     public const int NeedInit = 16;
     public const int OrbitingRadius = 17;
-    public const int PhysicRadius = 18;
-    public const int Planet = 19;
-    public const int Player = 20;
-    public const int PlayerNetworkId = 21;
-    public const int QuadrantIndex = 22;
-    public const int Rigidbody = 23;
-    public const int RotationSpeed = 24;
-    public const int SelfDestructTimer = 25;
-    public const int Ship = 26;
-    public const int SkyboxCoordinates = 27;
-    public const int Station = 28;
-    public const int TargetRotation = 29;
-    public const int Transform = 30;
-    public const int Velocity = 31;
-    public const int VelocityAgility = 32;
-    public const int View = 33;
-    public const int ViewPath = 34;
-    public const int ViewPrefab = 35;
-    public const int WarpDataContainer = 36;
-    public const int WarpFinishCoordinates = 37;
-    public const int Warping = 38;
-    public const int WarpPreparation = 39;
+    public const int PhysicShape = 18;
+    public const int PhysicsRadius = 19;
+    public const int Planet = 20;
+    public const int Player = 21;
+    public const int PlayerNetworkId = 22;
+    public const int QuadrantIndex = 23;
+    public const int Rigidbody = 24;
+    public const int RotationSpeed = 25;
+    public const int SelfDestructTimer = 26;
+    public const int ServerEntity = 27;
+    public const int Ship = 28;
+    public const int SkyboxCoordinates = 29;
+    public const int Station = 30;
+    public const int TargetRotation = 31;
+    public const int Transform = 32;
+    public const int Velocity = 33;
+    public const int VelocityAgility = 34;
+    public const int View = 35;
+    public const int ViewPath = 36;
+    public const int ViewPrefab = 37;
+    public const int WarpDataContainer = 38;
+    public const int WarpFinishCoordinates = 39;
+    public const int Warping = 40;
+    public const int WarpPreparation = 41;
 
-    public const int TotalComponents = 40;
+    public const int TotalComponents = 42;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -70,7 +72,8 @@ public static class GameComponentsLookup {
         "MovingAcceleration",
         "NeedInit",
         "OrbitingRadius",
-        "PhysicRadius",
+        "PhysicShape",
+        "PhysicsRadius",
         "Planet",
         "Player",
         "PlayerNetworkId",
@@ -78,6 +81,7 @@ public static class GameComponentsLookup {
         "Rigidbody",
         "RotationSpeed",
         "SelfDestructTimer",
+        "ServerEntity",
         "Ship",
         "SkyboxCoordinates",
         "Station",
@@ -113,7 +117,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.MovingAcceleration),
         typeof(Assets.Code.Common.Components.NeedInit),
         typeof(Assets.Code.Common.Components.OrbitingRadius),
-        typeof(Assets.Code.Common.Components.PhysicRadius),
+        typeof(Assets.Code.Common.Components.PhysicShape),
+        typeof(Assets.Code.Common.Components.PhysicsRadius),
         typeof(Assets.Code.Common.Components.Planet),
         typeof(Assets.Code.Common.Components.Player),
         typeof(Assets.Code.Common.Components.PlayerNetworkId),
@@ -121,6 +126,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.RigidbodyComponent),
         typeof(Assets.Code.Common.Components.RotationSpeed),
         typeof(Assets.Code.Common.Components.SelfDestructTimer),
+        typeof(Assets.Code.Common.Components.ServerEntity),
         typeof(Assets.Code.Common.Components.Ship),
         typeof(Assets.Code.Common.Components.SkyboxCoordinates),
         typeof(Assets.Code.Common.Components.Station),

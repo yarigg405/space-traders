@@ -30,23 +30,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInteres.Factories
                 .AddViewPath(stationPrefabName)
                 .AddGlobalPosition(at)
                 .AddCurrentRotationY(0)
+                .AddPhysicShape(_physicsShapesProvider.GetShapeForPrefab(stationPrefabName))
 
                 .With(x => x.isNeedInit = true)
                 ;
-
-            //var stationPrefab = _assetProvider.LoadAsset<SpaceStationRegistrar>(stationPrefabName);
-            //var childrenColliders = new ChildCollider[stationPrefab.DockingBays.Length];
-
-            //for (int i = 0; i < stationPrefab.DockingBays.Length; i++)
-            //{
-            //    var dockingBay = stationPrefab.DockingBays[i];
-            //    var deltaPos = dockingBay.transform.parent.localPosition;
-            //    childrenColliders[i] = new ChildCollider(
-            //        at + deltaPos.ToDoble2XZ(),
-            //        dockingBay.Radius, i
-            //        );
-            //}
-            //entity.AddChildrenColliders(childrenColliders);
 
             return entity;
         }
