@@ -9,6 +9,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization
         public SynchronizationFeature(ISystemFactory systems)
         {
             Add(systems.Create<NetworkSynchronizationSystem>());
+
+            Add(systems.Create<SynchronizationCleanupSystem>());
         }
     }
 }

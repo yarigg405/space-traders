@@ -33,10 +33,11 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(WarpFinishCoordinates)] = "wfc",
             [typeof(Ship)] = "s",
             [typeof(Station)] = "st",
+            [typeof(Planet)] = "p",
+            [typeof(StationDockingBay)] = "sdb",
             [typeof(SkyboxCoordinates)] = "sc",
             [typeof(QuadrantIndex)] = "qi",
             [typeof(PhysicsRadius)] = "pr",
-
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

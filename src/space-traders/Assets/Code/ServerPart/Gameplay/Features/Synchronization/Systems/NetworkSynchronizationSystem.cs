@@ -14,7 +14,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization.Systems
         public NetworkSynchronizationSystem(GameContext game, EntitiesSynchronizator syncronizator)
         {
             _entities = game.GetGroup(
-                GameMatcher.AllOf(GameMatcher.GlobalPosition)
+                GameMatcher.AllOf(
+                    GameMatcher.GlobalPosition, 
+                    GameMatcher.NeedSynchronize)
                 .NoneOf(GameMatcher.Warping));
 
             _synchronizator = syncronizator;
@@ -29,7 +31,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization.Systems
             foreach (var entity in _entities)
             {
                 _synchronizator.SyncGlobalPosition(entity.Id, entity.GlobalPosition);
-                _synchronizator.SyncRotation(entity.Id, entity.CurrentRotationY);
+                if (entity.hasCurrentRotationY)
+                    _synchronizator.SyncRotation(entity.Id, entity.CurrentRotationY);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entitas;
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using Yrr.Utils;
@@ -87,6 +88,17 @@ namespace Assets.Code.Common
         public static double SqrMagnitude(this double2 vector)
         {
             return math.lengthsq(vector);
+        }
+
+        public static int2 ToQuadrantIndex(this double2 globalPosition)
+        {
+            var x = globalPosition.x;
+            var y = globalPosition.y;
+
+            int quadrantX = (int)math.floor((x + GameConstants.GAME_SCENE_HALF_QUADRANT_SIZE) / GameConstants.GAME_SCENE_QUADRANT_SIZE);
+            int quadrantY = (int)math.floor((y + GameConstants.GAME_SCENE_HALF_QUADRANT_SIZE) / GameConstants.GAME_SCENE_QUADRANT_SIZE);
+
+            return new(quadrantX, quadrantY);
         }
     }
 }

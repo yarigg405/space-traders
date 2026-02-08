@@ -36,6 +36,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 var newAngle = AnglesUtil.MoveTowardsAngle(current, target, effectiveRotationSpeed);
 
                 entity.ReplaceCurrentRotationY(newAngle);
+                entity.isNeedSynchronize = true;
             }
         }
     }

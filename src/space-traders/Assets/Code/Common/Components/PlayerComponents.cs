@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Common.Serialization;
 using Entitas;
 
+
 namespace Assets.Code.Common.Components
 {
     [Game] public sealed class Player : ISerializeComponent { }

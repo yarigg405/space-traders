@@ -8,17 +8,17 @@
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherNeedInit;
+    static Entitas.IMatcher<GameEntity> _matcherStationDockingBay;
 
-    public static Entitas.IMatcher<GameEntity> NeedInit {
+    public static Entitas.IMatcher<GameEntity> StationDockingBay {
         get {
-            if (_matcherNeedInit == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.NeedInit);
+            if (_matcherStationDockingBay == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.StationDockingBay);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherNeedInit = matcher;
+                _matcherStationDockingBay = matcher;
             }
 
-            return _matcherNeedInit;
+            return _matcherStationDockingBay;
         }
     }
 }
@@ -33,18 +33,18 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Common.Components.NeedInit needInitComponent = new Assets.Code.Common.Components.NeedInit();
+    static readonly Assets.Code.Common.Components.StationDockingBay stationDockingBayComponent = new Assets.Code.Common.Components.StationDockingBay();
 
-    public bool isNeedInit {
-        get { return HasComponent(GameComponentsLookup.NeedInit); }
+    public bool isStationDockingBay {
+        get { return HasComponent(GameComponentsLookup.StationDockingBay); }
         set {
-            if (value != isNeedInit) {
-                var index = GameComponentsLookup.NeedInit;
+            if (value != isStationDockingBay) {
+                var index = GameComponentsLookup.StationDockingBay;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : needInitComponent;
+                            : stationDockingBayComponent;
 
                     AddComponent(index, component);
                 } else {

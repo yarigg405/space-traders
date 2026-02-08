@@ -1,46 +1,81 @@
-﻿
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Triggers
 {
     public sealed class TriggersInteractionsService
     {
-        private readonly Dictionary<uint, TriggerState> _states = new();
+        private readonly Dictionary<uint, HashSet<uint>> _previous = new();
         private readonly List<TriggerEvent> _events = new();
 
-        public void UpdateTrigger(uint triggerId, uint triggeredEntityId, bool isInsideNow)
+
+        public void UpdateInteractions(uint triggerId, List<uint> currentEntities)
         {
-            if (!_states.TryGetValue(triggerId, out var state))
+            if (!_previous.ContainsKey(triggerId))
             {
-                state = new TriggerState();
-                _states[triggerId] = state;
+                _previous[triggerId] = new();
             }
 
-            bool wasInside = state.EntitiesInside.Contains(triggeredEntityId);
+            foreach (var entityId in currentEntities)
+            {
+                if (_previous[triggerId].Contains(entityId))
+                {
+                    _events.Add(new TriggerEvent(
+                        triggerId,
+                        entityId,
+                        TriggerEventType.Stay));
+                }
+                else
+                {
+                    _previous[triggerId].Add(entityId);
+                    _events.Add(new TriggerEvent(
+                        triggerId,
+                        entityId,
+                        TriggerEventType.Enter));
+                }
+            }
 
-            if (isInsideNow && !wasInside)
+            foreach (var entityId in _previous[triggerId].ToArray())
             {
-                state.EntitiesInside.Add(triggeredEntityId);
-                _events.Add(new TriggerEvent(
-                    triggerId, triggeredEntityId, TriggerEventType.Enter));
-            }
-            else if (!isInsideNow && wasInside)
-            {
-                state.EntitiesInside.Remove(triggeredEntityId);
-                _events.Add(new TriggerEvent(
-                    triggerId, triggeredEntityId, TriggerEventType.Exit));
-            }
-            else if (isInsideNow && wasInside)
-            {
-                _events.Add(new TriggerEvent(
-                    triggerId, triggeredEntityId, TriggerEventType.Stay));
+                if (!currentEntities.Contains(entityId))
+                {
+                    _previous[triggerId].Remove(entityId);
+                    _events.Add(new TriggerEvent(
+                        triggerId,
+                        entityId,
+                        TriggerEventType.Exit));
+                }
             }
         }
 
-        public IReadOnlyList<TriggerEvent> ConsumeEvents()
+        public void RemoveTrigger(uint triggerId)
         {
-            var result = _events;
+            UpdateInteractions(triggerId, new());
+            _previous.Remove(triggerId);
+        }
+
+        public void RemoveEntity(uint entityId)
+        {
+            foreach (var kvp in _previous)
+            {
+                uint triggerId = kvp.Key;
+                var insideSet = kvp.Value;
+
+                if (insideSet.Remove(entityId))
+                {
+                    _events.Add(new TriggerEvent(
+                        triggerId,
+                        entityId,
+                        TriggerEventType.Exit));
+                }
+            }
+        }
+
+        public IEnumerable<TriggerEvent> ConsumeEvents()
+        {
+            var result = _events.ToList();
             _events.Clear();
             return result;
         }

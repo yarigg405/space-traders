@@ -3,7 +3,7 @@ using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
-using Assets.Code.ServerPart.Gameplay.Features.PointsOfInteres.Factories;
+using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory;
 using Assets.Code.ServerPart.Worlds;
 using VContainer;

@@ -30,6 +30,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 pos.y += mover.Velocity.y * _time.DeltaTime;
 
                 mover.ReplaceGlobalPosition(pos);
+                mover.isNeedSynchronize = true;
             }
         }
     }

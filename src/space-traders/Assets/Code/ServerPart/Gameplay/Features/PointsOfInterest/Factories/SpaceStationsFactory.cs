@@ -5,14 +5,15 @@ using Assets.Code.ServerPart.Physics.Data;
 using Unity.Mathematics;
 
 
-namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInteres.Factories
+namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
 {
     public sealed class SpaceStationsFactory
     {
         private readonly IIdentifierService _identifier;
         private readonly IPhysicsShapesProvider _physicsShapesProvider;
 
-        public SpaceStationsFactory(IIdentifierService identifier, IPhysicsShapesProvider physicsShapesProvider)
+        public SpaceStationsFactory(IIdentifierService identifier,
+            IPhysicsShapesProvider physicsShapesProvider)
         {
             _identifier = identifier;
             _physicsShapesProvider = physicsShapesProvider;
@@ -30,10 +31,27 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInteres.Factories
                 .AddViewPath(stationPrefabName)
                 .AddGlobalPosition(at)
                 .AddCurrentRotationY(0)
-                .AddPhysicShape(_physicsShapesProvider.GetShapeForPrefab(stationPrefabName))
-
-                .With(x => x.isNeedInit = true)
+                .AddChildrenEntities(new())
+                .AddCollectCollisionsInterval(1f)
+                .AddCollectCollisionsTimer(0f)
                 ;
+
+
+
+            var triggers = _physicsShapesProvider.GetShapeForPrefab(stationPrefabName);
+            foreach (var trigger in triggers)
+            {
+                var triggerEntity = CreateEntity.Empty(contexts)
+                      .AddId(_identifier.Next())
+                      .AddParentEntity(entity.Id)
+                      .With(x => x.isTrigger = true)
+                      .AddPhysicsRadius(trigger.Radius)
+                      .AddGlobalPosition(at + trigger.LocalCenter)
+                      .AddCollisionsBuffer(new(4))
+                      ;
+
+                entity.ChildrenEntities.Add(triggerEntity);
+            }
 
             return entity;
         }

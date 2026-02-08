@@ -8,17 +8,17 @@
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherServerEntity;
+    static Entitas.IMatcher<GameEntity> _matcherReadyToCollectCollisions;
 
-    public static Entitas.IMatcher<GameEntity> ServerEntity {
+    public static Entitas.IMatcher<GameEntity> ReadyToCollectCollisions {
         get {
-            if (_matcherServerEntity == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.ServerEntity);
+            if (_matcherReadyToCollectCollisions == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.ReadyToCollectCollisions);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherServerEntity = matcher;
+                _matcherReadyToCollectCollisions = matcher;
             }
 
-            return _matcherServerEntity;
+            return _matcherReadyToCollectCollisions;
         }
     }
 }
@@ -33,18 +33,18 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Common.Components.ServerEntity serverEntityComponent = new Assets.Code.Common.Components.ServerEntity();
+    static readonly Assets.Code.Common.Components.ReadyToCollectCollisions readyToCollectCollisionsComponent = new Assets.Code.Common.Components.ReadyToCollectCollisions();
 
-    public bool isServerEntity {
-        get { return HasComponent(GameComponentsLookup.ServerEntity); }
+    public bool isReadyToCollectCollisions {
+        get { return HasComponent(GameComponentsLookup.ReadyToCollectCollisions); }
         set {
-            if (value != isServerEntity) {
-                var index = GameComponentsLookup.ServerEntity;
+            if (value != isReadyToCollectCollisions) {
+                var index = GameComponentsLookup.ReadyToCollectCollisions;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : serverEntityComponent;
+                            : readyToCollectCollisionsComponent;
 
                     AddComponent(index, component);
                 } else {

@@ -3,7 +3,6 @@ using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Networking;
 using Entitas;
 using System.Collections.Generic;
-using UnityEngine;
 
 
 namespace Assets.Code.ClientPart.Gameplay.Features.Player.Systems
@@ -26,17 +25,13 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Systems
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
             return context.CreateCollector(GameMatcher.AllOf(
-                GameMatcher.Player,
-                GameMatcher.PlayerNetworkId,
-                GameMatcher.Transform)
+                GameMatcher.PlayerNetworkId)
                 .Added());
         }
 
         protected override bool Filter(GameEntity entity)
         {
-            return entity.isPlayer &&
-                entity.hasPlayerNetworkId &&
-                entity.hasTransform;
+            return entity.hasPlayerNetworkId;
         }
 
         protected override void Execute(List<GameEntity> players)

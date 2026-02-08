@@ -1,6 +1,5 @@
 ﻿using Assets.Code.Common;
 using Entitas;
-using Unity.Mathematics;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -20,13 +19,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         {
             foreach (var entity in _entities)
             {
-                var x = entity.GlobalPosition.x;
-                var y = entity.GlobalPosition.y;
-
-                int quadrantX = (int)math.floor((x + GameConstants.GAME_SCENE_HALF_QUADRANT_SIZE) / GameConstants.GAME_SCENE_QUADRANT_SIZE);
-                int quadrantY = (int)math.floor((y + GameConstants.GAME_SCENE_HALF_QUADRANT_SIZE) / GameConstants.GAME_SCENE_QUADRANT_SIZE);
-
-                entity.ReplaceQuadrantIndex(new(quadrantX, quadrantY));
+                var quadrantIndex = entity.GlobalPosition.ToQuadrantIndex();
+                entity.ReplaceQuadrantIndex(quadrantIndex);
             }
         }
     }
