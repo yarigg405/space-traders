@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Code.Common.Components
 {
-    [Game] public sealed class Velocity : IComponent { public Vector2 Value; }
+    [Game] public sealed class Velocity : ISerializeComponent { public Vector2 Value; }
     [Game] public sealed class VelocityAgility : ISerializeComponent { public float Value; }
 
     [Game, Input] public sealed class CurrentSpeedModifier : ISerializeComponent { public float Value; }

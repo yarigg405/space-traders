@@ -22,6 +22,7 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(MaxMoveSpeed)] = "mms",
             [typeof(MovingAcceleration)] = "ma",
             [typeof(RotationSpeed)] = "rs",
+            [typeof(Velocity)] = "v",
             [typeof(VelocityAgility)] = "va",
             [typeof(CurrentSpeedModifier)] = "csm",
             [typeof(Moving)] = "m",
@@ -38,6 +39,7 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(SkyboxCoordinates)] = "sc",
             [typeof(QuadrantIndex)] = "qi",
             [typeof(PhysicsRadius)] = "pr",
+            [typeof(Mass)] = "ms",
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

@@ -37,6 +37,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Factory
                 .AddMaxMoveSpeed(15f)
                 .AddMovingAcceleration(3f)
                 .AddPhysicsRadius(5)
+                .AddMass(100)
                 ;
 
             return player;

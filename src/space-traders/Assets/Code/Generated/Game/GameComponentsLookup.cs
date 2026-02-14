@@ -24,42 +24,43 @@ public static class GameComponentsLookup {
     public const int Id = 13;
     public const int KeepDistanceMinMax = 14;
     public const int LocalPosition = 15;
-    public const int MaxMoveSpeed = 16;
-    public const int MovementTargetId = 17;
-    public const int Moving = 18;
-    public const int MovingAcceleration = 19;
-    public const int NeedSynchronize = 20;
-    public const int OrbitingRadius = 21;
-    public const int ParentEntity = 22;
-    public const int PhysicShape = 23;
-    public const int PhysicsRadius = 24;
-    public const int Planet = 25;
-    public const int Player = 26;
-    public const int PlayerNetworkId = 27;
-    public const int ProcessedCollisions = 28;
-    public const int QuadrantIndex = 29;
-    public const int ReadyToCollectCollisions = 30;
-    public const int Rigidbody = 31;
-    public const int RotationSpeed = 32;
-    public const int SelfDestructTimer = 33;
-    public const int Ship = 34;
-    public const int SkyboxCoordinates = 35;
-    public const int Station = 36;
-    public const int StationDockingBay = 37;
-    public const int TargetRotation = 38;
-    public const int Transform = 39;
-    public const int Trigger = 40;
-    public const int Velocity = 41;
-    public const int VelocityAgility = 42;
-    public const int View = 43;
-    public const int ViewPath = 44;
-    public const int ViewPrefab = 45;
-    public const int WarpDataContainer = 46;
-    public const int WarpFinishCoordinates = 47;
-    public const int Warping = 48;
-    public const int WarpPreparation = 49;
+    public const int Mass = 16;
+    public const int MaxMoveSpeed = 17;
+    public const int MovementTargetId = 18;
+    public const int Moving = 19;
+    public const int MovingAcceleration = 20;
+    public const int NeedSynchronize = 21;
+    public const int OrbitingRadius = 22;
+    public const int ParentEntity = 23;
+    public const int PhysicShape = 24;
+    public const int PhysicsRadius = 25;
+    public const int Planet = 26;
+    public const int Player = 27;
+    public const int PlayerNetworkId = 28;
+    public const int ProcessedCollisions = 29;
+    public const int QuadrantIndex = 30;
+    public const int ReadyToCollectCollisions = 31;
+    public const int Rigidbody = 32;
+    public const int RotationSpeed = 33;
+    public const int SelfDestructTimer = 34;
+    public const int Ship = 35;
+    public const int SkyboxCoordinates = 36;
+    public const int Station = 37;
+    public const int StationDockingBay = 38;
+    public const int TargetRotation = 39;
+    public const int Transform = 40;
+    public const int Trigger = 41;
+    public const int Velocity = 42;
+    public const int VelocityAgility = 43;
+    public const int View = 44;
+    public const int ViewPath = 45;
+    public const int ViewPrefab = 46;
+    public const int WarpDataContainer = 47;
+    public const int WarpFinishCoordinates = 48;
+    public const int Warping = 49;
+    public const int WarpPreparation = 50;
 
-    public const int TotalComponents = 50;
+    public const int TotalComponents = 51;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -78,6 +79,7 @@ public static class GameComponentsLookup {
         "Id",
         "KeepDistanceMinMax",
         "LocalPosition",
+        "Mass",
         "MaxMoveSpeed",
         "MovementTargetId",
         "Moving",
@@ -131,6 +133,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.Id),
         typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
         typeof(Assets.Code.Common.Components.LocalPosition),
+        typeof(Assets.Code.Common.Components.Mass),
         typeof(Assets.Code.Common.Components.MaxMoveSpeed),
         typeof(Assets.Code.Common.Components.MovementTargetId),
         typeof(Assets.Code.Common.Components.Moving),

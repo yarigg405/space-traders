@@ -39,14 +39,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                     _synchronizator.UpdateComponentsForEntity(player,
                         MovementExtensions.GetMovementComponentsForReset());
                 }
-
-
-                //var player = _game.GetEntityWithId(input.InputConsumerEntityId);
-
-                //player.SetWarpTo(input.WarpFinishCoordinates.GetRandomCoordinatesAroundPointZX(50f));
-
-                //_synchronizator.UpdateComponentsForEntity(player,
-                //    MovementExtensions.GetMovementComponentsForReset());
             }
         }
     }

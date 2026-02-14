@@ -8,11 +8,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics
     {
         public PhysicsServerFeature(ISystemFactory systems)
         {
+            Add(systems.Create<PhysicPushingSystem>());
             Add(systems.Create<CollectCollisionsIntervalSystem>());
             Add(systems.Create<CastForTriggersInteractionsSystem>());
             Add(systems.Create<TriggerEventHandlersSystem>());
-
-            Add(systems.Create<CleanupCollisionsBufferSystem>());
         }
     }
 }

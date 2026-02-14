@@ -1,4 +1,5 @@
-﻿using Assets.Code.Common.Serialization;
+﻿
+using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Extensions;
 using Assets.Code.ServerPart.Networking;
 using Unity.Mathematics;

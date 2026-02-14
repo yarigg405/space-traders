@@ -11,8 +11,9 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class Trigger : IComponent { }
 
     [Game] public sealed class CollisionsBuffer : IComponent { public List<uint> Value; }
-    [Game] public sealed class ProcessedCollisions : IComponent{ public List<uint> Value; }
+    [Game] public sealed class ProcessedCollisions : IComponent { public List<uint> Value; }
     [Game] public sealed class CollectCollisionsInterval : IComponent { public float Value; }
     [Game] public sealed class CollectCollisionsTimer : IComponent { public float Value; }
     [Game] public sealed class ReadyToCollectCollisions : IComponent { }
+    [Game] public sealed class Mass : ISerializeComponent { public float Value; }
 }
