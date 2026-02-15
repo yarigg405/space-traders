@@ -50,7 +50,7 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<PlayerProvider>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<PlayerShipController>(Lifetime.Scoped).AsSelf();
-            Builder.Register<PlayerQuadrantChangeObserver>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
+            Builder.Register<PlayerQuadrantChangeObserver>(Lifetime.Scoped).AsSelf();
         }
     }
 }

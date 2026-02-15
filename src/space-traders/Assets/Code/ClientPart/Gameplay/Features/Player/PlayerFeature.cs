@@ -9,8 +9,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player
         public PlayerFeature(ISystemFactory systems)
         {
             Add(systems.Create<BindPlayerServicesSystem>());
-
-
         }
     }
 }

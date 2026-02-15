@@ -37,30 +37,31 @@ public static class GameComponentsLookup {
     public const int Planet = 26;
     public const int Player = 27;
     public const int PlayerNetworkId = 28;
-    public const int ProcessedCollisions = 29;
-    public const int QuadrantIndex = 30;
-    public const int ReadyToCollectCollisions = 31;
-    public const int Rigidbody = 32;
-    public const int RotationSpeed = 33;
-    public const int SelfDestructTimer = 34;
-    public const int Ship = 35;
-    public const int SkyboxCoordinates = 36;
-    public const int Station = 37;
-    public const int StationDockingBay = 38;
-    public const int TargetRotation = 39;
-    public const int Transform = 40;
-    public const int Trigger = 41;
-    public const int Velocity = 42;
-    public const int VelocityAgility = 43;
-    public const int View = 44;
-    public const int ViewPath = 45;
-    public const int ViewPrefab = 46;
-    public const int WarpDataContainer = 47;
-    public const int WarpFinishCoordinates = 48;
-    public const int Warping = 49;
-    public const int WarpPreparation = 50;
+    public const int PreviousFrameLocalPosition = 29;
+    public const int ProcessedCollisions = 30;
+    public const int QuadrantIndex = 31;
+    public const int ReadyToCollectCollisions = 32;
+    public const int Rigidbody = 33;
+    public const int RotationSpeed = 34;
+    public const int SelfDestructTimer = 35;
+    public const int Ship = 36;
+    public const int SkyboxCoordinates = 37;
+    public const int Station = 38;
+    public const int StationDockingBay = 39;
+    public const int TargetRotation = 40;
+    public const int Transform = 41;
+    public const int Trigger = 42;
+    public const int Velocity = 43;
+    public const int VelocityAgility = 44;
+    public const int View = 45;
+    public const int ViewPath = 46;
+    public const int ViewPrefab = 47;
+    public const int WarpDataContainer = 48;
+    public const int WarpFinishCoordinates = 49;
+    public const int Warping = 50;
+    public const int WarpPreparation = 51;
 
-    public const int TotalComponents = 51;
+    public const int TotalComponents = 52;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -92,6 +93,7 @@ public static class GameComponentsLookup {
         "Planet",
         "Player",
         "PlayerNetworkId",
+        "PreviousFrameLocalPosition",
         "ProcessedCollisions",
         "QuadrantIndex",
         "ReadyToCollectCollisions",
@@ -146,6 +148,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.Planet),
         typeof(Assets.Code.Common.Components.Player),
         typeof(Assets.Code.Common.Components.PlayerNetworkId),
+        typeof(Assets.Code.Common.Components.PreviousFrameLocalPosition),
         typeof(Assets.Code.Common.Components.ProcessedCollisions),
         typeof(Assets.Code.Common.Components.QuadrantIndex),
         typeof(Assets.Code.Common.Components.ReadyToCollectCollisions),

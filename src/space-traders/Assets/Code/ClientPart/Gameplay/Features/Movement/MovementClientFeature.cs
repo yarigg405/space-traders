@@ -1,4 +1,5 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features.Movement.Systems;
+using Assets.Code.ClientPart.Gameplay.Features.Player.Systems;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Movement.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Systems;
@@ -10,6 +11,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
     {
         public MovementClientFeature(ISystemFactory systems)
         {
+            Add(systems.Create<PlayerPreviousFramePositionSystem>());
             Add(systems.Create<OrbitMovingSystem>());
             Add(systems.Create<KeepDistanceSystem>());
 
@@ -23,6 +25,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
 
             Add(systems.Create<UpdateQuadrantIndexSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());
+            Add(systems.Create<UpdatePlayerQuadrantSystem>());
 
             Add(systems.Create<UpdateSkyboxSpaceStateSystem>());
             Add(systems.Create<UpdateSkyboxLocalPositionSystem>());

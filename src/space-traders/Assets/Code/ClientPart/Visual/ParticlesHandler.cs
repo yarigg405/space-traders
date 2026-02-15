@@ -1,5 +1,7 @@
-﻿using Assets.Code.ClientPart.Visual.Player;
+﻿using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.ClientPart.Visual.Player;
 using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using VContainer.Unity;
@@ -10,10 +12,15 @@ namespace Assets.Code.ClientPart.Visual
     internal sealed class ParticlesHandler : IStartable, IDisposable
     {
         private readonly PlayerQuadrantChangeObserver _playerObserver;
+        private readonly IPlayerProvider _playerProvider;
 
-        public ParticlesHandler(PlayerQuadrantChangeObserver playerObserver)
+        private readonly HashSet<HandledParticle> _handledParticles = new();
+
+
+        public ParticlesHandler(PlayerQuadrantChangeObserver playerObserver, IPlayerProvider playerProvider)
         {
             _playerObserver = playerObserver;
+            _playerProvider = playerProvider;
         }
 
         void IStartable.Start()
@@ -28,7 +35,25 @@ namespace Assets.Code.ClientPart.Visual
 
         private void OnPlayerQuadrantChanged(int2 playerQuadrant)
         {
-            Debug.Log("Quadrant Changed");
+            Debug.Log("Quadrant changed");
+
+            var entity = _playerProvider.PlayerEntity;
+            var delta = entity.LocalPosition - entity.PreviousFrameLocalPosition;
+
+            foreach (var handledParticle in _handledParticles)
+            {
+                handledParticle.TeleportOffset(delta);
+            }
+        }
+
+        internal void AddParticle(HandledParticle handledParticle)
+        {
+            _handledParticles.Add(handledParticle);
+        }
+
+        internal void RemoveParticle(HandledParticle handledParticle)
+        {
+            _handledParticles.Remove(handledParticle);
         }
     }
 }
