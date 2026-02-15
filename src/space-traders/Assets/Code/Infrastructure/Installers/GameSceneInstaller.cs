@@ -1,6 +1,8 @@
 ﻿using Assets.Code.ClientPart.CameraSystem;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.ClientPart.Visual;
+using Assets.Code.ClientPart.Visual.Player;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
 using UnityEngine;
@@ -35,6 +37,7 @@ namespace Assets.Code.Infrastructure.Installers
                 .AsImplementedInterfaces();
 
             Builder.Register<SkyboxSpaceState>(Lifetime.Scoped);
+            Builder.Register<ParticlesHandler>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterInputServices()
@@ -47,6 +50,7 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<PlayerProvider>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<PlayerShipController>(Lifetime.Scoped).AsSelf();
+            Builder.Register<PlayerQuadrantChangeObserver>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
         }
     }
 }
