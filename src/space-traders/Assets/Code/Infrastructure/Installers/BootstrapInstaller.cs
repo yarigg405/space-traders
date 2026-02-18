@@ -3,7 +3,6 @@ using Assets.Code.ClientPart.AssetManagement;
 using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Networking;
-using Assets.Code.ClientPart.View.Factory;
 using Assets.Code.Common.StaticData;
 using Assets.Code.Common.Time;
 using Assets.Code.Infrastructure.DI;
@@ -49,7 +48,6 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
-            Builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
