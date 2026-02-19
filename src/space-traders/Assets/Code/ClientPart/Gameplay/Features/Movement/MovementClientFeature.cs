@@ -25,7 +25,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
 
             Add(systems.Create<UpdateQuadrantIndexSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());
-            Add(systems.Create<UpdatePlayerQuadrantSystem>());
+            Add(systems.Create<UpdatePlayerViewModelSystem>());
 
             Add(systems.Create<UpdateSkyboxSpaceStateSystem>());
             Add(systems.Create<UpdateSkyboxLocalPositionSystem>());

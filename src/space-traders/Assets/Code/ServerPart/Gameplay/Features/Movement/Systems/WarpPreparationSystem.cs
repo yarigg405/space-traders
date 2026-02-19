@@ -39,6 +39,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                         entity.ReplaceWarpDataContainer(container);
 
                         entity.RemoveWarpFinishCoordinates();
+                        entity.isWarping = true;
                         entity.isWarpPreparation = false;
                         entity.isMoving = false;
                     }

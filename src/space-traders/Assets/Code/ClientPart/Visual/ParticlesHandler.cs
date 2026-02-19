@@ -11,13 +11,13 @@ namespace Assets.Code.ClientPart.Visual
 {
     internal sealed class ParticlesHandler : IStartable, IDisposable
     {
-        private readonly PlayerQuadrantChangeObserver _playerObserver;
+        private readonly PlayerViewModel _playerObserver;
         private readonly IPlayerProvider _playerProvider;
 
         private readonly HashSet<HandledParticle> _handledParticles = new();
 
 
-        public ParticlesHandler(PlayerQuadrantChangeObserver playerObserver, IPlayerProvider playerProvider)
+        public ParticlesHandler(PlayerViewModel playerObserver, IPlayerProvider playerProvider)
         {
             _playerObserver = playerObserver;
             _playerProvider = playerProvider;

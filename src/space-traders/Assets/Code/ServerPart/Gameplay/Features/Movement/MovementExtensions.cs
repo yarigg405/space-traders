@@ -41,8 +41,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                 .ResetMovingComponents()
                 .AddWarpFinishCoordinates(warpCoordinates)
-                .With(x=>x.isWarpPreparation  = true)
-                .With(x=>x.isMoving  = false)
+                .With(x => x.isWarpPreparation = true)
+                .With(x => x.isMoving = false)
                 ;
             return entity;
         }
@@ -52,6 +52,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                 .RemoveWarpDataContainer()
                 .With(x => x.isWarpPreparation = false)
+                .With(x => x.isWarping = false)
                 .With(x => x.isMoving = true)
                 ;
 

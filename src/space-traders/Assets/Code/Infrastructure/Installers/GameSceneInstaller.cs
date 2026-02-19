@@ -18,6 +18,7 @@ namespace Assets.Code.Infrastructure.Installers
         [SerializeField] private CameraOrbitMoveController _cameraOrbitMoveController;
         [SerializeField] private CameraTargetController _cameraTargetController;
         [SerializeField] private SkyboxCamera _skyboxCamera;
+        [SerializeField] private PlayerWarpEffectView _playerWarpEffectView;
 
         protected override void Install()
         {
@@ -37,6 +38,9 @@ namespace Assets.Code.Infrastructure.Installers
                 .WithParameter(_skyboxCamera)
                 .AsImplementedInterfaces();
 
+            Builder.Register<PlayerWarpEffectController>(Lifetime.Scoped)
+                .WithParameter(_playerWarpEffectView)
+                .AsImplementedInterfaces();
 
             Builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<SkyboxSpaceState>(Lifetime.Scoped);
@@ -53,7 +57,7 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<PlayerProvider>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<PlayerShipController>(Lifetime.Scoped).AsSelf();
-            Builder.Register<PlayerQuadrantChangeObserver>(Lifetime.Scoped).AsSelf();
+            Builder.Register<PlayerViewModel>(Lifetime.Scoped).AsSelf();
         }
     }
 }
