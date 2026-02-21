@@ -1,5 +1,95 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &366026517023037232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8465057195562032536}
+  - component: {fileID: 5691941506127067612}
+  - component: {fileID: 4154502090976387346}
+  m_Layer: 0
+  m_Name: warp-engine-test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8465057195562032536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366026517023037232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.84, z: 1.344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1364959422629691940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5691941506127067612
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366026517023037232}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4154502090976387346
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366026517023037232}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9d0dffb6d6f63dd46a698bceb857ff5d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2161831387200955818
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +300,7 @@ GameObject:
   - component: {fileID: -5765330425948439694}
   - component: {fileID: 5020663180218514601}
   - component: {fileID: 1568276404919247647}
+  - component: {fileID: 4996651194817053969}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -319,6 +410,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4996651194817053969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616673082105351056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b244901a9f6764e9be4ac3f68a40e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Assets.Code.ClientPart.Visual.ShipEnginesView
+  _behaviour: {fileID: 7587300388431576714}
+  _commonMoveObjects:
+  - {fileID: 8398065536843831933}
+  - {fileID: 2729334166835157539}
+  _warpMoveObjects:
+  - {fileID: 366026517023037232}
 --- !u!1 &8398065536843831933
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +637,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4248870661376794, guid: 422ddffcc098ca140ad705e2034aa951, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2357986598434852179}
+    - targetCorrespondingSourceObject: {fileID: 4248870661376794, guid: 422ddffcc098ca140ad705e2034aa951, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8465057195562032536}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422ddffcc098ca140ad705e2034aa951, type: 3}
 --- !u!4 &1364959422629691940 stripped

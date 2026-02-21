@@ -24,6 +24,7 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class Destructed : ISerializeComponent { }
     [Game] public sealed class SelfDestructTimer : ISerializeComponent { public float Value; }
     [Game] public sealed class NeedSynchronize : IComponent { }
+    [Game] public sealed class ViewModelComponent : IComponent { public ViewModel Value; }
 
     [Game] public sealed class GlobalPosition : ISerializeComponent { public double2 Value; }
     [Game] public sealed class LocalPosition : IComponent { public Vector3 Value; }

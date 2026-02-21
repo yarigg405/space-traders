@@ -1,7 +1,8 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
-using Assets.Code.ClientPart.Visual.Player;
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using VContainer.Unity;
@@ -9,28 +10,28 @@ using VContainer.Unity;
 
 namespace Assets.Code.ClientPart.Visual
 {
-    internal sealed class ParticlesHandler : IStartable, IDisposable
+    internal sealed class ParticlesHandler : IAsyncStartable, IDisposable
     {
-        private readonly PlayerViewModel _playerObserver;
         private readonly IPlayerProvider _playerProvider;
-
         private readonly HashSet<HandledParticle> _handledParticles = new();
 
 
-        public ParticlesHandler(PlayerViewModel playerObserver, IPlayerProvider playerProvider)
+        public ParticlesHandler(IPlayerProvider playerProvider)
         {
-            _playerObserver = playerObserver;
             _playerProvider = playerProvider;
         }
 
-        void IStartable.Start()
+
+
+        async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
-            _playerObserver.PlayerQuadrant.OnChange += OnPlayerQuadrantChanged;
+            await UniTask.WaitUntil(() => _playerProvider.PlayerEntity != null);
+            _playerProvider.PlayerEntity.ViewModel.QuadrantIndex.OnChange += OnPlayerQuadrantChanged;
         }
 
         void IDisposable.Dispose()
         {
-            _playerObserver.PlayerQuadrant.OnChange -= OnPlayerQuadrantChanged;
+            _playerProvider.PlayerEntity.ViewModel.QuadrantIndex.OnChange -= OnPlayerQuadrantChanged;
         }
 
         private void OnPlayerQuadrantChanged(int2 playerQuadrant)

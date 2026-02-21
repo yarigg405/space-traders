@@ -1,35 +1,36 @@
 ﻿using Assets.Code.ClientPart.CameraSystem;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Common;
+using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 using VContainer.Unity;
 
 
 namespace Assets.Code.ClientPart.Visual.Player
 {
-    internal sealed class PlayerWarpEffectController : IStartable, IDisposable, ILateTickable
+    internal sealed class PlayerWarpEffectController : IAsyncStartable, IDisposable, ILateTickable
     {
         private readonly PlayerWarpEffectView _warpVfx;
         private readonly IPlayerProvider _playerProvider;
         private readonly SkyboxSpaceState _skyboxSpace;
-        private readonly PlayerViewModel _viewModel;
 
 
         public PlayerWarpEffectController(PlayerWarpEffectView warpVfx,
-            IPlayerProvider playerProvider, SkyboxSpaceState skyboxSpace,
-            PlayerViewModel viewModel)
+            IPlayerProvider playerProvider, SkyboxSpaceState skyboxSpace)
         {
             _warpVfx = warpVfx;
             _playerProvider = playerProvider;
             _skyboxSpace = skyboxSpace;
-            _viewModel = viewModel;
         }
 
 
-        void IStartable.Start()
+
+        async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
-            _viewModel.PlayerIsWarping.OnChange += OnWarpStateChanged;
+            await UniTask.WaitUntil(() => _playerProvider.PlayerEntity != null);
+            _playerProvider.PlayerEntity.ViewModel.IsWarping.OnChange += OnWarpStateChanged;
         }
 
         void ILateTickable.LateTick()
@@ -62,7 +63,7 @@ namespace Assets.Code.ClientPart.Visual.Player
 
         void IDisposable.Dispose()
         {
-            _viewModel.PlayerIsWarping.OnChange -= OnWarpStateChanged;
+            _playerProvider.PlayerEntity.ViewModel.IsWarping.OnChange -= OnWarpStateChanged;
         }
 
 

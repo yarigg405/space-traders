@@ -1,7 +1,7 @@
-﻿using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
+﻿using Assets.Code.Common;
+using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Worlds;
 using Unity.Mathematics;
-
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
@@ -28,7 +28,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
             //var spawnPoint = new double2(0, 2_500_000);//.GetRandomCoordinatesAroundPointZX(50f);
             //var spawnPoint = new double2(0, 5_795_500_000);
             //var spawnPoint = new double2(0, 0).GetRandomCoordinatesAroundPointZX(50f);
-            var spawnPoint = new double2(24990, 24990);
+            var spawnPoint = new double2(24990, 24990).GetRandomCoordinatesAroundPointZX(50f);
 
             var newPlayerEntity = _playerFactory.CreatePlayer(clientId, spawnPoint, ctxs);
             return newPlayerEntity;

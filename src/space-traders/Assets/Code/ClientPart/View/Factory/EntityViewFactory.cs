@@ -24,6 +24,8 @@ namespace Assets.Code.ClientPart.View.Factory
             EntityBehaviour prefab = _assetProvider.LoadAsset<EntityBehaviour>(entity.ViewPath);
             var view = _instantiator.Instantiate(prefab,
                 _farAwayPos.GetRandomCoordinatesAroundPointZX(15f), Quaternion.identity);
+
+            entity.AddViewModel(new());
             view.SetEntity(entity);
 
             return view;
@@ -34,6 +36,8 @@ namespace Assets.Code.ClientPart.View.Factory
             EntityBehaviour prefab = entity.ViewPrefab;
             var view = _instantiator.Instantiate(prefab,
                 _farAwayPos.GetRandomCoordinatesAroundPointZX(15f), Quaternion.identity);
+
+            entity.AddViewModel(new());
             view.SetEntity(entity);
 
             return view;

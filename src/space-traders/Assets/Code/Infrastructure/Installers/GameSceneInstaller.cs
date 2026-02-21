@@ -57,7 +57,6 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<PlayerProvider>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<PlayerShipController>(Lifetime.Scoped).AsSelf();
-            Builder.Register<PlayerViewModel>(Lifetime.Scoped).AsSelf();
         }
     }
 }

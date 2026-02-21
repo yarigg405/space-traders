@@ -36,7 +36,8 @@ namespace Assets.Code.ClientPart.Visual
         private async UniTask SetTeleportOff()
         {
             await UniTask.NextFrame();
-            _vfx.SetBool(_needTeleportProperty, false);
+            if (_vfx != null)
+                _vfx.SetBool(_needTeleportProperty, false);
         }
     }
 }
