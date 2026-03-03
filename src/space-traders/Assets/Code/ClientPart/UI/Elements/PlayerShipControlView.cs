@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using VContainer;
 
 
-namespace Assets.Code.UI.Elements
+namespace Assets.Code.ClientPart.UI.Elements
 {
     public class PlayerShipControlView : MonoBehaviour
     {
