@@ -26,7 +26,7 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<ScreensProvider>(Lifetime.Transient).AsImplementedInterfaces();
             Builder.Register<ScreenViewsProvider>(Lifetime.Singleton).AsImplementedInterfaces();
-            Builder.Register<UIManager>(Lifetime.Singleton);
+            Builder.Register<UIManager>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterScreens();
         }

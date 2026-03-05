@@ -1,4 +1,5 @@
-﻿using Assets.Code.UI.Infrastructure;
+﻿using Assets.Code.Common.DataContainers;
+using Assets.Code.UI.Infrastructure;
 
 
 namespace Assets.Code.UI.Screens
@@ -9,7 +10,7 @@ namespace Assets.Code.UI.Screens
         private readonly LayerUI_Popups _screenRoot;
         private readonly RequestDockPopupPresenter _presenter;
 
-        public RequestDockPopup(IScreenViewsProvider viewsProvider, 
+        public RequestDockPopup(IScreenViewsProvider viewsProvider,
             LayerUI_Popups screenRoot, RequestDockPopupPresenter presenter)
         {
             _viewsProvider = viewsProvider;
@@ -19,15 +20,19 @@ namespace Assets.Code.UI.Screens
 
         void IScreen.Show(object args)
         {
+            var dockingData = (DockingDataContainer)args;
             var view = _viewsProvider.GetView<RequestDockPopupView>();
-            _screenRoot.ShowView(view);
 
-         //   _presenter.Show(view, 
+            _screenRoot.ShowView(view);
+            _presenter.Show(view, dockingData);
         }
 
         void IScreen.Hide()
         {
-          //  _presenter.Hide();
+            var view = _viewsProvider.GetView<RequestDockPopupView>();
+
+            _presenter.Hide(view);
+            _screenRoot.HideView(view);
         }
     }
 }

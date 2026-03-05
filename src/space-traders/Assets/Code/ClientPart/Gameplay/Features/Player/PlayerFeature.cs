@@ -9,6 +9,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player
         public PlayerFeature(ISystemFactory systems)
         {
             Add(systems.Create<BindPlayerServicesSystem>());
+            Add(systems.Create<PlayerCanBeDockedSystem>());
+            Add(systems.Create<PlayerCanNotBeDockedSystem>());
         }
     }
 }

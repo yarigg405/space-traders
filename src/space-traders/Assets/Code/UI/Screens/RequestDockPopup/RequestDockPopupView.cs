@@ -11,5 +11,11 @@ namespace Assets.Code.UI.Screens
         [SerializeField] private TextMeshProUGUI _stationNameTmp;
         [SerializeField] private TextMeshProUGUI _dockNumTmp;
         [field: SerializeField] public Button RequestDockBtn { get; private set; }
+
+        internal void SetupView(uint dockId, uint stationId)
+        {
+            _stationNameTmp.text = $"Station: {stationId}";
+            _dockNumTmp.text = $"Docking Bay: {dockId}";
+        }
     }
 }

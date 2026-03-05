@@ -51,6 +51,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
                       .AddCollisionsBuffer(new(4))
                       .AddTriggerEnterEventHandler(new(4))
                       .AddTriggerExitEventHandler(new(4))
+                      .AddShipsInDockZone(new(4))
                       ;
 
                 entity.ChildrenEntities.Add(triggerEntity);

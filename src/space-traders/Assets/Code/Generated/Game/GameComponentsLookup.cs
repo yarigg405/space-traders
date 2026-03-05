@@ -44,27 +44,29 @@ public static class GameComponentsLookup {
     public const int RotationSpeed = 33;
     public const int SelfDestructTimer = 34;
     public const int Ship = 35;
-    public const int SkyboxCoordinates = 36;
-    public const int Station = 37;
-    public const int StationDockingBay = 38;
-    public const int TargetRotation = 39;
-    public const int Transform = 40;
-    public const int Trigger = 41;
-    public const int TriggerEnterEventHandler = 42;
-    public const int TriggerExitEventHandler = 43;
-    public const int TriggerStayEventHandler = 44;
-    public const int Velocity = 45;
-    public const int VelocityAgility = 46;
-    public const int View = 47;
-    public const int ViewModel = 48;
-    public const int ViewPath = 49;
-    public const int ViewPrefab = 50;
-    public const int WarpDataContainer = 51;
-    public const int WarpFinishCoordinates = 52;
-    public const int Warping = 53;
-    public const int WarpPreparation = 54;
+    public const int ShipCanBeDocked = 36;
+    public const int ShipsInDockZone = 37;
+    public const int SkyboxCoordinates = 38;
+    public const int Station = 39;
+    public const int StationDockingBay = 40;
+    public const int TargetRotation = 41;
+    public const int Transform = 42;
+    public const int Trigger = 43;
+    public const int TriggerEnterEventHandler = 44;
+    public const int TriggerExitEventHandler = 45;
+    public const int TriggerStayEventHandler = 46;
+    public const int Velocity = 47;
+    public const int VelocityAgility = 48;
+    public const int View = 49;
+    public const int ViewModel = 50;
+    public const int ViewPath = 51;
+    public const int ViewPrefab = 52;
+    public const int WarpDataContainer = 53;
+    public const int WarpFinishCoordinates = 54;
+    public const int Warping = 55;
+    public const int WarpPreparation = 56;
 
-    public const int TotalComponents = 55;
+    public const int TotalComponents = 57;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -103,6 +105,8 @@ public static class GameComponentsLookup {
         "RotationSpeed",
         "SelfDestructTimer",
         "Ship",
+        "ShipCanBeDocked",
+        "ShipsInDockZone",
         "SkyboxCoordinates",
         "Station",
         "StationDockingBay",
@@ -161,6 +165,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.RotationSpeed),
         typeof(Assets.Code.Common.Components.SelfDestructTimer),
         typeof(Assets.Code.Common.Components.Ship),
+        typeof(Assets.Code.Common.Components.ShipCanBeDocked),
+        typeof(Assets.Code.Common.Components.ShipsInDockZone),
         typeof(Assets.Code.Common.Components.SkyboxCoordinates),
         typeof(Assets.Code.Common.Components.Station),
         typeof(Assets.Code.Common.Components.StationDockingBay),

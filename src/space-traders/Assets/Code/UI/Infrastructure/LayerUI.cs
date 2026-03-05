@@ -7,6 +7,14 @@ namespace Assets.Code.UI.Infrastructure
     {
         public virtual void ShowView(UIScreenView view)
         {
+            view.transform.SetParent(transform);
+            view.transform.SetAsLastSibling();
+            view.transform.localPosition = Vector3.zero;
+        }
+
+        public virtual void HideView(UIScreenView view)
+        {
+            view.transform.SetAsFirstSibling();
         }
     }
 }

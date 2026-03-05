@@ -9,5 +9,6 @@ namespace Assets.Code.UI.Infrastructure
 
         void CloseScreen<TScreen>() where TScreen : IScreen;
         void OpenScreen<TScreen>(object args = null) where TScreen : IScreen;
+        bool IsScreenOpened<TScreen>() where TScreen : IScreen;
     }
 }
