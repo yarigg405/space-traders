@@ -45,9 +45,12 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
                       .AddId(_identifier.Next())
                       .AddParentEntity(entity.Id)
                       .With(x => x.isTrigger = true)
+                      .With(x => x.isStationDockingBay = true)
                       .AddPhysicsRadius(trigger.Radius)
                       .AddGlobalPosition(at + trigger.LocalCenter)
                       .AddCollisionsBuffer(new(4))
+                      .AddTriggerEnterEventHandler(new(4))
+                      .AddTriggerExitEventHandler(new(4))
                       ;
 
                 entity.ChildrenEntities.Add(triggerEntity);

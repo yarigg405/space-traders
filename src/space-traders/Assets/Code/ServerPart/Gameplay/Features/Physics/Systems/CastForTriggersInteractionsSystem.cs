@@ -64,9 +64,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
                     continue;
                 }
 
-                for (int c = 0; c < children.Count; c++)
-                    children[c].CollisionsBuffer.Clear();
-
                 for (int i = 0; i < entityCount; i++)
                 {
                     var entity = _entitiesBuffer[i];
@@ -125,8 +122,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
             for (int t = 0; t < triggerCount; t++)
             {
                 var trigger = _triggersBuffer[t];
-
-                trigger.CollisionsBuffer.Clear();
 
                 var triggerQuadrant = trigger.QuadrantIndex;
                 var triggerPos = trigger.GlobalPosition;

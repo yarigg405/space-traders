@@ -294,6 +294,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[SCENE SETUP]'
       objectReference: {fileID: 0}
+    - target: {fileID: 3696274842147498233, guid: ebb8832658e486345b17a12a510c2533, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.13629
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696274842147498233, guid: ebb8832658e486345b17a12a510c2533, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.943075
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696274842147498233, guid: ebb8832658e486345b17a12a510c2533, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.7452226
+      objectReference: {fileID: 0}
     - target: {fileID: 4804775314361159271, guid: ebb8832658e486345b17a12a510c2533, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

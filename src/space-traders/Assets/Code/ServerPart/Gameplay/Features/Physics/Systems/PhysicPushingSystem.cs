@@ -2,7 +2,6 @@
 using Assets.Code.ServerPart.Worlds.GameSynchronization;
 using Entitas;
 using System.Collections.Generic;
-using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 
