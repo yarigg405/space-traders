@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 namespace Yrr.Utils
 {
     [Serializable]
-    public struct ReactiveValue<T>
+    public sealed class ReactiveValue<T>
     {
         public event Action<T> OnChange;
 
@@ -24,7 +26,8 @@ namespace Yrr.Utils
 
         public void SetValue(T value)
         {
-            if (value.Equals(_currentValue)) return;
+            if (EqualityComparer<T>.Default.Equals(_currentValue, value))
+                return;
 
             _currentValue = value;
             OnChange?.Invoke(_currentValue);
