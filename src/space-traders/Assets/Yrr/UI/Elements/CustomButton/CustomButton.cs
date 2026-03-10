@@ -11,8 +11,6 @@ namespace Yrr.UI.Elements
 
         protected override void DoStateTransition(SelectionState state, bool instant)
         {
-            Debug.Log("State: " + state);
-
             base.DoStateTransition(state, instant);
 
             var number = (int)state;
