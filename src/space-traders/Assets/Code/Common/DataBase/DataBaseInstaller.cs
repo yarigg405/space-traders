@@ -11,6 +11,11 @@ namespace Assets.Code.Common.DataBase
         {
             var db = new SQLiteConnection(dbPath);
 
+            db.CreateTable<PlayerORM>();
+            db.CreateTable<CharacterORM>();
+            db.CreateTable<PlayerShipORM>();
+            db.CreateTable<CharacterLocationORM>();
+
             db.CreateTable<StarSystemORM>();
             db.CreateTable<PlanetORM>();
             db.CreateTable<SpaceStationORM>();
