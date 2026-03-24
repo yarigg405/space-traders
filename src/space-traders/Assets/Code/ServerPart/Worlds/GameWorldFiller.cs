@@ -1,4 +1,5 @@
-﻿using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
+﻿using Assets.Code.Common.StaticData;
+using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory;
 using Unity.Mathematics;
 
@@ -10,10 +11,17 @@ namespace Assets.Code.ServerPart.Worlds
         private readonly SpaceStationsFactory _spaceStationsFactory;
         private readonly SkyboxObjectFactory _skyboxFactory;
 
-        public GameWorldFiller(SpaceStationsFactory spaceStationsFactory, SkyboxObjectFactory skyboxFactory)
+        private readonly PlanetsRepository _planetsRepository;
+        private readonly SpaceStationsRepository _spaceStationsRepository;
+
+        public GameWorldFiller(SpaceStationsFactory spaceStationsFactory,
+            SkyboxObjectFactory skyboxFactory, PlanetsRepository planetsRepository,
+            SpaceStationsRepository spaceStationsRepository)
         {
             _spaceStationsFactory = spaceStationsFactory;
             _skyboxFactory = skyboxFactory;
+            _planetsRepository = planetsRepository;
+            _spaceStationsRepository = spaceStationsRepository;
         }
 
         public void FillWorld(string sceneName, Contexts contexts)
@@ -24,18 +32,24 @@ namespace Assets.Code.ServerPart.Worlds
 
         private void FillWithPlanets(string sceneName, Contexts contexts)
         {
-            //_skyboxFactory.CreatePlanet(new(0, 5_795_500_000), "Planet", contexts);
-            //_skyboxFactory.CreatePlanet(new(25000, 25000), "Planet", contexts);
+            var planets = _planetsRepository.GetPlanets(sceneName);
+
+            foreach (var planet in planets)
+            {
+                double2 pos = new(planet.PositionX, planet.PositionY);
+                _skyboxFactory.CreatePlanet(pos, planet.PrefabName, contexts);
+            }
         }
 
         private void FillWithStations(string sceneName, Contexts contexts)
         {
-            _spaceStationsFactory.CreateSpaceStation(double2.zero, contexts);
-            //_spaceStationsFactory.CreateSpaceStation(new double2(0, 25_000), contexts);
-            //_spaceStationsFactory.CreateSpaceStation(new double2(0, 250_000), contexts);
-            //_spaceStationsFactory.CreateSpaceStation(new double2(0, 2_500_000), contexts);
-            //_spaceStationsFactory.CreateSpaceStation(new double2(0, 25_000_000), contexts);
-            //_spaceStationsFactory.CreateSpaceStation(new double2(0, 250_000_000), contexts);
+            var stations = _spaceStationsRepository.GetStations(sceneName);
+
+            foreach (var station in stations)
+            {
+                double2 pos = new(station.PositionX, station.PositionY);
+                _spaceStationsFactory.CreateSpaceStation(pos, station.PrefabName, contexts);
+            }
         }
     }
 }

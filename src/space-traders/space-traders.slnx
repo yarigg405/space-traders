@@ -34,5 +34,6 @@
   <Project Path="Unity.InputSystem.TestFramework.csproj" />
   <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
   <Project Path="Unity.ProBuilder.Stl.csproj" />
+  <Project Path="sqlite.csproj" />
   <Project Path="Unity.Collections.Editor.csproj" />
 </Solution>

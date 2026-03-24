@@ -1,4 +1,6 @@
-﻿using Assets.Code.Infrastructure.DI;
+﻿using Assets.Code.Common.DataBase;
+using Assets.Code.Common.StaticData;
+using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
@@ -33,6 +35,10 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<ServerMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
                 builder.Register<ServerInputService>(Lifetime.Singleton).AsSelf();
+
+                builder.Register<DataBaseManager>(Lifetime.Singleton).AsImplementedInterfaces();
+                builder.Register<PlanetsRepository>(Lifetime.Singleton).AsSelf();
+                builder.Register<SpaceStationsRepository>(Lifetime.Singleton).AsSelf();
             });
         }
 

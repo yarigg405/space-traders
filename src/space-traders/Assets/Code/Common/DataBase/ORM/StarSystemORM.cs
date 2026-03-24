@@ -1,0 +1,22 @@
+﻿using SQLite;
+
+
+namespace Assets.Code.Common.DataBase.ORM
+{
+    [Table("StarSystems")]
+    public sealed class StarSystemORM
+    {
+        [PrimaryKey, AutoIncrement]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("name")]
+        public string Name { get; set; }
+
+        [Column("positionX")]
+        public float PositionX { get; set; }
+
+        [Column("positionY")]
+        public float PositionY { get; set; }
+    }
+}
