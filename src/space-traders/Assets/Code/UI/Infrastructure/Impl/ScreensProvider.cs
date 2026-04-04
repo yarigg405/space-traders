@@ -1,4 +1,5 @@
-﻿using VContainer;
+﻿using System;
+using VContainer;
 
 
 namespace Assets.Code.UI.Infrastructure.Impl
@@ -12,9 +13,14 @@ namespace Assets.Code.UI.Infrastructure.Impl
             _objectResolver = objectResolver;
         }
 
-        public IScreen GetScreen<TScreen>() where TScreen : IScreen
+        IScreen IScreensProvider.GetScreen<TScreen>()
         {
             return _objectResolver.Resolve<TScreen>();
+        }
+
+        IScreen IScreensProvider.GetScreen(Type screenType)
+        {
+            return _objectResolver.Resolve(screenType, null) as IScreen;
         }
     }
 }

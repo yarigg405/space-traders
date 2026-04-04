@@ -33,7 +33,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Systems
         {
             foreach (var entity in entities)
             {
-                _uiManager.CloseScreen<RequestDockPopup>();
+                _uiManager.CloseModal<RequestDockPopup>();
             }
         }
     }

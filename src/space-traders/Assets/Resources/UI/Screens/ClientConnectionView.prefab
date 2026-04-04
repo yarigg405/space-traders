@@ -1555,6 +1555,8 @@ MonoBehaviour:
   <HostPortIF>k__BackingField: {fileID: 8856459666092964047}
   <PlayerNameIF>k__BackingField: {fileID: 5910634351848766773}
   <HostPasswordIF>k__BackingField: {fileID: 3797742031098792235}
+  <BackButton>k__BackingField: {fileID: 8024820628029439058}
+  <ConnectButton>k__BackingField: {fileID: 7742564547804351035}
 --- !u!1 &6742620345141036417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,3 +2527,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7050965548707085729, guid: db752701b208144408aa05f9a3473e84, type: 3}
   m_PrefabInstance: {fileID: 3408289658749854110}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7742564547804351035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4917842884553960357, guid: db752701b208144408aa05f9a3473e84, type: 3}
+  m_PrefabInstance: {fileID: 3408289658749854110}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62749cd6d15ec2841a350ee0ef153190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Yrr::Yrr.UI.Elements.CustomButton

@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UI;
 using Yrr.Utils;
 
@@ -16,8 +15,6 @@ namespace Yrr.UI.Elements
             var number = (int)state;
             var buttonState = (CustomButtonState)number;
             CurrentState.SetValue(buttonState);
-
-            Debug.Log("ButtonState: " + CurrentState.Value);
         }
     }
 

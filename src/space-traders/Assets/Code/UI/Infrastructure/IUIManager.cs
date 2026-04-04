@@ -7,8 +7,13 @@ namespace Assets.Code.UI.Infrastructure
         event Action<IScreen> OnScreenClosed;
         event Action<IScreen> OnScreenOpened;
 
-        void CloseScreen<TScreen>() where TScreen : IScreen;
-        void OpenScreen<TScreen>(object args = null) where TScreen : IScreen;
-        bool IsScreenOpened<TScreen>() where TScreen : IScreen;
+        void GoToScreen<TScreen>(object args = null) where TScreen : IScreen;
+        void BackToPreviousScreen();
+
+        void OpenModal<TPopup>(object args = null) where TPopup : IScreen;
+        void CloseModal<TPopup>() where TPopup : IScreen;
+        void CloseAllModals();
+
+        void ClearHistory();
     }
 }

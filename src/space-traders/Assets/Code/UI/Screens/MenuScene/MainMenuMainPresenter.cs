@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Code.UI.Screens.MenuScene
 {
-    public sealed class MainMenuMainPresenter
+    public sealed class MainMenuMainPresenter : IPresenter<MainMenuMainView>
     {
         private readonly IUIManager _uIManager;
 
@@ -13,8 +13,7 @@ namespace Assets.Code.UI.Screens.MenuScene
         {
             _uIManager = uIManager;
         }
-
-        internal void Show(MainMenuMainView view)
+        void IPresenter<MainMenuMainView>.Show(MainMenuMainView view)
         {
             view.CloseButton.onClick.AddListener(ClickOnQuit);
             view.StartGameBtn.onClick.AddListener(ClickOnStartGame);
@@ -23,7 +22,7 @@ namespace Assets.Code.UI.Screens.MenuScene
             view.Show();
         }
 
-        internal void Hide(MainMenuMainView view)
+        void IPresenter<MainMenuMainView>.Hide(MainMenuMainView view)
         {
             view.Hide();
 
@@ -39,7 +38,7 @@ namespace Assets.Code.UI.Screens.MenuScene
 
         private void ClickOnJoinGame()
         {
-          
+            _uIManager.GoToScreen<ClientConnectionScreen>();
         }
 
         private void ClickOnQuit()

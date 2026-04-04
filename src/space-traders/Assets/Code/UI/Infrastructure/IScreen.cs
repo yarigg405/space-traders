@@ -1,5 +1,8 @@
-public interface IScreen
+namespace Assets.Code.UI
 {
-    void Show(object args);
-    void Hide();
+    public interface IScreen
+    {
+        void Show(object args);
+        void Hide();
+    }
 }
