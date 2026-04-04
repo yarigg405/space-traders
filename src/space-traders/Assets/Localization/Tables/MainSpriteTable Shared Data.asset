@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: MainSpriteTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: MainSpriteTable
+  m_TableCollectionNameGuidString: b261dd59069c9473ab65c2cceda96e71
+  m_Entries:
+  - m_Id: 74691108864
+    m_Key: VipPopupVipIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 344375132413952
+    m_Key: ShopVipIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718974831550464
+    m_Key: RateGameVipIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1108660389404672
+    m_Key: AchievementsVipIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2139322928062464
+    m_Key: StatisticsVipIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519587517095936
+    m_Key: EnemyIconVipIcon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4680036896456704
+    m_Key: VipText
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items:
+    - rid: 1123692665008816129
+    - rid: 7493889914931773457
+  m_KeyGenerator:
+    rid: 1123692665008816128
+  references:
+    version: 2
+    RefIds:
+    - rid: 1123692665008816128
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1764071844745
+    - rid: 1123692665008816129
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 74691108864
+          m_TableCodes:
+          - ru-RU
+          - en-US
+        - m_KeyId: 344375132413952
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        - m_KeyId: 718974831550464
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        - m_KeyId: 1108660389404672
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        - m_KeyId: 2139322928062464
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        - m_KeyId: 2519587517095936
+          m_TableCodes:
+          - en-US
+          - ru-RU
+        m_TypeString: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    - rid: 7493889914931773457
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 4680036896456704
+          m_TableCodes:
+          - ru-RU
+          - en-US
+        m_TypeString: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null

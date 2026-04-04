@@ -1,0 +1,497 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainStringTable_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: d07ee906671b6934dbb8d3a28ba2991b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 123190886400
+    m_Localized: 'Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2963674218496
+    m_Localized: 'Mars Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3067818786816
+    m_Localized: 'Backgammon Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3542513336320
+    m_Localized: 'Home mars: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3214690729984
+    m_Localized: 'Defeats: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3461194170368
+    m_Localized: 'Escapes: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23363955179520
+    m_Localized: 'Day: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35386743046144
+    m_Localized: Daily Reward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35420612050944
+    m_Localized: 'Bonus in:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35707787657216
+    m_Localized: 'X2 coins
+
+      for watching an ad'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37499195867136
+    m_Localized: Backgammon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37556456505344
+    m_Localized: short & long
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37646332051456
+    m_Localized: "SHORT \nBACKGAMMON"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 37676505874432
+    m_Localized: 'LONG
+
+      BACKGAMMON'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38462111596544
+    m_Localized: 'Player ID: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40371593658368
+    m_Localized: short
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40456830304256
+    m_Localized: long
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40687181479936
+    m_Localized: ONLINE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40729833357312
+    m_Localized: VS BOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43445817163776
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43546929250304
+    m_Localized: 'Start position: top'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411174219776
+    m_Localized: 'Start position: bottom'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43612997926912
+    m_Localized: Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43738864795648
+    m_Localized: Sound On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411174219777
+    m_Localized: Sound Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43925649735680
+    m_Localized: Change
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44859675099136
+    m_Localized: STATISTICS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45606693224448
+    m_Localized: Bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47525931237376
+    m_Localized: Your winnings will be doubled
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47574295756800
+    m_Localized: 'When purchasing VIP
+
+      advertisements are not displayed in
+      the game'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48193995784192
+    m_Localized: TO THE SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58224208232448
+    m_Localized: "You didn\u2019t finish the game. Please try again in 30 seconds."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59302035308544
+    m_Localized: ACHIEVEMENTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59505937203200
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61497476628480
+    m_Localized: Waiting for opponent to roll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62089305505792
+    m_Localized: "You can\u2019t block all 6 points until your opponent enters the
+      home board."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63060731478016
+    m_Localized: Problems connecting to the internet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64313716883456
+    m_Localized: PROFILE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64457128525824
+    m_Localized: Player ID
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64523423694848
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64555208130560
+    m_Localized: Avatar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65514671947776
+    m_Localized: 'SEARCHING FOR OPPONENT: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65556447215616
+    m_Localized: 'The entry fee is half the bet\r\nBet: {0}\r\nEntry Fee: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66302144135168
+    m_Localized: Opponent found. Please wait for the game to start.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67327127175168
+    m_Localized: Server connection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67421809393664
+    m_Localized: No connection to the server
+    m_Metadata:
+      m_Items: []
+  - m_Id: 360930751791104
+    m_Localized: Beginner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361006450589696
+    m_Localized: Player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361043729563648
+    m_Localized: Specialist
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361074507366400
+    m_Localized: Pro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 361105918509056
+    m_Localized: Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372785083826176
+    m_Localized: Bronze
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372849390895104
+    m_Localized: Silver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372879128510464
+    m_Localized: Gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372904889925632
+    m_Localized: Ruby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372926368956416
+    m_Localized: Saphire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372958249861120
+    m_Localized: Emerald
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373073790353408
+    m_Localized: You
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373671319289856
+    m_Localized: league
+    m_Metadata:
+      m_Items: []
+  - m_Id: 391890495062016
+    m_Localized: 'CURRENT BET: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392023060234240
+    m_Localized: 'Rival: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392123228602368
+    m_Localized: 'Coins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392315709407232
+    m_Localized: 'Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392371762085888
+    m_Localized: 'Mars Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392389529157632
+    m_Localized: 'Backgammon Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392409686982656
+    m_Localized: 'Gammon Wins: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392429190496256
+    m_Localized: 'Escapes: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392449205714944
+    m_Localized: 'Defeats: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 396597208793088
+    m_Localized: Opponent left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 397378225946624
+    m_Localized: Victory! {0} \r\n+{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 397668060741632
+    m_Localized: Defeat! {0}\r\n-{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 397730996273152
+    m_Localized: "Time\u2019s up"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1826410607919104
+    m_Localized: "You didn\u2019t finish the game. Please try again in {0} seconds."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13466614951297024
+    m_Localized: No internet connection. Check your connection and try again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13466651441741824
+    m_Localized: No ads available at the moment. Please try again later.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14885221476319232
+    m_Localized: "Rate the game, \nget"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14885244108783616
+    m_Localized: 1 day
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14885609474605056
+    m_Localized: RATE US
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414080
+    m_Localized: Bonus ready!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414081
+    m_Localized: 30 days
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414082
+    m_Localized: Double coin rewards on win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414083
+    m_Localized: VIP status in the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414084
+    m_Localized: Choosing a league for online play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414085
+    m_Localized: Playing in the VIP league
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25027411178414086
+    m_Localized: Connecting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25060406786514944
+    m_Localized: Disabling ads in the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25731328681959424
+    m_Localized: REFRESH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27253819988500480
+    m_Localized: RUB
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27253878331269120
+    m_Localized: USD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27253881158230016
+    m_Localized: EUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27581930718355458
+    m_Localized: Your bonus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604819927040
+    m_Localized: Tired of ads?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870080
+    m_Localized: "Purchase VIP status for 30 days \nand enjoy the game without advertisements!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870081
+    m_Localized: YOU ARE THE WINNER!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870082
+    m_Localized: TOP-bet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870083
+    m_Localized: TOP-chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870084
+    m_Localized: RULES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870085
+    m_Localized: The more chips a player earns in a given league, the higher he will
+      be in the league's ranking.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870086
+    m_Localized: If a player loses chips and drops to a lower league, their record
+      will be removed from the leaderboard of that league.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870087
+    m_Localized: VIP players gain access to a closed VIP league with no betting limits.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870088
+    m_Localized: VIP League players can choose any league to play in online.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870089
+    m_Localized: VIP players can play without ads.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870090
+    m_Localized: 'PLAY WITH '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870091
+    m_Localized: VIP LEAGUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870092
+    m_Localized: VIP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870093
+    m_Localized: Bot difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32670604861870094
+    m_Localized: VIP-league
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71120352997007360
+    m_Localized: Network error. Check your internet connection or try again later.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71445730759512064
+    m_Localized: Dice animation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71445730793066496
+    m_Localized: Legal moves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71445730793066497
+    m_Localized: Leave game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71445730793066498
+    m_Localized: QUIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71445730793066499
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71445730793066500
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71446744166273024
+    m_Localized: EXIT GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71446744166273025
+    m_Localized: Are you sure you want to leave the game?
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

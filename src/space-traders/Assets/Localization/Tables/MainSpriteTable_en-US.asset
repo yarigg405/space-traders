@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: MainSpriteTable_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: b261dd59069c9473ab65c2cceda96e71, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 74691108864
+    m_Localized: '75b593755720f41508507598264f7f35[vip-icon-en-us]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 344375132413952
+    m_Localized: '01b72f0011e534071914dfda1c0b0b8a[shop-vip-icon-en-us]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718974831550464
+    m_Localized: '0393dfe0255c042dc83b5f92698bc76f[rate-game-vip-icon-en-us]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1108660389404672
+    m_Localized: '9fbe4ad0d738c49b8b673dac7f376407[achievements-vip-icon-en-us]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2139322928062464
+    m_Localized: 'c76ccf0ae07b74ac1b636eed4c30660c[statistics-vip-icon-en-us]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519587517095936
+    m_Localized: '75b593755720f41508507598264f7f35[vip-icon-en-us]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4680036896456704
+    m_Localized: e5943b6a1fefeef46af5588b5fe93ad6
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
