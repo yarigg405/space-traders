@@ -1495,7 +1495,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &4422842987919971854
 MonoBehaviour:
@@ -1555,7 +1555,6 @@ MonoBehaviour:
   <HostPortIF>k__BackingField: {fileID: 8856459666092964047}
   <PlayerNameIF>k__BackingField: {fileID: 5910634351848766773}
   <HostPasswordIF>k__BackingField: {fileID: 3797742031098792235}
-  <BackButton>k__BackingField: {fileID: 8024820628029439058}
   <ConnectButton>k__BackingField: {fileID: 7742564547804351035}
 --- !u!1 &6742620345141036417
 GameObject:

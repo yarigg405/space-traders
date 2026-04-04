@@ -1,10 +1,9 @@
-﻿using Assets.Code.UI.Infrastructure.Impl;
-using Assets.Code.UI.Infrastructure.Interfaces;
+﻿using Assets.Code.UI.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 
 
-namespace Assets.Code.UI
+namespace Assets.Code.UI.Infrastructure.Impl
 {
     public sealed class UIManager : IUIManager
     {

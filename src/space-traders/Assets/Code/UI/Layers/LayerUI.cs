@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-namespace Assets.Code.UI.Infrastructure
+namespace Assets.Code.UI.Layers
 {
     public abstract class LayerUI : MonoBehaviour
     {

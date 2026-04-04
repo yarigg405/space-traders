@@ -1,6 +1,6 @@
 ﻿using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
-using Assets.Code.UI.Infrastructure.Interfaces;
+using Assets.Code.UI;
 using Assets.Code.UI.Screens;
 
 

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Assets.Code.UI.Infrastructure;
+using System;
 
-namespace Assets.Code.UI.Infrastructure.Interfaces
+namespace Assets.Code.UI
 {
     public interface IUIManager
     {
