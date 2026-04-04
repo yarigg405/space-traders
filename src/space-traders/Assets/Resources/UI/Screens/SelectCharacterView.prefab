@@ -411,6 +411,14 @@ PrefabInstance:
       propertyPath: m_text
       value: BACK
       objectReference: {fileID: 0}
+    - target: {fileID: 6102461801703221371, guid: db752701b208144408aa05f9a3473e84, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 72211444877463556
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102461801703221371, guid: db752701b208144408aa05f9a3473e84, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:2006b3e7a75e54941b18737237ce7992
+      objectReference: {fileID: 0}
     - target: {fileID: 7050965548707085729, guid: db752701b208144408aa05f9a3473e84, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -527,6 +535,14 @@ PrefabInstance:
     - target: {fileID: 5606913222882485137, guid: db752701b208144408aa05f9a3473e84, type: 3}
       propertyPath: m_text
       value: CREATE CHARACTER
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102461801703221371, guid: db752701b208144408aa05f9a3473e84, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 72211444877463560
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102461801703221371, guid: db752701b208144408aa05f9a3473e84, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:2006b3e7a75e54941b18737237ce7992
       objectReference: {fileID: 0}
     - target: {fileID: 7050965548707085729, guid: db752701b208144408aa05f9a3473e84, type: 3}
       propertyPath: m_Pivot.x

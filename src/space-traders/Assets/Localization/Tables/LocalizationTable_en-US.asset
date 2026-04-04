@@ -18,312 +18,48 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 123190886400
-    m_Localized: 'Wins: {0}'
+  - m_Id: 72212614824038400
+    m_Localized: CONNECT
     m_Metadata:
       m_Items: []
-  - m_Id: 2963674218496
-    m_Localized: 
+  - m_Id: 72211444835520512
+    m_Localized: START GAME
     m_Metadata:
       m_Items: []
-  - m_Id: 3067818786816
-    m_Localized: 
+  - m_Id: 72211444877463552
+    m_Localized: JOIN GAME
     m_Metadata:
       m_Items: []
-  - m_Id: 3542513336320
-    m_Localized: 
+  - m_Id: 72211444877463553
+    m_Localized: QUIT
     m_Metadata:
       m_Items: []
-  - m_Id: 3214690729984
-    m_Localized: 
+  - m_Id: 72211444877463554
+    m_Localized: Player Name
     m_Metadata:
       m_Items: []
-  - m_Id: 3461194170368
-    m_Localized: 
+  - m_Id: 72211444877463555
+    m_Localized: Server Password
     m_Metadata:
       m_Items: []
-  - m_Id: 23363955179520
-    m_Localized: 
+  - m_Id: 72211444877463556
+    m_Localized: BACK
     m_Metadata:
       m_Items: []
-  - m_Id: 35386743046144
-    m_Localized: 
+  - m_Id: 72211444877463557
+    m_Localized: Enter character name
     m_Metadata:
       m_Items: []
-  - m_Id: 35420612050944
-    m_Localized: 
+  - m_Id: 72211444877463558
+    m_Localized: CREATE
     m_Metadata:
       m_Items: []
-  - m_Id: 35707787657216
-    m_Localized: 
+  - m_Id: 72211444877463559
+    m_Localized: DOCK REQUEST
     m_Metadata:
       m_Items: []
-  - m_Id: 37499195867136
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 37556456505344
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 37646332051456
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 37676505874432
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 38462111596544
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40371593658368
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40456830304256
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40687181479936
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 40729833357312
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 43445817163776
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 43546929250304
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 43612997926912
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 43738864795648
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 43925649735680
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 44859675099136
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 45606693224448
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 47525931237376
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 47574295756800
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 48193995784192
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58224208232448
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59302035308544
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59505937203200
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 61497476628480
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 61669245960192
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 62089305505792
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 63060731478016
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 64313716883456
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 64457128525824
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 64523423694848
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 64555208130560
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 65514671947776
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 65556447215616
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 66302144135168
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 67327127175168
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 67421809393664
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 360930751791104
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 361006450589696
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 361043729563648
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 361074507366400
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 361105918509056
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 372785083826176
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 372849390895104
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 372879128510464
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 372904889925632
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 372926368956416
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 372958249861120
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 373073790353408
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 373671319289856
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 391890495062016
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392023060234240
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392123228602368
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392315709407232
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392371762085888
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392389529157632
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392409686982656
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392429190496256
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 392449205714944
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 396597208793088
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 397378225946624
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 397668060741632
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 397730996273152
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1826410607919104
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13466614951297024
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 13466651441741824
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14885221476319232
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14885244108783616
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
-  - m_Id: 14885609474605056
-    m_Localized: 
+  - m_Id: 72211444877463560
+    m_Localized: CREATE CHARACTER
     m_Metadata:
       m_Items: []
   references:
