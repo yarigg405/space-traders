@@ -1,4 +1,8 @@
-﻿namespace Assets.Code.UI.Infrastructure
+﻿using Assets.Code.UI.Infrastructure;
+using Assets.Code.UI.Infrastructure.Interfaces;
+
+
+namespace Assets.Code.UI
 {
     public abstract class ScreenBase<TPresenter, TView> : IScreen
         where TView: UIScreenView

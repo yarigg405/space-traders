@@ -1,4 +1,4 @@
-namespace Assets.Code.UI
+namespace Assets.Code.UI.Infrastructure.Interfaces
 {
     public interface IScreen
     {

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 
-namespace Assets.Code.UI.Infrastructure
+namespace Assets.Code.UI
 {
     public abstract class UIScreenView : MonoBehaviour
     {

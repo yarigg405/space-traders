@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Assets.Code.UI.Infrastructure
+namespace Assets.Code.UI.Infrastructure.Impl
 {
     internal readonly struct ScreenState
     {

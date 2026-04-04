@@ -1,4 +1,4 @@
-﻿using Assets.Code.UI.Infrastructure;
+﻿using Assets.Code.UI.Infrastructure.Interfaces;
 using Assets.Code.UI.Screens.MainMenu;
 using UnityEngine;
 
