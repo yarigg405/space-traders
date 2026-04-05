@@ -56,14 +56,14 @@ namespace Assets.Code.ClientPart.UI
 
         private async UniTask OnHostClickAsync()
         {
-            await _networkManager.StartHost();
-            _stateMachine.Enter<LoadGameSceneState>();
+            //await _networkManager.StartHost();
+            //_stateMachine.Enter<LoadGameSceneState>();
         }
 
         private async UniTask OnClientClickedAsync()
         {
-            await _networkManager.StartClient();
-            _stateMachine.Enter<LoadGameSceneState>();
+            //await _networkManager.StartClient();
+            //_stateMachine.Enter<LoadGameSceneState>();
         }
 
         private string GetProjectName()

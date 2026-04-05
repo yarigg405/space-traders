@@ -2,9 +2,11 @@
 {
     public enum ClientToServerMessageType : ushort
     {
-        RequestConnectToGame = 1,
-        RequestForSceneEntities = 2,
-        RequestForChangeScene = 3,
+        RequestConnectToServer = 1,
+        RequestGetCharacters = 2,
+        RequestEnterTheGame = 3,
+        RequestForSceneEntities = 4,
+        RequestForChangeScene = 5,
 
         SendTargetRotation = 31,
         SendSpeedModifier = 32,

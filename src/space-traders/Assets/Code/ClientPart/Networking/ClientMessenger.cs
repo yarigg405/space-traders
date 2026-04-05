@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Networking;
+using Assets.Code.Networking.RequestSystem;
 using Assets.Code.ServerPart.Networking;
 using Cysharp.Threading.Tasks;
 using Riptide;
@@ -16,27 +17,26 @@ namespace Assets.Code.ClientPart.Networking
         private static NetworkManager _networkManager;
         private static ICancellationToken _cts;
         private static ClientEntitiesController _clientEntitiesController;
-
-        private static string _sceneToConnect = string.Empty;
-
+        private static NetworkRequestSystem _requestSystem;
 
         public static void SetupDependencies(IObjectResolver resolver)
         {
             _networkManager = resolver.Resolve<NetworkManager>();
             _cts = resolver.Resolve<ICancellationToken>();
             _clientEntitiesController = resolver.Resolve<ClientEntitiesController>();
+            _requestSystem = resolver.Resolve<NetworkRequestSystem>();
         }
 
 
         public static async UniTask<string> RequestForConnectGame()
         {
-            _sceneToConnect = string.Empty;
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestConnectToGame);
-            _networkManager.Client.Send(message);
+            //_sceneToConnect = string.Empty;
+            //var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestConnectToGame);
+            //_networkManager.Client.Send(message);
 
-            await UniTask.WaitWhile(() => _sceneToConnect.Length == 0)
-                .AttachExternalCancellation(_cts.Token);
-            return _sceneToConnect;
+            //await UniTask.WaitWhile(() => _sceneToConnect.Length == 0)
+            //    .AttachExternalCancellation(_cts.Token);
+            return "";
         }
 
         public static void RequestForLoadingSceneEntities()
@@ -95,10 +95,39 @@ namespace Assets.Code.ClientPart.Networking
         #region MessageHandlers
 
 
-        [MessageHandler((ushort)ServerToClientMessageType.ConnectToGameSceneCommand)]
-        private static void HandleSceneConnectionCommand(Message message)
+        //[MessageHandler((ushort)ServerToClientMessageType.ConnectToGameSceneCommand)]
+        //private static void HandleSceneConnectionCommand(Message message)
+        //{
+        //    _sceneToConnect = message.GetString();
+        //}
+
+        [MessageHandler((ushort)ServerToClientMessageType.RequestFailed)]
+        private static void HandleRequestFailed(Message message)
         {
-            _sceneToConnect = message.GetString();
+            var requestId = message.GetUInt();
+            var error = message.GetString();
+            _requestSystem.Reject(requestId, error);
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseConnectToServer)]
+        private static void HandleResponseConnectToServer(Message message)
+        {
+           
+
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseGetCharacters)]
+        private static void HandleResponseGetCharacters(Message message)
+        {
+            
+
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseEnterTheGame)]
+        private static void HandleResponseEnterTheGame(Message message)
+        {
+            
+
         }
 
 

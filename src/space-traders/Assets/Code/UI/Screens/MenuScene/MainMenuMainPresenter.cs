@@ -14,7 +14,7 @@ namespace Assets.Code.UI.Screens.MenuScene
         private readonly ICancellationToken _cts;
         private MainMenuMainView _view;
 
-        public MainMenuMainPresenter(IUIManager uIManager, NetworkManager networkManager, 
+        public MainMenuMainPresenter(IUIManager uIManager, NetworkManager networkManager,
             ICancellationToken cts)
         {
             _uIManager = uIManager;
@@ -23,7 +23,7 @@ namespace Assets.Code.UI.Screens.MenuScene
         }
         void IPresenter<MainMenuMainView>.Show(MainMenuMainView view, object args)
         {
-            _view = view;   
+            _view = view;
 
             view.CloseButton.onClick.AddListener(ClickOnQuit);
             view.StartGameBtn.onClick.AddListener(ClickOnStartGame);
@@ -52,7 +52,7 @@ namespace Assets.Code.UI.Screens.MenuScene
         private async UniTask StartHostAsync(ushort port, string serverPassword)
         {
             _uIManager.OpenModal<AwaitServerResponsePopup>();
-            await _networkManager.StartHost();
+            await _networkManager.StartHost(port, serverPassword, _cts.Token);
             await UniTask.NextFrame();
             _uIManager.CloseModal<AwaitServerResponsePopup>();
         }

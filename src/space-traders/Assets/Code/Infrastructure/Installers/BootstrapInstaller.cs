@@ -12,6 +12,7 @@ using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.Networking;
+using Assets.Code.Networking.RequestSystem;
 using Assets.Code.ServerPart.Physics.Data;
 using UnityEngine;
 using VContainer;
@@ -62,6 +63,7 @@ namespace Assets.Code.Infrastructure.Installers
         private void BindNetworking()
         {
             Builder.Register<NetworkManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            Builder.Register<NetworkRequestSystem>(Lifetime.Singleton);
             Builder.Register<ClientMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
         }
 
