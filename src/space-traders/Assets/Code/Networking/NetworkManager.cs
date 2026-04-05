@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Riptide;
 using Riptide.Utils;
 using System;
+using System.Threading;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -13,11 +14,12 @@ namespace Assets.Code.Networking
 {
     public class NetworkManager : IInitializable, IDisposable, IFixedTickable
     {
-        private const string _ipAddress = "127.0.0.1";
-        private const ushort _port = 40501;
-        private const ushort _maxPlayers = 4;
+        private const ushort _maxPlayers = 6;
+        private const string _hostIp = "127.0.0.1";
 
         private readonly IObjectResolver _resolver;
+
+        private string _serverPassword;
 
         public NetworkManager(IObjectResolver resolver)
         {
@@ -28,8 +30,6 @@ namespace Assets.Code.Networking
 
         public Server Server { get; private set; }
         public Client Client { get; private set; }
-
-        public NetworkConnectionType ConnectionType { get; private set; }
 
         void IInitializable.Initialize()
         {
@@ -49,44 +49,107 @@ namespace Assets.Code.Networking
 
         void IDisposable.Dispose()
         {
-            Server.Stop();
-            if (_serverStartup != null)
-                _serverStartup.StopServer();
-
-            Client.Disconnect();
+            Cleanup();
         }
 
-        public async UniTask StartHost()
+        public async UniTask StartHost(ushort port, string serverPassword, CancellationToken ct)
         {
-            Server.Start(_port, _maxPlayers);
-            await UniTask.WaitUntil(() => Server.IsRunning);
+            try
+            {
+                if (Server.IsRunning)
+                    throw new InvalidOperationException("Server already running");
 
-            Client.Connect($"{_ipAddress}:{_port}");
-            await UniTask.WaitUntil(() => Client.IsConnected);
+                if (Client.IsConnected)
+                    throw new InvalidOperationException("Client already connected");
 
+                Server.Start(port, _maxPlayers);
+                await UniTask.WaitUntil(() => Server.IsRunning)
+                        .AttachExternalCancellation(ct)
+                        .Timeout(TimeSpan.FromSeconds(5));
+                _serverPassword = serverPassword;
 
-            _serverStartup = new(_resolver.Resolve<GameLifetimeScope>());
+                Client.Connect($"{_hostIp}:{port}");
+                await UniTask.WaitUntil(() => Client.IsConnected)
+                        .AttachExternalCancellation(ct)
+                        .Timeout(TimeSpan.FromSeconds(5));
 
-            ConnectionType = NetworkConnectionType.Host;
+                _serverStartup = new(_resolver.Resolve<GameLifetimeScope>());
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("StartHost cancelled");
+                Cleanup();
+                throw;
+            }
+            catch (TimeoutException)
+            {
+                Debug.LogError("StartHost timeout");
+                Cleanup();
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                Cleanup();
+                throw;
+            }
         }
 
-        public async UniTask StartHost(ushort port, string serverPassword)
+        public async UniTask StartClient(string ipAddress, ushort port, CancellationToken ct)
         {
+            try
+            {
+                if (Client.IsConnected)
+                    throw new InvalidOperationException("Client already connected");
 
+                Client.Connect($"{ipAddress}:{port}");
+                await UniTask.WaitUntil(() => Client.IsConnected)
+                        .AttachExternalCancellation(ct)
+                        .Timeout(TimeSpan.FromSeconds(5));
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.Log("StartClient cancelled");
+                Cleanup();
+                throw;
+            }
+            catch (TimeoutException)
+            {
+                Debug.LogError("StartClient timeout");
+                Cleanup();
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                Cleanup();
+                throw;
+            }
         }
 
-        public async UniTask StartClient()
+        private void Cleanup()
         {
-            Client.Connect($"{_ipAddress}:{_port}");
-            await UniTask.WaitUntil(() => Client.IsConnected);
-            ConnectionType = NetworkConnectionType.Client;
-        }
-    }
+            try
+            {
+                if (Client.IsConnected)
+                    Client.Disconnect();
 
-    public enum NetworkConnectionType
-    {
-        None = 0,
-        Host = 1,
-        Client = 2,
+                if (_serverStartup != null)
+                    _serverStartup.StopServer();
+
+                if (Server.IsRunning)
+                    Server.Stop();
+            }
+
+            catch (Exception ex)
+            {
+                Debug.LogError($"Cleanup failed: {ex}");
+            }
+        }
+
+        public bool CheckServerPassword(string password)
+        {
+            return _serverPassword.Equals(password);
+        }
     }
 }
