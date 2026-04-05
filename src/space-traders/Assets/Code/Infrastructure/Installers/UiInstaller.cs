@@ -4,6 +4,7 @@ using Assets.Code.UI.Layers;
 using Assets.Code.UI.LoadingScreens;
 using Assets.Code.UI.Screens;
 using Assets.Code.UI.Screens.MenuScene;
+using Assets.Code.UI.Screens.MessageBox;
 using UnityEngine;
 using VContainer;
 
@@ -52,6 +53,11 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<RequestDockPopup>(Lifetime.Singleton);
             Builder.Register<RequestDockPopupPresenter>(Lifetime.Transient);
+
+            Builder.Register<AwaitServerResponsePopup>(Lifetime.Singleton);
+
+            Builder.Register<MessageBoxPopup>(Lifetime.Singleton);
+            Builder.Register<MessageBoxPresenter>(Lifetime.Transient);
         }
     }
 }

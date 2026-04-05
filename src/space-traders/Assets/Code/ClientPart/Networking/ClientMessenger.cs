@@ -4,7 +4,6 @@ using Assets.Code.Networking;
 using Assets.Code.ServerPart.Networking;
 using Cysharp.Threading.Tasks;
 using Riptide;
-using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
 using VContainer;
@@ -14,8 +13,8 @@ namespace Assets.Code.ClientPart.Networking
 {
     public static class ClientMessenger
     {
-        private static CancellationTokenSource _cancellationTokenSource = new();
         private static NetworkManager _networkManager;
+        private static ICancellationToken _cts;
         private static ClientEntitiesController _clientEntitiesController;
 
         private static string _sceneToConnect = string.Empty;
@@ -24,6 +23,7 @@ namespace Assets.Code.ClientPart.Networking
         public static void SetupDependencies(IObjectResolver resolver)
         {
             _networkManager = resolver.Resolve<NetworkManager>();
+            _cts = resolver.Resolve<ICancellationToken>();
             _clientEntitiesController = resolver.Resolve<ClientEntitiesController>();
         }
 
@@ -35,7 +35,7 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager.Client.Send(message);
 
             await UniTask.WaitWhile(() => _sceneToConnect.Length == 0)
-                .AttachExternalCancellation(_cancellationTokenSource.Token);
+                .AttachExternalCancellation(_cts.Token);
             return _sceneToConnect;
         }
 

@@ -46,6 +46,7 @@ namespace Assets.Code.Infrastructure.Installers
 
         private void BindGameServices()
         {
+            Builder.Register<AsyncCancellationToken>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();

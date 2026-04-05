@@ -70,6 +70,11 @@ namespace Assets.Code.Networking
             ConnectionType = NetworkConnectionType.Host;
         }
 
+        public async UniTask StartHost(ushort port, string serverPassword)
+        {
+
+        }
+
         public async UniTask StartClient()
         {
             Client.Connect($"{_ipAddress}:{_port}");

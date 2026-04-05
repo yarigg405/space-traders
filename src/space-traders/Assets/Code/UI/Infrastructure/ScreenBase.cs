@@ -26,7 +26,7 @@ namespace Assets.Code.UI
         {
             var view = _viewsProvider.GetView<TView>();
 
-            _presenter.Show(view);
+            _presenter.Show(view, args);
             _screenRoot.ShowView(view);
         }
 

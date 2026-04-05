@@ -13,7 +13,7 @@ namespace Assets.Code.UI.Screens.MenuScene
             _uIManager = uIManager;
         }
 
-        void IPresenter<ClientConnectionView>.Show(ClientConnectionView view)
+        void IPresenter<ClientConnectionView>.Show(ClientConnectionView view, object args)
         {
             view.CloseButton.onClick.AddListener(ClickOnBack);
 
