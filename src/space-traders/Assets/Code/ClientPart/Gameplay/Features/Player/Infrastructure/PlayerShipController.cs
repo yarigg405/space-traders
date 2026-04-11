@@ -8,24 +8,31 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure
 {
     public sealed class PlayerShipController
     {
+        private readonly ClientMessenger _clientMessenger;
+
+        public PlayerShipController(ClientMessenger clientMessenger)
+        {
+            _clientMessenger = clientMessenger;
+        }
+
         internal void SetSpeedModifier(float value)
         {
-            ClientMessenger.SendSpeedModifierToServer(value);
+            _clientMessenger.SendSpeedModifierToServer(value);
         }
 
         internal void SetKeepDistance(ClickableEntity currentSelected, Vector2 minMaxDistance)
         {
-            ClientMessenger.SendKeepDistance(currentSelected.Entity.Id, minMaxDistance);
+            _clientMessenger.SendKeepDistance(currentSelected.Entity.Id, minMaxDistance);
         }
 
         internal void SetOrbit(ClickableEntity currentSelected, float orbitRadius)
         {
-            ClientMessenger.SendSetOrbit(currentSelected.Entity.Id, orbitRadius);
+            _clientMessenger.SendSetOrbit(currentSelected.Entity.Id, orbitRadius);
         }
 
         internal void SetWarpTo(double2 coordinates)
         {
-            ClientMessenger.SendSetWarpTo(coordinates);
+            _clientMessenger.SendSetWarpTo(coordinates);
         }
     }
 }

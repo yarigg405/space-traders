@@ -1,4 +1,3 @@
-using VContainer;
 using VContainer.Unity;
 
 
@@ -6,16 +5,16 @@ namespace Assets.Code.ClientPart.Networking
 {
     public sealed class ClientMessengerDependencySetupper : IInitializable
     {
-        private readonly IObjectResolver _resolver;
+        private ClientMessengerRouter _router;
 
-        public ClientMessengerDependencySetupper(IObjectResolver resolver)
+        internal ClientMessengerDependencySetupper(ClientMessengerRouter router)
         {
-            _resolver = resolver;
+            _router = router;
         }
 
         void IInitializable.Initialize()
         {
-            ClientMessenger.SetupDependencies(_resolver);
+            ClientMessengerReceiver.Initialize(_router);
         }
     }
 }

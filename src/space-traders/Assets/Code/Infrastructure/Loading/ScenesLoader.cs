@@ -12,9 +12,9 @@ namespace Assets.Code.Infrastructure.Loading
     {
         public string CurrentScene { get; private set; }
         private readonly SceneLoadingScreen _loadingScreen;
-        private readonly ICancellationToken _cts;
+        private readonly ILifetimeCancellationToken _cts;
 
-        public ScenesLoader(SceneLoadingScreen loadingScreen, ICancellationToken cts)
+        public ScenesLoader(SceneLoadingScreen loadingScreen, ILifetimeCancellationToken cts)
         {
             _loadingScreen = loadingScreen;
             _cts = cts;
@@ -23,10 +23,10 @@ namespace Assets.Code.Infrastructure.Loading
         public void LoadScene(string name, Action onLoaded = null)
         {
             CurrentScene = name;
-            LoadAsync(name, onLoaded,_cts.Token).Forget();
+            LoadAsync(name, onLoaded, _cts.Token).Forget();
         }
 
-        private async UniTaskVoid LoadAsync(string sceneName, Action onLoaded, CancellationToken cancellationToken)
+        private async UniTask LoadAsync(string sceneName, Action onLoaded, CancellationToken cancellationToken)
         {
             _loadingScreen.Show();
             await SceneManager.LoadSceneAsync(sceneName).ToUniTask().AttachExternalCancellation(cancellationToken);

@@ -3,6 +3,7 @@ using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine.SceneManagement;
 
 
@@ -12,25 +13,31 @@ namespace Assets.Code.Infrastructure.States.GameStates
     {
         private readonly IStateMachine _stateMachine;
         private readonly IScenesLoader _scenesLoader;
+        private readonly ClientMessenger _messenger;
+
+        private CancellationTokenSource _cts;
 
         public ChangeGameSceneState(IScenesLoader scenesLoader,
-            IStateMachine stateMachine)
+            IStateMachine stateMachine,
+            ClientMessenger messenger)
         {
             _scenesLoader = scenesLoader;
             _stateMachine = stateMachine;
+            _messenger = messenger;
         }
 
         public override void Enter(string sceneName)
         {
+            _cts = new();
             SceneManager.sceneLoaded += OnSceneLoaded;
             EnterAsync(sceneName).Forget();
         }
 
         private async UniTask EnterAsync(string sceneName)
         {
-            ClientMessenger.RequestForChangeScene(sceneName);
+            _messenger.RequestForChangeScene(sceneName);
 
-            sceneName = await ClientMessenger.RequestForConnectGame();
+            sceneName = await _messenger.RequestForEnterTheGame(_cts.Token);
             _scenesLoader.LoadScene(sceneName);
         }
 

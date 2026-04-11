@@ -9,14 +9,16 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
     {
         private readonly IGroup<InputEntity> _inputs;
         private readonly IGroup<GameEntity> _players;
+        private readonly ClientMessenger _messenger;
 
-        public InputListenClientSystem(InputContext input, GameContext game)
+        public InputListenClientSystem(InputContext input, GameContext game, ClientMessenger messenger)
         {
             _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
                 InputMatcher.ClickedPosition));
 
             _players = game.GetGroup(GameMatcher.ClientPlayer);
+            _messenger = messenger;
         }
 
         void IExecuteSystem.Execute()
@@ -28,7 +30,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
                     var clickPos = input.ClickedPosition;
                     var targetRotation = AnglesUtil.GetAngleDirectionY(player.LocalPosition, input.ClickedPosition);
 
-                    ClientMessenger.SendTargetRotationToServer(targetRotation);
+                    _messenger.SendTargetRotationToServer(targetRotation);
                 }
             }
         }

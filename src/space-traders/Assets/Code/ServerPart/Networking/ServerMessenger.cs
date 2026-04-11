@@ -28,7 +28,7 @@ namespace Assets.Code.ServerPart.Networking
 
         public static void SendConnectionDataToPlayer(ushort clientId, string sceneName)
         {
-            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ConnectToGameSceneCommand)
+            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
                 .AddString(sceneName);
 
             _networkManager.Server.Send(message, clientId);
@@ -89,11 +89,11 @@ namespace Assets.Code.ServerPart.Networking
         #region MessageHandlers
 
 
-        [MessageHandler((ushort)ClientToServerMessageType.RequestConnectToGame)]
-        private static void HandleConnectToGameScene(ushort fromClientId, Message message)
-        {
-            _clientSceneConnector.ConnectPlayer(fromClientId);
-        }
+        //[MessageHandler((ushort)ClientToServerMessageType.RequestConnectToGame)]
+        //private static void HandleConnectToGameScene(ushort fromClientId, Message message)
+        //{
+        //    _clientSceneConnector.ConnectPlayer(fromClientId);
+        //}
 
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]

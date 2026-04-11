@@ -4,9 +4,9 @@ using System.Threading;
 
 namespace Assets.Code.Networking
 {
-    public sealed class AsyncCancellationToken : ICancellationToken, IDisposable
+    public sealed class LifetimeCancellationToken : ILifetimeCancellationToken, IDisposable
     {
-        CancellationToken ICancellationToken.Token => _cts.Token;
+        CancellationToken ILifetimeCancellationToken.Token => _cts.Token;
         private readonly CancellationTokenSource _cts = new();
 
         void IDisposable.Dispose()

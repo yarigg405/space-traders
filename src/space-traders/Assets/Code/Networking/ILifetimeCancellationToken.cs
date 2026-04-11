@@ -3,7 +3,7 @@
 
 namespace Assets.Code.Networking
 {
-    public interface ICancellationToken
+    public interface ILifetimeCancellationToken
     {
         public CancellationToken Token { get; }
     }

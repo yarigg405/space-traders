@@ -11,11 +11,11 @@ namespace Assets.Code.UI.Screens.MenuScene
     {
         private readonly IUIManager _uIManager;
         private readonly NetworkManager _networkManager;
-        private readonly ICancellationToken _cts;
+        private readonly ILifetimeCancellationToken _cts;
         private MainMenuMainView _view;
 
         public MainMenuMainPresenter(IUIManager uIManager, NetworkManager networkManager,
-            ICancellationToken cts)
+            ILifetimeCancellationToken cts)
         {
             _uIManager = uIManager;
             _networkManager = networkManager;
