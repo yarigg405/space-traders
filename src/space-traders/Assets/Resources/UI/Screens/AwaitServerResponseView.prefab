@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 6761479889533125441}
   - component: {fileID: 4422842987919971854}
   - component: {fileID: 6465354524638299666}
+  - component: {fileID: 5589353888350891143}
   m_Layer: 5
   m_Name: AwaitServerResponseView
   m_TagString: Untagged
@@ -267,3 +268,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5589353888350891143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409816141730134057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42b55ed811f8934bb244d48feb6f0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Assets.Code.UI.Screens.AwaitServerResponseView
+  <CloseButton>k__BackingField: {fileID: 0}
+  <Canvas>k__BackingField: {fileID: 6761479889533125441}

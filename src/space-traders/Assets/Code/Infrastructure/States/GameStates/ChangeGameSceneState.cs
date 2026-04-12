@@ -33,6 +33,12 @@ namespace Assets.Code.Infrastructure.States.GameStates
             EnterAsync(sceneName).Forget();
         }
 
+        public override void Exit()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+        }
+
         private async UniTask EnterAsync(string sceneName)
         {
             _messenger.RequestForChangeScene(sceneName);

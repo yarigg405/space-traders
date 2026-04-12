@@ -54,7 +54,7 @@ namespace Assets.Code.UI.Screens.MenuScene
             _uIManager.OpenModal<AwaitServerResponsePopup>();
             await _networkManager.StartHost(port, serverPassword, _cts.Token);
             await UniTask.NextFrame();
-            _uIManager.CloseModal<AwaitServerResponsePopup>();
+            _uIManager.CloseModal<AwaitServerResponsePopup>();        
         }
 
 

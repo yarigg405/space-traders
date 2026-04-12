@@ -1,5 +1,4 @@
 ﻿using Assets.Code.UI.Infrastructure.Interfaces;
-using System;
 using System.Collections.Generic;
 
 
@@ -8,28 +7,25 @@ namespace Assets.Code.UI.Infrastructure.Impl
     internal sealed class UiNavigationStack
     {
         private readonly IScreensProvider _provider;
-        private readonly Stack<ScreenState> _stack = new();
+        private readonly Stack<INavigationIntent> _stack = new();
 
         public UiNavigationStack(IScreensProvider provider)
         {
             _provider = provider;
         }
 
-        public (IScreen opened, IScreen closed) Push(Type type, object args)
+        public (IScreen opened, IScreen closed) Push(INavigationIntent intent)
         {
             IScreen closed = null;
+
             if (_stack.Count > 0)
             {
                 var current = _stack.Peek();
-                closed = _provider.GetScreen(current.ScreenType);
-                closed.Hide();
+                closed = current.ExecuteHide(_provider);
             }
 
-            var state = new ScreenState(type, args);
-            _stack.Push(state);
-
-            var opened = _provider.GetScreen(type);
-            opened.Show(args);
+            _stack.Push(intent);
+            var opened = intent.Execute(_provider);
 
             return (opened, closed);
         }
@@ -40,12 +36,10 @@ namespace Assets.Code.UI.Infrastructure.Impl
                 return (null, null);
 
             var current = _stack.Pop();
-            var closed = _provider.GetScreen(current.ScreenType);
-            closed.Hide();
+            var closed = current.ExecuteHide(_provider);
 
             var previous = _stack.Peek();
-            var opened = _provider.GetScreen(previous.ScreenType);
-            opened.Show(previous.Args);
+            var opened = previous.Execute(_provider);
 
             return (opened, closed);
         }
@@ -54,8 +48,8 @@ namespace Assets.Code.UI.Infrastructure.Impl
         {
             while (_stack.Count > 0)
             {
-                var state = _stack.Pop();
-                _provider.GetScreen(state.ScreenType).Hide();
+                var intent = _stack.Pop();
+                intent.ExecuteHide(_provider);
             }
         }
     }

@@ -10,11 +10,11 @@
   <Project Path="Unity.Splines.csproj" />
   <Project Path="Unity.PerformanceTesting.Editor.csproj" />
   <Project Path="Unity.Localization.Editor.csproj" />
+  <Project Path="Game.csproj" />
   <Project Path="Unity.Burst.csproj" />
   <Project Path="Unity.ProBuilder.Csg.csproj" />
   <Project Path="Unity.VisualStudio.Editor.csproj" />
   <Project Path="Unity.InputSystem.csproj" />
-  <Project Path="Game.csproj" />
   <Project Path="Unity.Searcher.Editor.csproj" />
   <Project Path="Unity.ProBuilder.Editor.csproj" />
   <Project Path="Unity.ResourceManager.csproj" />

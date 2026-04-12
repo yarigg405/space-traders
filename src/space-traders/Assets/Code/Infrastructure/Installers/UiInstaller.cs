@@ -27,6 +27,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.RegisterInstance(_layerPopups).AsSelf();
 
             Builder.Register<ScreensProvider>(Lifetime.Transient).AsImplementedInterfaces();
+            Builder.Register<NavigationIntentFactory>(Lifetime.Transient).AsImplementedInterfaces();
             Builder.Register<ScreenViewsProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<UIManager>(Lifetime.Singleton).AsImplementedInterfaces();
 
@@ -41,6 +42,7 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<SelectCharacterScreen>(Lifetime.Singleton);
             Builder.Register<SelectCharacterPresenter>(Lifetime.Transient);
+            Builder.Register<SelectCharacterIntent>(Lifetime.Transient);
 
             Builder.Register<CreateCharacterScreen>(Lifetime.Singleton);
             Builder.Register<CreateCharacterPresenter>(Lifetime.Transient);

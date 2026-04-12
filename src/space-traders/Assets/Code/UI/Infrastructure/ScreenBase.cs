@@ -6,14 +6,14 @@ using Assets.Code.UI.Layers;
 namespace Assets.Code.UI
 {
     public abstract class ScreenBase<TPresenter, TView> : IScreen
-        where TView: UIScreenView
+        where TView : UIScreenView
         where TPresenter : IPresenter<TView>
     {
         private readonly IScreenViewsProvider _viewsProvider;
         private readonly TPresenter _presenter;
         private readonly LayerUI _screenRoot;
 
-        protected ScreenBase(IScreenViewsProvider viewsProvider, 
+        protected ScreenBase(IScreenViewsProvider viewsProvider,
             TPresenter presenter, LayerUI screenRoot)
         {
             _viewsProvider = viewsProvider;

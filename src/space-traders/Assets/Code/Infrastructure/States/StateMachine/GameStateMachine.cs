@@ -1,11 +1,12 @@
 ﻿using Assets.Code.Infrastructure.States.StatesInfrastructure;
+using System;
 using VContainer;
 using VContainer.Unity;
 
 
 namespace Assets.Code.Infrastructure.States.StateMachine
 {
-    internal sealed class GameStateMachine : ITickable, IStateMachine
+    internal sealed class GameStateMachine : ITickable, IStateMachine, IDisposable
     {
         private readonly IObjectResolver _resolver;
         private IExitableState _activeState;
@@ -57,6 +58,11 @@ namespace Assets.Code.Infrastructure.States.StateMachine
         private TState GetState<TState>() where TState : class, IExitableState
         {
             return _resolver.Resolve<TState>();
+        }
+
+        void IDisposable.Dispose()
+        {
+            _activeState?.Exit();
         }
     }
 }
