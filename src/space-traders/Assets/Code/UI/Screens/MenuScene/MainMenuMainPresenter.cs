@@ -12,14 +12,17 @@ namespace Assets.Code.UI.Screens.MenuScene
         private readonly IUIManager _uIManager;
         private readonly NetworkManager _networkManager;
         private readonly ILifetimeCancellationToken _cts;
+        private readonly AuthentificationContainer _authentification;
+
         private MainMenuMainView _view;
 
         public MainMenuMainPresenter(IUIManager uIManager, NetworkManager networkManager,
-            ILifetimeCancellationToken cts)
+            ILifetimeCancellationToken cts, AuthentificationContainer authentification)
         {
             _uIManager = uIManager;
             _networkManager = networkManager;
             _cts = cts;
+            _authentification = authentification;
         }
         void IPresenter<MainMenuMainView>.Show(MainMenuMainView view, object args)
         {
@@ -52,9 +55,13 @@ namespace Assets.Code.UI.Screens.MenuScene
         private async UniTask StartHostAsync(ushort port, string serverPassword)
         {
             _uIManager.OpenModal<AwaitServerResponsePopup>();
+            _authentification.Login = "_server";
+            _authentification.Password = serverPassword;
+
             await _networkManager.StartHost(port, serverPassword, _cts.Token);
             await UniTask.NextFrame();
-            _uIManager.CloseModal<AwaitServerResponsePopup>();        
+
+            _uIManager.GoToScreen<SelectCharacterScreen>(_authentification);      
         }
 
 

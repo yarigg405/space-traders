@@ -14,6 +14,7 @@ namespace Assets.Code.UI.Layers
 
         public virtual void HideView(UIScreenView view)
         {
+            view.Hide();
             view.transform.SetAsFirstSibling();
         }
     }

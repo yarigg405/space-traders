@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common.StaticData;
+﻿using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory;
 using Unity.Mathematics;

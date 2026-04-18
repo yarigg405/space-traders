@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Assets.Code.UI.Infrastructure.Impl
 {
-    public sealed class UIManager : IUIManager
+    public sealed class UIManager : IUIManager, IDisposable
     {
         public event Action<IScreen> OnScreenOpened;
         public event Action<IScreen> OnScreenClosed;
@@ -36,7 +36,7 @@ namespace Assets.Code.UI.Infrastructure.Impl
             var request = _intentFactory.Create(typeof(TScreen), args);
             if (request is IAsyncNavigationIntent asyncIntent)
             {
-                HandleAsync(asyncIntent).Forget();
+                HandleAsync(asyncIntent, args).Forget();
             }
             else
             {
@@ -65,7 +65,7 @@ namespace Assets.Code.UI.Infrastructure.Impl
             }
         }
 
-        private async UniTask HandleAsync(IAsyncNavigationIntent intent)
+        private async UniTask HandleAsync(IAsyncNavigationIntent intent, object args)
         {
             if (_isNavigating)
                 return;
@@ -79,7 +79,7 @@ namespace Assets.Code.UI.Infrastructure.Impl
 
             try
             {
-                var data = await intent.Load(token);
+                var data = await intent.Load(token, args);
 
                 if (token.IsCancellationRequested)
                     return;
@@ -175,6 +175,12 @@ namespace Assets.Code.UI.Infrastructure.Impl
         public void ClearHistory()
         {
             _navigation.Clear();
+        }
+
+        void IDisposable.Dispose()
+        {
+            _navigationCts?.Cancel();
+            _navigationCts?.Dispose();
         }
     }
 }

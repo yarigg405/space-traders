@@ -1,7 +1,9 @@
-﻿using Assets.Code.Networking;
+﻿using Assets.Code._Tempo;
+using Assets.Code.Networking;
 using Cysharp.Threading.Tasks;
 using Riptide;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
@@ -29,6 +31,28 @@ namespace Assets.Code.ClientPart.Networking
                 msg, ct, TimeSpan.FromSeconds(5));
 
             return response.GetString();
+        }
+
+        public async UniTask<List<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestGetCharacters)
+                .AddString(login)
+                .AddString(password);
+
+            var response = await _requestSystem.SendRequest(
+                msg, ct, TimeSpan.FromSeconds(5));
+
+            var count = response.GetInt();
+            var result = new List<CharacterData>(count);
+            for (int i = 0; i < count; i++)
+            {
+                var character = new CharacterData
+                {
+                    Name = response.GetString(),
+                };
+                result.Add(character);
+            }
+            return result;
         }
 
         public void RequestForLoadingSceneEntities()

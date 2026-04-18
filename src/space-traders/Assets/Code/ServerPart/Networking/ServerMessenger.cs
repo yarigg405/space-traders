@@ -1,6 +1,7 @@
 ﻿using Assets.Code.ClientPart.Networking;
 using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
+using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
@@ -17,6 +18,8 @@ namespace Assets.Code.ServerPart.Networking
         private static ClientSceneConnector _clientSceneConnector;
         private static PlayerDataProvider _playerDataProvider;
         private static ServerInputService _serverInputService;
+        private static CharactersRepository _charactersRepository;
+        private static PlayersRepository _playersRepository;
 
         public static void SetupDependencies(IObjectResolver resolver)
         {
@@ -24,6 +27,9 @@ namespace Assets.Code.ServerPart.Networking
             _clientSceneConnector = resolver.Resolve<ClientSceneConnector>();
             _playerDataProvider = resolver.Resolve<PlayerDataProvider>();
             _serverInputService = resolver.Resolve<ServerInputService>();
+
+            _playersRepository = resolver.Resolve<PlayersRepository>();
+            _charactersRepository = resolver.Resolve<CharactersRepository>();
         }
 
         public static void SendConnectionDataToPlayer(ushort clientId, string sceneName)
@@ -94,7 +100,39 @@ namespace Assets.Code.ServerPart.Networking
         //{
         //    _clientSceneConnector.ConnectPlayer(fromClientId);
         //}
+        [MessageHandler((ushort)ClientToServerMessageType.RequestGetCharacters)]
+        private static void HandleRequestGetCharacters(ushort fromClientId, Message message)
+        {
+            var login = message.GetString();
+            var password = message.GetString();
+            var messageId = message.GetUInt();
 
+            if (_networkManager.CheckServerPassword(password))
+            {
+                var player = _playersRepository.GetOrCreatePlayer(login);
+                var characters = _charactersRepository.GetCharactersForPlayer(player.Id);
+
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseGetCharacters)
+                    .AddUInt(messageId)
+                    .AddInt(characters.Count);
+
+                foreach (var character in characters)
+                {
+                    response.AddString(character.Name);
+                }
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+
+            else
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
+                    .AddUInt(messageId)
+                    .AddString("Wrong password");
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+        }
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)

@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
+using Assets.Code.ServerPart.Networking;
 using Riptide;
 using System;
 using Unity.Mathematics;
@@ -22,7 +23,7 @@ namespace Assets.Code.ClientPart.Networking
 
         internal void HandleRequestFailed(Message message)
         {
-            _requestSystem.SetResponse(ServerPart.Networking.ServerToClientMessageType.RequestFailed, message);
+            _requestSystem.SetResponse(ServerToClientMessageType.RequestFailed, message);
         }
 
         internal void HandleResponseConnectToServer(Message message)
@@ -32,7 +33,7 @@ namespace Assets.Code.ClientPart.Networking
 
         internal void HandleResponseGetCharacters(Message message)
         {
-            throw new NotImplementedException();
+            _requestSystem.SetResponse(ServerToClientMessageType.ResponseGetCharacters, message);
         }
 
         internal void HandleResponseEnterTheGame(Message message)

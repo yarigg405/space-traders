@@ -3,7 +3,7 @@ using Assets.Code.Common.DataBase.ORM;
 using System.Collections.Generic;
 
 
-namespace Assets.Code.Common.StaticData
+namespace Assets.Code.Common.StaticData.Repositories
 {
     public sealed class PlanetsRepository
     {
