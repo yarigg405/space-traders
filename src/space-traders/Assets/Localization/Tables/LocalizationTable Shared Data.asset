@@ -71,6 +71,14 @@ MonoBehaviour:
     m_Key: error-empty-name
     m_Metadata:
       m_Items: []
+  - m_Id: 77691252214304768
+    m_Key: error-connection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77691252252053504
+    m_Key: error-password
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

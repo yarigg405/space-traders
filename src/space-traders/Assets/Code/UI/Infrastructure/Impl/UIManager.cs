@@ -34,7 +34,6 @@ namespace Assets.Code.UI.Infrastructure.Impl
         public void GoToScreen<TScreen>(object args = null) where TScreen : IScreen
         {
             var request = _intentFactory.Create(typeof(TScreen), args);
-            _navigation.Push(request);
             ExecuteRequest(request).Forget();
         }
 
@@ -69,6 +68,11 @@ namespace Assets.Code.UI.Infrastructure.Impl
                 {
                     opened = syncIntent.Execute(_screensProvider);
                 }
+
+                if (opened == null)
+                    return;
+
+                _navigation.Push(request);
 
                 if (closed != null)
                 {

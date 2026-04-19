@@ -59,9 +59,8 @@ namespace Assets.Code.UI.Screens.MenuScene
             _authentification.Password = serverPassword;
 
             await _networkManager.StartHost(port, serverPassword, _cts.Token);
-            await UniTask.NextFrame();
 
-            _uIManager.GoToScreen<SelectCharacterScreen>(_authentification);      
+            _uIManager.GoToScreen<SelectCharacterScreen>();      
         }
 
 

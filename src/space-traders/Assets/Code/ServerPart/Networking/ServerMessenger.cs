@@ -131,7 +131,7 @@ namespace Assets.Code.ServerPart.Networking
             {
                 var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
                     .AddUInt(messageId)
-                    .AddString("Wrong password");
+                    .AddString("error-password");
 
                 _networkManager.Server.Send(response, fromClientId);
             }

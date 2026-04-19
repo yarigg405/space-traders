@@ -1,9 +1,7 @@
 ﻿using Assets.Code.Common.DataBase;
 using Assets.Code.Common.DataBase.ORM;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using UnityEngine;
 
 
 namespace Assets.Code.Common.StaticData.Repositories

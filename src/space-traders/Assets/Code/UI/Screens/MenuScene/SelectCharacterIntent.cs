@@ -2,7 +2,9 @@
 using Assets.Code.Networking;
 using Assets.Code.UI.Infrastructure.Impl;
 using Assets.Code.UI.Infrastructure.Interfaces;
+using Assets.Code.UI.Screens.MessageBox;
 using Cysharp.Threading.Tasks;
+using System;
 using System.Threading;
 
 
@@ -31,6 +33,12 @@ namespace Assets.Code.UI.Screens.MenuScene
                     .RequestForCharacters(_authentification.Login, _authentification.Password, token);
                 token.ThrowIfCancellationRequested();
                 return charactersData;
+            }
+            catch (RequestFailedException ex)
+            {
+                var data = MessageBoxPopup.CreateData(ex.Message);
+                _uiManager.OpenModal<MessageBoxPopup>(data);
+                throw new OperationCanceledException();
             }
             finally
             {

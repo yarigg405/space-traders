@@ -113,17 +113,11 @@ namespace Assets.Code.Networking
                 Cleanup();
                 throw;
             }
-            catch (TimeoutException)
-            {
-                Debug.LogError("StartClient timeout");
-                Cleanup();
-                throw;
-            }
             catch (Exception ex)
             {
                 Debug.LogException(ex);
                 Cleanup();
-                throw;
+                throw new("error-connection");
             }
         }
 
@@ -145,6 +139,12 @@ namespace Assets.Code.Networking
             {
                 Debug.LogError($"Cleanup failed: {ex}");
             }
+        }
+
+        public void StopClient()
+        {
+            if (Client.IsConnected)
+                Client.Disconnect();
         }
 
         public bool CheckServerPassword(string password)

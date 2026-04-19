@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Assets.Code._Tempo
+namespace Assets.Code.Networking.Data
 {
     [Serializable]
     public struct CharacterData
