@@ -1,11 +1,56 @@
-﻿using System;
+﻿using Assets.Code._Tempo;
+using Assets.Code.UI.Infrastructure.Interfaces;
+using Assets.Code.UI.Screens.MainMenu;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 
 namespace Assets.Code.UI.Screens.MenuScene
 {
-    internal sealed class SelectCharacterPresenter
+    public sealed class SelectCharacterPresenter : IPresenter<SelectCharacterView>
     {
+        private readonly IUIManager _uiManager;
+
+        public SelectCharacterPresenter(IUIManager uiManager)
+        {
+            _uiManager = uiManager;
+        }
+
+        void IPresenter<SelectCharacterView>.Show(SelectCharacterView view, object args)
+        {
+            if (args is not IEnumerable<CharacterData> characters)
+            {
+                throw new("SelectCharacterPresenter need characters args");
+            }
+
+            view.SetupCharacters(characters);
+            view.CreateCharacterButton.onClick.AddListener(ClickOnCreateCharacter);
+            view.OnCharacterSelected += OnCharacterSelected;
+            view.CloseButton.onClick.AddListener(ClickOnBack);
+        }
+
+        void IPresenter<SelectCharacterView>.Hide(SelectCharacterView view)
+        {
+            view.Hide();
+
+            view.CreateCharacterButton.onClick.RemoveListener(ClickOnCreateCharacter);
+            view.OnCharacterSelected -= OnCharacterSelected;
+            view.CloseButton.onClick.RemoveListener(ClickOnBack);
+        }
+
+        private void ClickOnCreateCharacter()
+        {
+            _uiManager.GoToScreen<CreateCharacterScreen>();
+        }
+
+        private void OnCharacterSelected(int characterId)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ClickOnBack()
+        {
+            _uiManager.BackToPreviousScreen();
+        }
     }
 }

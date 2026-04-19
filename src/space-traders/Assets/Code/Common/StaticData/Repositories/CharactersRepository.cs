@@ -1,6 +1,9 @@
 ﻿using Assets.Code.Common.DataBase;
 using Assets.Code.Common.DataBase.ORM;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using UnityEngine;
 
 
 namespace Assets.Code.Common.StaticData.Repositories
@@ -19,6 +22,28 @@ namespace Assets.Code.Common.StaticData.Repositories
             return _dataBase.Query<CharacterORM>(
                 "SELECT * FROM Characters WHERE playerId = ?",
                 playerId);
+        }
+
+        internal bool TryCreateNewCharacter(int playerId, CharacterORM character, out string error)
+        {
+            if (character.Name.Length < 1)
+            {
+                error = "error-empty-name";
+                return false;
+            }
+
+            var playerCharacters = GetCharactersForPlayer(playerId);
+            if (playerCharacters.FirstOrDefault(x => x.Name.Equals(character.Name)) != null)
+            {
+                error = "error-char-exists";
+                return false;
+            }
+
+
+            _dataBase.CreateNew(character);
+
+            error = "";
+            return true;
         }
     }
 }

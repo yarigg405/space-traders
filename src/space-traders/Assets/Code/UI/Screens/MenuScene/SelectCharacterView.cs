@@ -8,10 +8,10 @@ using Yrr.Utils;
 
 namespace Assets.Code.UI.Screens.MainMenu
 {
-    internal sealed class SelectCharacterView : UIScreenView
+    public sealed class SelectCharacterView : UIScreenView
     {
         [field: SerializeField] public Button CreateCharacterButton { get; private set; }
-        public event Action<string> OnCharacterSelected;
+        public event Action<int> OnCharacterSelected;
 
         [SerializeField] private SelectCharacterCardView _characterCardPrefab;
         [SerializeField] private Transform _cardsRoot;
@@ -43,7 +43,7 @@ namespace Assets.Code.UI.Screens.MainMenu
 
         private void SelectCharacter(CharacterData character)
         {
-            OnCharacterSelected?.Invoke(character.Guid);
+            OnCharacterSelected?.Invoke(character.Id);
         }
     }
 }

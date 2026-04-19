@@ -1,10 +1,12 @@
 ﻿using Assets.Code.ClientPart.Networking;
+using Assets.Code.Common.DataBase.ORM;
 using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
+using Cysharp.Threading.Tasks;
 using Riptide;
 using Unity.Mathematics;
 using VContainer;
@@ -118,6 +120,7 @@ namespace Assets.Code.ServerPart.Networking
 
                 foreach (var character in characters)
                 {
+                    response.AddInt(character.Id);
                     response.AddString(character.Name);
                 }
 
@@ -129,6 +132,48 @@ namespace Assets.Code.ServerPart.Networking
                 var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
                     .AddUInt(messageId)
                     .AddString("Wrong password");
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestCreateCharacter)]
+        private static void HandleRequestCreateCharacter(ushort fromClientId, Message message)
+        {
+            var login = message.GetString();
+            var characterName = message.GetString();
+            var messageId = message.GetUInt();
+
+            var player = _playersRepository.GetOrCreatePlayer(login);
+
+            var character = new CharacterORM
+            {
+                PlayerId = player.Id,
+                Name = characterName,
+                CurrentShipId = 0
+            };
+
+            TEstCreateCharacterAsync(player, character, messageId, fromClientId).Forget();
+        }
+
+        private static async UniTask TEstCreateCharacterAsync(PlayerORM player, CharacterORM character, uint messageId, ushort fromClientId)
+        {
+            await UniTask.Delay(1000);
+
+            if (_charactersRepository.TryCreateNewCharacter(player.Id, character, out string error))
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseCreateCharacter)
+                    .AddUInt(messageId)
+                    .AddBool(true);
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+
+            else
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
+                    .AddUInt(messageId)
+                    .AddString(error);
 
                 _networkManager.Server.Send(response, fromClientId);
             }

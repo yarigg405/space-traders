@@ -179,6 +179,8 @@ namespace Assets.Code.UI.Infrastructure.Impl
 
         void IDisposable.Dispose()
         {
+            CloseAllModals();
+
             _navigationCts?.Cancel();
             _navigationCts?.Dispose();
         }

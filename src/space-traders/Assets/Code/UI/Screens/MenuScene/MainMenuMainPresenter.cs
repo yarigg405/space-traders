@@ -32,7 +32,7 @@ namespace Assets.Code.UI.Screens.MenuScene
             view.StartGameBtn.onClick.AddListener(ClickOnStartGame);
             view.JoinGameBtn.onClick.AddListener(ClickOnJoinGame);
 
-            view.Show();
+            _networkManager.Cleanup();
         }
 
         void IPresenter<MainMenuMainView>.Hide(MainMenuMainView view)

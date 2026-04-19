@@ -127,7 +127,7 @@ namespace Assets.Code.Networking
             }
         }
 
-        private void Cleanup()
+        public void Cleanup()
         {
             try
             {

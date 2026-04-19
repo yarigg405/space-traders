@@ -1,4 +1,5 @@
 ﻿using Assets.Code.UI.Infrastructure.Interfaces;
+using UnityEngine;
 
 
 namespace Assets.Code.UI.Screens.MessageBox
@@ -14,18 +15,14 @@ namespace Assets.Code.UI.Screens.MessageBox
 
         void IPresenter<MessageBoxView>.Show(MessageBoxView view, object args)
         {
+            if (args is not MessageBoxData data)
+            {
+                Debug.LogError("MessageBox need MessageBoxData");
+                return;
+            }
+
             view.CloseButton.onClick.AddListener(ClosePopup);
-
-            if (args != null && args is string message)
-            {
-                view.SetMessageText(message);
-            }
-
-            else
-            {
-                view.SetMessageText(string.Empty);
-            }
-
+            view.SetMessage("LocalizationTable",  data.Message, data.Args);
             view.Show();
         }
 

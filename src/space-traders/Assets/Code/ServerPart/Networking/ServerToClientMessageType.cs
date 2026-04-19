@@ -5,7 +5,9 @@
         RequestFailed = 1,
         ResponseConnectToServer = 2,
         ResponseGetCharacters = 3,
-        ResponseEnterTheGame = 4,
+        ResponseCreateCharacter = 4,
+
+        ResponseEnterTheGame = 5,
 
         CreateEntity = 10,
         DestroyEntity = 11,

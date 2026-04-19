@@ -11,5 +11,22 @@ namespace Assets.Code.UI.Screens.MessageBox
             MessageBoxPresenter presenter,
             LayerUI_Popups screenRoot)
             : base(viewsProvider, presenter, screenRoot) { }
+
+        public static MessageBoxData CreateData(string message, params object[] args)
+        {
+            return new MessageBoxData(message, args);
+        }
+    }
+
+    public readonly struct MessageBoxData
+    {
+        public readonly string Message;
+        public readonly object[] Args;
+
+        public MessageBoxData(string message, params object[] args)
+        {
+            Message = message;
+            Args = args;
+        }
     }
 }

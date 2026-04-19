@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en-US
   m_SharedData: {fileID: 11400000, guid: 2006b3e7a75e54941b18737237ce7992, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1962192192998998295
   m_TableData:
   - m_Id: 72212614824038400
     m_Localized: CONNECT
@@ -66,6 +67,21 @@ MonoBehaviour:
     m_Localized: Loading...
     m_Metadata:
       m_Items: []
+  - m_Id: 77637146674171904
+    m_Localized: A character with the name {0} already exists
+    m_Metadata:
+      m_Items:
+      - rid: 1962192192998998295
+  - m_Id: 77646298469339136
+    m_Localized: Please enter the character's name
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1962192192998998295
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 77637146674171904

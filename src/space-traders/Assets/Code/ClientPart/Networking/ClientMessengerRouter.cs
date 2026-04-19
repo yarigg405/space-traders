@@ -36,6 +36,11 @@ namespace Assets.Code.ClientPart.Networking
             _requestSystem.SetResponse(ServerToClientMessageType.ResponseGetCharacters, message);
         }
 
+        internal void HandleResponseCreateCharacter(Message message)
+        {
+            _requestSystem.SetResponse(ServerToClientMessageType.ResponseCreateCharacter, message);
+        }
+
         internal void HandleResponseEnterTheGame(Message message)
         {
             throw new NotImplementedException();

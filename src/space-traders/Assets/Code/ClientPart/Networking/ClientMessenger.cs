@@ -33,7 +33,7 @@ namespace Assets.Code.ClientPart.Networking
             return response.GetString();
         }
 
-        public async UniTask<List<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)
+        public async UniTask<IEnumerable<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestGetCharacters)
                 .AddString(login)
@@ -48,11 +48,31 @@ namespace Assets.Code.ClientPart.Networking
             {
                 var character = new CharacterData
                 {
+                    Id = response.GetInt(),
                     Name = response.GetString(),
                 };
                 result.Add(character);
             }
             return result;
+        }
+
+        public async UniTask<bool> RequestForCreateNewCharacter(string login, CharacterData character, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestCreateCharacter)
+                .AddString(login)
+                .AddString(character.Name);
+
+            var response = await _requestSystem.SendRequest(
+                msg, ct, TimeSpan.FromSeconds(5));
+
+            if (response != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void RequestForLoadingSceneEntities()

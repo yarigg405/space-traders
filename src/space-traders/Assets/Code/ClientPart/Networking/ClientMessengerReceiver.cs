@@ -32,6 +32,12 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseGetCharacters(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseCreateCharacter)]
+        private static void HandleResponseCreateCharacter(Message message)
+        {
+            _router.HandleResponseCreateCharacter(message);
+        }
+
         [MessageHandler((ushort)ServerToClientMessageType.ResponseEnterTheGame)]
         private static void HandleResponseEnterTheGame(Message message)
         {

@@ -63,6 +63,14 @@ MonoBehaviour:
     m_Key: loading
     m_Metadata:
       m_Items: []
+  - m_Id: 77637146674171904
+    m_Key: error-char-exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77646298469339136
+    m_Key: error-empty-name
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

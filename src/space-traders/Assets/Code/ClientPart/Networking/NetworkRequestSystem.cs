@@ -80,7 +80,7 @@ namespace Assets.Code.ClientPart.Networking
         private void Reject(uint id, string error)
         {
             if (_pending.TryGetValue(id, out var tcs))
-                tcs.TrySetException(new Exception(error));
+                tcs.TrySetException(new RequestFailedException(error));
         }
     }
 }
