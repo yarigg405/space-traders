@@ -12,25 +12,23 @@ namespace Assets.Code.UI.Screens.MenuScene
     {
         private readonly ClientMessenger _clientMessenger;
         private readonly IUIManager _uiManager;
+        private readonly AuthentificationContainer _authentification;
 
-        public SelectCharacterIntent(ClientMessenger clientMessenger, IUIManager uiManager)
+        public SelectCharacterIntent(ClientMessenger clientMessenger,
+            IUIManager uiManager, AuthentificationContainer authentificationContainer)
         {
             _clientMessenger = clientMessenger;
             _uiManager = uiManager;
+            _authentification = authentificationContainer;
         }
 
-        async UniTask<object> IAsyncNavigationIntent.Load(CancellationToken token, object args)
+        async UniTask<object> IAsyncNavigationIntent.Load(CancellationToken token)
         {
-            if (args == null || args is not AuthentificationContainer authentification)
-            {
-                throw new("SelectCharacterIntent Error: Args in not AuthentificationContainer");
-            }
-
             try
             {
                 _uiManager.OpenModal<AwaitServerResponsePopup>();
                 var charactersData = await _clientMessenger
-                    .RequestForCharacters(authentification.Login, authentification.Password, token);
+                    .RequestForCharacters(_authentification.Login, _authentification.Password, token);
                 token.ThrowIfCancellationRequested();
                 return charactersData;
             }

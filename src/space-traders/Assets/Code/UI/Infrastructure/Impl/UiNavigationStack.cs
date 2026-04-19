@@ -6,51 +6,28 @@ namespace Assets.Code.UI.Infrastructure.Impl
 {
     internal sealed class UiNavigationStack
     {
-        private readonly IScreensProvider _provider;
-        private readonly Stack<INavigationIntent> _stack = new();
+        private readonly Stack<INavigationRequest> _stack = new();
 
-        public UiNavigationStack(IScreensProvider provider)
+        public void Push(INavigationRequest request)
         {
-            _provider = provider;
+            _stack.Push(request);
         }
 
-        public (IScreen opened, IScreen closed) Push(INavigationIntent intent)
-        {
-            IScreen closed = null;
-
-            if (_stack.Count > 0)
-            {
-                var current = _stack.Peek();
-                closed = current.ExecuteHide(_provider);
-            }
-
-            _stack.Push(intent);
-            var opened = intent.Execute(_provider);
-
-            return (opened, closed);
-        }
-
-        public (IScreen opened, IScreen closed) Pop()
+        public INavigationRequest Pop()
         {
             if (_stack.Count <= 1)
-                return (null, null);
+                return null;
 
-            var current = _stack.Pop();
-            var closed = current.ExecuteHide(_provider);
-
-            var previous = _stack.Peek();
-            var opened = previous.Execute(_provider);
-
-            return (opened, closed);
+            _stack.Pop();
+            return _stack.Peek();
         }
 
         public void Clear()
         {
-            while (_stack.Count > 0)
-            {
-                var intent = _stack.Pop();
-                intent.ExecuteHide(_provider);
-            }
+            _stack.Clear();
         }
+
+        public INavigationRequest Peek() =>
+            _stack.Count > 0 ? _stack.Peek() : null;
     }
 }

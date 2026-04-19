@@ -18,6 +18,7 @@ namespace Assets.Code.UI.Infrastructure.Impl
 
         private bool _isNavigating;
         private CancellationTokenSource _navigationCts;
+        private IScreen _currentScreen;
 
         private readonly HashSet<Type> _openedScreens = new();
         private readonly HashSet<Type> _openedModals = new();
@@ -26,46 +27,18 @@ namespace Assets.Code.UI.Infrastructure.Impl
         {
             _screensProvider = screensProvider;
             _intentFactory = intentFactory;
-
-            _navigation = new(screensProvider);
+            _navigation = new();
         }
 
 
         public void GoToScreen<TScreen>(object args = null) where TScreen : IScreen
         {
             var request = _intentFactory.Create(typeof(TScreen), args);
-            if (request is IAsyncNavigationIntent asyncIntent)
-            {
-                HandleAsync(asyncIntent, args).Forget();
-            }
-            else
-            {
-                var intent = request as INavigationIntent;
-                HandleSync(intent);
-            }
+            _navigation.Push(request);
+            ExecuteRequest(request).Forget();
         }
 
-        private void HandleSync(INavigationIntent intent)
-        {
-            if (_isNavigating)
-                return;
-
-            var (opened, closed) = _navigation.Push(intent);
-
-            if (closed != null)
-            {
-                _openedScreens.Remove(closed.GetType());
-                OnScreenClosed?.Invoke(closed);
-            }
-
-            if (opened != null)
-            {
-                _openedScreens.Add(opened.GetType());
-                OnScreenOpened?.Invoke(opened);
-            }
-        }
-
-        private async UniTask HandleAsync(IAsyncNavigationIntent intent, object args)
+        private async UniTask ExecuteRequest(INavigationRequest request)
         {
             if (_isNavigating)
                 return;
@@ -79,30 +52,40 @@ namespace Assets.Code.UI.Infrastructure.Impl
 
             try
             {
-                var data = await intent.Load(token, args);
+                IScreen opened = null;
+                var closed = _currentScreen;
 
-                if (token.IsCancellationRequested)
-                    return;
+                if (request is IAsyncNavigationIntent asyncIntent)
+                {
+                    var data = await asyncIntent.Load(token);
 
-                var finalIntent = intent.Create(data);
-                var (opened, closed) = _navigation.Push(finalIntent);
+                    if (token.IsCancellationRequested)
+                        return;
+
+                    var finalIntent = asyncIntent.Create(data);
+                    opened = finalIntent.Execute(_screensProvider);
+                }
+                else if (request is INavigationIntent syncIntent)
+                {
+                    opened = syncIntent.Execute(_screensProvider);
+                }
 
                 if (closed != null)
                 {
+                    closed.Hide();
                     _openedScreens.Remove(closed.GetType());
                     OnScreenClosed?.Invoke(closed);
                 }
 
                 if (opened != null)
                 {
+                    _currentScreen = opened;
+
                     _openedScreens.Add(opened.GetType());
                     OnScreenOpened?.Invoke(opened);
                 }
             }
-            catch (OperationCanceledException)
-            {
-                //...
-            }
+            catch (OperationCanceledException) { }
             catch (Exception e)
             {
                 UnityEngine.Debug.LogException(e);
@@ -114,22 +97,14 @@ namespace Assets.Code.UI.Infrastructure.Impl
         }
 
 
-
         public void BackToPreviousScreen()
         {
-            var (closed, opened) = _navigation.Pop();
+            var request = _navigation.Pop();
 
-            if (closed == null)
+            if (request == null)
                 return;
 
-            _openedScreens.Remove(closed.GetType());
-            OnScreenClosed?.Invoke(closed);
-
-            if (opened != null)
-            {
-                _openedScreens.Add(opened.GetType());
-                OnScreenOpened?.Invoke(opened);
-            }
+            ExecuteRequest(request).Forget();
         }
 
 

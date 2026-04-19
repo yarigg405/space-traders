@@ -6,7 +6,7 @@ namespace Assets.Code.UI.Infrastructure.Interfaces
 {
     public interface IAsyncNavigationIntent : INavigationRequest
     {
-        UniTask<object> Load(CancellationToken token, object args);
+        UniTask<object> Load(CancellationToken token);
         INavigationIntent Create(object data);
     }
 }
