@@ -19,6 +19,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly PlayerDataProvider _playerDataProvider;
         private readonly ServerWorldsController _serverWorldsController;
         private readonly NetworkManager _networkManager;
+        private readonly ServerMessenger _messenger;
 
         private readonly Dictionary<ushort, string> _sceneForClientsMap = new();
         private readonly Dictionary<string, List<ushort>> _clientsOnScenesMap = new();
@@ -27,13 +28,15 @@ namespace Assets.Code.ServerPart.Networking
         public ClientSceneConnector(PlayerBuilder playerBuilder,
             PlayerDataProvider playerDataProvider,
             ServerWorldsController serverWorldsController,
-            NetworkManager networkManager)
+            NetworkManager networkManager,
+            ServerMessenger messenger)
         {
             _playerBuilder = playerBuilder;
             _playerDataProvider = playerDataProvider;
             _serverWorldsController = serverWorldsController;
 
             _networkManager = networkManager;
+            _messenger = messenger;
         }
 
         void IInitializable.Initialize()
@@ -57,12 +60,12 @@ namespace Assets.Code.ServerPart.Networking
             var snapshot = newPlayerEntity.AsSerializedEntity();
             foreach (var client in _clientsOnScenesMap[sceneName])
             {
-                ServerMessenger.SendEntityToClient(client, snapshot);
+                _messenger.SendEntityToClient(client, snapshot);
             }
             _playerEntities[clientId] = newPlayerEntity;
 
             AddClientToScene(clientId, sceneName);
-            ServerMessenger.SendConnectionDataToPlayer(clientId, sceneName);
+            _messenger.SendConnectionDataToPlayer(clientId, sceneName);
         }
 
         private void OnClientDisconnected(object sender, ServerDisconnectedEventArgs e)
@@ -84,7 +87,7 @@ namespace Assets.Code.ServerPart.Networking
 
             foreach (var snapshot in snapshots)
             {
-                ServerMessenger.SendEntityToClient(clientId, snapshot);
+                _messenger.SendEntityToClient(clientId, snapshot);
             }
         }
 
@@ -116,7 +119,7 @@ namespace Assets.Code.ServerPart.Networking
             var entityId = _playerEntities[clientId].Id;
             foreach (var client in _clientsOnScenesMap[sceneName])
             {
-                ServerMessenger.DestroyEntityOnClient(client, entityId);
+                _messenger.DestroyEntityOnClient(client, entityId);
             }
 
             _sceneForClientsMap[clientId] = string.Empty;

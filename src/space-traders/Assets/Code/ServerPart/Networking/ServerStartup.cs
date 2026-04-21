@@ -33,8 +33,11 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<GameWorldFiller>(Lifetime.Singleton).AsSelf();
                 builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();
                 builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-                builder.Register<ServerMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
                 builder.Register<ServerInputService>(Lifetime.Singleton).AsSelf();
+
+                builder.Register<ServerMessenger>(Lifetime.Singleton).AsSelf();
+                builder.Register<ServerMessengerRouter>(Lifetime.Singleton).AsSelf();
+                builder.Register<ServerMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
 
                 builder.Register<DataBaseManager>(Lifetime.Singleton).AsImplementedInterfaces();
                 builder.Register<PlayersRepository>(Lifetime.Singleton).AsSelf();

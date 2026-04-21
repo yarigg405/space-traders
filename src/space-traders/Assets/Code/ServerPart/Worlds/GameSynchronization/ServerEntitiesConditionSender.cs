@@ -8,11 +8,14 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
     {
         private readonly string _sceneName;
         private readonly ClientSceneConnector _clientSceneConnector;
+        private readonly ServerMessenger _messenger;
 
-        internal ServerEntitiesConditionSender(string sceneName, ClientSceneConnector clientSceneConnector)
+        internal ServerEntitiesConditionSender(string sceneName,
+            ClientSceneConnector clientSceneConnector, ServerMessenger messenger)
         {
             _sceneName = sceneName;
             _clientSceneConnector = clientSceneConnector;
+            _messenger = messenger;
         }
 
         void IEntityCreator.CreateEntityOnClients(GameEntity entity)
@@ -20,7 +23,7 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
             var snapshot = entity.AsSerializedEntity();
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.SendEntityToClient(client, snapshot);
+                _messenger.SendEntityToClient(client, snapshot);
             }
         }
 
@@ -28,7 +31,7 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
         {
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.DestroyEntityOnClient(client, entityId);
+                _messenger.DestroyEntityOnClient(client, entityId);
             }
         }
     }

@@ -1,21 +1,20 @@
-﻿using VContainer;
-using VContainer.Unity;
+﻿using VContainer.Unity;
 
 
 namespace Assets.Code.ServerPart.Networking
 {
     public sealed class ServerMessengerDependencySetupper : IInitializable
     {
-        private readonly IObjectResolver _resolver;
+        private readonly ServerMessengerRouter _router;
 
-        public ServerMessengerDependencySetupper(IObjectResolver resolver)
+        internal ServerMessengerDependencySetupper(ServerMessengerRouter router)
         {
-            _resolver = resolver;
+            _router = router;
         }
 
         void IInitializable.Initialize()
         {
-            ServerMessenger.SetupDependencies(_resolver);
+            ServerMessengerReceiver.Initialize(_router);
         }
     }
 }

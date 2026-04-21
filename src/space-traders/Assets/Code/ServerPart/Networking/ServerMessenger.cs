@@ -1,40 +1,23 @@
-﻿using Assets.Code.ClientPart.Networking;
-using Assets.Code.Common.DataBase.ORM;
-using Assets.Code.Common.Serialization;
+﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
-using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Networking;
-using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
-using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
-using Cysharp.Threading.Tasks;
 using Riptide;
 using Unity.Mathematics;
-using VContainer;
 
 
 namespace Assets.Code.ServerPart.Networking
 {
-    public static class ServerMessenger
+    public class ServerMessenger
     {
-        private static NetworkManager _networkManager;
-        private static ClientSceneConnector _clientSceneConnector;
-        private static PlayerDataProvider _playerDataProvider;
-        private static ServerInputService _serverInputService;
-        private static CharactersRepository _charactersRepository;
-        private static PlayersRepository _playersRepository;
+        private readonly NetworkManager _networkManager;
 
-        public static void SetupDependencies(IObjectResolver resolver)
+        public ServerMessenger(NetworkManager networkManager)
         {
-            _networkManager = resolver.Resolve<NetworkManager>();
-            _clientSceneConnector = resolver.Resolve<ClientSceneConnector>();
-            _playerDataProvider = resolver.Resolve<PlayerDataProvider>();
-            _serverInputService = resolver.Resolve<ServerInputService>();
-
-            _playersRepository = resolver.Resolve<PlayersRepository>();
-            _charactersRepository = resolver.Resolve<CharactersRepository>();
+            _networkManager = networkManager;
         }
+        
 
-        public static void SendConnectionDataToPlayer(ushort clientId, string sceneName)
+        public void SendConnectionDataToPlayer(ushort clientId, string sceneName)
         {
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
                 .AddString(sceneName);
@@ -42,7 +25,7 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, clientId);
         }
 
-        public static void SendEntityToClient(ushort clientId, EntitySnapshot snapshot)
+        public void SendEntityToClient(ushort clientId, EntitySnapshot snapshot)
         {
             var json = JsonSerializator.ToJson(snapshot);
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.CreateEntity)
@@ -51,7 +34,7 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, clientId);
         }
 
-        public static void DestroyEntityOnClient(ushort clientId, uint entityId)
+        public void DestroyEntityOnClient(ushort clientId, uint entityId)
         {
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.DestroyEntity)
                 .AddUInt(entityId);
@@ -60,7 +43,7 @@ namespace Assets.Code.ServerPart.Networking
         }
 
         #region Update of components
-        public static void SynchronizeGlobalPosition(ushort client, uint entityId, double2 globalPosition)
+        public void SynchronizeGlobalPosition(ushort client, uint entityId, double2 globalPosition)
         {
             var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.SynchronizeGlobalPosition)
                 .AddUInt(entityId)
@@ -71,7 +54,7 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, client);
         }
 
-        public static void SynchronizeRotation(ushort client, uint entityId, float currentRotation)
+        public void SynchronizeRotation(ushort client, uint entityId, float currentRotation)
         {
             var message = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.SynchronizeRotation)
                 .AddUInt(entityId)
@@ -81,7 +64,7 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, client);
         }
 
-        public static void UpdateComponentsForEntity(ushort client, uint entityId, string snapshotJson)
+        public void UpdateComponentsForEntity(ushort client, uint entityId, string snapshotJson)
         {
             var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.UpdateComponentsForEntity)
                 .AddUInt(entityId)
@@ -90,153 +73,6 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(message, client);
         }
 
-        #endregion
-
-
-
-        #region MessageHandlers
-
-
-        //[MessageHandler((ushort)ClientToServerMessageType.RequestConnectToGame)]
-        //private static void HandleConnectToGameScene(ushort fromClientId, Message message)
-        //{
-        //    _clientSceneConnector.ConnectPlayer(fromClientId);
-        //}
-        [MessageHandler((ushort)ClientToServerMessageType.RequestGetCharacters)]
-        private static void HandleRequestGetCharacters(ushort fromClientId, Message message)
-        {
-            var login = message.GetString();
-            var password = message.GetString();
-            var messageId = message.GetUInt();
-
-            if (_networkManager.CheckServerPassword(password))
-            {
-                var player = _playersRepository.GetOrCreatePlayer(login);
-                var characters = _charactersRepository.GetCharactersForPlayer(player.Id);
-
-                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseGetCharacters)
-                    .AddUInt(messageId)
-                    .AddInt(characters.Count);
-
-                foreach (var character in characters)
-                {
-                    response.AddInt(character.Id);
-                    response.AddString(character.Name);
-                }
-
-                _networkManager.Server.Send(response, fromClientId);
-            }
-
-            else
-            {
-                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
-                    .AddUInt(messageId)
-                    .AddString("error-password");
-
-                _networkManager.Server.Send(response, fromClientId);
-            }
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.RequestCreateCharacter)]
-        private static void HandleRequestCreateCharacter(ushort fromClientId, Message message)
-        {
-            var login = message.GetString();
-            var characterName = message.GetString();
-            var messageId = message.GetUInt();
-
-            var player = _playersRepository.GetOrCreatePlayer(login);
-
-            var character = new CharacterORM
-            {
-                PlayerId = player.Id,
-                Name = characterName,
-                CurrentShipId = 0
-            };
-
-            TEstCreateCharacterAsync(player, character, messageId, fromClientId).Forget();
-        }
-
-        private static async UniTask TEstCreateCharacterAsync(PlayerORM player, CharacterORM character, uint messageId, ushort fromClientId)
-        {
-            await UniTask.Delay(1000);
-
-            if (_charactersRepository.TryCreateNewCharacter(player.Id, character, out string error))
-            {
-                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseCreateCharacter)
-                    .AddUInt(messageId)
-                    .AddBool(true);
-
-                _networkManager.Server.Send(response, fromClientId);
-            }
-
-            else
-            {
-                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
-                    .AddUInt(messageId)
-                    .AddString(error);
-
-                _networkManager.Server.Send(response, fromClientId);
-            }
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
-        private static void HandleEntitiesLoading(ushort fromClientId, Message message)
-        {
-            _clientSceneConnector.FillWorldForClient(fromClientId);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.RequestForChangeScene)]
-        private static void HandleChangeScene(ushort fromClientId, Message message)
-        {
-            var sceneName = message.GetString();
-            var scene = _playerDataProvider.GetSceneNameForPlayer(fromClientId);
-            if (scene.Equals(sceneName)) return;
-            _playerDataProvider.SetPlayerScene(fromClientId, sceneName);
-
-            _clientSceneConnector.ConnectPlayer(fromClientId);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendTargetRotation)]
-        private static void HandleClientTargetRotation(ushort fromClientId, Message message)
-        {
-            var targetRotation = message.GetFloat();
-            _serverInputService.SetPlayerTargetRotation(fromClientId, targetRotation);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendSpeedModifier)]
-        private static void HandleClientSpeedModifier(ushort fromClientId, Message message)
-        {
-            var speedModifier = message.GetFloat();
-            _serverInputService.SetPlayerSpeedModifier(fromClientId, speedModifier);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendKeepDistance)]
-        private static void HandleKeepDistance(ushort fromClientId, Message message)
-        {
-            var targetId = message.GetUInt();
-            var minMaxDistance = message.GetVector2();
-
-            _serverInputService.SetPlayerKeepDistance(fromClientId, targetId, minMaxDistance);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendSetOrbit)]
-        private static void HandleSetOrbig(ushort fromClientId, Message message)
-        {
-            var targetId = message.GetUInt();
-            var orbitRadius = message.GetFloat();
-
-            _serverInputService.SetPlayerOrbitMoving(fromClientId, targetId, orbitRadius);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendSetWarpTo)]
-        private static void HandleSetWarpTo(ushort fromClientId, Message message)
-        {
-            var x = message.GetDouble();
-            var y = message.GetDouble();
-            var coordinates = new double2(x, y);
-
-            _serverInputService.SetPlayerWarpTo(fromClientId, coordinates);
-        }
         #endregion
     }
 }

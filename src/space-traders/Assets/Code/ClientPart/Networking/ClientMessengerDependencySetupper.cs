@@ -5,7 +5,7 @@ namespace Assets.Code.ClientPart.Networking
 {
     public sealed class ClientMessengerDependencySetupper : IInitializable
     {
-        private ClientMessengerRouter _router;
+        private readonly ClientMessengerRouter _router;
 
         internal ClientMessengerDependencySetupper(ClientMessengerRouter router)
         {

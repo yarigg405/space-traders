@@ -11,18 +11,21 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
     {
         private readonly string _sceneName;
         private readonly ClientSceneConnector _clientSceneConnector;
+        private readonly ServerMessenger _messenger;
 
-        internal EntitiesSynchronizator(string sceneName, ClientSceneConnector clientSceneConnector)
+        internal EntitiesSynchronizator(string sceneName,
+            ClientSceneConnector clientSceneConnector, ServerMessenger messenger)
         {
             _sceneName = sceneName;
             _clientSceneConnector = clientSceneConnector;
+            _messenger = messenger;
         }
 
         public void SyncGlobalPosition(uint entityId, double2 globalPosition)
         {
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.SynchronizeGlobalPosition(client, entityId, globalPosition);
+                _messenger.SynchronizeGlobalPosition(client, entityId, globalPosition);
             }
         }
 
@@ -30,7 +33,7 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
         {
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.SynchronizeRotation(client, entityId, rotation);
+                _messenger.SynchronizeRotation(client, entityId, rotation);
             }
         }
 
@@ -41,7 +44,7 @@ namespace Assets.Code.ServerPart.Worlds.GameSynchronization
 
             foreach (var client in _clientSceneConnector.GetClientsOnScene(_sceneName))
             {
-                ServerMessenger.UpdateComponentsForEntity(client, entity.Id, json);
+                _messenger.UpdateComponentsForEntity(client, entity.Id, json);
             }
         }
     }
