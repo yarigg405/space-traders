@@ -7,6 +7,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
     public sealed class PlayerDataProvider
     {
         private readonly Dictionary<ushort, string> _playerScenes = new();
+        private readonly Dictionary<ushort, int> _playerCharacters = new();
 
         public string GetSceneNameForPlayer(ushort playerId)
         {
@@ -19,6 +20,16 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
         public void SetPlayerScene(ushort playerId, string sceneName)
         {
             _playerScenes[playerId] = sceneName;
+        }
+
+        public int GetCharacterIdForPlayer(ushort playerId)
+        {
+            return _playerCharacters[playerId];
+        }
+
+        public void SetCharacterForPlayer(ushort playerId, int characterId)
+        {
+            _playerCharacters[playerId] = characterId;
         }
     }
 }

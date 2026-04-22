@@ -25,7 +25,8 @@ namespace Assets.Code.ClientPart.Networking
 
         public async UniTask<string> RequestForEnterTheGame(int selectedCharacterId, CancellationToken ct)
         {
-            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestEnterTheGame);
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestEnterTheGame)
+                .AddInt(selectedCharacterId);
 
             var response = await _requestSystem.SendRequest(
                 msg, ct, TimeSpan.FromSeconds(5));

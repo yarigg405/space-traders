@@ -3,6 +3,7 @@ using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Riptide;
+using System;
 using Unity.Mathematics;
 
 
@@ -94,6 +95,18 @@ namespace Assets.Code.ServerPart.Networking
                 _networkManager.Server.Send(response, fromClientId);
             }
         }
+
+        internal void HandleRequestEnterTheGame(ushort fromClientId, Message message)
+        {
+            var characterId = message.GetInt();
+            
+            here!!!
+
+            _clientSceneConnector.ConnectPlayer(fromClientId);
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType
+        }
+
+
 
         internal void HandleClientTargetRotation(ushort fromClientId, Message message)
         {

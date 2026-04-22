@@ -1,9 +1,5 @@
 ﻿using Assets.Code.ClientPart.Networking;
-using Assets.Code.Common.DataBase.ORM;
-using Cysharp.Threading.Tasks;
 using Riptide;
-using System;
-using Unity.Mathematics;
 
 
 namespace Assets.Code.ServerPart.Networking
@@ -30,7 +26,13 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestCreateCharacter(fromClientId, message);
         }
 
-       
+        [MessageHandler((ushort)ClientToServerMessageType.RequestEnterTheGame)]
+        private static void HandleRequestEnterTheGame(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestEnterTheGame(fromClientId, message);
+        }
+
+
 
         //[MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
         //private static void HandleEntitiesLoading(ushort fromClientId, Message message)
