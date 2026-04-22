@@ -15,15 +15,23 @@ namespace Assets.Code.UI.Screens.MessageBox
 
         void IPresenter<MessageBoxView>.Show(MessageBoxView view, object args)
         {
-            if (args is not MessageBoxData data)
+            if (args is MessageBoxData data)
             {
-                Debug.LogError("MessageBox need MessageBoxData");
+                view.CloseButton.onClick.AddListener(ClosePopup);
+                view.SetMessage("LocalizationTable", data.Message, data.Args);
+                view.Show();
                 return;
             }
 
-            view.CloseButton.onClick.AddListener(ClosePopup);
-            view.SetMessage("LocalizationTable",  data.Message, data.Args);
-            view.Show();
+            if (args is string message)
+            {
+                view.CloseButton.onClick.AddListener(ClosePopup);
+                view.SetMessage("LocalizationTable", message);
+                view.Show();
+                return;
+            }
+            
+            Debug.LogError("MessageBox need MessageBoxData or string");            
         }
 
         void IPresenter<MessageBoxView>.Hide(MessageBoxView view)

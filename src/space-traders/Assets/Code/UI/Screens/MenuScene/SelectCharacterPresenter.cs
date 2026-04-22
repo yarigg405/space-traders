@@ -1,7 +1,8 @@
-﻿using Assets.Code.Networking.Data;
+﻿using Assets.Code.ClientPart.Networking;
+using Assets.Code.Infrastructure.States.GameStates;
+using Assets.Code.Networking.Data;
 using Assets.Code.UI.Infrastructure.Interfaces;
 using Assets.Code.UI.Screens.MainMenu;
-using System;
 using System.Collections.Generic;
 
 
@@ -10,10 +11,12 @@ namespace Assets.Code.UI.Screens.MenuScene
     public sealed class SelectCharacterPresenter : IPresenter<SelectCharacterView>
     {
         private readonly IUIManager _uiManager;
+        private readonly GameEnterManager _enterManager;
 
-        public SelectCharacterPresenter(IUIManager uiManager)
+        public SelectCharacterPresenter(IUIManager uiManager, GameEnterManager enterManager)
         {
             _uiManager = uiManager;
+            _enterManager = enterManager;
         }
 
         void IPresenter<SelectCharacterView>.Show(SelectCharacterView view, object args)
@@ -45,7 +48,7 @@ namespace Assets.Code.UI.Screens.MenuScene
 
         private void OnCharacterSelected(int characterId)
         {
-            throw new NotImplementedException();
+            _enterManager.EnterGame(characterId);
         }
 
         private void ClickOnBack()

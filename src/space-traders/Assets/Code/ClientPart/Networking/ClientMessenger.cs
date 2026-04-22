@@ -23,7 +23,7 @@ namespace Assets.Code.ClientPart.Networking
         }
 
 
-        public async UniTask<string> RequestForEnterTheGame(CancellationToken ct)
+        public async UniTask<string> RequestForEnterTheGame(int selectedCharacterId, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestEnterTheGame);
 

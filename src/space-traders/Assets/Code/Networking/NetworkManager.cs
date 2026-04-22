@@ -62,6 +62,8 @@ namespace Assets.Code.Networking
                 if (Client.IsConnected)
                     throw new InvalidOperationException("Client already connected");
 
+                _serverStartup = new(_resolver.Resolve<GameLifetimeScope>());
+
                 Server.Start(port, _maxPlayers);
                 await UniTask.WaitUntil(() => Server.IsRunning)
                         .AttachExternalCancellation(ct)
@@ -72,8 +74,6 @@ namespace Assets.Code.Networking
                 await UniTask.WaitUntil(() => Client.IsConnected)
                         .AttachExternalCancellation(ct)
                         .Timeout(TimeSpan.FromSeconds(5));
-
-                _serverStartup = new(_resolver.Resolve<GameLifetimeScope>());
             }
             catch (OperationCanceledException)
             {

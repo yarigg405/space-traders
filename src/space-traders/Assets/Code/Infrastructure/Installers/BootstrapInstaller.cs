@@ -62,6 +62,7 @@ namespace Assets.Code.Infrastructure.Installers
         private void BindNetworking()
         {
             Builder.Register<AuthentificationContainer>(Lifetime.Singleton).AsSelf();
+            Builder.Register<GameEnterManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Builder.Register<NetworkManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Builder.Register<ClientMessenger>(Lifetime.Singleton).AsSelf();
             Builder.Register<NetworkRequestSystem>(Lifetime.Singleton).AsSelf();
@@ -79,6 +80,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<BootstrapState>(Lifetime.Transient).AsSelf();
             Builder.Register<MenuSceneState>(Lifetime.Transient).AsSelf();
             Builder.Register<LoadGameSceneState>(Lifetime.Transient).AsSelf();
+            Builder.Register<SpaceStationState>(Lifetime.Transient).AsSelf();
             Builder.Register<ChangeGameSceneState>(Lifetime.Transient).AsSelf();
             Builder.Register<GameLoopState>(Lifetime.Transient).AsSelf().AsImplementedInterfaces();
         }

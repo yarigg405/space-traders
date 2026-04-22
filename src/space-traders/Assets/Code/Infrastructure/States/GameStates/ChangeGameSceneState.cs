@@ -2,6 +2,7 @@
 using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
+using Assets.Code.Networking;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine.SceneManagement;
@@ -14,16 +15,19 @@ namespace Assets.Code.Infrastructure.States.GameStates
         private readonly IStateMachine _stateMachine;
         private readonly IScenesLoader _scenesLoader;
         private readonly ClientMessenger _messenger;
+        private readonly AuthentificationContainer _authentification;
 
         private CancellationTokenSource _cts;
 
         public ChangeGameSceneState(IScenesLoader scenesLoader,
             IStateMachine stateMachine,
-            ClientMessenger messenger)
+            ClientMessenger messenger,
+            AuthentificationContainer authentification)
         {
             _scenesLoader = scenesLoader;
             _stateMachine = stateMachine;
             _messenger = messenger;
+            _authentification = authentification;
         }
 
         public override void Enter(string sceneName)
@@ -43,7 +47,7 @@ namespace Assets.Code.Infrastructure.States.GameStates
         {
             _messenger.RequestForChangeScene(sceneName);
 
-            sceneName = await _messenger.RequestForEnterTheGame(_cts.Token);
+            sceneName = await _messenger.RequestForEnterTheGame(_authentification.SelectedCharacterId, _cts.Token);
             _scenesLoader.LoadScene(sceneName);
         }
 

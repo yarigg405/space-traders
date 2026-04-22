@@ -1,6 +1,5 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
-using VContainer.Unity;
 
 
 namespace Assets.Code.Infrastructure.States.GameStates
