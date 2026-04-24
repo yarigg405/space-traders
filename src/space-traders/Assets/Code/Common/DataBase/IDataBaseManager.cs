@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 namespace Assets.Code.Common.DataBase
@@ -13,5 +14,6 @@ namespace Assets.Code.Common.DataBase
         int Update(object updatedObject);
 
         void Execute(string sql, params object[] args);
+        void RunInTransaction(Action<IDataBaseManager> action);
     }
 }

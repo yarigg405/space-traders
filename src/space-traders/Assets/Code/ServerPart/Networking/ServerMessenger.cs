@@ -15,15 +15,6 @@ namespace Assets.Code.ServerPart.Networking
         {
             _networkManager = networkManager;
         }
-        
-
-        public void SendConnectionDataToPlayer(ushort clientId, string sceneName)
-        {
-            var message = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
-                .AddString(sceneName);
-
-            _networkManager.Server.Send(message, clientId);
-        }
 
         public void SendEntityToClient(ushort clientId, EntitySnapshot snapshot)
         {

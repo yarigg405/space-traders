@@ -23,27 +23,22 @@ namespace Assets.Code.ClientPart.Networking
 
         internal void HandleRequestFailed(Message message)
         {
-            _requestSystem.SetResponse(ServerToClientMessageType.RequestFailed, message);
-        }
-
-        internal void HandleResponseConnectToServer(Message message)
-        {
-            throw new NotImplementedException();
+            _requestSystem.SetResponseFailed(message);
         }
 
         internal void HandleResponseGetCharacters(Message message)
         {
-            _requestSystem.SetResponse(ServerToClientMessageType.ResponseGetCharacters, message);
+            _requestSystem.SetResponseOk(message);
         }
 
         internal void HandleResponseCreateCharacter(Message message)
         {
-            _requestSystem.SetResponse(ServerToClientMessageType.ResponseCreateCharacter, message);
+            _requestSystem.SetResponseOk(message);
         }
 
         internal void HandleResponseEnterTheGame(Message message)
         {
-            throw new NotImplementedException();
+            _requestSystem.SetResponseOk(message);
         }
 
         internal void HandleCreateEntity(Message message)

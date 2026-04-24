@@ -7,6 +7,7 @@ namespace Assets.Code.Common.DataBase.ORM
     [Table("CharacterLocations")]
     public sealed class CharacterLocationORM
     {
+        [PrimaryKey]
         [Column("characterId")]
         public int CharacterId { get; set; }
 

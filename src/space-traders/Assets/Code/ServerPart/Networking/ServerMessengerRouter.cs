@@ -1,9 +1,11 @@
 ﻿using Assets.Code.Common.DataBase.ORM;
 using Assets.Code.Common.StaticData.Repositories;
+using Assets.Code.Common.StaticData.Staff;
+using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
+using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Riptide;
-using System;
 using Unity.Mathematics;
 
 
@@ -12,20 +14,36 @@ namespace Assets.Code.ServerPart.Networking
     internal sealed class ServerMessengerRouter
     {
         private readonly NetworkManager _networkManager;
+        private readonly ServerInputService _serverInputService;
+        private readonly CharactersCreatingService _characterCreator;
+        private readonly PlayerDataProvider _playerDataProvider;
+        private readonly ClientSceneConnector _clientSceneConnector;
+
         private readonly PlayersRepository _playersRepository;
         private readonly CharactersRepository _charactersRepository;
-        private readonly ServerInputService _serverInputService;
+        private readonly CharacterLocationsRepository _characterLocationsRepository;
+        private readonly StarSystemRepository _starsSystemRepository;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
             PlayersRepository playersRepository,
             CharactersRepository charactersRepository,
-            ServerInputService serverInputService)
+            ServerInputService serverInputService,
+            CharactersCreatingService characterCreator,
+            CharacterLocationsRepository characterLocationsRepository,
+            StarSystemRepository starsSystemRepository,
+            ClientSceneConnector clientSceneConnector,
+            PlayerDataProvider playerDataProvider)
         {
             _networkManager = networkManager;
             _playersRepository = playersRepository;
             _charactersRepository = charactersRepository;
             _serverInputService = serverInputService;
+            _characterCreator = characterCreator;
+            _characterLocationsRepository = characterLocationsRepository;
+            _starsSystemRepository = starsSystemRepository;
+            _clientSceneConnector = clientSceneConnector;
+            _playerDataProvider = playerDataProvider;
         }
 
         internal void HandleRequestGetCharacters(ushort fromClientId, Message message)
@@ -56,7 +74,7 @@ namespace Assets.Code.ServerPart.Networking
             {
                 var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
                     .AddUInt(messageId)
-                    .AddString("error-password");
+                    .AddString(ErrorCodes.WrongPassword);
 
                 _networkManager.Server.Send(response, fromClientId);
             }
@@ -77,7 +95,7 @@ namespace Assets.Code.ServerPart.Networking
                 CurrentShipId = 0
             };
 
-            if (_charactersRepository.TryCreateNewCharacter(player.Id, character, out string error))
+            if (_characterCreator.TryCreateNewCharacter(player.Id, character, out string error))
             {
                 var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseCreateCharacter)
                     .AddUInt(messageId)
@@ -99,11 +117,28 @@ namespace Assets.Code.ServerPart.Networking
         internal void HandleRequestEnterTheGame(ushort fromClientId, Message message)
         {
             var characterId = message.GetInt();
-            
-            here!!!
+            var messageId = message.GetUInt();
 
+            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
+
+            string sceneName = string.Empty;
+            if (location.LocationType == LocationType.Space)
+            {
+                sceneName = _starsSystemRepository.Get(location.CurrentLocationId).Name;
+            }
+
+            else //if (location.LocationType == LocationType.Station)
+            {
+                sceneName = SceneNames.StationScene;
+            }
+
+            _playerDataProvider.SetPlayerScene(fromClientId, sceneName);
             _clientSceneConnector.ConnectPlayer(fromClientId);
-            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
+                .AddUInt(messageId)
+               .AddString(sceneName);
+
+            _networkManager.Server.Send(response, fromClientId);
         }
 
 

@@ -117,7 +117,7 @@ namespace Assets.Code.Networking
             {
                 Debug.LogException(ex);
                 Cleanup();
-                throw new("error-connection");
+                throw new(ErrorCodes.ErrorConnection);
             }
         }
 

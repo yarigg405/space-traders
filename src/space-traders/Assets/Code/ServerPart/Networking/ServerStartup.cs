@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Common.DataBase;
 using Assets.Code.Common.StaticData.Repositories;
+using Assets.Code.Common.StaticData.Staff;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
@@ -42,8 +43,12 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<DataBaseManager>(Lifetime.Singleton).AsImplementedInterfaces();
                 builder.Register<PlayersRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<CharactersRepository>(Lifetime.Singleton).AsSelf();
+                builder.Register<StarSystemRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<PlanetsRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<SpaceStationsRepository>(Lifetime.Singleton).AsSelf();
+                builder.Register<CharacterLocationsRepository>(Lifetime.Singleton).AsSelf();
+
+                builder.Register<CharactersCreatingService>(Lifetime.Singleton).AsSelf();
             });
         }
 

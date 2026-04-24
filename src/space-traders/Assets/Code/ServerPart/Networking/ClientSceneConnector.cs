@@ -65,7 +65,6 @@ namespace Assets.Code.ServerPart.Networking
             _playerEntities[clientId] = newPlayerEntity;
 
             AddClientToScene(clientId, sceneName);
-            _messenger.SendConnectionDataToPlayer(clientId, sceneName);
         }
 
         private void OnClientDisconnected(object sender, ServerDisconnectedEventArgs e)

@@ -3,17 +3,15 @@
     public enum ServerToClientMessageType : ushort
     {
         RequestFailed = 1,
-        ResponseConnectToServer = 2,
         ResponseGetCharacters = 3,
         ResponseCreateCharacter = 4,
-
         ResponseEnterTheGame = 5,
 
-        CreateEntity = 10,
-        DestroyEntity = 11,
 
-        UpdateComponentsForEntity = 30,
-        SynchronizeGlobalPosition = 31,
-        SynchronizeRotation = 32,
+        CreateEntity = 50,
+        DestroyEntity = 51,
+        UpdateComponentsForEntity = 52,
+        SynchronizeGlobalPosition = 53,
+        SynchronizeRotation = 54,
     }
 }

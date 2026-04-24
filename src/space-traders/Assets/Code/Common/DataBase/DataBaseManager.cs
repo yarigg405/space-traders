@@ -20,6 +20,7 @@ namespace Assets.Code.Common.DataBase
                 CreateNewDataBase();
 
             _connection = new(_dbPath);
+            _connection.Execute("PRAGMA foreign_keys = ON;");
         }
 
         private void CreateNewDataBase()
@@ -52,6 +53,14 @@ namespace Assets.Code.Common.DataBase
         void IDataBaseManager.Execute(string sql, params object[] args)
         {
             _connection.CreateCommand(sql, args).ExecuteNonQuery();
+        }
+
+        void IDataBaseManager.RunInTransaction(Action<IDataBaseManager> action)
+        {
+            _connection.RunInTransaction(() =>
+            {
+                action(this);
+            });
         }
 
         void IDisposable.Dispose()

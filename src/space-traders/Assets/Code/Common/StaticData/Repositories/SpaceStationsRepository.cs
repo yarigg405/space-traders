@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Assets.Code.Common.StaticData.Repositories
 {
-    internal class SpaceStationsRepository
+    public sealed class SpaceStationsRepository
     {
         private readonly IDataBaseManager _dataBase;
 

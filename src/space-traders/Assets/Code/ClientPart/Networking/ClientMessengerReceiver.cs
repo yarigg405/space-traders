@@ -20,12 +20,6 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleRequestFailed(message);
         }
 
-        [MessageHandler((ushort)ServerToClientMessageType.ResponseConnectToServer)]
-        private static void HandleResponseConnectToServer(Message message)
-        {
-            _router.HandleResponseConnectToServer(message);
-        }
-
         [MessageHandler((ushort)ServerToClientMessageType.ResponseGetCharacters)]
         private static void HandleResponseGetCharacters(Message message)
         {

@@ -50,25 +50,17 @@ namespace Assets.Code.ClientPart.Networking
             }
         }
 
-        public void SetResponse(ServerToClientMessageType messageType, Message msg)
+        public void SetResponseOk(Message msg)
         {
-            switch (messageType)
-            {
-                case ServerToClientMessageType.RequestFailed:
-                    {
-                        var requestId = msg.GetUInt();
-                        var error = msg.GetString();
-                        Reject(requestId, error);
-                    }
-                    break;
+            var requestId = msg.GetUInt();
+            Resolve(requestId, msg);
+        }
 
-                default:
-                    {
-                        var requestId = msg.GetUInt();
-                        Resolve(requestId, msg);
-                    }
-                    break;
-            }
+        public void SetResponseFailed(Message msg)
+        {
+            var requestId = msg.GetUInt();
+            var error = msg.GetString();
+            Reject(requestId, error);
         }
 
         private void Resolve(uint id, Message msg)
