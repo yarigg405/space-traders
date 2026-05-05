@@ -24,6 +24,7 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         private void LoadMenu()
         {
+            _scenesLoader.SetSceneLoaded();
             _uiManager.GoToScreen<MainMenuMainScreen>();
         }
     }

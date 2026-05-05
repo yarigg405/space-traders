@@ -6,6 +6,7 @@ using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Riptide;
+using System;
 using Unity.Mathematics;
 
 
@@ -23,6 +24,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly CharactersRepository _charactersRepository;
         private readonly CharacterLocationsRepository _characterLocationsRepository;
         private readonly StarSystemRepository _starsSystemRepository;
+        private readonly SpaceStationsRepository _spaceStationsRepository;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
@@ -33,7 +35,8 @@ namespace Assets.Code.ServerPart.Networking
             CharacterLocationsRepository characterLocationsRepository,
             StarSystemRepository starsSystemRepository,
             ClientSceneConnector clientSceneConnector,
-            PlayerDataProvider playerDataProvider)
+            PlayerDataProvider playerDataProvider,
+            SpaceStationsRepository spaceStationsRepository)
         {
             _networkManager = networkManager;
             _playersRepository = playersRepository;
@@ -44,6 +47,7 @@ namespace Assets.Code.ServerPart.Networking
             _starsSystemRepository = starsSystemRepository;
             _clientSceneConnector = clientSceneConnector;
             _playerDataProvider = playerDataProvider;
+            _spaceStationsRepository = spaceStationsRepository;
         }
 
         internal void HandleRequestGetCharacters(ushort fromClientId, Message message)
@@ -136,7 +140,23 @@ namespace Assets.Code.ServerPart.Networking
             _clientSceneConnector.ConnectPlayer(fromClientId);
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
                 .AddUInt(messageId)
-               .AddString(sceneName);
+                .AddString(sceneName);
+
+            _networkManager.Server.Send(response, fromClientId);
+        }
+
+        internal void HandleRequestForStationSceneData(ushort fromClientId, Message message)
+        {
+            var characterId = message.GetInt();
+            var messageId = message.GetUInt();
+            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
+            var station = _spaceStationsRepository.GetById(location.CurrentLocationId);
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseLoadStationData)
+                .AddUInt(messageId)
+                .AddInt(station.Id)
+                .AddString(station.Name)
+                ;
 
             _networkManager.Server.Send(response, fromClientId);
         }

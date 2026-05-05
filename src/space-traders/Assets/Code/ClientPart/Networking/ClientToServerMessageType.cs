@@ -8,6 +8,7 @@
         RequestEnterTheGame = 3,
         RequestForSceneEntities = 4,
         RequestForChangeScene = 5,
+        RequestForStationSceneData = 6,
 
         SendTargetRotation = 31,
         SendSpeedModifier = 32,

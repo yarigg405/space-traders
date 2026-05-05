@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Networking;
 using Assets.Code.Networking.Data;
+using Assets.Code.UI.Screens.StationScreens;
 using Cysharp.Threading.Tasks;
 using Riptide;
 using System;
@@ -32,6 +33,23 @@ namespace Assets.Code.ClientPart.Networking
                 msg, ct, TimeSpan.FromSeconds(5));
 
             return response.GetString();
+        }
+
+        public async UniTask<LoadStationData> RequestForLoadStation(int selectedCharacterId, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForStationSceneData)
+                .AddInt(selectedCharacterId);
+
+            var response = await _requestSystem.SendRequest
+                (msg, ct, TimeSpan.FromSeconds(5));
+
+            var result = new LoadStationData
+            {
+                StationId = response.GetInt(),
+                StationName = response.GetString(),
+            };
+
+            return result;
         }
 
         public async UniTask<IEnumerable<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)

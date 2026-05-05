@@ -32,6 +32,12 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestEnterTheGame(fromClientId, message);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForStationSceneData)]
+        private static void HandleRequestForStationSceneData(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestForStationSceneData(fromClientId, message);
+        }
+
 
 
         //[MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]

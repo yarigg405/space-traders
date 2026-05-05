@@ -21,14 +21,13 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         public override void Enter(string sceneName)
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            _scenesLoader.LoadScene(sceneName);
+            _scenesLoader.LoadScene(sceneName, OnSceneLoaded);
         }
 
-        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+        private void OnSceneLoaded()
         {
+            _scenesLoader.SetSceneLoaded();
             _stateMachine.Enter<GameLoopState>();
-            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

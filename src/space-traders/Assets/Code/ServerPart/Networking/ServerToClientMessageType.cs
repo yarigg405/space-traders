@@ -6,7 +6,7 @@
         ResponseGetCharacters = 3,
         ResponseCreateCharacter = 4,
         ResponseEnterTheGame = 5,
-
+        ResponseLoadStationData = 6,
 
         CreateEntity = 50,
         DestroyEntity = 51,

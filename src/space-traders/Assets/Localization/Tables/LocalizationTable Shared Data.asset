@@ -79,6 +79,10 @@ MonoBehaviour:
     m_Key: error-password
     m_Metadata:
       m_Items: []
+  - m_Id: 83454847057367040
+    m_Key: undock
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

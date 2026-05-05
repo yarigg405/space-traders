@@ -41,6 +41,11 @@ namespace Assets.Code.ClientPart.Networking
             _requestSystem.SetResponseOk(message);
         }
 
+        internal void HandleResponseLoadStationData(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
         internal void HandleCreateEntity(Message message)
         {
             var json = message.GetString();

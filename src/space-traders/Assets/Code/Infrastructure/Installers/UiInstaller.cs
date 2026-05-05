@@ -5,6 +5,7 @@ using Assets.Code.UI.LoadingScreens;
 using Assets.Code.UI.Screens;
 using Assets.Code.UI.Screens.MenuScene;
 using Assets.Code.UI.Screens.MessageBox;
+using Assets.Code.UI.Screens.StationScreens;
 using UnityEngine;
 using VContainer;
 
@@ -49,6 +50,9 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<ClientConnectionScreen>(Lifetime.Singleton);
             Builder.Register<ClientConnectionPresenter>(Lifetime.Transient);
+
+            Builder.Register<StationMainScreen>(Lifetime.Singleton);
+            Builder.Register<StationMainPresenter>(Lifetime.Singleton);
         }
 
         private void RegisterGameScreens()

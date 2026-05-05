@@ -7,5 +7,6 @@ namespace Assets.Code.Infrastructure.Loading
     {
         void LoadScene(string name, Action onLoaded = null);
         string CurrentScene { get; }
+        void SetSceneLoaded();
     }
 }

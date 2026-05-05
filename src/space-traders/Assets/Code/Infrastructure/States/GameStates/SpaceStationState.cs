@@ -1,7 +1,6 @@
 ﻿using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
 using Assets.Code.UI;
-using UnityEngine;
 
 
 namespace Assets.Code.Infrastructure.States.GameStates
@@ -19,13 +18,7 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         public override void Enter()
         {
-            _scenesLoader.LoadScene(SceneNames.StationScene, OnSceneLoaded);
-        }
-
-        private void OnSceneLoaded()
-        {
-            Debug.LogError("### Setup UI here");
-            _uiManager.ClearHistory();
+            _scenesLoader.LoadScene(SceneNames.StationScene);
         }
     }
 }

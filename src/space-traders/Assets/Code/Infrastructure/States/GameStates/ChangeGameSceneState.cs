@@ -33,7 +33,6 @@ namespace Assets.Code.Infrastructure.States.GameStates
         public override void Enter(string sceneName)
         {
             _cts = new();
-            SceneManager.sceneLoaded += OnSceneLoaded;
             EnterAsync(sceneName).Forget();
         }
 
@@ -48,13 +47,13 @@ namespace Assets.Code.Infrastructure.States.GameStates
             _messenger.RequestForChangeScene(sceneName);
 
             sceneName = await _messenger.RequestForEnterTheGame(_authentification.SelectedCharacterId, _cts.Token);
-            _scenesLoader.LoadScene(sceneName);
+            _scenesLoader.LoadScene(sceneName, OnSceneLoaded);
         }
 
-        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+        private void OnSceneLoaded()
         {
+            _scenesLoader.SetSceneLoaded();
             _stateMachine.Enter<GameLoopState>();
-            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }

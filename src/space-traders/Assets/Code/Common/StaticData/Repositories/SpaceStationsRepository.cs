@@ -20,5 +20,12 @@ namespace Assets.Code.Common.StaticData.Repositories
                 "SELECT st.* FROM SpaceStations st JOIN StarSystems s ON st.StarSystemId = s.Id WHERE s.Name = ?",
                 starSystemName);
         }
+
+        internal SpaceStationORM GetById(int stationId)
+        {
+            return _dataBase.QuerySingle<SpaceStationORM>(
+            "SELECT * FROM SpaceStations WHERE id = ?"
+            , stationId);
+        }
     }
 }

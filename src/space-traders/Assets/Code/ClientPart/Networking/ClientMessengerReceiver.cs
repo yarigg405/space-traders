@@ -38,6 +38,12 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseEnterTheGame(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseLoadStationData)]
+        private static void HandleResponseLoadStationData(Message message)
+        {
+            _router.HandleResponseLoadStationData(message);
+        }
+
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]
         private static void HandleCreateEntity(Message message)

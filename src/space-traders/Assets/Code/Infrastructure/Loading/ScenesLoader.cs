@@ -30,7 +30,12 @@ namespace Assets.Code.Infrastructure.Loading
         {
             _loadingScreen.Show();
             await SceneManager.LoadSceneAsync(sceneName).ToUniTask().AttachExternalCancellation(cancellationToken);
+
             onLoaded?.Invoke();
+        }
+
+        void IScenesLoader.SetSceneLoaded()
+        {
             _loadingScreen.Hide();
         }
     }
