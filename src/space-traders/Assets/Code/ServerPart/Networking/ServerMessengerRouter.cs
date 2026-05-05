@@ -8,6 +8,7 @@ using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Riptide;
 using System;
 using Unity.Mathematics;
+using Unity.VectorGraphics;
 
 
 namespace Assets.Code.ServerPart.Networking
@@ -128,7 +129,7 @@ namespace Assets.Code.ServerPart.Networking
             string sceneName = string.Empty;
             if (location.LocationType == LocationType.Space)
             {
-                sceneName = _starsSystemRepository.Get(location.CurrentLocationId).Name;
+                sceneName = _starsSystemRepository.GetById(location.CurrentLocationId).Name;
             }
 
             else //if (location.LocationType == LocationType.Station)
@@ -136,6 +137,7 @@ namespace Assets.Code.ServerPart.Networking
                 sceneName = SceneNames.StationScene;
             }
 
+            _playerDataProvider.SetCharacterForPlayer(fromClientId, characterId);
             _playerDataProvider.SetPlayerScene(fromClientId, sceneName);
             _clientSceneConnector.ConnectPlayer(fromClientId);
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
@@ -159,6 +161,31 @@ namespace Assets.Code.ServerPart.Networking
                 ;
 
             _networkManager.Server.Send(response, fromClientId);
+        }
+
+        internal void HandleRequestForUndock(ushort fromClientId, Message message)
+        {
+            var characterId = _playerDataProvider.GetCharacterIdForPlayer(fromClientId);
+            var messageId = message.GetUInt();
+
+            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
+            var station = _spaceStationsRepository.GetById(location.CurrentLocationId);
+            var starSystem = _starsSystemRepository.GetById(station.StarSystemId);
+
+            _playerDataProvider.SetPlayerScene(fromClientId, starSystem.Name);
+            _clientSceneConnector.ConnectPlayer(fromClientId);
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToUndock)
+                .AddUInt(messageId)
+                .AddString(starSystem.Name)
+                ;
+
+            _networkManager.Server.Send(response, fromClientId);
+        }
+
+        internal void HandleEntitiesLoading(ushort fromClientId, Message message)
+        {
+            _clientSceneConnector.FillWorldForClient(fromClientId);
         }
 
 

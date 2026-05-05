@@ -44,6 +44,13 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseLoadStationData(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseToUndock)]
+        private static void HandleResponseToUndock(Message message)
+        {
+            _router.HandleResponseToUndock(message);
+        }
+
+
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]
         private static void HandleCreateEntity(Message message)

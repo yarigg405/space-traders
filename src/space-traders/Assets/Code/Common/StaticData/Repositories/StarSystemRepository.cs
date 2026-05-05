@@ -20,7 +20,7 @@ namespace Assets.Code.Common.StaticData.Repositories
                 "SELECT * FROM StarSystems");
         }
 
-        internal StarSystemORM Get(int id)
+        internal StarSystemORM GetById(int id)
         {
             return _dataBase.QuerySingle<StarSystemORM>(
                 "SELECT * FROM StarSystems WHERE id=?", id);

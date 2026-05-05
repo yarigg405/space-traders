@@ -6,9 +6,10 @@
         RequestCreateCharacter = 2,
 
         RequestEnterTheGame = 3,
-        RequestForSceneEntities = 4,
-        RequestForChangeScene = 5,
-        RequestForStationSceneData = 6,
+        RequestForSceneEntities = 4,        
+        RequestForStationSceneData = 5,
+        RequestForUndock = 6,
+        RequestForDock = 7,
 
         SendTargetRotation = 31,
         SendSpeedModifier = 32,

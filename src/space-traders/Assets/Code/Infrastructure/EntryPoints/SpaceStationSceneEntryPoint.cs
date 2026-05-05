@@ -33,12 +33,13 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
         void IStartable.Start()
         {
-            LoadSceneData().Forget();
+            LoadSceneData(_cts.Token).Forget();
         }
 
-        private async UniTask LoadSceneData()
+        private async UniTask LoadSceneData(CancellationToken ct)
         {
-            var data = await _messenger.RequestForLoadStation(_authentification.SelectedCharacterId, _cts.Token);
+            var data = await _messenger.RequestForLoadStation(_authentification.SelectedCharacterId, ct);
+            ct.ThrowIfCancellationRequested();
             _uiManager.GoToScreen<StationMainScreen>(data);
             _uiManager.ClearHistory();
 

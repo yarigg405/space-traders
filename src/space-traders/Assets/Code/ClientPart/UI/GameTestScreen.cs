@@ -41,8 +41,6 @@ namespace Assets.Code.ClientPart.UI
         private void LoadScene(string sceneName)
         {
             if (sceneName.Equals(_scenesLoader.CurrentScene)) return;
-
-            _stateMachine.Enter<ChangeGameSceneState, string>(sceneName);
         }
     }
 }

@@ -94,18 +94,24 @@ namespace Assets.Code.ClientPart.Networking
             }
         }
 
+        public async UniTask<string> RequestForUndock(CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForUndock);
+
+            var response = await _requestSystem.SendRequest
+                (msg, ct, TimeSpan.FromSeconds(5));
+
+            var result = response.GetString();
+            return result;
+        }
+
         public void RequestForLoadingSceneEntities()
         {
             var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
             _networkManager.Client.Send(message);
         }
 
-        public void RequestForChangeScene(string sceneName)
-        {
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForChangeScene)
-                .AddString(sceneName);
-            _networkManager.Client.Send(message);
-        }
+
 
         public void SendTargetRotationToServer(float targetRotation)
         {

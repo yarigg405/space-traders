@@ -81,7 +81,6 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<MenuSceneState>(Lifetime.Transient).AsSelf();
             Builder.Register<LoadGameSceneState>(Lifetime.Transient).AsSelf();
             Builder.Register<SpaceStationState>(Lifetime.Transient).AsSelf();
-            Builder.Register<ChangeGameSceneState>(Lifetime.Transient).AsSelf();
             Builder.Register<GameLoopState>(Lifetime.Transient).AsSelf().AsImplementedInterfaces();
         }
 

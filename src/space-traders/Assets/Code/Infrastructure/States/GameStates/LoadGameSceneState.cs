@@ -1,7 +1,6 @@
 ﻿using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
-using UnityEngine.SceneManagement;
 
 
 namespace Assets.Code.Infrastructure.States.GameStates
@@ -26,8 +25,8 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         private void OnSceneLoaded()
         {
-            _scenesLoader.SetSceneLoaded();
             _stateMachine.Enter<GameLoopState>();
+            _scenesLoader.SetSceneLoaded();
         }
     }
 }

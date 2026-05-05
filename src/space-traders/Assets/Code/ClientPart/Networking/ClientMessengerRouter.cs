@@ -1,8 +1,6 @@
 ﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
-using Assets.Code.ServerPart.Networking;
 using Riptide;
-using System;
 using Unity.Mathematics;
 
 
@@ -45,6 +43,13 @@ namespace Assets.Code.ClientPart.Networking
         {
             _requestSystem.SetResponseOk(message);
         }
+
+        internal void HandleResponseToUndock(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
+
 
         internal void HandleCreateEntity(Message message)
         {

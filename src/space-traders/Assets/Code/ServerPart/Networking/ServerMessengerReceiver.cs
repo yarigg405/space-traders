@@ -38,13 +38,19 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForStationSceneData(fromClientId, message);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForUndock)]
+        private static void HandleRequestForUndock(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestForUndock(fromClientId, message);
+        }
 
 
-        //[MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
-        //private static void HandleEntitiesLoading(ushort fromClientId, Message message)
-        //{
-        //    _clientSceneConnector.FillWorldForClient(fromClientId);
-        //}
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
+        private static void HandleEntitiesLoading(ushort fromClientId, Message message)
+        {
+            _router.HandleEntitiesLoading(fromClientId, message);
+        }
 
         //[MessageHandler((ushort)ClientToServerMessageType.RequestForChangeScene)]
         //private static void HandleChangeScene(ushort fromClientId, Message message)
