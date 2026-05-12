@@ -3,6 +3,7 @@ using Assets.Code.UI.Infrastructure.Impl;
 using Assets.Code.UI.Layers;
 using Assets.Code.UI.LoadingScreens;
 using Assets.Code.UI.Screens;
+using Assets.Code.UI.Screens.GameSceneScreens.GameSceneMain;
 using Assets.Code.UI.Screens.MenuScene;
 using Assets.Code.UI.Screens.MessageBox;
 using Assets.Code.UI.Screens.StationScreens;
@@ -52,7 +53,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<ClientConnectionPresenter>(Lifetime.Transient);
 
             Builder.Register<StationMainScreen>(Lifetime.Singleton);
-            Builder.Register<StationMainPresenter>(Lifetime.Singleton);
+            Builder.Register<StationMainPresenter>(Lifetime.Transient);
         }
 
         private void RegisterGameScreens()
@@ -64,6 +65,9 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<MessageBoxPopup>(Lifetime.Singleton);
             Builder.Register<MessageBoxPresenter>(Lifetime.Transient);
+
+            Builder.Register<GameSceneMainScreen>(Lifetime.Singleton);
+            Builder.Register<GameSceneMainPresenter>(Lifetime.Transient);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.Infrastructure.Systems;
+using Assets.Code.UI;
+using Assets.Code.UI.Screens.GameSceneScreens.GameSceneMain;
 using VContainer.Unity;
 
 
@@ -11,14 +13,17 @@ namespace Assets.Code.Infrastructure.EntryPoints
         private readonly ISystemFactory _systems;
         private readonly FeaturesContainer _featuresContainer;
         private readonly ClientMessenger _messenger;
+        private readonly IUIManager _uiManager;
 
         public SpaceSceneEntryPoint(ISystemFactory systems,
             FeaturesContainer featuresContainer,
-            ClientMessenger messenger)
+            ClientMessenger messenger,
+            IUIManager uiManager)
         {
             _systems = systems;
             _featuresContainer = featuresContainer;
             _messenger = messenger;
+            _uiManager = uiManager;
         }
 
         void IStartable.Start()
@@ -28,6 +33,9 @@ namespace Assets.Code.Infrastructure.EntryPoints
             _featuresContainer.Add(feature);
             _featuresContainer.Initialize();
             _messenger.RequestForLoadingSceneEntities();
+
+            _uiManager.GoToScreen<GameSceneMainScreen>();
+            _uiManager.ClearHistory();
         }
     }
 }
