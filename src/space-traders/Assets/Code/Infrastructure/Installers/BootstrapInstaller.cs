@@ -22,7 +22,6 @@ namespace Assets.Code.Infrastructure.Installers
 {
     internal sealed class BootstrapInstaller : MonoInstaller
     {
-        [SerializeField] private InputReferencesContainer _inputReferencesContainer;
         [SerializeField] private ConfigsStorage _configsStorage;
         [SerializeField] private PhysicsShapesStorage _shapesStorage;
 
@@ -53,8 +52,8 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
             Builder.Register<ClientEntitiesController>(Lifetime.Singleton).AsSelf();
+            Builder.Register<InputReferencesContainer>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
-            Builder.RegisterInstance(_inputReferencesContainer);
             Builder.RegisterInstance(_configsStorage);
             Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();
         }

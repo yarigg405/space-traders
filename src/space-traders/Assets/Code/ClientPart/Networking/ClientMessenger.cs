@@ -115,14 +115,14 @@ namespace Assets.Code.ClientPart.Networking
 
         public void SendTargetRotationToServer(float targetRotation)
         {
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendTargetRotation)
+            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendTargetRotation)
                 .AddFloat(targetRotation);
             _networkManager.Client.Send(message);
         }
 
         public void SendSpeedModifierToServer(float speedModifier)
         {
-            var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.SendSpeedModifier)
+            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendSpeedModifier)
                 .AddFloat(speedModifier);
             _networkManager.Client.Send(message);
         }

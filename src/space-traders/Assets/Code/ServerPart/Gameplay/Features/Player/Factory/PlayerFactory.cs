@@ -28,6 +28,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Factory
                 .AddGlobalPosition(at)
                 .AddCurrentSpeedModifier(0)
                 .AddCurrentRotationY(0)
+                .AddTargetRotation(0)
                 .AddCurrentMoveSpeed(0)
                 .AddVelocity(Vector2.zero)
                 .With(x => x.isMoving = true)

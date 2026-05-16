@@ -29,15 +29,13 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
         }
 
         void IInitializable.Initialize()
-        {
-            _inputReferencesContainer.DoubleClick.action.Enable();
-            _inputReferencesContainer.DoubleClick.action.performed += OnDoubleClick;
+        {            
+            _inputReferencesContainer.Actions.Player.DoubleClick.performed += OnDoubleClick;
         }
 
         void IDisposable.Dispose()
         {
-            _inputReferencesContainer.DoubleClick.action.performed -= OnDoubleClick;
-            _inputReferencesContainer.DoubleClick.action.Disable();
+            _inputReferencesContainer.Actions.Player.DoubleClick.performed -= OnDoubleClick;
         }
 
         void ITickable.Tick()
