@@ -49,6 +49,11 @@ namespace Assets.Code.ServerPart.Networking
 
         void IDisposable.Dispose()
         {
+            foreach (var pair in _playerEntities)
+            {
+                _playerSaver.Save(pair.Key, pair.Value);
+            }
+
             _networkManager.Server.ClientDisconnected -= OnClientDisconnected;
         }
 
