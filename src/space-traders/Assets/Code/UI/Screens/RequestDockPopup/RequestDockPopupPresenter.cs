@@ -1,4 +1,5 @@
-﻿using Assets.Code.Common.DataContainers;
+﻿using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
+using Assets.Code.Common.DataContainers;
 using UnityEngine;
 
 
@@ -7,13 +8,15 @@ namespace Assets.Code.UI.Screens
     public sealed class RequestDockPopupPresenter
     {
         private readonly GameContext _gameContext;
+        private readonly ClientDockingService _dockService;
 
         private GameEntity _dockingBayEntity;
         private GameEntity _stationEntity;
 
-        public RequestDockPopupPresenter(GameContext gameContext)
+        public RequestDockPopupPresenter(GameContext gameContext, ClientDockingService dockService)
         {
             _gameContext = gameContext;
+            _dockService = dockService;
         }
 
         internal void Show(RequestDockPopupView view, DockingDataContainer dockingData)
@@ -36,6 +39,8 @@ namespace Assets.Code.UI.Screens
 
         private void ClickOnDock()
         {
+
+
             Debug.Log("### Dock to " + _dockingBayEntity.Id);
         }
     }

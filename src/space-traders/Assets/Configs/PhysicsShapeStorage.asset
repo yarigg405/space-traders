@@ -13,9 +13,45 @@ MonoBehaviour:
   m_Name: PhysicsShapeStorage
   m_EditorClassIdentifier: Game::Assets.Code.ServerPart.Physics.Data.PhysicsShapesStorage
   _data:
-  - PrefabName: Prefabs/Stations/Station1
+  - PrefabName: Stations/Station1
     Shapes:
     - LocalCenter:
-        x: 0
+        x: -397.79998779296875
         y: 0
+      Radius: 1.5
+    - LocalCenter:
+        x: -13
+        y: 436.1000061035156
+      Radius: 1.5
+    - LocalCenter:
+        x: 32.900001525878906
+        y: 436.1000061035156
+      Radius: 1.5
+    - LocalCenter:
+        x: 410.6000061035156
+        y: 74
+      Radius: 1.5
+    - LocalCenter:
+        x: 459.5000305175781
+        y: 74
+      Radius: 1.5
+    - LocalCenter:
+        x: 435.20001220703125
+        y: 24
+      Radius: 1.5
+    - LocalCenter:
+        x: -13
+        y: -426.20001220703125
+      Radius: 1.5
+    - LocalCenter:
+        x: -13
+        y: -484.29998779296875
+      Radius: 1.5
+    - LocalCenter:
+        x: 53
+        y: -426.20001220703125
+      Radius: 1.5
+    - LocalCenter:
+        x: 53
+        y: -484.29998779296875
       Radius: 1.5

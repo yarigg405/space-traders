@@ -33,7 +33,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Factory
                 .AddVelocity(Vector2.zero)
                 .With(x => x.isMoving = true)
 
-                .AddVelocityAgility(2.5f)
+                .AddVelocityAgility(1.5f)   //0.5 - more heavy, 3.5 - more lighter
                 .AddRotationSpeed(250f)
                 .AddMaxMoveSpeed(15f)
                 .AddMovingAcceleration(3f)

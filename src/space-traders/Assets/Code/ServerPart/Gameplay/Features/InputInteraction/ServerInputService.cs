@@ -11,11 +11,11 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 {
     public sealed class ServerInputService
     {
-        private readonly PlayerDataProvider _playerDataProvider;
+        private readonly PlayerLocationManager _playerDataProvider;
         private readonly ServerWorldsController _worldsController;
         private readonly ClientSceneConnector _clientSceneConnector;
 
-        public ServerInputService(PlayerDataProvider playerDataProvider,
+        public ServerInputService(PlayerLocationManager playerDataProvider,
             ServerWorldsController worldsController, ClientSceneConnector clientSceneConnector)
         {
             _playerDataProvider = playerDataProvider;
@@ -57,7 +57,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 
         private InputEntity CreateNewInputEntityForPlayer(ushort playerNetworkId)
         {
-            var sceneName = _playerDataProvider.GetSceneNameForPlayer(playerNetworkId);
+            var sceneName = _playerDataProvider.GetSceneForCharacter(playerNetworkId);
             var world = _worldsController.GetOrCreateWorld(sceneName);
             var ctxs = world.Contexts;
 

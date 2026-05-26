@@ -35,8 +35,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
             {
                 var moveValue = _input.Actions.Player.Move.ReadValue<Vector2>();
 
-                Debug.Log("###MoveValue: " + moveValue.ToString());
-
                 if (moveValue.sqrMagnitude < 0.001f)
                     continue;
 

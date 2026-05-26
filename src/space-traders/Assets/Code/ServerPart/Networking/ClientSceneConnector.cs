@@ -16,20 +16,22 @@ namespace Assets.Code.ServerPart.Networking
     public sealed class ClientSceneConnector : IInitializable, IDisposable
     {
         private readonly PlayerBuilder _playerBuilder;
-        private readonly PlayerDataProvider _playerDataProvider;
+        private readonly PlayerLocationManager _playerDataProvider;
         private readonly ServerWorldsController _serverWorldsController;
         private readonly NetworkManager _networkManager;
         private readonly ServerMessenger _messenger;
+        private readonly PlayerSaver _playerSaver;
 
         private readonly Dictionary<ushort, string> _sceneForClientsMap = new();
         private readonly Dictionary<string, List<ushort>> _clientsOnScenesMap = new();
         private readonly Dictionary<ushort, GameEntity> _playerEntities = new();
 
         public ClientSceneConnector(PlayerBuilder playerBuilder,
-            PlayerDataProvider playerDataProvider,
+            PlayerLocationManager playerDataProvider,
             ServerWorldsController serverWorldsController,
             NetworkManager networkManager,
-            ServerMessenger messenger)
+            ServerMessenger messenger,
+            PlayerSaver playerSaver)
         {
             _playerBuilder = playerBuilder;
             _playerDataProvider = playerDataProvider;
@@ -37,6 +39,7 @@ namespace Assets.Code.ServerPart.Networking
 
             _networkManager = networkManager;
             _messenger = messenger;
+            _playerSaver = playerSaver;
         }
 
         void IInitializable.Initialize()
@@ -53,7 +56,7 @@ namespace Assets.Code.ServerPart.Networking
         public void ConnectPlayer(ushort clientId)
         {
             TryDisconnectClientFromCurrentScene(clientId);
-            var sceneName = _playerDataProvider.GetSceneNameForPlayer(clientId);
+            var sceneName = _playerDataProvider.GetSceneForCharacter(clientId);
             EnsureClientsListExist(sceneName);
 
             var newPlayerEntity = _playerBuilder.CreatePlayer(clientId);
@@ -70,6 +73,9 @@ namespace Assets.Code.ServerPart.Networking
         private void OnClientDisconnected(object sender, ServerDisconnectedEventArgs e)
         {
             var clientId = e.Client.Id;
+            var playerEntity = _playerEntities[clientId];
+            _playerSaver.Save(clientId, playerEntity);
+
             TryDisconnectClientFromCurrentScene(clientId);
             _sceneForClientsMap.Remove(clientId);
         }

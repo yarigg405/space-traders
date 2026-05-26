@@ -20,6 +20,9 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Destruct.Systems
         {
             foreach (var entity in _entities)
             {
+                if (entity == null) continue;
+                if (entity.View == null) continue;
+
                 entity.View.ReleaseEntity();
                 Object.Destroy(entity.View.gameObject);
             }

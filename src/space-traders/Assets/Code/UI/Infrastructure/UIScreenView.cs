@@ -22,7 +22,8 @@ namespace Assets.Code.UI
 
         public virtual void Hide()
         {
-            gameObject.SetActive(false);
+            if (gameObject)
+                gameObject.SetActive(false);
         }
     }
 }

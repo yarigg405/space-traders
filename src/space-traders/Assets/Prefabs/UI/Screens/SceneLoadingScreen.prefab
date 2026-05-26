@@ -383,5 +383,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.UI.LoadingScreens.SceneLoadingScreen
   _canvasGroup: {fileID: 7173145850176751748}
-  _outDuration: 1
+  _outDuration: 0.33
   _outEase: 1

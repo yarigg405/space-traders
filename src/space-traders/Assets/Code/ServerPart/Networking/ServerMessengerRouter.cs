@@ -18,8 +18,9 @@ namespace Assets.Code.ServerPart.Networking
         private readonly NetworkManager _networkManager;
         private readonly ServerInputService _serverInputService;
         private readonly CharactersCreatingService _characterCreator;
-        private readonly PlayerDataProvider _playerDataProvider;
         private readonly ClientSceneConnector _clientSceneConnector;
+        private readonly PlayerLocationManager _playerLocationManager;
+        private readonly PlayerCharacterManager _playerCharacterManager;
 
         private readonly PlayersRepository _playersRepository;
         private readonly CharactersRepository _charactersRepository;
@@ -36,8 +37,9 @@ namespace Assets.Code.ServerPart.Networking
             CharacterLocationsRepository characterLocationsRepository,
             StarSystemRepository starsSystemRepository,
             ClientSceneConnector clientSceneConnector,
-            PlayerDataProvider playerDataProvider,
-            SpaceStationsRepository spaceStationsRepository)
+            SpaceStationsRepository spaceStationsRepository,
+            PlayerLocationManager playerLocationManager,
+            PlayerCharacterManager playerCharacterManager)
         {
             _networkManager = networkManager;
             _playersRepository = playersRepository;
@@ -47,8 +49,9 @@ namespace Assets.Code.ServerPart.Networking
             _characterLocationsRepository = characterLocationsRepository;
             _starsSystemRepository = starsSystemRepository;
             _clientSceneConnector = clientSceneConnector;
-            _playerDataProvider = playerDataProvider;
             _spaceStationsRepository = spaceStationsRepository;
+            _playerLocationManager = playerLocationManager;
+            _playerCharacterManager = playerCharacterManager;
         }
 
         internal void HandleRequestGetCharacters(ushort fromClientId, Message message)
@@ -124,21 +127,10 @@ namespace Assets.Code.ServerPart.Networking
             var characterId = message.GetInt();
             var messageId = message.GetUInt();
 
-            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
+            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);           
 
-            string sceneName = string.Empty;
-            if (location.LocationType == LocationType.Space)
-            {
-                sceneName = _starsSystemRepository.GetById(location.CurrentLocationId).Name;
-            }
-
-            else //if (location.LocationType == LocationType.Station)
-            {
-                sceneName = SceneNames.StationScene;
-            }
-
-            _playerDataProvider.SetCharacterForPlayer(fromClientId, characterId);
-            _playerDataProvider.SetPlayerScene(fromClientId, sceneName);
+            _playerCharacterManager.SetCharacterForPlayer(fromClientId, characterId);
+            var sceneName = _playerLocationManager.GetSceneForCharacter(characterId);
             _clientSceneConnector.ConnectPlayer(fromClientId);
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
                 .AddUInt(messageId)
@@ -165,14 +157,14 @@ namespace Assets.Code.ServerPart.Networking
 
         internal void HandleRequestForUndock(ushort fromClientId, Message message)
         {
-            var characterId = _playerDataProvider.GetCharacterIdForPlayer(fromClientId);
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
             var messageId = message.GetUInt();
 
             var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
             var station = _spaceStationsRepository.GetById(location.CurrentLocationId);
             var starSystem = _starsSystemRepository.GetById(station.StarSystemId);
 
-            _playerDataProvider.SetPlayerScene(fromClientId, starSystem.Name);
+            _playerLocationManager.SetUndocked(characterId);
             _clientSceneConnector.ConnectPlayer(fromClientId);
 
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToUndock)

@@ -29,7 +29,10 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<SkyboxObjectFactory>(Lifetime.Singleton).AsSelf();
 
                 builder.Register<PlayerBuilder>(Lifetime.Singleton).AsSelf();
-                builder.Register<PlayerDataProvider>(Lifetime.Singleton).AsSelf();
+                builder.Register<PlayerLocationManager>(Lifetime.Singleton).AsSelf();
+                builder.Register<PlayerCharacterManager>(Lifetime.Singleton).AsSelf();
+                builder.Register<PlayerSaver>(Lifetime.Singleton).AsSelf();
+
                 builder.Register<ClientSceneConnector>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<GameWorldFiller>(Lifetime.Singleton).AsSelf();
                 builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();

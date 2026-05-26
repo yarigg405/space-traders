@@ -1,7 +1,5 @@
-﻿using Assets.Code.Common;
-using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
+﻿using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Worlds;
-using Unity.Mathematics;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
@@ -10,25 +8,26 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
     {
         private readonly PlayerFactory _playerFactory;
         private readonly ServerWorldsController _worldsController;
-        private readonly PlayerDataProvider _playerDataProvider;
+        private readonly PlayerCharacterManager _playerCharacterManager;
+        private readonly PlayerLocationManager _playerLocationManager;
 
         public PlayerBuilder(PlayerFactory playerFactory,
-            ServerWorldsController worldsController, PlayerDataProvider playerDataProvider)
+            ServerWorldsController worldsController, PlayerLocationManager playerLocationManager, PlayerCharacterManager playerCharacterManager)
         {
             _worldsController = worldsController;
             _playerFactory = playerFactory;
-            _playerDataProvider = playerDataProvider;
+            _playerLocationManager = playerLocationManager;
+            _playerCharacterManager = playerCharacterManager;
         }
 
         public GameEntity CreatePlayer(ushort clientId)
         {
-            var sceneName = _playerDataProvider.GetSceneNameForPlayer(clientId);
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(clientId);
+            var sceneName = _playerLocationManager.GetSceneForCharacter(characterId);
+            var spawnPoint = _playerLocationManager.GetCoordinatesForSpawn(characterId);
+
             var world = _worldsController.GetOrCreateWorld(sceneName);
             var ctxs = world.Contexts;
-            //var spawnPoint = new double2(0, 2_500_000);//.GetRandomCoordinatesAroundPointZX(50f);
-            //var spawnPoint = new double2(0, 5_795_500_000);
-            var spawnPoint = new double2(0, 0).GetRandomCoordinatesAroundPointZX(25f);
-            //var spawnPoint = new double2(24990, 24990).GetRandomCoordinatesAroundPointZX(50f);
 
             var newPlayerEntity = _playerFactory.CreatePlayer(clientId, spawnPoint, ctxs);
             return newPlayerEntity;

@@ -2,6 +2,7 @@
 using Assets.Code.ClientPart.AssetManagement;
 using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
+using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.Common.StaticData;
 using Assets.Code.Common.Time;
@@ -53,6 +54,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
             Builder.Register<ClientEntitiesController>(Lifetime.Singleton).AsSelf();
             Builder.Register<InputReferencesContainer>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            Builder.Register<ClientDockingService>(Lifetime.Scoped).AsSelf();
 
             Builder.RegisterInstance(_configsStorage);
             Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();

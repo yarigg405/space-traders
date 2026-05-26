@@ -17,6 +17,9 @@ namespace Assets.Code.Common.DataBase.ORM
         [Column("locationId")]
         public int CurrentLocationId { get; set; }      //star system id, space station id etc...
 
+        [Column("dockBayId")]
+        public int DockBayId { get; set; }
+
 
         [Column("positionX")]
         public double PositionX { get; set; }

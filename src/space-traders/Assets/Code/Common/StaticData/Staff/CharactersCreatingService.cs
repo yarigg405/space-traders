@@ -17,7 +17,7 @@ namespace Assets.Code.Common.StaticData.Staff
         private readonly IDataBaseManager _database;
 
         public CharactersCreatingService(CharactersRepository charactersRepository,
-            IDataBaseManager database, StarSystemRepository starSystemRepository, 
+            IDataBaseManager database, StarSystemRepository starSystemRepository,
             SpaceStationsRepository spacesStationsRepository)
         {
             _charactersRepository = charactersRepository;
@@ -55,7 +55,8 @@ namespace Assets.Code.Common.StaticData.Staff
                     {
                         CharacterId = characterId,
                         LocationType = LocationType.Station,
-                        CurrentLocationId = _spacesStationsRepository.GetStations(startSystemName).First().Id
+                        CurrentLocationId = _spacesStationsRepository.GetStations(startSystemName).First().Id,
+                        DockBayId = 0
                     };
                     _database.CreateNew(location);
 

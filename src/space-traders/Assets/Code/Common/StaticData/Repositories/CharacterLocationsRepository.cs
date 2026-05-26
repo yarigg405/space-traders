@@ -19,5 +19,10 @@ namespace Assets.Code.Common.StaticData.Repositories
                 "SELECT * FROM CharacterLocations WHERE characterId =?"
                 , characterId);
         }
+
+        internal void UpdateLocation(CharacterLocationORM location)
+        {
+            _database.Update(location);
+        }
     }
 }

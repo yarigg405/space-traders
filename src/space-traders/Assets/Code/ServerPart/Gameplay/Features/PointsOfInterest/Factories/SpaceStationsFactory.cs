@@ -34,9 +34,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
                 .AddCollectCollisionsTimer(0f)
                 ;
 
-
-
-            var triggers = _physicsShapesProvider.GetShapeForPrefab("Prefabs/" + prefabName);
+            var triggers = _physicsShapesProvider.GetShapeForPrefab(prefabName);
             foreach (var trigger in triggers)
             {
                 var triggerEntity = CreateEntity.Empty(contexts)
