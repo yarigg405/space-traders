@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Extensions;
 using Assets.Code.Networking;
+using Assets.Code.ServerPart.Gameplay.Features.Physics.Triggers;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Worlds;
 using Riptide;

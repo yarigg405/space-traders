@@ -94,6 +94,20 @@ namespace Assets.Code.ClientPart.Networking
             }
         }
 
+        public async UniTask<string> RequestForDock(int stationId, int dockingBayIndex,  CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForDock)
+                .AddInt(stationId)
+                .AddInt(dockingBayIndex)
+                ;
+
+            var response = await _requestSystem.SendRequest
+                (msg,ct, TimeSpan.FromSeconds(5));
+
+            var result = response.GetString();
+            return result;
+        }
+
         public async UniTask<string> RequestForUndock(CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForUndock);

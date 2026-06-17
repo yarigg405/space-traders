@@ -16,6 +16,8 @@ namespace Assets.Code.ClientPart.Visual.Player
         private readonly IPlayerProvider _playerProvider;
         private readonly SkyboxSpaceState _skyboxSpace;
 
+        private IDisposable _isWarpingSubscription;
+
 
         public PlayerWarpEffectController(PlayerWarpEffectView warpVfx,
             IPlayerProvider playerProvider, SkyboxSpaceState skyboxSpace)
@@ -29,8 +31,14 @@ namespace Assets.Code.ClientPart.Visual.Player
 
         async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
-            await UniTask.WaitUntil(() => _playerProvider.PlayerEntity != null);
-            _playerProvider.PlayerEntity.ViewModel.IsWarping.OnChange += OnWarpStateChanged;
+            await UniTask.WaitUntil(() =>
+            _playerProvider.PlayerEntity != null,
+            cancellationToken: cancellation);
+
+            if (cancellation.IsCancellationRequested)
+                return;
+
+            _isWarpingSubscription = _playerProvider.PlayerEntity.ViewModel.IsWarping.Subscribe(OnWarpStateChanged, true);
         }
 
         void ILateTickable.LateTick()
@@ -52,18 +60,16 @@ namespace Assets.Code.ClientPart.Visual.Player
 
             float scale = GameConstants.SKYBOX_OBJECTS_POSITION_MODIFIER;
 
-            var newLocal = new Vector3(
-                (float)(dx * scale),
-                0f,
-                (float)(dy * scale)
-            );
-
-            _warpVfx.transform.position = newLocal;
+            _warpVfx.transform.position = new Vector3(
+            (float)(dx * scale),
+            0f,
+            (float)(dy * scale));
         }
 
         void IDisposable.Dispose()
         {
-            _playerProvider.PlayerEntity.ViewModel.IsWarping.OnChange -= OnWarpStateChanged;
+            _isWarpingSubscription?.Dispose();
+            _isWarpingSubscription = null;
         }
 
 

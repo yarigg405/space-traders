@@ -8,6 +8,7 @@
         ResponseEnterTheGame = 5,
         ResponseLoadStationData = 6,
         ResponseToUndock = 7,
+        ResponseToDock = 8,
 
         CreateEntity = 50,
         DestroyEntity = 51,

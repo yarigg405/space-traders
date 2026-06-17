@@ -18,55 +18,58 @@ public static class GameComponentsLookup {
     public const int CurrentMoveSpeed = 7;
     public const int CurrentRotationY = 8;
     public const int CurrentSpeedModifier = 9;
-    public const int Destructed = 10;
-    public const int EntityLink = 11;
-    public const int GlobalPosition = 12;
-    public const int Id = 13;
-    public const int KeepDistanceMinMax = 14;
-    public const int LocalPosition = 15;
-    public const int Mass = 16;
-    public const int MaxMoveSpeed = 17;
-    public const int MovementTargetId = 18;
-    public const int Moving = 19;
-    public const int MovingAcceleration = 20;
-    public const int NeedSynchronize = 21;
-    public const int OrbitingRadius = 22;
-    public const int ParentEntity = 23;
-    public const int PhysicShape = 24;
-    public const int PhysicsRadius = 25;
-    public const int Planet = 26;
-    public const int Player = 27;
-    public const int PlayerNetworkId = 28;
-    public const int PreviousFrameLocalPosition = 29;
-    public const int QuadrantIndex = 30;
-    public const int ReadyToCollectCollisions = 31;
-    public const int Rigidbody = 32;
-    public const int RotationSpeed = 33;
-    public const int SelfDestructTimer = 34;
-    public const int Ship = 35;
-    public const int ShipCanBeDocked = 36;
-    public const int ShipsInDockZone = 37;
-    public const int SkyboxCoordinates = 38;
-    public const int Station = 39;
-    public const int StationDockingBay = 40;
-    public const int TargetRotation = 41;
-    public const int Transform = 42;
-    public const int Trigger = 43;
-    public const int TriggerEnterEventHandler = 44;
-    public const int TriggerExitEventHandler = 45;
-    public const int TriggerStayEventHandler = 46;
-    public const int Velocity = 47;
-    public const int VelocityAgility = 48;
-    public const int View = 49;
-    public const int ViewModel = 50;
-    public const int ViewPath = 51;
-    public const int ViewPrefab = 52;
-    public const int WarpDataContainer = 53;
-    public const int WarpFinishCoordinates = 54;
-    public const int Warping = 55;
-    public const int WarpPreparation = 56;
+    public const int DatabaseId = 10;
+    public const int Destructed = 11;
+    public const int Disposed = 12;
+    public const int EntityLink = 13;
+    public const int GlobalPosition = 14;
+    public const int Id = 15;
+    public const int KeepDistanceMinMax = 16;
+    public const int LocalPosition = 17;
+    public const int Mass = 18;
+    public const int MaxMoveSpeed = 19;
+    public const int MovementTargetId = 20;
+    public const int Moving = 21;
+    public const int MovingAcceleration = 22;
+    public const int NeedSynchronize = 23;
+    public const int OrbitingRadius = 24;
+    public const int ParentEntity = 25;
+    public const int PhysicShape = 26;
+    public const int PhysicsRadius = 27;
+    public const int Planet = 28;
+    public const int Player = 29;
+    public const int PlayerNetworkId = 30;
+    public const int PreviousFrameLocalPosition = 31;
+    public const int QuadrantIndex = 32;
+    public const int ReadyToCollectCollisions = 33;
+    public const int Rigidbody = 34;
+    public const int RotationSpeed = 35;
+    public const int SelfDestructTimer = 36;
+    public const int Ship = 37;
+    public const int ShipCanBeDocked = 38;
+    public const int ShipsInDockZone = 39;
+    public const int SkyboxCoordinates = 40;
+    public const int Station = 41;
+    public const int StationDockingBay = 42;
+    public const int StationDockingBayIndex = 43;
+    public const int TargetRotation = 44;
+    public const int Transform = 45;
+    public const int Trigger = 46;
+    public const int TriggerEnterEventHandler = 47;
+    public const int TriggerExitEventHandler = 48;
+    public const int TriggerStayEventHandler = 49;
+    public const int Velocity = 50;
+    public const int VelocityAgility = 51;
+    public const int View = 52;
+    public const int ViewModel = 53;
+    public const int ViewPath = 54;
+    public const int ViewPrefab = 55;
+    public const int WarpDataContainer = 56;
+    public const int WarpFinishCoordinates = 57;
+    public const int Warping = 58;
+    public const int WarpPreparation = 59;
 
-    public const int TotalComponents = 57;
+    public const int TotalComponents = 60;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -79,7 +82,9 @@ public static class GameComponentsLookup {
         "CurrentMoveSpeed",
         "CurrentRotationY",
         "CurrentSpeedModifier",
+        "DatabaseId",
         "Destructed",
+        "Disposed",
         "EntityLink",
         "GlobalPosition",
         "Id",
@@ -110,6 +115,7 @@ public static class GameComponentsLookup {
         "SkyboxCoordinates",
         "Station",
         "StationDockingBay",
+        "StationDockingBayIndex",
         "TargetRotation",
         "Transform",
         "Trigger",
@@ -139,7 +145,9 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.CurrentMoveSpeed),
         typeof(Assets.Code.Common.Components.CurrentRotationY),
         typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
+        typeof(Assets.Code.Common.Components.DatabaseId),
         typeof(Assets.Code.Common.Components.Destructed),
+        typeof(Assets.Code.Common.Components.Disposed),
         typeof(Assets.Code.Common.Components.EntityLink),
         typeof(Assets.Code.Common.Components.GlobalPosition),
         typeof(Assets.Code.Common.Components.Id),
@@ -170,6 +178,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.SkyboxCoordinates),
         typeof(Assets.Code.Common.Components.Station),
         typeof(Assets.Code.Common.Components.StationDockingBay),
+        typeof(Assets.Code.Common.Components.StationDockingBayIndex),
         typeof(Assets.Code.Common.Components.TargetRotation),
         typeof(Assets.Code.Common.Components.TransformComponent),
         typeof(Assets.Code.Common.Components.Trigger),

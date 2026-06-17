@@ -19,6 +19,9 @@ namespace Assets.Code.ClientPart.Visual
 
         private void OnDestroy()
         {
+            if (_behaviour == null) return;
+            if (_behaviour.Entity == null) return;
+
             _behaviour.Entity.ViewModel.IsWarping.OnChange -= OnWarpChanged;
         }
 

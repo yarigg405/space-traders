@@ -1,7 +1,6 @@
 ﻿using Assets.Code.ClientPart.CameraSystem;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
-using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
 using Assets.Code.ClientPart.View.Factory;
 using Assets.Code.ClientPart.Visual;
 using Assets.Code.ClientPart.Visual.Player;
@@ -27,22 +26,18 @@ namespace Assets.Code.Infrastructure.Installers
             RegisterInputServices();
             RegisterPlayerServices();
 
-
             Builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
         }
 
         private void RegisterCommonServices()
         {
-            Builder.Register<CameraService>(Lifetime.Scoped)
-                .WithParameter(_cameraOrbitMoveController)
-                .WithParameter(_cameraTargetController)
-                .WithParameter(_skyboxCamera)
-                .AsImplementedInterfaces();
+            Builder.RegisterInstance(_cameraOrbitMoveController);
+            Builder.RegisterInstance(_cameraTargetController);
+            Builder.RegisterInstance(_skyboxCamera);
+            Builder.RegisterInstance(_playerWarpEffectView);
 
-            Builder.Register<PlayerWarpEffectController>(Lifetime.Scoped)
-                .WithParameter(_playerWarpEffectView)
-                .AsImplementedInterfaces();
-
+            Builder.Register<CameraService>(Lifetime.Scoped).AsImplementedInterfaces(); 
+            Builder.Register<PlayerWarpEffectController>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<SkyboxSpaceState>(Lifetime.Scoped);
             Builder.Register<ParticlesHandler>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();

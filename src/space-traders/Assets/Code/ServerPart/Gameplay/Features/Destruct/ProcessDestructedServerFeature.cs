@@ -11,6 +11,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Destruct
         {
             Add(systems.Create<SelfDestructTimerSystem>());
             Add(systems.Create<CleanupGameDestructedServerSystem>());
+            Add(systems.Create<PreDestructionEntityHandleSystem>());
             Add(systems.Create<InputCleanupSystem>());
         }
     }

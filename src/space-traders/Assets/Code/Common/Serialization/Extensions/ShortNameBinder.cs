@@ -40,7 +40,9 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(QuadrantIndex)] = "qi",
             [typeof(PhysicsRadius)] = "pr",
             [typeof(Mass)] = "ms",
-            [typeof(ShipCanBeDocked)] = "scbd"
+            [typeof(ShipCanBeDocked)] = "scbd",
+            [typeof(DatabaseId)] = "dbi",
+            [typeof(StationDockingBayIndex)] = "sdi",
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

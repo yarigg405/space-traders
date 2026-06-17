@@ -48,7 +48,7 @@ namespace Assets.Code.ServerPart.Worlds
             foreach (var station in stations)
             {
                 double2 pos = new(station.PositionX, station.PositionY);
-                _spaceStationsFactory.CreateSpaceStation(pos, station.PrefabName, contexts);
+                _spaceStationsFactory.CreateSpaceStation(station.Id, pos, station.PrefabName, contexts);
             }
         }
     }

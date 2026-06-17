@@ -1,14 +1,11 @@
 ﻿using Assets.Code.Common.DataBase.ORM;
 using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Common.StaticData.Staff;
-using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Riptide;
-using System;
 using Unity.Mathematics;
-using Unity.VectorGraphics;
 
 
 namespace Assets.Code.ServerPart.Networking
@@ -127,7 +124,7 @@ namespace Assets.Code.ServerPart.Networking
             var characterId = message.GetInt();
             var messageId = message.GetUInt();
 
-            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);           
+            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
 
             _playerCharacterManager.SetCharacterForPlayer(fromClientId, characterId);
             var sceneName = _playerLocationManager.GetSceneForCharacter(characterId);
@@ -170,6 +167,24 @@ namespace Assets.Code.ServerPart.Networking
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToUndock)
                 .AddUInt(messageId)
                 .AddString(starSystem.Name)
+                ;
+
+            _networkManager.Server.Send(response, fromClientId);
+        }
+
+        internal void HandleRequestForDock(ushort fromClientId, Message message)
+        {
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
+            var stationId = message.GetInt();
+            var dockingBayId = message.GetInt();
+            var messageId = message.GetUInt();
+
+            _playerLocationManager.SetStationDocked(characterId, stationId, dockingBayId);
+            _clientSceneConnector.ConnectPlayer(fromClientId);
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToDock)
+                .AddUInt(messageId)
+                .AddString("ok")
                 ;
 
             _networkManager.Server.Send(response, fromClientId);

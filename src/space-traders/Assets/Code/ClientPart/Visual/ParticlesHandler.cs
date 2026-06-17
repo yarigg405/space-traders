@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Unity.Mathematics;
-using UnityEngine;
 using VContainer.Unity;
 
 
@@ -14,6 +13,8 @@ namespace Assets.Code.ClientPart.Visual
     {
         private readonly IPlayerProvider _playerProvider;
         private readonly HashSet<HandledParticle> _handledParticles = new();
+
+        private IDisposable _subscription;
 
 
         public ParticlesHandler(IPlayerProvider playerProvider)
@@ -26,18 +27,17 @@ namespace Assets.Code.ClientPart.Visual
         async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
             await UniTask.WaitUntil(() => _playerProvider.PlayerEntity != null);
-            _playerProvider.PlayerEntity.ViewModel.QuadrantIndex.OnChange += OnPlayerQuadrantChanged;
+            _subscription = _playerProvider.PlayerEntity.ViewModel.QuadrantIndex.Subscribe(OnPlayerQuadrantChanged);
         }
 
         void IDisposable.Dispose()
         {
-            _playerProvider.PlayerEntity.ViewModel.QuadrantIndex.OnChange -= OnPlayerQuadrantChanged;
+            _subscription?.Dispose();
+            _subscription = null;
         }
 
         private void OnPlayerQuadrantChanged(int2 playerQuadrant)
         {
-            Debug.Log("Quadrant changed");
-
             var entity = _playerProvider.PlayerEntity;
             var delta = entity.LocalPosition - entity.PreviousFrameLocalPosition;
 

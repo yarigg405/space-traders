@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,6 @@ namespace Yrr.Utils
             set => SetValue(value);
         }
 
-
         public void SetValue(T value)
         {
             if (EqualityComparer<T>.Default.Equals(_currentValue, value))
@@ -33,9 +31,19 @@ namespace Yrr.Utils
             OnChange?.Invoke(_currentValue);
         }
 
-        public void Cleanup()
+        public IDisposable Subscribe(Action<T> listener, bool invokeImmediately = false)
         {
-            OnChange = null;
+            OnChange += listener;
+
+            if (invokeImmediately)
+                listener(_currentValue);
+
+            return new Subscription(this, listener);
+        }
+
+        private void Unsubscribe(Action<T> listener)
+        {
+            OnChange -= listener;
         }
 
 
@@ -54,6 +62,29 @@ namespace Yrr.Utils
         public override int GetHashCode()
         {
             return HashCode.Combine(Value);
+        }
+
+
+        private sealed class Subscription : IDisposable
+        {
+            private ReactiveValue<T> _source;
+            private Action<T> _listener;
+
+            public Subscription(ReactiveValue<T> reactiveValue, Action<T> listener)
+            {
+                _source = reactiveValue;
+                _listener = listener;
+            }
+
+            void IDisposable.Dispose()
+            {
+                if (_source == null) return;
+
+                _source.Unsubscribe(_listener);
+
+                _source = null;
+                _listener = null;
+            }
         }
     }
 }

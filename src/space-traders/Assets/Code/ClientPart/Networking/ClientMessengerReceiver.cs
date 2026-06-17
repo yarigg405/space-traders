@@ -50,6 +50,12 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseToUndock(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseToDock)]
+        private static void HandleResponseToDock(Message message)
+        {
+            _router.HandleResponseToDock(message);
+        }
+
 
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]

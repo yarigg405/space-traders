@@ -369,6 +369,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -461,7 +462,7 @@ VisualEffect:
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
-  m_ResourceVersion: 1
+  m_ReleaseInstanceOnDisable: 0
   m_PropertySheet:
     m_Float:
       m_Array: []
@@ -1132,7 +1133,7 @@ VisualEffect:
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
-  m_ResourceVersion: 1
+  m_ReleaseInstanceOnDisable: 0
   m_PropertySheet:
     m_Float:
       m_Array: []
@@ -1737,7 +1738,6 @@ MonoBehaviour:
     TypeName: Assets.Code.Infrastructure.DI.GameLifetimeScope
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 0}
   - {fileID: 1544108958238442793}
   - {fileID: 6866851136053705178}
   - {fileID: 8492320118164791992}

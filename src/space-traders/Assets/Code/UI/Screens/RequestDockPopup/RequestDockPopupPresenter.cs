@@ -1,6 +1,5 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
 using Assets.Code.Common.DataContainers;
-using UnityEngine;
 
 
 namespace Assets.Code.UI.Screens
@@ -35,13 +34,9 @@ namespace Assets.Code.UI.Screens
             view.RequestDockBtn.onClick.RemoveListener(ClickOnDock);
         }
 
-
-
         private void ClickOnDock()
         {
-
-
-            Debug.Log("### Dock to " + _dockingBayEntity.Id);
+            _dockService.RequestDockTo(_stationEntity.DatabaseId, _dockingBayEntity.StationDockingBayIndex);
         }
     }
 }

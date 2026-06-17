@@ -44,6 +44,11 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForUndock(fromClientId, message);
         }
 
+        [MessageHandler((ushort) ClientToServerMessageType.RequestForDock)]
+        private static void HandleRequestForDock(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestForDock(fromClientId, message);
+        }
 
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]

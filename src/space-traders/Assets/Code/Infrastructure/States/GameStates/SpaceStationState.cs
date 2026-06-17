@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
 using Assets.Code.UI;
+using Assets.Code.UI.Screens;
 
 
 namespace Assets.Code.Infrastructure.States.GameStates
@@ -18,6 +19,8 @@ namespace Assets.Code.Infrastructure.States.GameStates
 
         public override void Enter()
         {
+            _uiManager.CloseModal<RequestDockPopup>();
+
             _scenesLoader.LoadScene(SceneNames.StationScene);
         }
     }

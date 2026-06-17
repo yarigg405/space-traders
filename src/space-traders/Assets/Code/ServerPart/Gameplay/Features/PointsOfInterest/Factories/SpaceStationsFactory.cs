@@ -19,12 +19,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
             _physicsShapesProvider = physicsShapesProvider;
         }
 
-        public GameEntity CreateSpaceStation(double2 at, string prefabName, Contexts contexts)
+        public GameEntity CreateSpaceStation(int databaseId, double2 at, string prefabName, Contexts contexts)
         {
             var entity =
                 CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
                 .With(x => x.isStation = true)
+                .AddDatabaseId(databaseId)
 
                 .AddViewPath("Prefabs/" + prefabName)
                 .AddGlobalPosition(at)
@@ -35,13 +36,15 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
                 ;
 
             var triggers = _physicsShapesProvider.GetShapeForPrefab(prefabName);
-            foreach (var trigger in triggers)
+            for (int i = 0; i < triggers.Length; i++)
             {
+                PhysicsShape trigger = triggers[i];
                 var triggerEntity = CreateEntity.Empty(contexts)
                       .AddId(_identifier.Next())
                       .AddParentEntity(entity.Id)
                       .With(x => x.isTrigger = true)
                       .With(x => x.isStationDockingBay = true)
+                      .AddStationDockingBayIndex(i)
                       .AddPhysicsRadius(trigger.Radius)
                       .AddGlobalPosition(at + trigger.LocalCenter)
                       .AddCollisionsBuffer(new(4))

@@ -12,9 +12,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Destruct.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(32);
 
-        internal CleanupGameDestructedServerSystem(GameContext game, IEntityDestroyer entityDestroyer)
+        internal CleanupGameDestructedServerSystem(GameContext game,
+            IEntityDestroyer entityDestroyer)
         {
-            _entities = game.GetGroup(GameMatcher.Destructed);
+            _entities = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Destructed,
+                GameMatcher.Disposed));
+
             _entityDestroyer = entityDestroyer;
         }
 
