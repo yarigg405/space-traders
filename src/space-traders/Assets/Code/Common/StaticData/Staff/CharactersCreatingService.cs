@@ -56,6 +56,8 @@ namespace Assets.Code.Common.StaticData.Staff
                         CharacterId = characterId,
                         LocationType = LocationType.Station,
                         CurrentLocationId = _spacesStationsRepository.GetStations(startSystemName).First().Id,
+                        PositionX = 0,
+                        PositionY = 0,
                         DockBayId = 0
                     };
                     _database.CreateNew(location);

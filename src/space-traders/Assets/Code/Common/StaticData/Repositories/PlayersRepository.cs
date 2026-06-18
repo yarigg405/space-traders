@@ -27,12 +27,11 @@ namespace Assets.Code.Common.StaticData.Repositories
                     PlayerLogin = playerName,
                     PlayerGuid = Guid.NewGuid().ToString(),
                 };
-
-                var id = _dataBase.CreateNew(newPlayer);
+                _dataBase.CreateNew(newPlayer);
 
                 player = _dataBase.QuerySingle<PlayerORM>
-                ("SELECT * FROM Players WHERE id =?"
-                , id);
+                ("SELECT * FROM Players WHERE login =?"
+                , playerName);
             }
 
             return player;

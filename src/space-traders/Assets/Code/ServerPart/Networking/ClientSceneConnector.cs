@@ -1,7 +1,6 @@
 ﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Extensions;
 using Assets.Code.Networking;
-using Assets.Code.ServerPart.Gameplay.Features.Physics.Triggers;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Worlds;
 using Riptide;
@@ -22,6 +21,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly NetworkManager _networkManager;
         private readonly ServerMessenger _messenger;
         private readonly PlayerSaver _playerSaver;
+        private readonly PlayerCharacterManager _playerCharacterManager;
 
         private readonly Dictionary<ushort, string> _sceneForClientsMap = new();
         private readonly Dictionary<string, List<ushort>> _clientsOnScenesMap = new();
@@ -32,7 +32,8 @@ namespace Assets.Code.ServerPart.Networking
             ServerWorldsController serverWorldsController,
             NetworkManager networkManager,
             ServerMessenger messenger,
-            PlayerSaver playerSaver)
+            PlayerSaver playerSaver,
+            PlayerCharacterManager playerCharacterManager)
         {
             _playerBuilder = playerBuilder;
             _playerDataProvider = playerDataProvider;
@@ -41,6 +42,7 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager = networkManager;
             _messenger = messenger;
             _playerSaver = playerSaver;
+            _playerCharacterManager = playerCharacterManager;
         }
 
         void IInitializable.Initialize()
@@ -62,7 +64,8 @@ namespace Assets.Code.ServerPart.Networking
         public void ConnectPlayer(ushort clientId)
         {
             TryDisconnectClientFromCurrentScene(clientId);
-            var sceneName = _playerDataProvider.GetSceneForCharacter(clientId);
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(clientId);
+            var sceneName = _playerDataProvider.GetSceneForCharacter(characterId);
             EnsureClientsListExist(sceneName);
 
             var newPlayerEntity = _playerBuilder.CreatePlayer(clientId);

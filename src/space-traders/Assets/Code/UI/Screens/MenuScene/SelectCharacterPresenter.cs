@@ -1,5 +1,4 @@
 ﻿using Assets.Code.ClientPart.Networking;
-using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Networking.Data;
 using Assets.Code.UI.Infrastructure.Interfaces;
 using Assets.Code.UI.Screens.MainMenu;
