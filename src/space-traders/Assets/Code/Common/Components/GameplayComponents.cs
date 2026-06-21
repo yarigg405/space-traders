@@ -8,4 +8,6 @@ namespace Assets.Code.Common.Components
 {
     [Game] public sealed class ShipsInDockZone : IComponent { public List<GameEntity> Value; }
     [Game] public sealed class ShipCanBeDocked : ISerializeComponent { public DockingDataContainer Value; }
+    [Game] public sealed class DockingInProccess : ISerializeComponent { }
+    [Game] public sealed class AnimatedMovingDataContainerComponent : IComponent { public AnimatedMoveDataContainer Value; }
 }

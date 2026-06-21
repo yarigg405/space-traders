@@ -19,7 +19,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
             _entities = game.GetGroup(GameMatcher.AllOf(
                GameMatcher.PhysicsRadius,
                GameMatcher.GlobalPosition)
-               .NoneOf(GameMatcher.Trigger));
+               .NoneOf(
+                GameMatcher.Trigger,
+                GameMatcher.IgnoreCollision                
+                ));
             _synchronizator = synchronizator;
         }
 

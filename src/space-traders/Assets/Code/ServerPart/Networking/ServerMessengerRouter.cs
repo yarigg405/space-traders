@@ -4,6 +4,7 @@ using Assets.Code.Common.StaticData.Staff;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Riptide;
 using Unity.Mathematics;
 
@@ -18,6 +19,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly ClientSceneConnector _clientSceneConnector;
         private readonly PlayerLocationManager _playerLocationManager;
         private readonly PlayerCharacterManager _playerCharacterManager;
+        private readonly ServerDockingService _dockingService;
 
         private readonly PlayersRepository _playersRepository;
         private readonly CharactersRepository _charactersRepository;
@@ -36,7 +38,8 @@ namespace Assets.Code.ServerPart.Networking
             ClientSceneConnector clientSceneConnector,
             SpaceStationsRepository spaceStationsRepository,
             PlayerLocationManager playerLocationManager,
-            PlayerCharacterManager playerCharacterManager)
+            PlayerCharacterManager playerCharacterManager,
+            ServerDockingService dockingService)
         {
             _networkManager = networkManager;
             _playersRepository = playersRepository;
@@ -49,6 +52,7 @@ namespace Assets.Code.ServerPart.Networking
             _spaceStationsRepository = spaceStationsRepository;
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
+            _dockingService = dockingService;
         }
 
         internal void HandleRequestGetCharacters(ushort fromClientId, Message message)
@@ -179,15 +183,25 @@ namespace Assets.Code.ServerPart.Networking
             var dockingBayId = message.GetInt();
             var messageId = message.GetUInt();
 
-            _playerLocationManager.SetStationDocked(characterId, stationId, dockingBayId);
-            _clientSceneConnector.ConnectPlayer(fromClientId);
+            if (_dockingService.CharacterCanDock(characterId, stationId))
+            {
+                _dockingService.StartDocking(characterId, stationId, dockingBayId, fromClientId);
 
-            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToDock)
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToDock)
                 .AddUInt(messageId)
                 .AddString("ok")
                 ;
+                _networkManager.Server.Send(response, fromClientId);
+            }
 
-            _networkManager.Server.Send(response, fromClientId);
+            else
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
+                    .AddUInt(messageId)
+                    .AddString("error");
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
         }
 
         internal void HandleEntitiesLoading(ushort fromClientId, Message message)

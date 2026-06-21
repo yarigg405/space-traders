@@ -5,13 +5,13 @@ using Entitas;
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
 {
-    internal sealed class ShipDockingSystem : IExecuteSystem
+    internal sealed class CheckShipCanBeDockedSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly GameContext _gameContext;
         private readonly EntitiesSynchronizator _synchronizator;
 
-        public ShipDockingSystem(GameContext game, EntitiesSynchronizator synchronizator)
+        public CheckShipCanBeDockedSystem(GameContext game, EntitiesSynchronizator synchronizator)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.StationDockingBay,

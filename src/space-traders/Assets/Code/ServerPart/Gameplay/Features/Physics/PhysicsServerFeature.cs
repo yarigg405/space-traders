@@ -13,7 +13,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics
             Add(systems.Create<CastForTriggersInteractionsSystem>());
             Add(systems.Create<TriggerEventHandlersSystem>());
 
-            Add(systems.Create<ShipDockingSystem>());
+            Add(systems.Create<CheckShipCanBeDockedSystem>());
 
             Add(systems.Create<CleanupTriggerEventHandlersSystem>());
         }

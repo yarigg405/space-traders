@@ -1,4 +1,5 @@
 ﻿using Assets.Code.ClientPart.View;
+using System;
 using UnityEngine;
 
 
@@ -11,18 +12,22 @@ namespace Assets.Code.ClientPart.Visual
         [SerializeField] private GameObject[] _commonMoveObjects;
         [SerializeField] private GameObject[] _warpMoveObjects;
 
+        private IDisposable _isWarpingSubscription;
+        private IDisposable _animationSubscription;
+
         private void Start()
         {
-            _behaviour.Entity.ViewModel.IsWarping.OnChange += OnWarpChanged;
-            OnWarpChanged(_behaviour.Entity.ViewModel.IsWarping);
+            _isWarpingSubscription = _behaviour.Entity.ViewModel.IsWarping.Subscribe(OnWarpChanged, true);
+            _animationSubscription = _behaviour.Entity.ViewModel.IsAnimatedMoving.Subscribe(OnAnimationChanged, true);
         }
 
         private void OnDestroy()
         {
-            if (_behaviour == null) return;
-            if (_behaviour.Entity == null) return;
+            _isWarpingSubscription?.Dispose();
+            _isWarpingSubscription = null;
 
-            _behaviour.Entity.ViewModel.IsWarping.OnChange -= OnWarpChanged;
+            _animationSubscription?.Dispose();
+            _animationSubscription = null;
         }
 
         private void OnWarpChanged(bool isWarping)
@@ -35,6 +40,14 @@ namespace Assets.Code.ClientPart.Visual
             foreach (var obj in _warpMoveObjects)
             {
                 obj.SetActive(isWarping);
+            }
+        }
+
+        private void OnAnimationChanged(bool animated)
+        {
+            foreach (var obj in _commonMoveObjects)
+            {
+                obj.SetActive(!animated);
             }
         }
     }

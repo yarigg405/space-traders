@@ -6,6 +6,7 @@ using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory;
 using Assets.Code.ServerPart.Worlds;
@@ -32,6 +33,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<PlayerLocationManager>(Lifetime.Singleton).AsSelf();
                 builder.Register<PlayerCharacterManager>(Lifetime.Singleton).AsSelf();
                 builder.Register<PlayerSaver>(Lifetime.Singleton).AsSelf();
+                builder.Register<ServerDockingService>(Lifetime.Scoped).AsSelf();
 
                 builder.Register<ClientSceneConnector>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<GameWorldFiller>(Lifetime.Singleton).AsSelf();

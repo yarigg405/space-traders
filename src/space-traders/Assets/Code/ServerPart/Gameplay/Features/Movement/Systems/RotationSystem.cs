@@ -14,6 +14,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         public RotationSystem(GameContext game, ITimeService time)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Moving,
                 GameMatcher.CurrentRotationY,
                 GameMatcher.TargetRotation,
                 GameMatcher.RotationSpeed

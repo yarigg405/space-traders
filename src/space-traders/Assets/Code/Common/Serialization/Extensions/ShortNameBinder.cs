@@ -43,6 +43,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(ShipCanBeDocked)] = "scbd",
             [typeof(DatabaseId)] = "dbi",
             [typeof(StationDockingBayIndex)] = "sdi",
+            [typeof(IgnoreCollision)] = "ic",
+            [typeof(DockingInProccess)] = "dip",
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

@@ -22,6 +22,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
 
             Add(systems.Create<WarpPreparationSystem>());
             Add(systems.Create<WarpMovingSystem>());
+            Add(systems.Create<ShipStartDockingSystem>());
 
             Add(systems.Create<UpdateQuadrantIndexSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());

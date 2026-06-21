@@ -59,6 +59,28 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             return entity;
         }
 
+        public static GameEntity SetStartDocking(this GameEntity entity)
+        {
+            entity
+                .With(x => x.isMoving = false)
+                .With(x => x.isIgnoreCollision = true)
+                .With(x => x.isDockingInProccess = true)
+                ;
+
+            return entity;
+        }
+
+        public static GameEntity SetFinishDocking(this GameEntity entity)
+        {
+            entity
+                .With(x => x.isMoving = true)
+                .With(x => x.isIgnoreCollision = false)
+                .With(x => x.isDockingInProccess = false)
+                ;
+
+            return entity;
+        }
+
 
         public static GameEntity ResetMovingComponents(this GameEntity entity)
         {

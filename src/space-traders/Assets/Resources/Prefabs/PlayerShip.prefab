@@ -99,6 +99,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7027253189536078995}
+  - component: {fileID: 6838385149598235908}
+  - component: {fileID: 9095536518088977081}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -122,6 +124,38 @@ Transform:
   - {fileID: 974412957333186955}
   m_Father: {fileID: 4949454666890082279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6838385149598235908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161831387200955818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b244901a9f6764e9be4ac3f68a40e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Assets.Code.ClientPart.Visual.ShipEnginesView
+  _behaviour: {fileID: 7587300388431576714}
+  _commonMoveObjects:
+  - {fileID: 8398065536843831933}
+  - {fileID: 2729334166835157539}
+  _warpMoveObjects:
+  - {fileID: 366026517023037232}
+--- !u!114 &9095536518088977081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161831387200955818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25566d59b76530c4f93dbcf73071d16e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Assets.Code.ClientPart.Visual.ShipAnimatedMover
+  _behaviour: {fileID: 7587300388431576714}
+  _viewRoot: {fileID: 974412957333186955}
 --- !u!1 &2407874204017055526
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +236,7 @@ VisualEffect:
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
-  m_ResourceVersion: 1
+  m_ReleaseInstanceOnDisable: 0
   m_PropertySheet:
     m_Float:
       m_Array: []
@@ -300,7 +334,6 @@ GameObject:
   - component: {fileID: -5765330425948439694}
   - component: {fileID: 5020663180218514601}
   - component: {fileID: 1568276404919247647}
-  - component: {fileID: 4996651194817053969}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -410,24 +443,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4996651194817053969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4616673082105351056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b244901a9f6764e9be4ac3f68a40e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Assets.Code.ClientPart.Visual.ShipEnginesView
-  _behaviour: {fileID: 7587300388431576714}
-  _commonMoveObjects:
-  - {fileID: 8398065536843831933}
-  - {fileID: 2729334166835157539}
-  _warpMoveObjects:
-  - {fileID: 366026517023037232}
 --- !u!1 &8398065536843831933
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +491,7 @@ VisualEffect:
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
-  m_ResourceVersion: 1
+  m_ReleaseInstanceOnDisable: 0
   m_PropertySheet:
     m_Float:
       m_Array: []

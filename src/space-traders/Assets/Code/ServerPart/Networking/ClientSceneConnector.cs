@@ -154,5 +154,13 @@ namespace Assets.Code.ServerPart.Networking
 
             return 0;
         }
+
+        public GameEntity GetEntityForPlayer(ushort clientId)
+        {
+            if (_playerEntities.TryGetValue(clientId, out var entity))
+                return entity;
+
+            return null;
+        }
     }
 }
