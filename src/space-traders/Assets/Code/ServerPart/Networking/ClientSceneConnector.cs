@@ -61,14 +61,14 @@ namespace Assets.Code.ServerPart.Networking
         }
 
 
-        public void ConnectPlayer(ushort clientId)
+        public void ConnectPlayer(ushort clientId, bool spawnFromStation = false)
         {
             TryDisconnectClientFromCurrentScene(clientId);
             var characterId = _playerCharacterManager.GetCharacterIdForPlayer(clientId);
             var sceneName = _playerDataProvider.GetSceneForCharacter(characterId);
             EnsureClientsListExist(sceneName);
 
-            var newPlayerEntity = _playerBuilder.CreatePlayer(clientId);
+            var newPlayerEntity = _playerBuilder.CreatePlayer(clientId, spawnFromStation);
             var snapshot = newPlayerEntity.AsSerializedEntity();
             foreach (var client in _clientsOnScenesMap[sceneName])
             {

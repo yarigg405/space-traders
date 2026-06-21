@@ -15,6 +15,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             Add(systems.Create<RotationSystem>());
             Add(systems.Create<HandleVelocitySystem>());
             Add(systems.Create<PhysicsMovingSystem>());
+            Add(systems.Create<ShipUndockTimerSystem>());
 
             Add(systems.Create<WarpPreparationSystem>());
             Add(systems.Create<WarpMovingSystem>());

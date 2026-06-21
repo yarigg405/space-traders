@@ -166,7 +166,7 @@ namespace Assets.Code.ServerPart.Networking
             var starSystem = _starsSystemRepository.GetById(station.StarSystemId);
 
             _playerLocationManager.SetUndocked(characterId);
-            _clientSceneConnector.ConnectPlayer(fromClientId);
+            _clientSceneConnector.ConnectPlayer(fromClientId, true);
 
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToUndock)
                 .AddUInt(messageId)

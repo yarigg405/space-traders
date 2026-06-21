@@ -32,8 +32,8 @@ namespace Assets.Code.ClientPart.Visual
             if (animated)
             {
                 var container = _behaviour.Entity.AnimatedMovingDataContainer;
-                _viewRoot.transform.position = container.From;
-                _viewRoot.DOMove(container.To, container.MaxTime).SetEase(Ease.InOutCubic);
+                _viewRoot.transform.localPosition = container.From;
+                _viewRoot.DOLocalMove(container.To, container.MaxTime).SetEase(Ease.InOutCubic);
             }
 
             else

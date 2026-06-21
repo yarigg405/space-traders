@@ -59,7 +59,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             return entity;
         }
 
-        public static GameEntity SetStartDocking(this GameEntity entity)
+        public static GameEntity StartDocking(this GameEntity entity)
         {
             entity
                 .With(x => x.isMoving = false)
@@ -70,7 +70,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             return entity;
         }
 
-        public static GameEntity SetFinishDocking(this GameEntity entity)
+        public static GameEntity FinishDocking(this GameEntity entity)
         {
             entity
                 .With(x => x.isMoving = true)
@@ -80,6 +80,32 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
 
             return entity;
         }
+
+        public static GameEntity StartUndocking(this GameEntity entity)
+        {
+            entity
+               .With(x => x.isMoving = false)
+               .With(x => x.isIgnoreCollision = true)
+               .With(x => x.isUndockingInProccess = true)
+               .AddUndockingTimer(5f)
+               ;
+
+            return entity;
+        }
+
+        public static GameEntity FinishUndocking(this GameEntity entity)
+        {
+            entity
+                .With(x => x.isMoving = true)
+                .With(x => x.isIgnoreCollision = false)
+                .With(x => x.isUndockingInProccess = false)
+                .RemoveUndockingTimer()
+                ;
+
+            return entity;
+        }
+
+
 
 
         public static GameEntity ResetMovingComponents(this GameEntity entity)

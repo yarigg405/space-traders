@@ -61,18 +61,20 @@ public static class GameComponentsLookup {
     public const int TriggerEnterEventHandler = 50;
     public const int TriggerExitEventHandler = 51;
     public const int TriggerStayEventHandler = 52;
-    public const int Velocity = 53;
-    public const int VelocityAgility = 54;
-    public const int View = 55;
-    public const int ViewModel = 56;
-    public const int ViewPath = 57;
-    public const int ViewPrefab = 58;
-    public const int WarpDataContainer = 59;
-    public const int WarpFinishCoordinates = 60;
-    public const int Warping = 61;
-    public const int WarpPreparation = 62;
+    public const int UndockingInProccess = 53;
+    public const int UndockingTimer = 54;
+    public const int Velocity = 55;
+    public const int VelocityAgility = 56;
+    public const int View = 57;
+    public const int ViewModel = 58;
+    public const int ViewPath = 59;
+    public const int ViewPrefab = 60;
+    public const int WarpDataContainer = 61;
+    public const int WarpFinishCoordinates = 62;
+    public const int Warping = 63;
+    public const int WarpPreparation = 64;
 
-    public const int TotalComponents = 63;
+    public const int TotalComponents = 65;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -128,6 +130,8 @@ public static class GameComponentsLookup {
         "TriggerEnterEventHandler",
         "TriggerExitEventHandler",
         "TriggerStayEventHandler",
+        "UndockingInProccess",
+        "UndockingTimer",
         "Velocity",
         "VelocityAgility",
         "View",
@@ -194,6 +198,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.TriggerEnterEventHandler),
         typeof(Assets.Code.Common.Components.TriggerExitEventHandler),
         typeof(Assets.Code.Common.Components.TriggerStayEventHandler),
+        typeof(Assets.Code.Common.Components.UndockingInProccess),
+        typeof(Assets.Code.Common.Components.UndockingTimer),
         typeof(Assets.Code.Common.Components.Velocity),
         typeof(Assets.Code.Common.Components.VelocityAgility),
         typeof(Assets.Code.Common.Components.View),

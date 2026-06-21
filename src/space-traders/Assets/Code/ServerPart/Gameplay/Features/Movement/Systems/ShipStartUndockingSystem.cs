@@ -6,18 +6,17 @@ using UnityEngine;
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
 {
-    internal sealed class ShipStartDockingSystem : IExecuteSystem
+    internal sealed class ShipStartUndockingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(4);
 
         private float _dockingTime = 5f;
 
-        public ShipStartDockingSystem(GameContext game)
+        public ShipStartUndockingSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
-               GameMatcher.ShipCanBeDocked,
-               GameMatcher.DockingInProccess
+               GameMatcher.UndockingInProccess
                )
                 .NoneOf(GameMatcher.AnimatedMovingDataContainer));
         }
@@ -26,9 +25,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         {
             foreach (var entity in _entities.GetEntities(_buffer))
             {
-                var initData = entity.ShipCanBeDocked;
-                var from = Vector3.zero;
-                var to = new Vector3(0f, -25f, 0f);
+                var to = Vector3.zero;
+                var from = new Vector3(0f, -25f, 0f);
 
                 var container = new AnimatedMoveDataContainer(from, to, _dockingTime);
 

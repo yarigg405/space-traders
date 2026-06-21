@@ -1,4 +1,5 @@
-﻿using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
+﻿using Assets.Code.ServerPart.Gameplay.Features.Movement;
+using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Worlds;
 
 
@@ -20,7 +21,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
             _playerCharacterManager = playerCharacterManager;
         }
 
-        public GameEntity CreatePlayer(ushort clientId)
+        public GameEntity CreatePlayer(ushort clientId, bool spawnFromStation)
         {
             var characterId = _playerCharacterManager.GetCharacterIdForPlayer(clientId);
             var sceneName = _playerLocationManager.GetSceneForCharacter(characterId);
@@ -30,6 +31,11 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
             var ctxs = world.Contexts;
 
             var newPlayerEntity = _playerFactory.CreatePlayer(clientId, spawnPoint, ctxs);
+            if (spawnFromStation)
+            {
+                newPlayerEntity.StartUndocking();
+            }
+
             return newPlayerEntity;
         }
     }

@@ -41,7 +41,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Services
             var playerEntity = _clientSceneConnector.GetEntityForPlayer(fromClientId);
             if (playerEntity != null)
             {
-                playerEntity.SetStartDocking();                
+                playerEntity.StartDocking();                
 
                 await UniTask.Delay(_dockingAwaitDelay);
 
