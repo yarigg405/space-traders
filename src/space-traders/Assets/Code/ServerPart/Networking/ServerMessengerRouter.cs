@@ -128,14 +128,21 @@ namespace Assets.Code.ServerPart.Networking
             var characterId = message.GetInt();
             var messageId = message.GetUInt();
 
-            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
-
             _playerCharacterManager.SetCharacterForPlayer(fromClientId, characterId);
-            var sceneName = _playerLocationManager.GetSceneForCharacter(characterId);
             _clientSceneConnector.ConnectPlayer(fromClientId);
+
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseEnterTheGame)
-                .AddUInt(messageId)
-                .AddString(sceneName);
+                .AddUInt(messageId);
+
+            var isStation = _playerLocationManager.IsCharacterInStation(characterId);
+            response.AddBool(isStation);
+
+            if (!isStation)
+            {
+                var sceneData = _playerLocationManager.GetSpaceSceneData(characterId);
+                response.AddString(sceneData.SceneName)
+                        .AddString(sceneData.ConfigJson);
+            }
 
             _networkManager.Server.Send(response, fromClientId);
         }
@@ -161,16 +168,14 @@ namespace Assets.Code.ServerPart.Networking
             var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
             var messageId = message.GetUInt();
 
-            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
-            var station = _spaceStationsRepository.GetById(location.CurrentLocationId);
-            var starSystem = _starsSystemRepository.GetById(station.StarSystemId);
-
             _playerLocationManager.SetUndocked(characterId);
             _clientSceneConnector.ConnectPlayer(fromClientId, true);
 
+            var sceneData = _playerLocationManager.GetSpaceSceneData(characterId);
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseToUndock)
                 .AddUInt(messageId)
-                .AddString(starSystem.Name)
+                .AddString(sceneData.SceneName)
+                .AddString(sceneData.ConfigJson)
                 ;
 
             _networkManager.Server.Send(response, fromClientId);

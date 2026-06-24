@@ -57,8 +57,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 
         private InputEntity CreateNewInputEntityForPlayer(ushort playerNetworkId)
         {
-            var sceneName = _playerDataProvider.GetSceneForCharacter(playerNetworkId);
-            var world = _worldsController.GetOrCreateWorld(sceneName);
+            var worldKey = _playerDataProvider.GetWorldKeyForCharacter(playerNetworkId);
+            var world = _worldsController.GetOrCreateWorld(worldKey);
             var ctxs = world.Contexts;
 
             var entityId = _clientSceneConnector.GetEntityIdForPlayer(playerNetworkId);

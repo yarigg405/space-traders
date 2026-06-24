@@ -24,7 +24,7 @@ namespace Assets.Code.ClientPart.Networking
         }
 
 
-        public async UniTask<string> RequestForEnterTheGame(int selectedCharacterId, CancellationToken ct)
+        public async UniTask<EnterGameResult> RequestForEnterTheGame(int selectedCharacterId, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestEnterTheGame)
                 .AddInt(selectedCharacterId);
@@ -32,7 +32,21 @@ namespace Assets.Code.ClientPart.Networking
             var response = await _requestSystem.SendRequest(
                 msg, ct, TimeSpan.FromSeconds(5));
 
-            return response.GetString();
+            var result = new EnterGameResult
+            {
+                IsStation = response.GetBool(),
+            };
+
+            if (!result.IsStation)
+            {
+                result.SpaceScene = new SpaceSceneData
+                {
+                    SceneName = response.GetString(),
+                    ConfigJson = response.GetString(),
+                };
+            }
+
+            return result;
         }
 
         public async UniTask<LoadStationData> RequestForLoadStation(int selectedCharacterId, CancellationToken ct)
@@ -108,14 +122,18 @@ namespace Assets.Code.ClientPart.Networking
             return result;
         }
 
-        public async UniTask<string> RequestForUndock(CancellationToken ct)
+        public async UniTask<SpaceSceneData> RequestForUndock(CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForUndock);
 
             var response = await _requestSystem.SendRequest
                 (msg, ct, TimeSpan.FromSeconds(5));
 
-            var result = response.GetString();
+            var result = new SpaceSceneData
+            {
+                SceneName = response.GetString(),
+                ConfigJson = response.GetString(),
+            };
             return result;
         }
 

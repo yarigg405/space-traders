@@ -1,6 +1,7 @@
 ﻿using Assets.Code.ClientPart.CameraSystem;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.ClientPart.View;
 using Assets.Code.ClientPart.View.Factory;
 using Assets.Code.ClientPart.Visual;
 using Assets.Code.ClientPart.Visual.Player;
@@ -26,6 +27,7 @@ namespace Assets.Code.Infrastructure.Installers
             RegisterInputServices();
             RegisterPlayerServices();
 
+            Builder.RegisterEntryPoint<SpaceSceneConfigApplier>();
             Builder.RegisterEntryPoint<SpaceSceneEntryPoint>();
         }
 

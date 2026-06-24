@@ -18,5 +18,14 @@ namespace Assets.Code.Common.DataBase.ORM
 
         [Column("positionY")]
         public float PositionY { get; set; }
+
+        [Column("sceneName")]
+        public string SceneName { get; set; }
+
+        [Column("skybox")]
+        public int Skybox { get; set; }
+
+        [Column("lightSettings")]
+        public int LightSettings { get; set; }
     }
 }

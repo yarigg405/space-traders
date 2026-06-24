@@ -1,5 +1,6 @@
 ﻿using Assets.Code.ClientPart.Networking;
 using Assets.Code.Infrastructure.States.GameStates;
+using Assets.Code.Networking.Data;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.UI.Infrastructure.Interfaces;
 using Cysharp.Threading.Tasks;
@@ -58,9 +59,9 @@ namespace Assets.Code.UI.Screens.StationScreens
 
         private async UniTask UndockShipAsync(CancellationToken ct)
         {
-            var scene = await _messenger.RequestForUndock(ct);
+            var sceneData = await _messenger.RequestForUndock(ct);
             ct.ThrowIfCancellationRequested();
-            _stateMachine.Enter<LoadGameSceneState, string>(scene);
+            _stateMachine.Enter<LoadGameSceneState, SpaceSceneData>(sceneData);
         }
     }
 

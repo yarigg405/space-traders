@@ -65,18 +65,18 @@ namespace Assets.Code.ServerPart.Networking
         {
             TryDisconnectClientFromCurrentScene(clientId);
             var characterId = _playerCharacterManager.GetCharacterIdForPlayer(clientId);
-            var sceneName = _playerDataProvider.GetSceneForCharacter(characterId);
-            EnsureClientsListExist(sceneName);
+            var worldKey = _playerDataProvider.GetWorldKeyForCharacter(characterId);
+            EnsureClientsListExist(worldKey);
 
             var newPlayerEntity = _playerBuilder.CreatePlayer(clientId, spawnFromStation);
             var snapshot = newPlayerEntity.AsSerializedEntity();
-            foreach (var client in _clientsOnScenesMap[sceneName])
+            foreach (var client in _clientsOnScenesMap[worldKey])
             {
                 _messenger.SendEntityToClient(client, snapshot);
             }
             _playerEntities[clientId] = newPlayerEntity;
 
-            AddClientToScene(clientId, sceneName);
+            AddClientToScene(clientId, worldKey);
         }
 
         private void OnClientDisconnected(object sender, ServerDisconnectedEventArgs e)

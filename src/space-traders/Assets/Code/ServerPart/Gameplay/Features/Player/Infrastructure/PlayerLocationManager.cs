@@ -1,8 +1,10 @@
 ﻿using Assets.Code.Common;
 using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Infrastructure.Loading;
+using Assets.Code.Networking.Data;
 using Assets.Code.ServerPart.Physics.Data;
 using Unity.Mathematics;
+using UnityEngine;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
@@ -26,7 +28,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
             _starSystemRepository = starSystemRepository;
         }
 
-        internal string GetSceneForCharacter(int characterId)
+        internal string GetWorldKeyForCharacter(int characterId)
         {
             var location = _locationsRepository.GetLocationForCharacter(characterId);
 
@@ -36,6 +38,31 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
             var spaceSystemId = location.CurrentLocationId;
             var spaceSystem = _starSystemRepository.GetById(spaceSystemId);
             return spaceSystem.Name;
+        }
+
+        internal bool IsCharacterInStation(int characterId)
+        {
+            var location = _locationsRepository.GetLocationForCharacter(characterId);
+            return location.LocationType == Common.DataBase.ORM.LocationType.Station;
+        }
+
+        internal SpaceSceneData GetSpaceSceneData(int characterId)
+        {
+            var location = _locationsRepository.GetLocationForCharacter(characterId);
+            var starSystem = _starSystemRepository.GetById(location.CurrentLocationId);
+
+            var config = new SpaceSceneConfig
+            {
+                StarSystem = starSystem.Name,
+                Skybox = starSystem.Skybox,
+                LightSettings = starSystem.LightSettings,
+            };
+
+            return new SpaceSceneData
+            {
+                SceneName = starSystem.SceneName,
+                ConfigJson = JsonUtility.ToJson(config),
+            };
         }
 
         internal double2 GetCoordinatesForSpawn(int characterId)

@@ -1,7 +1,7 @@
-﻿using Assets.Code.Infrastructure.Loading;
-using Assets.Code.Infrastructure.States.GameStates;
+﻿using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.Networking;
+using Assets.Code.Networking.Data;
 using Assets.Code.UI;
 using Assets.Code.UI.Screens;
 using Assets.Code.UI.Screens.MessageBox;
@@ -44,9 +44,9 @@ namespace Assets.Code.ClientPart.Networking
 
             try
             {
-                var sceneName = await _messenger.RequestForEnterTheGame(_authentification.SelectedCharacterId, token);
+                var enterResult = await _messenger.RequestForEnterTheGame(_authentification.SelectedCharacterId, token);
                 token.ThrowIfCancellationRequested();
-                HandleSceneEnter(sceneName);
+                HandleSceneEnter(enterResult);
             }
 
             catch (RequestFailedException e)
@@ -63,16 +63,16 @@ namespace Assets.Code.ClientPart.Networking
             }
         }
 
-        private void HandleSceneEnter(string sceneName)
+        private void HandleSceneEnter(EnterGameResult enterResult)
         {
-            if (sceneName.Equals(SceneNames.StationScene))
+            if (enterResult.IsStation)
             {
                 _stateMachine.Enter<SpaceStationState>();
             }
 
             else
             {
-                _stateMachine.Enter<LoadGameSceneState, string>(sceneName);
+                _stateMachine.Enter<LoadGameSceneState, SpaceSceneData>(enterResult.SpaceScene);
             }
         }
 

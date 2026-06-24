@@ -24,10 +24,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
         public GameEntity CreatePlayer(ushort clientId, bool spawnFromStation)
         {
             var characterId = _playerCharacterManager.GetCharacterIdForPlayer(clientId);
-            var sceneName = _playerLocationManager.GetSceneForCharacter(characterId);
+            var worldKey = _playerLocationManager.GetWorldKeyForCharacter(characterId);
             var spawnPoint = _playerLocationManager.GetCoordinatesForSpawn(characterId);
 
-            var world = _worldsController.GetOrCreateWorld(sceneName);
+            var world = _worldsController.GetOrCreateWorld(worldKey);
             var ctxs = world.Contexts;
 
             var newPlayerEntity = _playerFactory.CreatePlayer(clientId, spawnPoint, ctxs);
