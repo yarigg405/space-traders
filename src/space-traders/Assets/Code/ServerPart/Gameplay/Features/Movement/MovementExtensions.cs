@@ -146,5 +146,17 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
 
             return AnglesUtil.NormalizeAngle(angleDeg);
         }
+
+        public static double2 GetPosition(this GameEntity entity)
+        {
+            if (entity.hasGlobalPosition)
+                return entity.GlobalPosition;
+
+            if (entity.hasSkyboxCoordinates)
+                return entity.SkyboxCoordinates;
+
+            Debug.LogError($"Entity {entity.Id} has no position component (GlobalPosition or SkyboxCoordinates)");
+            return default;
+        }
     }
 }

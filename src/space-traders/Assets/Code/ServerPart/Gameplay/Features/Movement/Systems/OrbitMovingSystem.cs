@@ -32,8 +32,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     continue;
                 }
 
+                var targetPosition = target.GetPosition();
+
                 var radius = entity.OrbitingRadius;
-                var direction = entity.GlobalPosition - target.GlobalPosition;
+                var direction = entity.GlobalPosition - targetPosition;
                 var distance = math.length(direction);
 
                 if (distance <= radius) return;
@@ -41,11 +43,11 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
 
                 var angleToPoint = math.atan2(direction.y, direction.x);
 
-                if (IsClockwiseMoving(entity.GlobalPosition, target.GlobalPosition, entity.CurrentRotationY))
+                if (IsClockwiseMoving(entity.GlobalPosition, targetPosition, entity.CurrentRotationY))
                 {
                     var tanAngle1 = angleToPoint - angleOffset;
-                    var tx1 = target.GlobalPosition.x + radius * math.cos(tanAngle1);
-                    var ty1 = target.GlobalPosition.y + radius * math.sin(tanAngle1);
+                    var tx1 = targetPosition.x + radius * math.cos(tanAngle1);
+                    var ty1 = targetPosition.y + radius * math.sin(tanAngle1);
                     var point1 = new double2(tx1, ty1);
                     var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, point1);
                     entity.ReplaceTargetRotation(angle);
@@ -54,8 +56,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 else
                 {
                     var tanAngle2 = angleToPoint + angleOffset;
-                    var tx2 = target.GlobalPosition.x + radius * math.cos(tanAngle2);
-                    var ty2 = target.GlobalPosition.y + radius * math.sin(tanAngle2);
+                    var tx2 = targetPosition.x + radius * math.cos(tanAngle2);
+                    var ty2 = targetPosition.y + radius * math.sin(tanAngle2);
                     var point2 = new double2(tx2, ty2);
                     var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, point2);
                     entity.ReplaceTargetRotation(angle);

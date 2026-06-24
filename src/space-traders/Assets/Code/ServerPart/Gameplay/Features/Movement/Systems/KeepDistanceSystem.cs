@@ -31,13 +31,15 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     continue;
                 }
 
+                var targetPosition = target.GetPosition();
+
                 var minMaxDistance = entity.KeepDistanceMinMax;
 
-                var distance = math.length(entity.GlobalPosition - target.GlobalPosition);
+                var distance = math.length(entity.GlobalPosition - targetPosition);
 
                 if (distance < minMaxDistance.x)
                 {
-                    var angle = MovementExtensions.GetAngleDirectionY(target.GlobalPosition, entity.GlobalPosition);
+                    var angle = MovementExtensions.GetAngleDirectionY(targetPosition, entity.GlobalPosition);
                     entity.ReplaceTargetRotation(angle);
 
                     if (entity.CurrentSpeedModifier == 0)
@@ -46,7 +48,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
 
                 else if (distance > minMaxDistance.y)
                 {
-                    var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, target.GlobalPosition);
+                    var angle = MovementExtensions.GetAngleDirectionY(entity.GlobalPosition, targetPosition);
                     entity.ReplaceTargetRotation(angle);
 
                     if (entity.CurrentSpeedModifier == 0)

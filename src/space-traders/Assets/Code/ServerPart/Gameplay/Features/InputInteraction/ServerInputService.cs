@@ -25,33 +25,33 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
 
         public void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
         {
-            var input = CreateNewInputEntityForPlayer(fromClientId)
+            CreateNewInputEntityForPlayer(fromClientId)?
                 .AddTargetRotation(targetRotation);
         }
 
         public void SetPlayerSpeedModifier(ushort fromClientId, float targetSpeedModifier)
         {
-            var input = CreateNewInputEntityForPlayer(fromClientId)
+            CreateNewInputEntityForPlayer(fromClientId)?
                 .AddCurrentSpeedModifier(targetSpeedModifier);
         }
 
         public void SetPlayerKeepDistance(ushort fromClientId, uint targetId, Vector2 minMaxDistance)
         {
-            var input = CreateNewInputEntityForPlayer(fromClientId)
-                 .AddMovementTargetId(targetId)
-                 .AddKeepDistanceMinMax(minMaxDistance);
+            CreateNewInputEntityForPlayer(fromClientId)?
+                .AddMovementTargetId(targetId)
+                .AddKeepDistanceMinMax(minMaxDistance);
         }
 
         public void SetPlayerOrbitMoving(ushort fromClientId, uint targetId, float orbitRadius)
         {
-            var input = CreateNewInputEntityForPlayer(fromClientId)
+            CreateNewInputEntityForPlayer(fromClientId)?
                 .AddMovementTargetId(targetId)
                 .AddOrbitingRadius(orbitRadius);
         }
 
         public void SetPlayerWarpTo(ushort fromClientId, double2 coordinates)
         {
-            var input = CreateNewInputEntityForPlayer(fromClientId)
+            CreateNewInputEntityForPlayer(fromClientId)?
                 .AddWarpFinishCoordinates(coordinates);
         }
 
@@ -62,6 +62,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
             var ctxs = world.Contexts;
 
             var entityId = _clientSceneConnector.GetEntityIdForPlayer(playerNetworkId);
+
+            var player = ctxs.game.GetEntityWithId(entityId);
+            if (player != null && (player.isWarpPreparation || player.isWarping))
+                return null;
 
             var input = CreateEntity.EmptyInput(ctxs)
                .With(x => x.isInput = true)
