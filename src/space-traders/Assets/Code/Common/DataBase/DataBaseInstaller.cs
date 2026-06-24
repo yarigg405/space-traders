@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Common.DataBase.ORM;
+using Assets.Code.Infrastructure.Loading;
 using SQLite;
 using System.Collections.Generic;
 
@@ -24,7 +25,7 @@ namespace Assets.Code.Common.DataBase
             db.InsertAll(GetPlanets());
             db.InsertAll(GetStations());
 
-            db.Execute("PRAGMA journal_mode=WAL;");
+            db.ExecuteScalar<string>("PRAGMA journal_mode=WAL;");
             db.Close();
         }
 
@@ -32,16 +33,24 @@ namespace Assets.Code.Common.DataBase
         {
             yield return new StarSystemORM
             {
-                Name = "GameScene1",
+                Name = "Sol",
                 PositionX = 0,
                 PositionY = 0,
+
+                SceneName = SceneNames.GameScene1,
+                Skybox = 0,
+                LightSettings = 0,
             };
 
             yield return new StarSystemORM
             {
-                Name = "GameScene2",
+                Name = "Aldebaran",
                 PositionX = 100,
                 PositionY = 100,
+
+                SceneName = SceneNames.GameScene1,
+                Skybox = 1,
+                LightSettings = 1,
             };
         }
 
