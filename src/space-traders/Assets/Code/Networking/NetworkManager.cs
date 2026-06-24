@@ -95,7 +95,7 @@ namespace Assets.Code.Networking
             }
             catch (SocketException)
             {
-                Debug.LogWarning("StartHost failed: address/port already in use");
+                Debug.LogError("StartHost failed: address/port already in use");
                 Cleanup();
                 throw new Exception(ErrorCodes.ServerAlreadyCreated);
             }

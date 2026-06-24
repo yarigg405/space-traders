@@ -1,4 +1,4 @@
-﻿using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
+﻿using Assets.Code.ClientPart.Gameplay.Features.Navigation;
 using Assets.Code.ClientPart.Networking;
 using Unity.Mathematics;
 using UnityEngine;
@@ -20,19 +20,28 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure
             _clientMessenger.SendSpeedModifierToServer(value);
         }
 
-        internal void SetKeepDistance(ClickableEntity currentSelected, Vector2 minMaxDistance)
+        internal void SetKeepDistance(GameEntity target, Vector2 minMaxDistance)
         {
-            _clientMessenger.SendKeepDistance(currentSelected.Entity.Id, minMaxDistance);
+            _clientMessenger.SendKeepDistance(target.Id, minMaxDistance);
         }
 
-        internal void SetOrbit(ClickableEntity currentSelected, float orbitRadius)
+        internal void SetOrbit(GameEntity target, float orbitRadius)
         {
-            _clientMessenger.SendSetOrbit(currentSelected.Entity.Id, orbitRadius);
+            _clientMessenger.SendSetOrbit(target.Id, orbitRadius);
         }
 
         internal void SetWarpTo(double2 coordinates)
         {
             _clientMessenger.SendSetWarpTo(coordinates);
+        }
+
+        internal bool SetWarpToEntity(GameEntity target)
+        {
+            if (!target.TryGetCoordinate(out var coordinates))
+                return false;
+
+            _clientMessenger.SendSetWarpTo(coordinates);
+            return true;
         }
     }
 }

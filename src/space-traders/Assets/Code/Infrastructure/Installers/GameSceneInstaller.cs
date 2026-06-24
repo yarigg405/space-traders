@@ -1,5 +1,6 @@
 ﻿using Assets.Code.ClientPart.CameraSystem;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
+using Assets.Code.ClientPart.Gameplay.Features.Navigation;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ClientPart.View;
 using Assets.Code.ClientPart.View.Factory;
@@ -25,6 +26,7 @@ namespace Assets.Code.Infrastructure.Installers
         {
             RegisterCommonServices();
             RegisterInputServices();
+            RegisterNavigationServices();
             RegisterPlayerServices();
 
             Builder.RegisterEntryPoint<SpaceSceneConfigApplier>();
@@ -49,6 +51,13 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<CameraRaycaster>(Lifetime.Scoped).AsSelf();
             Builder.Register<MouseClickDetector>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
+        }
+
+        private void RegisterNavigationServices()
+        {
+            Builder.Register<SelectionService>(Lifetime.Scoped).AsSelf();
+            Builder.Register<NavigationRegistry>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
+            Builder.Register<NavigationSelectionRouter>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void RegisterPlayerServices()

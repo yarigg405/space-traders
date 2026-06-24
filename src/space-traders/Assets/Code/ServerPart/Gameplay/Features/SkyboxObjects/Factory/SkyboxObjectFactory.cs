@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Common;
+using Assets.Code.Common.Extensions;
 using Assets.Code.Infrastructure.Identifiers;
 using Unity.Mathematics;
 
@@ -19,6 +20,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory
             return CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
                 .AddViewPath("Prefabs/" + prefabName)
+                .With(x => x.isPlanet = true)
 
                 .AddSkyboxCoordinates(at)
                 .AddQuadrantIndex(CalculateQuadrantIndex(at))
