@@ -1,6 +1,4 @@
-using Assets.Code.ClientPart.Gameplay.Features.Navigation;
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +8,6 @@ namespace Assets.Code.ClientPart.UI.Elements.Navigation
     public sealed class NavigationIcon : MonoBehaviour
     {
         [SerializeField] private Image _icon;
-        [SerializeField] private TextMeshProUGUI _label;
         [SerializeField] private Button _selectButton;
         [SerializeField] private GameObject _selectedFrame;
 
@@ -33,9 +30,6 @@ namespace Assets.Code.ClientPart.UI.Elements.Navigation
         {
             _entity = entity;
             _onSelect = onSelect;
-
-            if (_label != null)
-                _label.text = entity.GetName();
 
             _selectButton.onClick.AddListener(OnClick);
             SetSelected(false);
