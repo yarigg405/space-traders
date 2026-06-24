@@ -1,7 +1,9 @@
 ﻿using Assets.Code.Networking;
 using Assets.Code.UI.Infrastructure.Interfaces;
 using Assets.Code.UI.Screens.MainMenu;
+using Assets.Code.UI.Screens.MessageBox;
 using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 
@@ -54,13 +56,31 @@ namespace Assets.Code.UI.Screens.MenuScene
 
         private async UniTask StartHostAsync(ushort port, string serverPassword)
         {
-            _uIManager.OpenModal<AwaitServerResponsePopup>();
-            _authentification.Login = "_server";
-            _authentification.Password = serverPassword;
+            try
+            {
+                _uIManager.CloseModal<MessageBoxPopup>();
+                _uIManager.OpenModal<AwaitServerResponsePopup>();
+                _authentification.Login = "_server";
+                _authentification.Password = serverPassword;
 
-            await _networkManager.StartHost(port, serverPassword, _cts.Token);
+                await _networkManager.StartHost(port, serverPassword, _cts.Token);
+                _uIManager.GoToScreen<SelectCharacterScreen>();
+            }
 
-            _uIManager.GoToScreen<SelectCharacterScreen>();      
+            catch (OperationCanceledException)
+            {
+            }
+
+            catch (Exception ex)
+            {
+                var data = MessageBoxPopup.CreateData(ex.Message);
+                _uIManager.OpenModal<MessageBoxPopup>(data);
+            }
+
+            finally
+            {
+                _uIManager.CloseModal<AwaitServerResponsePopup>();
+            }
         }
 
 

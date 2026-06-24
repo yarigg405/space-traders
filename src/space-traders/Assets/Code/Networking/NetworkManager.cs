@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Riptide;
 using Riptide.Utils;
 using System;
+using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 using VContainer;
@@ -35,8 +36,7 @@ namespace Assets.Code.Networking
         {
             RiptideLogger.Initialize(Debug.Log, Debug.Log, Debug.LogWarning, Debug.LogError, false);
 
-            Server = new();
-            Client = new();
+            CreatePeers();
         }
 
         void IFixedTickable.FixedTick()
@@ -45,6 +45,12 @@ namespace Assets.Code.Networking
                 Server.Update();
 
             Client.Update();
+        }
+
+        private void CreatePeers()
+        {
+            Server = new();
+            Client = new();
         }
 
         void IDisposable.Dispose()
@@ -87,6 +93,12 @@ namespace Assets.Code.Networking
                 Cleanup();
                 throw;
             }
+            catch (SocketException)
+            {
+                Debug.LogWarning("StartHost failed: address/port already in use");
+                Cleanup();
+                throw new Exception(ErrorCodes.ServerAlreadyCreated);
+            }
             catch (Exception ex)
             {
                 Debug.LogException(ex);
@@ -125,20 +137,38 @@ namespace Assets.Code.Networking
         {
             try
             {
-                if (Client.IsConnected)
+                if (Client.IsConnected || Client.IsConnecting)
                     Client.Disconnect();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Client cleanup failed: {ex}");
+            }
 
-                if (_serverStartup != null)
-                    _serverStartup.StopServer();
+            try
+            {
+                _serverStartup?.StopServer();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Server scope cleanup failed: {ex}");
+            }
+            finally
+            {
+                _serverStartup = null;
+            }
 
+            try
+            {
                 if (Server.IsRunning)
                     Server.Stop();
             }
-
             catch (Exception ex)
             {
-                Debug.LogError($"Cleanup failed: {ex}");
+                Debug.LogError($"Server cleanup failed: {ex}");
             }
+
+            CreatePeers();
         }
 
         public void StopClient()

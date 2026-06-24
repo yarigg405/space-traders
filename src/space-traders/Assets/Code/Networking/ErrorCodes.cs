@@ -6,5 +6,6 @@
         public const string CharacterExists = "error-char-exists";
         public const string ErrorConnection = "error-connection";
         public const string WrongPassword = "error-password";
+        public const string ServerAlreadyCreated = "error-server-already-created";
     }
 }
