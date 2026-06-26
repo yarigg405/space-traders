@@ -6,16 +6,16 @@ namespace Assets.Code.Common.StaticData.Repositories
 {
     public sealed class WalletsRepository
     {
-        private readonly IDataBaseManager _database;
+        private readonly IDataBaseManager _dataBase;
 
-        public WalletsRepository(IDataBaseManager database)
+        public WalletsRepository(IDataBaseManager dataBase)
         {
-            _database = database;
+            _dataBase = dataBase;
         }
 
         internal long GetCharacterMoney(int characterId)
         {
-            var wallet = _database.QuerySingle<WalletORM>(
+            var wallet = _dataBase.QuerySingle<WalletORM>(
                 "SELECT * FROM Wallets WHERE ownerType = ? AND ownerId = ?",
                 WalletOwnerType.Character, characterId);
 

@@ -6,23 +6,23 @@ namespace Assets.Code.Common.StaticData.Repositories
 {
     public sealed class CharacterLocationsRepository
     {
-        private readonly IDataBaseManager _database;
+        private readonly IDataBaseManager _dataBase;
 
-        public CharacterLocationsRepository(IDataBaseManager database)
+        public CharacterLocationsRepository(IDataBaseManager dataBase)
         {
-            _database = database;
+            _dataBase = dataBase;
         }
 
         internal CharacterLocationORM GetLocationForCharacter(int characterId)
         {
-            return _database.QuerySingle<CharacterLocationORM>(
+            return _dataBase.QuerySingle<CharacterLocationORM>(
                 "SELECT * FROM CharacterLocations WHERE characterId =?"
                 , characterId);
         }
 
         internal void UpdateLocation(CharacterLocationORM location)
         {
-            _database.Update(location);
+            _dataBase.Update(location);
         }
     }
 }

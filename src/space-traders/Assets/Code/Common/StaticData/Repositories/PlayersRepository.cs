@@ -22,16 +22,12 @@ namespace Assets.Code.Common.StaticData.Repositories
 
             if (player == null)
             {
-                var newPlayer = new PlayerORM
+                player = new PlayerORM
                 {
                     PlayerLogin = playerName,
                     PlayerGuid = Guid.NewGuid().ToString(),
                 };
-                _dataBase.CreateNew(newPlayer);
-
-                player = _dataBase.QuerySingle<PlayerORM>
-                ("SELECT * FROM Players WHERE login =?"
-                , playerName);
+                _dataBase.CreateNew(player);
             }
 
             return player;

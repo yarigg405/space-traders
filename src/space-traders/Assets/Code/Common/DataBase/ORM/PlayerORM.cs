@@ -13,6 +13,7 @@ namespace Assets.Code.Common.DataBase.ORM
         [Column("guid")]
         public string PlayerGuid { get; set; }
 
+        [Indexed]
         [Column("login")]
         public string PlayerLogin { get; set; }
     }

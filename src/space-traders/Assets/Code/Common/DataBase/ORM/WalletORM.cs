@@ -8,12 +8,14 @@ namespace Assets.Code.Common.DataBase.ORM
     public sealed class WalletORM
     {
         [PrimaryKey, AutoIncrement]
-        [Column("walletId")]
-        public int WalletId { get; set; }
+        [Column("id")]
+        public int Id { get; set; }
 
+        [Indexed("IX_Wallets_Owner", 0)]
         [Column("ownerType")]
         public WalletOwnerType OwnerType { get; set; }
 
+        [Indexed("IX_Wallets_Owner", 1)]
         [Column("ownerId")]
         public int OwnerId { get; set; }
 

@@ -10,6 +10,7 @@ namespace Assets.Code.Common.DataBase.ORM
         [Column("id")]
         public int Id { get; set; }
 
+        [Indexed]
         [Column("name")]
         public string Name { get; set; }
 

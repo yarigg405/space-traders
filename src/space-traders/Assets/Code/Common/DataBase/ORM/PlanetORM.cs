@@ -13,6 +13,7 @@ namespace Assets.Code.Common.DataBase.ORM
         [Column("name")]
         public string Name { get; set; }
 
+        [Indexed]
         [Column("starSystemId")]
         public int StarSystemId { get; set; }
 
