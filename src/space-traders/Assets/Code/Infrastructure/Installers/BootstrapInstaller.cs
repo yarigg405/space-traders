@@ -25,6 +25,7 @@ namespace Assets.Code.Infrastructure.Installers
     {
         [SerializeField] private ConfigsStorage _configsStorage;
         [SerializeField] private PhysicsShapesStorage _shapesStorage;
+        [SerializeField] private ItemsCatalogSO _itemsCatalog;
 
         protected override void Install()
         {
@@ -59,6 +60,7 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.RegisterInstance(_configsStorage);
             Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();
+            Builder.RegisterInstance(_itemsCatalog).AsImplementedInterfaces();
         }
 
         private void BindNetworking()

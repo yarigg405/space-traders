@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44f2fb69b5f3ed4db54caf2211121d3, type: 3}
+  m_Name: ItemSO 1
+  m_EditorClassIdentifier: Game::Assets.Code.Common.Inventory.ItemSO
+  <Id>k__BackingField: test-item1
+  <Icon>k__BackingField: {fileID: 21300000, guid: 90df3fc288f95d1459f61e799750cf28, type: 3}
+  <Mass>k__BackingField: 2
+  <Volume>k__BackingField: 2
+  <Components>k__BackingField:
+    _components: []
+  references:
+    version: 2
+    RefIds: []
