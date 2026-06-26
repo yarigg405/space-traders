@@ -16,6 +16,7 @@ namespace Assets.Code.Common.DataBase
             db.CreateTable<CharacterORM>();
             db.CreateTable<PlayerShipORM>();
             db.CreateTable<CharacterLocationORM>();
+            db.CreateTable<WalletORM>();
 
             db.CreateTable<StarSystemORM>();
             db.CreateTable<PlanetORM>();

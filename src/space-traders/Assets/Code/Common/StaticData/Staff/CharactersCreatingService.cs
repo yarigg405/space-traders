@@ -10,6 +10,8 @@ namespace Assets.Code.Common.StaticData.Staff
 {
     internal sealed class CharactersCreatingService
     {
+        private const long StartingMoney = 0;
+
         private readonly CharactersRepository _charactersRepository;
         private readonly StarSystemRepository _starSystemRepository;
         private readonly SpaceStationsRepository _spacesStationsRepository;
@@ -62,6 +64,13 @@ namespace Assets.Code.Common.StaticData.Staff
                     };
                     _database.CreateNew(location);
 
+                    var wallet = new WalletORM
+                    {
+                        OwnerType = WalletOwnerType.Character,
+                        OwnerId = characterId,
+                        Money = StartingMoney
+                    };
+                    _database.CreateNew(wallet);
                 });
 
                 error = "";

@@ -52,6 +52,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<PlanetsRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<SpaceStationsRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<CharacterLocationsRepository>(Lifetime.Singleton).AsSelf();
+                builder.Register<WalletsRepository>(Lifetime.Singleton).AsSelf();
 
                 builder.Register<CharactersCreatingService>(Lifetime.Singleton).AsSelf();
             });

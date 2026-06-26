@@ -19,7 +19,7 @@ namespace Assets.Code.Common.DataBase.ORM
     }
 
     [Serializable]
-    public enum ShipState : ushort
+    public enum ShipState : byte
     {
         Stored,         //in hangar, innactive
         Selected,
