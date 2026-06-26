@@ -17,3 +17,5 @@ MonoBehaviour:
     value: {fileID: 11400000, guid: 6e72adb9b1ca3d444888f5fd71452133, type: 2}
   - key: test-item
     value: {fileID: 11400000, guid: 6cae7d81e03bf3f42b88d3823ac65ca6, type: 2}
+  - key: TestShip1
+    value: {fileID: 11400000, guid: 883aec311a2d19f45b56a1824f31fece, type: 2}

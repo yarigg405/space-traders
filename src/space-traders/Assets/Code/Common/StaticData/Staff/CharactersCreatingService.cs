@@ -11,6 +11,7 @@ namespace Assets.Code.Common.StaticData.Staff
     internal sealed class CharactersCreatingService
     {
         private const long StartingMoney = 0;
+        private const string StartingShipModelId = "TestShip1";
 
         private readonly CharactersRepository _charactersRepository;
         private readonly StarSystemRepository _starSystemRepository;
@@ -71,6 +72,18 @@ namespace Assets.Code.Common.StaticData.Staff
                         Money = StartingMoney
                     };
                     _database.CreateNew(wallet);
+
+                    var ship = new CharacterShipORM
+                    {
+                        OwnerCharacterId = characterId,
+                        ShipModelId = StartingShipModelId,
+                        ShipState = ShipState.Selected,
+                        ShipFitJson = string.Empty
+                    };
+                    _database.CreateNew(ship);
+
+                    character.CurrentShipId = ship.Id;
+                    _database.Update(character);
                 });
 
                 error = "";

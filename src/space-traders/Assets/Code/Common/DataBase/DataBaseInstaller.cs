@@ -14,7 +14,7 @@ namespace Assets.Code.Common.DataBase
 
             db.CreateTable<PlayerORM>();
             db.CreateTable<CharacterORM>();
-            db.CreateTable<PlayerShipORM>();
+            db.CreateTable<CharacterShipORM>();
             db.CreateTable<CharacterLocationORM>();
             db.CreateTable<WalletORM>();
             db.CreateTable<ItemStackORM>();
