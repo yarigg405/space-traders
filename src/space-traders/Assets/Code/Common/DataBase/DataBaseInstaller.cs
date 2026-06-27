@@ -105,6 +105,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation1",
                 StarSystemId = 1,
+                StationType = 0,
                 PositionX = 0,
                 PositionY = 0,
 
@@ -115,6 +116,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation2",
                 StarSystemId = 1,
+                StationType = 1,
                 PositionX = 0,
                 PositionY = 250_000,
 
@@ -125,6 +127,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation3",
                 StarSystemId = 2,
+                StationType = 0,
                 PositionX = 0,
                 PositionY = 0,
 
@@ -135,6 +138,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation4",
                 StarSystemId = 2,
+                StationType = 1,
                 PositionX = 0,
                 PositionY = 250_000,
 

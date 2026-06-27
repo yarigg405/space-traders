@@ -26,6 +26,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly CharacterLocationsRepository _characterLocationsRepository;
         private readonly StarSystemRepository _starsSystemRepository;
         private readonly SpaceStationsRepository _spaceStationsRepository;
+        private readonly CharacterShipsRepository _characterShipsRepository;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
@@ -37,6 +38,7 @@ namespace Assets.Code.ServerPart.Networking
             StarSystemRepository starsSystemRepository,
             ClientSceneConnector clientSceneConnector,
             SpaceStationsRepository spaceStationsRepository,
+            CharacterShipsRepository characterShipsRepository,
             PlayerLocationManager playerLocationManager,
             PlayerCharacterManager playerCharacterManager,
             ServerDockingService dockingService)
@@ -50,6 +52,7 @@ namespace Assets.Code.ServerPart.Networking
             _starsSystemRepository = starsSystemRepository;
             _clientSceneConnector = clientSceneConnector;
             _spaceStationsRepository = spaceStationsRepository;
+            _characterShipsRepository = characterShipsRepository;
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
             _dockingService = dockingService;
@@ -153,11 +156,17 @@ namespace Assets.Code.ServerPart.Networking
             var messageId = message.GetUInt();
             var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
             var station = _spaceStationsRepository.GetById(location.CurrentLocationId);
+            var starSystem = _starsSystemRepository.GetById(station.StarSystemId);
+            var ship = _characterShipsRepository.GetCurrentShip(characterId);
 
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseLoadStationData)
                 .AddUInt(messageId)
                 .AddInt(station.Id)
                 .AddString(station.Name)
+                .AddString(starSystem.Name)
+                .AddInt(station.StationType)
+                .AddString(ship.ShipModelId)
+                .AddString(ship.ShipFitJson)
                 ;
 
             _networkManager.Server.Send(response, fromClientId);

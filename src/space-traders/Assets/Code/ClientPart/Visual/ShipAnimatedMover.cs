@@ -1,4 +1,4 @@
-﻿using Assets.Code.ClientPart.View;
+using Assets.Code.ClientPart.View;
 using DG.Tweening;
 using System;
 using UnityEngine;
@@ -6,19 +6,19 @@ using UnityEngine;
 
 namespace Assets.Code.ClientPart.Visual
 {
-    internal sealed class ShipAnimatedMover : MonoBehaviour
+    internal sealed class ShipAnimatedMover : MonoBehaviour, IEntityComponentRegistrar
     {
         [SerializeField] private EntityBehaviour _behaviour;
         [SerializeField] private Transform _viewRoot;
 
         private IDisposable _subscription;
 
-        private void Start()
+        public void RegisterComponents()
         {
             _subscription = _behaviour.Entity.ViewModel.IsAnimatedMoving.Subscribe(OnAnimationChanged, true);
         }
 
-        private void OnDestroy()
+        public void UnRegisterComponents()
         {
             DOTween.Kill(_viewRoot);
             _subscription?.Dispose();

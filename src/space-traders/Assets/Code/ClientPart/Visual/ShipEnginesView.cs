@@ -1,11 +1,11 @@
-﻿using Assets.Code.ClientPart.View;
+using Assets.Code.ClientPart.View;
 using System;
 using UnityEngine;
 
 
 namespace Assets.Code.ClientPart.Visual
 {
-    internal sealed class ShipEnginesView : MonoBehaviour
+    internal sealed class ShipEnginesView : MonoBehaviour, IEntityComponentRegistrar
     {
         [SerializeField] private EntityBehaviour _behaviour;
 
@@ -15,13 +15,13 @@ namespace Assets.Code.ClientPart.Visual
         private IDisposable _isWarpingSubscription;
         private IDisposable _animationSubscription;
 
-        private void Start()
+        public void RegisterComponents()
         {
             _isWarpingSubscription = _behaviour.Entity.ViewModel.IsWarping.Subscribe(OnWarpChanged, true);
             _animationSubscription = _behaviour.Entity.ViewModel.IsAnimatedMoving.Subscribe(OnAnimationChanged, true);
         }
 
-        private void OnDestroy()
+        public void UnRegisterComponents()
         {
             _isWarpingSubscription?.Dispose();
             _isWarpingSubscription = null;

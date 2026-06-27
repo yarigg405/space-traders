@@ -51,6 +51,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<SpaceSceneDataHolder>(Lifetime.Singleton).AsSelf();
+            Builder.Register<StationSceneDataHolder>(Lifetime.Singleton).AsSelf();
             Builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();

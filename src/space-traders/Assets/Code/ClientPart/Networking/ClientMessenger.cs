@@ -61,6 +61,10 @@ namespace Assets.Code.ClientPart.Networking
             {
                 StationId = response.GetInt(),
                 StationName = response.GetString(),
+                StarSystemName = response.GetString(),
+                StationType = response.GetInt(),
+                ShipModelId = response.GetString(),
+                ShipFitJson = response.GetString(),
             };
 
             return result;

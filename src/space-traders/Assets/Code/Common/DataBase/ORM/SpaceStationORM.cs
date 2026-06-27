@@ -17,6 +17,9 @@ namespace Assets.Code.Common.DataBase.ORM
         [Column("starSystemId")]
         public int StarSystemId { get; set; }
 
+        [Column("stationType")]
+        public int StationType { get; set; }
+
         [Column("prefabName")]
         public string PrefabName { get; set; }
 

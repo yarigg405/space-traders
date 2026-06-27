@@ -40,6 +40,7 @@ namespace Assets.Code.UI.Screens.StationScreens
             _view = view;
 
             view.StationNameTmp.text = data.StationName;
+            view.StarSystemNameTmp.text = data.StarSystemName;
             view.UndockButton.onClick.AddListener(ClickUndock);
 
             _cts = new();
@@ -68,6 +69,10 @@ namespace Assets.Code.UI.Screens.StationScreens
     public struct LoadStationData
     {
         public int StationId;
-        public string StationName;        
+        public string StationName;
+        public string StarSystemName;
+        public int StationType;
+        public string ShipModelId;
+        public string ShipFitJson;
     }
 }
