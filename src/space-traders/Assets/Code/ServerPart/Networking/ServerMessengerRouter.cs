@@ -27,6 +27,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly StarSystemRepository _starsSystemRepository;
         private readonly SpaceStationsRepository _spaceStationsRepository;
         private readonly CharacterShipsRepository _characterShipsRepository;
+        private readonly WalletsRepository _walletsRepository;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
@@ -39,6 +40,7 @@ namespace Assets.Code.ServerPart.Networking
             ClientSceneConnector clientSceneConnector,
             SpaceStationsRepository spaceStationsRepository,
             CharacterShipsRepository characterShipsRepository,
+            WalletsRepository walletsRepository,
             PlayerLocationManager playerLocationManager,
             PlayerCharacterManager playerCharacterManager,
             ServerDockingService dockingService)
@@ -53,6 +55,7 @@ namespace Assets.Code.ServerPart.Networking
             _clientSceneConnector = clientSceneConnector;
             _spaceStationsRepository = spaceStationsRepository;
             _characterShipsRepository = characterShipsRepository;
+            _walletsRepository = walletsRepository;
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
             _dockingService = dockingService;
@@ -216,6 +219,20 @@ namespace Assets.Code.ServerPart.Networking
 
                 _networkManager.Server.Send(response, fromClientId);
             }
+        }
+
+        internal void HandleRequestForMoney(ushort fromClientId, Message message)
+        {
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
+            var messageId = message.GetUInt();
+
+            var money = _walletsRepository.GetCharacterMoney(characterId);
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseMoney)
+                .AddUInt(messageId)
+                .AddLong(money);
+
+            _networkManager.Server.Send(response, fromClientId);
         }
 
         internal void HandleEntitiesLoading(ushort fromClientId, Message message)

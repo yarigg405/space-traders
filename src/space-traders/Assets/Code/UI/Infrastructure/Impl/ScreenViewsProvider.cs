@@ -31,6 +31,19 @@ namespace Assets.Code.UI.Infrastructure.Impl
             return _cachedScreens[type] as TView;
         }
 
+        public bool TryGetView<TView>(out TView view) where TView : UIScreenView
+        {
+            var type = typeof(TView);
+            if (ScreenIsCached(type))
+            {
+                view = _cachedScreens[type] as TView;
+                return true;
+            }
+
+            view = null;
+            return false;
+        }
+
         private bool ScreenIsCached(Type screenType)
         {
             if (!_cachedScreens.ContainsKey(screenType))

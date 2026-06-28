@@ -56,6 +56,12 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseToDock(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseMoney)]
+        private static void HandleResponseMoney(Message message)
+        {
+            _router.HandleResponseMoney(message);
+        }
+
 
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]

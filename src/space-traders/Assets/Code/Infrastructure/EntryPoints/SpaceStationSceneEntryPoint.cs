@@ -4,6 +4,7 @@ using Assets.Code.Infrastructure.Loading;
 using Assets.Code.Networking;
 using Assets.Code.UI;
 using Assets.Code.UI.Screens;
+using Assets.Code.UI.Screens.GameMain;
 using Assets.Code.UI.Screens.StationScreens;
 using Cysharp.Threading.Tasks;
 using System;
@@ -51,6 +52,7 @@ namespace Assets.Code.Infrastructure.EntryPoints
             _stationSceneDataHolder.Current = data;
             _stationVisualApplier.Apply(data.StationType);
             _uiManager.GoToScreen<StationMainScreen>(data);
+            _uiManager.OpenModal<GameMainScreen>();
             _uiManager.ClearHistory();
 
             _scenesLoader.SetSceneLoaded();

@@ -50,6 +50,12 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForDock(fromClientId, message);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForMoney)]
+        private static void HandleRequestForMoney(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestForMoney(fromClientId, message);
+        }
+
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)

@@ -24,7 +24,9 @@ namespace Assets.Code.UI.Screens
 
         void IScreen.Hide()
         {
-            var view = _viewsProvider.GetView<AwaitServerResponseView>();
+            if (!_viewsProvider.TryGetView<AwaitServerResponseView>(out var view))
+                return;
+
             _screenRoot.HideView(view);
         }
     }

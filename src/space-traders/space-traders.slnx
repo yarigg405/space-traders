@@ -1,5 +1,6 @@
 ﻿<Solution>
   <Project Path="Unity.Localization.csproj" />
+  <Project Path="Game.csproj" />
   <Project Path="Unity.ProBuilder.csproj" />
   <Project Path="Unity.ScriptableBuildPipeline.Editor.csproj" />
   <Project Path="Unity.Addressables.Editor.csproj" />
@@ -7,7 +8,6 @@
   <Project Path="Unity.Splines.csproj" />
   <Project Path="Unity.PerformanceTesting.Editor.csproj" />
   <Project Path="Unity.Localization.Editor.csproj" />
-  <Project Path="Game.csproj" />
   <Project Path="Unity.Burst.csproj" />
   <Project Path="Unity.ProBuilder.Csg.csproj" />
   <Project Path="Unity.VisualStudio.Editor.csproj" />

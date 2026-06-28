@@ -141,6 +141,16 @@ namespace Assets.Code.ClientPart.Networking
             return result;
         }
 
+        public async UniTask<long> RequestForMoney(CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForMoney);
+
+            var response = await _requestSystem.SendRequest
+                (msg, ct, TimeSpan.FromSeconds(5));
+
+            return response.GetLong();
+        }
+
         public void RequestForLoadingSceneEntities()
         {
             var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
