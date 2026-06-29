@@ -6,7 +6,7 @@ using UnityEngine;
 using VContainer;
 
 
-namespace Assets.Code.ClientPart.UI.Elements.Overview
+namespace Assets.Code.UI.SpaceScene.Overview
 {
     public sealed class OverviewPanel : MonoBehaviour
     {

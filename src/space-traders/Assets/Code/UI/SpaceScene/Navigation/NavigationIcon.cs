@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Assets.Code.ClientPart.UI.Elements.Navigation
+namespace Assets.Code.UI.SpaceScene.Navigation
 {
     public sealed class NavigationIcon : MonoBehaviour
     {

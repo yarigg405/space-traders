@@ -6,7 +6,7 @@ using UnityEngine;
 using VContainer;
 
 
-namespace Assets.Code.ClientPart.UI.Elements.Navigation
+namespace Assets.Code.UI.SpaceScene.Navigation
 {
     public sealed class NavigationIconsOverlay : MonoBehaviour
     {

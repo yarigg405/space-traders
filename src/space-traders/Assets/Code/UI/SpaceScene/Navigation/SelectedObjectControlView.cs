@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using VContainer;
 
 
-namespace Assets.Code.ClientPart.UI.Elements
+namespace Assets.Code.UI.SpaceScene.Navigation
 {
     public sealed class SelectedObjectControlView : MonoBehaviour
     {

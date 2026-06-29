@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Assets.Code.ClientPart.UI.Elements.Overview
+namespace Assets.Code.UI.SpaceScene.Overview
 {
     public sealed class OverviewRow : MonoBehaviour
     {
