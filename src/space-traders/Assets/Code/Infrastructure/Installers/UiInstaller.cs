@@ -8,6 +8,7 @@ using Assets.Code.UI.Screens.GameSceneScreens.GameSceneMain;
 using Assets.Code.UI.Screens.MenuScene;
 using Assets.Code.UI.Screens.MessageBox;
 using Assets.Code.UI.Screens.StationScreens;
+using Assets.Code.UI.Screens.TradingMain;
 using UnityEngine;
 using VContainer;
 using Assets.Code.UI.Screens.CurrentShipInfo;
@@ -63,6 +64,9 @@ namespace Assets.Code.Infrastructure.Installers
         {
             Builder.Register<RequestDockPopup>(Lifetime.Singleton);
             Builder.Register<RequestDockPopupPresenter>(Lifetime.Transient);
+
+            Builder.Register<TradingMainPopup>(Lifetime.Singleton);
+            Builder.Register<TradingMainPresenter>(Lifetime.Transient);
 
             Builder.Register<AwaitServerResponsePopup>(Lifetime.Singleton);
 

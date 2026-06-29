@@ -1,5 +1,6 @@
 using Assets.Code.UI.Infrastructure.Interfaces;
 using Assets.Code.UI.Screens.CurrentShipInfo;
+using Assets.Code.UI.Screens.TradingMain;
 using Assets.Code.UI.Screens.Wallet;
 
 
@@ -40,7 +41,7 @@ namespace Assets.Code.UI.Screens.GameMain
 
         private void OpenTradeScreen()
         {
-
+            _uiManager.OpenModal<TradingMainPopup>();
         }
     }
 }
