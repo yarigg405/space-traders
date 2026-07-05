@@ -6,6 +6,7 @@ using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.Common.StaticData;
 using Assets.Code.Common.Time;
+using Assets.Code.Common.TradingSystem;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
 using Assets.Code.Infrastructure.Loading;
@@ -26,6 +27,7 @@ namespace Assets.Code.Infrastructure.Installers
         [SerializeField] private ConfigsStorage _configsStorage;
         [SerializeField] private PhysicsShapesStorage _shapesStorage;
         [SerializeField] private ItemsCatalogSO _itemsCatalog;
+        [SerializeField] private TradeItemsCategoryConfig _categoriesConfig;
 
         protected override void Install()
         {
@@ -62,6 +64,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.RegisterInstance(_configsStorage);
             Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();
             Builder.RegisterInstance(_itemsCatalog).AsImplementedInterfaces();
+            Builder.RegisterInstance(_categoriesConfig);
         }
 
         private void BindNetworking()

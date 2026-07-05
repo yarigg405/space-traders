@@ -87,6 +87,102 @@ MonoBehaviour:
     m_Key: error-server-already-created
     m_Metadata:
       m_Items: []
+  - m_Id: 105479265036787712
+    m_Key: trade-goods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730752
+    m_Key: industrial-goods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730753
+    m_Key: drugs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730754
+    m_Key: consumer-goods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730755
+    m_Key: ships
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730756
+    m_Key: frigates
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925056
+    m_Key: cruisers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925057
+    m_Key: industrial-ships
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925058
+    m_Key: electronic-parts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925059
+    m_Key: garbage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925060
+    m_Key: hydrogen-batteries
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925061
+    m_Key: nanocontrollers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925062
+    m_Key: carbon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925063
+    m_Key: standart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925064
+    m_Key: advanced
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925065
+    m_Key: medicines
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925066
+    m_Key: wheat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925067
+    m_Key: dairy-products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925068
+    m_Key: frozen-food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925069
+    m_Key: canned-food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925070
+    m_Key: blue-pill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925071
+    m_Key: cocaine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925072
+    m_Key: metamphetamine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105484335509921792
+    m_Key: TestShip1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
