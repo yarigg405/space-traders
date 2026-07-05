@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System;
 using System.Linq;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ namespace Assets.Code.Common.Inventory
             _allComponentsTypes = assembly.GetTypes()
                 .Where(t => t != baseType && baseType.IsAssignableFrom(t)).ToArray();
 
-            _options = _allComponentsTypes.Select(x=>x.Name).ToArray();
+            _options = _allComponentsTypes.Select(x => x.Name).ToArray();
         }
 
         public override void OnInspectorGUI()
@@ -39,6 +38,7 @@ namespace Assets.Code.Common.Inventory
                 var component = Convert.ChangeType(Activator.CreateInstance(type), type);
 
                 item.AddComponent(component);
+                EditorUtility.SetDirty(item);
             }
         }
     }
