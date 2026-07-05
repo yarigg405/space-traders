@@ -13,9 +13,29 @@ MonoBehaviour:
   m_Name: ItemsCatalog
   m_EditorClassIdentifier: Game::Assets.Code.Common.StaticData.ItemsCatalogSO
   Items:
-  - key: test-item1
-    value: {fileID: 11400000, guid: 6e72adb9b1ca3d444888f5fd71452133, type: 2}
-  - key: test-item
-    value: {fileID: 11400000, guid: 6cae7d81e03bf3f42b88d3823ac65ca6, type: 2}
   - key: TestShip1
     value: {fileID: 11400000, guid: 883aec311a2d19f45b56a1824f31fece, type: 2}
+  - key: blue-pill
+    value: {fileID: 11400000, guid: 8b099262bb52c4f409b136046575f01c, type: 2}
+  - key: canned-food
+    value: {fileID: 11400000, guid: 63c195e729a6f594ba874d56b909caa4, type: 2}
+  - key: carbon
+    value: {fileID: 11400000, guid: 435a51ea3de678b4185a90b578edfd75, type: 2}
+  - key: dairy-products
+    value: {fileID: 11400000, guid: 7bc3dc609f975f946b32c2fb5d5a5cb2, type: 2}
+  - key: electronic-parts
+    value: {fileID: 11400000, guid: 6e72adb9b1ca3d444888f5fd71452133, type: 2}
+  - key: frozen-food
+    value: {fileID: 11400000, guid: 64cc7603fc8b42f43832571ad9b45fd8, type: 2}
+  - key: garbage
+    value: {fileID: 11400000, guid: 85987481c3bc80c429e6981c00467241, type: 2}
+  - key: hydrogen-batteries
+    value: {fileID: 11400000, guid: efbca8f25b6dc834aadd4d641559023e, type: 2}
+  - key: medicines
+    value: {fileID: 11400000, guid: 50a4b544f7d5b2c48bd3861a8fed0274, type: 2}
+  - key: metamphetamine
+    value: {fileID: 11400000, guid: 05e73cd5925ae9e4faf89ab0fda6c106, type: 2}
+  - key: nanocontrollers
+    value: {fileID: 11400000, guid: e8417586a396b024c81054fca74a51b1, type: 2}
+  - key: wheat
+    value: {fileID: 11400000, guid: 88c2cdf0df8beb64883b5bfef5f16154, type: 2}

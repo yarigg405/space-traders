@@ -10,14 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44f2fb69b5f3ed4db54caf2211121d3, type: 3}
-  m_Name: ItemSO
+  m_Name: cocaine
   m_EditorClassIdentifier: Game::Assets.Code.Common.Inventory.ItemSO
-  <Id>k__BackingField: test-item
-  <Icon>k__BackingField: {fileID: 21300000, guid: 90df3fc288f95d1459f61e799750cf28, type: 3}
+  <Id>k__BackingField: blue-pill
+  <Icon>k__BackingField: {fileID: 21300000, guid: 48a38997505ead64baf505703aa1ec12, type: 3}
   <Mass>k__BackingField: 1
-  <Volume>k__BackingField: 1
+  <Volume>k__BackingField: 0.5
   <Components>k__BackingField:
-    _components: []
+    _components:
+    - rid: 2736341515462508658
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2736341515462508658
+      type: {class: TradeItemComponent, ns: Assets.Code.Common.Inventory.Components, asm: Game}
+      data:
+        _type: TradeItemComponent
+        <CategoryId>k__BackingField: trade-goods.drugs

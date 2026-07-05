@@ -41,5 +41,10 @@ namespace Assets.Code.Common.StaticData
         {
             return Items[id];
         }
+
+        IEnumerable<ItemSO> IItemsCatalog.GetAllItems()
+        {
+            return Items.Values;
+        }
     }
 }
