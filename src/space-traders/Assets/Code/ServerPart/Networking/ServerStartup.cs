@@ -55,6 +55,8 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<CharacterShipsRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<WalletsRepository>(Lifetime.Singleton).AsSelf();
                 builder.Register<ItemStacksRepository>(Lifetime.Singleton).AsSelf();
+                builder.Register<BuyOrdersRepository>(Lifetime.Singleton).AsSelf();
+                builder.Register<SellOrdersRepository>(Lifetime.Singleton).AsSelf();
 
                 builder.Register<CharactersCreatingService>(Lifetime.Singleton).AsSelf();
             });

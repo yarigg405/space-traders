@@ -19,6 +19,9 @@ namespace Assets.Code.Common.DataBase
             db.CreateTable<WalletORM>();
             db.CreateTable<ItemStackORM>();
 
+            db.CreateTable<BuyOrderORM>();
+            db.CreateTable<SellOrderORM>();
+
             db.CreateTable<StarSystemORM>();
             db.CreateTable<PlanetORM>();
             db.CreateTable<SpaceStationORM>();
