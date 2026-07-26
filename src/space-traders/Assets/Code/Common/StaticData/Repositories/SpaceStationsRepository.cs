@@ -21,6 +21,17 @@ namespace Assets.Code.Common.StaticData.Repositories
                 starSystemName);
         }
 
+        internal IReadOnlyList<SpaceStationORM> GetAll()
+        {
+            return _dataBase.Query<SpaceStationORM>("SELECT * FROM SpaceStations");
+        }
+
+        internal IReadOnlyList<SpaceStationORM> GetByStarSystemId(int starSystemId)
+        {
+            return _dataBase.Query<SpaceStationORM>(
+                "SELECT * FROM SpaceStations WHERE starSystemId = ?", starSystemId);
+        }
+
         internal SpaceStationORM GetById(int stationId)
         {
             return _dataBase.QuerySingle<SpaceStationORM>(

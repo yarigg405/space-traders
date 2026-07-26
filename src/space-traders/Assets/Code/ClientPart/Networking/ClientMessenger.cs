@@ -70,6 +70,57 @@ namespace Assets.Code.ClientPart.Networking
             return result;
         }
 
+        public async UniTask<StationTradeData> RequestForStationTradeData(int stationId, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForStationTradeData)
+                .AddInt(stationId);
+
+            var response = await _requestSystem.SendRequest
+                (msg, ct, TimeSpan.FromSeconds(5));
+
+            var result = new StationTradeData
+            {
+                CurrentStationId = response.GetInt(),
+            };
+
+            var stationCount = response.GetInt();
+            result.Stations = new List<StationOrdersData>(stationCount);
+
+            for (int i = 0; i < stationCount; i++)
+            {
+                var station = new StationOrdersData
+                {
+                    StationId = response.GetInt(),
+                    StationName = response.GetString(),
+                    BuyOrders = ReadOrders(response),
+                    SellOrders = ReadOrders(response),
+                };
+
+                result.Stations.Add(station);
+            }
+
+            return result;
+        }
+
+        private static List<TradeOrderData> ReadOrders(Message response)
+        {
+            var count = response.GetInt();
+            var orders = new List<TradeOrderData>(count);
+
+            for (int i = 0; i < count; i++)
+            {
+                orders.Add(new TradeOrderData
+                {
+                    ItemId = response.GetString(),
+                    Price = response.GetLong(),
+                    Quantity = response.GetInt(),
+                    ExpiresAt = response.GetLong(),
+                });
+            }
+
+            return orders;
+        }
+
         public async UniTask<IEnumerable<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestGetCharacters)

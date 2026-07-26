@@ -62,6 +62,12 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseMoney(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseStationTradeData)]
+        private static void HandleResponseStationTradeData(Message message)
+        {
+            _router.HandleResponseStationTradeData(message);
+        }
+
 
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]

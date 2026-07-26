@@ -10,6 +10,7 @@
         ResponseToUndock = 7,
         ResponseToDock = 8,
         ResponseMoney = 9,
+        ResponseStationTradeData = 10,
 
         CreateEntity = 50,
         DestroyEntity = 51,

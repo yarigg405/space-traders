@@ -1,4 +1,5 @@
 using Assets.Code.Common.Inventory;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -11,13 +12,20 @@ namespace Assets.Code.UI.Screens.TradingMain
     {
         private const string LocalizationTable = "LocalizationTable";
 
+        [SerializeField] private Button _selectButton;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _label;
 
         private LocalizedString _labelString;
 
-        public void Bind(ItemSO item)
+        private ItemSO _item;
+        private Action<ItemSO> _onSelected;
+
+        public void Bind(ItemSO item, Action<ItemSO> onSelected)
         {
+            _item = item;
+            _onSelected = onSelected;
+
             if (_icon)
             {
                 _icon.sprite = item.Icon;
@@ -25,6 +33,17 @@ namespace Assets.Code.UI.Screens.TradingMain
             }
 
             BindLabel(item.Id);
+
+            if (_selectButton)
+            {
+                _selectButton.onClick.RemoveListener(OnSelectClicked);
+                _selectButton.onClick.AddListener(OnSelectClicked);
+            }
+        }
+
+        private void OnSelectClicked()
+        {
+            _onSelected?.Invoke(_item);
         }
 
         private void BindLabel(string entryKey)
@@ -58,6 +77,9 @@ namespace Assets.Code.UI.Screens.TradingMain
         private void OnDestroy()
         {
             UnbindLabel();
+
+            if (_selectButton)
+                _selectButton.onClick.RemoveListener(OnSelectClicked);
         }
     }
 }

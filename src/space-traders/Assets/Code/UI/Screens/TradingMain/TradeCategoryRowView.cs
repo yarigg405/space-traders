@@ -43,7 +43,8 @@ namespace Assets.Code.UI.Screens.TradingMain
             BuildChildCategories();
             BuildItems();
 
-            _hasChildren = _childCategories.Count > 0 || _itemRows.Count > 0;
+            HasContent = ComputeHasContent();
+            _hasChildren = HasContent;
 
             if (_expandArrow)
                 _expandArrow.gameObject.SetActive(_hasChildren);
@@ -51,7 +52,11 @@ namespace Assets.Code.UI.Screens.TradingMain
             SetExpanded(false);
 
             _headerButton.onClick.AddListener(OnHeaderClicked);
+
+            gameObject.SetActive(HasContent);
         }
+
+        public bool HasContent { get; private set; }
 
         private void BuildChildCategories()
         {
@@ -73,9 +78,23 @@ namespace Assets.Code.UI.Screens.TradingMain
             foreach (var item in items)
             {
                 var row = Instantiate(_context.ItemRowPrefab, _childrenRoot);
-                row.Bind(item);
+                row.Bind(item, _context.OnItemSelected);
                 _itemRows.Add(row);
             }
+        }
+
+        private bool ComputeHasContent()
+        {
+            if (_itemRows.Count > 0)
+                return true;
+
+            foreach (var child in _childCategories)
+            {
+                if (child.HasContent)
+                    return true;
+            }
+
+            return false;
         }
 
         private void OnHeaderClicked()

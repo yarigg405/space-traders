@@ -56,6 +56,12 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForMoney(fromClientId, message);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForStationTradeData)]
+        private static void HandleRequestForStationTradeData(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestForStationTradeData(fromClientId, message);
+        }
+
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)

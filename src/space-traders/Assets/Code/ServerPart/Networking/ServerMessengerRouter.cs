@@ -28,6 +28,8 @@ namespace Assets.Code.ServerPart.Networking
         private readonly SpaceStationsRepository _spaceStationsRepository;
         private readonly CharacterShipsRepository _characterShipsRepository;
         private readonly WalletsRepository _walletsRepository;
+        private readonly BuyOrdersRepository _buyOrdersRepository;
+        private readonly SellOrdersRepository _sellOrdersRepository;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
@@ -41,6 +43,8 @@ namespace Assets.Code.ServerPart.Networking
             SpaceStationsRepository spaceStationsRepository,
             CharacterShipsRepository characterShipsRepository,
             WalletsRepository walletsRepository,
+            BuyOrdersRepository buyOrdersRepository,
+            SellOrdersRepository sellOrdersRepository,
             PlayerLocationManager playerLocationManager,
             PlayerCharacterManager playerCharacterManager,
             ServerDockingService dockingService)
@@ -56,6 +60,8 @@ namespace Assets.Code.ServerPart.Networking
             _spaceStationsRepository = spaceStationsRepository;
             _characterShipsRepository = characterShipsRepository;
             _walletsRepository = walletsRepository;
+            _buyOrdersRepository = buyOrdersRepository;
+            _sellOrdersRepository = sellOrdersRepository;
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
             _dockingService = dockingService;
@@ -231,6 +237,48 @@ namespace Assets.Code.ServerPart.Networking
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseMoney)
                 .AddUInt(messageId)
                 .AddLong(money);
+
+            _networkManager.Server.Send(response, fromClientId);
+        }
+
+        internal void HandleRequestForStationTradeData(ushort fromClientId, Message message)
+        {
+            var stationId = message.GetInt();
+            var messageId = message.GetUInt();
+
+            var currentStation = _spaceStationsRepository.GetById(stationId);
+            var stations = _spaceStationsRepository.GetByStarSystemId(currentStation.StarSystemId);
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseStationTradeData)
+                .AddUInt(messageId)
+                .AddInt(stationId)
+                .AddInt(stations.Count);
+
+            foreach (var station in stations)
+            {
+                response.AddInt(station.Id)
+                        .AddString(station.Name);
+
+                var buyOrders = _buyOrdersRepository.GetByStation(station.Id);
+                response.AddInt(buyOrders.Count);
+                foreach (var order in buyOrders)
+                {
+                    response.AddString(order.ItemId)
+                            .AddLong(order.Price)
+                            .AddInt(order.Quantity)
+                            .AddLong(order.ExpiresAt);
+                }
+
+                var sellOrders = _sellOrdersRepository.GetByStation(station.Id);
+                response.AddInt(sellOrders.Count);
+                foreach (var order in sellOrders)
+                {
+                    response.AddString(order.ItemId)
+                            .AddLong(order.Price)
+                            .AddInt(order.Quantity)
+                            .AddLong(order.ExpiresAt);
+                }
+            }
 
             _networkManager.Server.Send(response, fromClientId);
         }

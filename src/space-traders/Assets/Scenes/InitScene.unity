@@ -621,6 +621,7 @@ MonoBehaviour:
   _shapesStorage: {fileID: 11400000, guid: c88f0b2434f7b3d4eb6f5a67ee1e2b43, type: 2}
   _itemsCatalog: {fileID: 11400000, guid: 3ca4bdf06dadced41960ad477627101e, type: 2}
   _categoriesConfig: {fileID: 11400000, guid: 3d005381d12eeb6498f62dc953976802, type: 2}
+  _ordersGenerationConfig: {fileID: 11400000, guid: 50d1fcaef5ddc2b40890ec07be67c51a, type: 2}
 --- !u!4 &1891047627
 Transform:
   m_ObjectHideFlags: 0

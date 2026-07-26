@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d44f2fb69b5f3ed4db54caf2211121d3, type: 3}
   m_Name: cocaine
   m_EditorClassIdentifier: Game::Assets.Code.Common.Inventory.ItemSO
-  <Id>k__BackingField: blue-pill
+  <Id>k__BackingField: cocaine
   <Icon>k__BackingField: {fileID: 21300000, guid: 48a38997505ead64baf505703aa1ec12, type: 3}
   <Mass>k__BackingField: 1
   <Volume>k__BackingField: 0.5

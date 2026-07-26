@@ -11,6 +11,7 @@
         RequestForUndock = 6,
         RequestForDock = 7,
         RequestForMoney = 8,
+        RequestForStationTradeData = 9,
 
         SendTargetRotation = 31,
         SendSpeedModifier = 32,

@@ -183,6 +183,14 @@ MonoBehaviour:
     m_Key: TestShip1
     m_Metadata:
       m_Items: []
+  - m_Id: 111401725397557248
+    m_Key: TradeScope.CurrentStation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111401725439500288
+    m_Key: TradeScope.StarSystem
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

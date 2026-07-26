@@ -8,6 +8,7 @@ using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
+using Assets.Code.ServerPart.Gameplay.Features.Trading;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory;
 using Assets.Code.ServerPart.Worlds;
 using VContainer;
@@ -59,7 +60,11 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<SellOrdersRepository>(Lifetime.Singleton).AsSelf();
 
                 builder.Register<CharactersCreatingService>(Lifetime.Singleton).AsSelf();
+
+                builder.Register<StationOrdersGenerator>(Lifetime.Singleton).AsSelf();
             });
+
+            _serverScope.Container.Resolve<StationOrdersGenerator>().GenerateForAllStations();
         }
 
         public void StopServer()
