@@ -79,8 +79,8 @@ MonoBehaviour:
     m_Key: error-password
     m_Metadata:
       m_Items: []
-  - m_Id: 83454847057367040
-    m_Key: undock
+  - m_Id: 113103626001682432
+    m_Key: "\u0421\u0422\u042B\u041A\u041E\u0412\u041A\u0410"
     m_Metadata:
       m_Items: []
   - m_Id: 101468646516187136
@@ -189,6 +189,26 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 111401725439500288
     m_Key: TradeScope.StarSystem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625472
+    m_Key: massVal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625473
+    m_Key: volumeVal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625474
+    m_Key: sellers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626047819776
+    m_Key: buyers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113177580234051584
+    m_Key: trade-system
     m_Metadata:
       m_Items: []
   m_Metadata:

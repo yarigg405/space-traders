@@ -49,7 +49,7 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_expandArrow)
                 _expandArrow.gameObject.SetActive(_hasChildren);
 
-            SetExpanded(false);
+            SetExpanded(_context.ExpandByDefault);
 
             _headerButton.onClick.AddListener(OnHeaderClicked);
 

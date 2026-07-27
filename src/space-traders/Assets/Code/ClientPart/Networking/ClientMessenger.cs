@@ -23,7 +23,6 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager = networkManager;
         }
 
-
         public async UniTask<EnterGameResult> RequestForEnterTheGame(int selectedCharacterId, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestEnterTheGame)

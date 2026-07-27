@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
+using Yrr.UI.Elements;
 using Yrr.Utils;
 
 
@@ -19,14 +20,18 @@ namespace Assets.Code.UI.Screens.TradingMain
         [SerializeField] private GameObject _content;
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _nameLabel;
+        [SerializeField] private LocalizeableTmp _massTmp;
+        [SerializeField] private LocalizeableTmp _volumeTmp;
 
         [Header("Buy orders")]
-        [SerializeField] private RectTransform _buyOrdersRoot;
+        [SerializeField] private Transform _buyOrdersRoot;
         [SerializeField] private GameObject _buyOrdersEmpty;
+        [SerializeField] private GameObject _buyOrdersFilled;
 
         [Header("Sell orders")]
         [SerializeField] private RectTransform _sellOrdersRoot;
         [SerializeField] private GameObject _sellOrdersEmpty;
+        [SerializeField] private GameObject _sellOrdersFilled;
 
         [Header("Prefabs")]
         [SerializeField] private TradeOrderRowView _orderRowPrefab;
@@ -59,6 +64,8 @@ namespace Assets.Code.UI.Screens.TradingMain
             }
 
             BindName(item.Id);
+            _massTmp.BindText("massVal", item.Mass);
+            _volumeTmp.BindText("volumeVal", item.Volume);
 
             FillOrders(_buyOrdersRoot, _buyOrdersEmpty, buyOrders, OnBuyOrderSelected);
             FillOrders(_sellOrdersRoot, _sellOrdersEmpty, sellOrders, OnSellOrderSelected);
@@ -87,13 +94,15 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OpenBuyOrderPopup(ItemSO item, TradeOrderInfo order)
         {
+            Debug.Log("OpenBuyOrder: " + item.Id);
         }
 
         private void OpenSellOrderPopup(ItemSO item, TradeOrderInfo order)
         {
+            Debug.Log("OpenSellOrder: " + item.Id);
         }
 
-        private void FillOrders(RectTransform root, GameObject emptyState,
+        private void FillOrders(Transform root, GameObject emptyState,
             IReadOnlyList<TradeOrderInfo> orders, Action<TradeOrderInfo> onSelected)
         {
             if (root == null)
@@ -115,7 +124,7 @@ namespace Assets.Code.UI.Screens.TradingMain
             }
         }
 
-        private void ClearOrders(RectTransform root, GameObject emptyState)
+        private void ClearOrders(Transform root, GameObject emptyState)
         {
             if (root != null)
                 root.ClearChildren();

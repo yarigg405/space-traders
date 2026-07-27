@@ -12,19 +12,22 @@ namespace Assets.Code.UI.Screens.TradingMain
         public IReadOnlyDictionary<string, List<ItemSO>> ItemsByCategory { get; }
         public Action OnHierarchyChanged { get; }
         public Action<ItemSO> OnItemSelected { get; }
+        public bool ExpandByDefault { get; }
 
         public TradeCategoryBuildContext(
             TradeCategoryRowView categoryRowPrefab,
             TradeItemRowView itemRowPrefab,
             IReadOnlyDictionary<string, List<ItemSO>> itemsByCategory,
             Action onHierarchyChanged,
-            Action<ItemSO> onItemSelected)
+            Action<ItemSO> onItemSelected,
+            bool expandByDefault)
         {
             CategoryRowPrefab = categoryRowPrefab;
             ItemRowPrefab = itemRowPrefab;
             ItemsByCategory = itemsByCategory;
             OnHierarchyChanged = onHierarchyChanged;
             OnItemSelected = onItemSelected;
+            ExpandByDefault = expandByDefault;
         }
     }
 }

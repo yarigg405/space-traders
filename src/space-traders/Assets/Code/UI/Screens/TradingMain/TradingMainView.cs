@@ -7,9 +7,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using Yrr.Utils;
-
+ 
 
 namespace Assets.Code.UI.Screens.TradingMain
 {
@@ -33,11 +34,13 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private readonly List<TradeCategoryRowView> _rootRows = new();
         private readonly Dictionary<string, ItemOrders> _ordersByItem = new();
+        private readonly Dictionary<string, string> _localizedNames = new();
         private readonly List<ScopeLabel> _scopeLabels = new();
 
         private IReadOnlyList<TradeItemCategory> _categories;
         private List<ItemSO> _items = new();
         private StationTradeData _tradeData;
+        private ItemSO _selectedItem;
         private bool _listenersWired;
 
         private TradeScope Scope
@@ -63,14 +66,20 @@ namespace Assets.Code.UI.Screens.TradingMain
                 if (item != null)
                     _items.Add(item);
 
+            _selectedItem = null;
+
             WireListeners();
-            Rebuild();
+            RefreshLocalizedNames();
+            BuildOrderLookup();
+            RebuildTree();
+            _detailView?.Clear();
         }
 
         public void SetTradeData(StationTradeData tradeData)
         {
             _tradeData = tradeData;
-            Rebuild();
+            BuildOrderLookup();
+            RefreshSelectedItem();
         }
 
         private void WireListeners()
@@ -87,7 +96,34 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_searchInput)
                 _searchInput.onValueChanged.AddListener(OnSearchChanged);
 
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
             _listenersWired = true;
+        }
+
+        private void RefreshLocalizedNames()
+        {
+            _localizedNames.Clear();
+
+            foreach (var item in _items)
+            {
+                if (item == null || string.IsNullOrEmpty(item.Id))
+                    continue;
+
+                var localized = new LocalizedString
+                {
+                    TableReference = LocalizationTable,
+                    TableEntryReference = item.Id
+                };
+
+                _localizedNames[item.Id] = localized.GetLocalizedString();
+            }
+        }
+
+        private void OnLocaleChanged(Locale locale)
+        {
+            RefreshLocalizedNames();
+            RebuildTree();
         }
 
         private void PopulateScopeOptions()
@@ -115,23 +151,25 @@ namespace Assets.Code.UI.Screens.TradingMain
             _scopeLabels.Clear();
         }
 
-        private void OnScopeChanged(int _) => Rebuild();
+        private void OnScopeChanged(int _)
+        {
+            BuildOrderLookup();
+            RefreshSelectedItem();
+        }
 
-        private void OnSearchChanged(string _) => Rebuild();
+        private void OnSearchChanged(string _) => RebuildTree();
 
-        private void Rebuild()
+        private void RebuildTree()
         {
             if (_categories == null)
                 return;
 
-            BuildOrderLookup();
-
-            _detailView?.Clear();
             ClearCategories();
 
             var itemsByCategory = GroupItemsByCategory(_items);
+            var expandByDefault = !string.IsNullOrWhiteSpace(Search);
             var context = new TradeCategoryBuildContext(
-                _categoryRowPrefab, _itemRowPrefab, itemsByCategory, RebuildLayout, OnItemSelected);
+                _categoryRowPrefab, _itemRowPrefab, itemsByCategory, RebuildLayout, OnItemSelected, expandByDefault);
 
             foreach (var category in _categories)
             {
@@ -148,6 +186,23 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (item == null)
                 return;
 
+            _selectedItem = item;
+            ShowItem(item);
+        }
+
+        private void RefreshSelectedItem()
+        {
+            if (_selectedItem == null)
+            {
+                _detailView?.Clear();
+                return;
+            }
+
+            ShowItem(_selectedItem);
+        }
+
+        private void ShowItem(ItemSO item)
+        {
             if (_ordersByItem.TryGetValue(item.Id, out var orders))
                 _detailView?.Show(item, orders.Buy, orders.Sell);
             else
@@ -205,9 +260,6 @@ namespace Assets.Code.UI.Screens.TradingMain
                 if (item == null)
                     continue;
 
-                if (!_ordersByItem.ContainsKey(item.Id))
-                    continue;
-
                 if (!MatchesSearch(item, search))
                     continue;
 
@@ -229,13 +281,24 @@ namespace Assets.Code.UI.Screens.TradingMain
             return map;
         }
 
-        private static bool MatchesSearch(ItemSO item, string search)
+        private bool MatchesSearch(ItemSO item, string search)
         {
             if (string.IsNullOrWhiteSpace(search))
                 return true;
 
-            return item.Id != null &&
-                   item.Id.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0;
+            var name = GetLocalizedName(item);
+            return name != null &&
+                   name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private string GetLocalizedName(ItemSO item)
+        {
+            if (item == null || item.Id == null)
+                return null;
+
+            return _localizedNames.TryGetValue(item.Id, out var name) && !string.IsNullOrEmpty(name)
+                ? name
+                : item.Id;
         }
 
         private void RebuildLayout()
@@ -256,6 +319,8 @@ namespace Assets.Code.UI.Screens.TradingMain
 
             if (_searchInput)
                 _searchInput.onValueChanged.RemoveListener(OnSearchChanged);
+
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
 
             DisposeScopeLabels();
         }

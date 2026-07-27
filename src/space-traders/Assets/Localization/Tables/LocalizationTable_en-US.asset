@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 72211444877463559
-    m_Localized: "\u041E\u0422\u0421\u0422\u042B\u041A\u041E\u0412\u0410\u0422\u042C\u0421\u042F"
+    m_Localized: DOCK
     m_Metadata:
       m_Items: []
   - m_Id: 72211444877463560
@@ -82,10 +82,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 77691252252053504
     m_Localized: Wrong password
-    m_Metadata:
-      m_Items: []
-  - m_Id: 83454847057367040
-    m_Localized: UNDOCK
     m_Metadata:
       m_Items: []
   - m_Id: 101468646516187136
@@ -194,6 +190,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 111401725439500288
     m_Localized: System
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626001682432
+    m_Localized: UNDOCK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625472
+    m_Localized: '{0} kg'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625473
+    m_Localized: '{0} m3'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625474
+    m_Localized: Sellers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626047819776
+    m_Localized: Buyers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113177580234051584
+    m_Localized: Trade System
     m_Metadata:
       m_Items: []
   references:
