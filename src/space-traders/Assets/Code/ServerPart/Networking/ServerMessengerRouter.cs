@@ -6,6 +6,7 @@ using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Riptide;
+using System.Collections.Generic;
 using Unity.Mathematics;
 
 
@@ -246,8 +247,9 @@ namespace Assets.Code.ServerPart.Networking
             var stationId = message.GetInt();
             var messageId = message.GetUInt();
 
-            var currentStation = _spaceStationsRepository.GetById(stationId);
-            var stations = _spaceStationsRepository.GetByStarSystemId(currentStation.StarSystemId);
+            var stations = _spaceStationsRepository.GetAll();
+
+            var systemNames = new Dictionary<int, string>();
 
             var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseStationTradeData)
                 .AddUInt(messageId)
@@ -257,7 +259,11 @@ namespace Assets.Code.ServerPart.Networking
             foreach (var station in stations)
             {
                 response.AddInt(station.Id)
-                        .AddString(station.Name);
+                        .AddString(station.Name)
+                        .AddDouble(station.PositionX)
+                        .AddDouble(station.PositionY)
+                        .AddInt(station.StarSystemId)
+                        .AddString(GetStarSystemName(station.StarSystemId, systemNames));
 
                 var buyOrders = _buyOrdersRepository.GetByStation(station.Id);
                 response.AddInt(buyOrders.Count);
@@ -281,6 +287,17 @@ namespace Assets.Code.ServerPart.Networking
             }
 
             _networkManager.Server.Send(response, fromClientId);
+        }
+
+        private string GetStarSystemName(int starSystemId, Dictionary<int, string> cache)
+        {
+            if (!cache.TryGetValue(starSystemId, out var name))
+            {
+                name = _starsSystemRepository.GetById(starSystemId)?.Name ?? string.Empty;
+                cache[starSystemId] = name;
+            }
+
+            return name;
         }
 
         internal void HandleEntitiesLoading(ushort fromClientId, Message message)
