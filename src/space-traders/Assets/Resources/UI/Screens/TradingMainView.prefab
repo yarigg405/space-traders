@@ -716,8 +716,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Option A
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2b96a760fd8029449bb5985dfbd68fb8, type: 2}
-  m_sharedMaterial: {fileID: 2152292010564752829, guid: 2b96a760fd8029449bb5985dfbd68fb8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f4a1ec9053639a438738b9f54191b5e, type: 2}
+  m_sharedMaterial: {fileID: -1728384563818766799, guid: 8f4a1ec9053639a438738b9f54191b5e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -982,7 +982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4110438376426146134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4198,7 +4198,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 0

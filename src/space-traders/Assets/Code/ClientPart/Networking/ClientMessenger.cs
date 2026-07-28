@@ -91,6 +91,10 @@ namespace Assets.Code.ClientPart.Networking
                 {
                     StationId = response.GetInt(),
                     StationName = response.GetString(),
+                    PositionX = response.GetDouble(),
+                    PositionY = response.GetDouble(),
+                    StarSystemId = response.GetInt(),
+                    StarSystemName = response.GetString(),
                     BuyOrders = ReadOrders(response),
                     SellOrders = ReadOrders(response),
                 };

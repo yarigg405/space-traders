@@ -1,3 +1,5 @@
+using Assets.Code.ClientPart.Gameplay.Features.Navigation;
+using Assets.Code.Common;
 using Assets.Code.Common.Inventory;
 using Assets.Code.Common.Inventory.Components;
 using Assets.Code.Common.TradingSystem;
@@ -5,6 +7,7 @@ using Assets.Code.Networking.Data;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -35,6 +38,7 @@ namespace Assets.Code.UI.Screens.TradingMain
         private readonly List<TradeCategoryRowView> _rootRows = new();
         private readonly Dictionary<string, ItemOrders> _ordersByItem = new();
         private readonly Dictionary<string, string> _localizedNames = new();
+        private readonly Dictionary<int, string> _distanceByStation = new();
         private readonly List<ScopeLabel> _scopeLabels = new();
 
         private IReadOnlyList<TradeItemCategory> _categories;
@@ -78,6 +82,7 @@ namespace Assets.Code.UI.Screens.TradingMain
         public void SetTradeData(StationTradeData tradeData)
         {
             _tradeData = tradeData;
+            BuildDistanceCache();
             BuildOrderLookup();
             RefreshSelectedItem();
         }
@@ -209,6 +214,51 @@ namespace Assets.Code.UI.Screens.TradingMain
                 _detailView?.Show(item, Array.Empty<TradeOrderInfo>(), Array.Empty<TradeOrderInfo>());
         }
 
+        private void BuildDistanceCache()
+        {
+            _distanceByStation.Clear();
+
+            if (_tradeData.Stations == null)
+                return;
+
+            if (!TryGetStation(_tradeData.CurrentStationId, out var current))
+                return;
+
+            double2 from = new(current.PositionX, current.PositionY);
+
+            foreach (var station in _tradeData.Stations)
+            {
+                if (station.StarSystemId == current.StarSystemId)
+                {
+                    double2 to = new(station.PositionX, station.PositionY);
+                    double distance = math.distance(from, to) * GameConstants.DISTANCE_REAL_TO_UI;
+                    _distanceByStation[station.StationId] = DistanceFormat.Format(distance);
+                }
+                else
+                {
+                    _distanceByStation[station.StationId] = station.StarSystemName;
+                }
+            }
+        }
+
+        private bool TryGetStation(int stationId, out StationOrdersData station)
+        {
+            if (_tradeData.Stations != null)
+            {
+                foreach (var candidate in _tradeData.Stations)
+                {
+                    if (candidate.StationId == stationId)
+                    {
+                        station = candidate;
+                        return true;
+                    }
+                }
+            }
+
+            station = default;
+            return false;
+        }
+
         private void BuildOrderLookup()
         {
             _ordersByItem.Clear();
@@ -216,14 +266,28 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_tradeData.Stations == null)
                 return;
 
+            int currentSystemId = TryGetStation(_tradeData.CurrentStationId, out var current)
+                ? current.StarSystemId
+                : int.MinValue;
+
             foreach (var station in _tradeData.Stations)
             {
-                if (Scope == TradeScope.CurrentStation && station.StationId != _tradeData.CurrentStationId)
+                if (!IsInScope(station, currentSystemId))
                     continue;
 
                 AddOrders(station, station.SellOrders, isSell: true);
                 AddOrders(station, station.BuyOrders, isSell: false);
             }
+        }
+
+        private bool IsInScope(StationOrdersData station, int currentSystemId)
+        {
+            return Scope switch
+            {
+                TradeScope.CurrentStation => station.StationId == _tradeData.CurrentStationId,
+                TradeScope.StarSystem => station.StarSystemId == currentSystemId,
+                _ => true,
+            };
         }
 
         private void AddOrders(StationOrdersData station, List<TradeOrderData> orders, bool isSell)
@@ -242,7 +306,8 @@ namespace Assets.Code.UI.Screens.TradingMain
                     _ordersByItem.Add(order.ItemId, bucket);
                 }
 
-                var info = new TradeOrderInfo(station.StationName, order.Price, order.Quantity, order.ExpiresAt);
+                var distance = _distanceByStation.TryGetValue(station.StationId, out var d) ? d : string.Empty;
+                var info = new TradeOrderInfo(station.StationName, distance, order.Price, order.Quantity, order.ExpiresAt);
                 if (isSell)
                     bucket.Sell.Add(info);
                 else

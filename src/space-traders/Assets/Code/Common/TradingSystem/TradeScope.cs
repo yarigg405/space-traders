@@ -4,5 +4,6 @@ namespace Assets.Code.Common.TradingSystem
     {
         CurrentStation = 0,
         StarSystem = 1,
+        AllSystems = 2,
     }
 }

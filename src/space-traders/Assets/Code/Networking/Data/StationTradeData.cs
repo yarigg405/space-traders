@@ -13,6 +13,10 @@ namespace Assets.Code.Networking.Data
     {
         public int StationId;
         public string StationName;
+        public double PositionX;
+        public double PositionY;
+        public int StarSystemId;
+        public string StarSystemName;
         public List<TradeOrderData> BuyOrders;
         public List<TradeOrderData> SellOrders;
     }

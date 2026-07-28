@@ -10,6 +10,7 @@ namespace Assets.Code.UI.Screens.TradingMain
     {
         [SerializeField] private Button _selectButton;
         [SerializeField] private TextMeshProUGUI _stationLabel;
+        [SerializeField] private TextMeshProUGUI _distanceLabel;
         [SerializeField] private TextMeshProUGUI _priceLabel;
         [SerializeField] private TextMeshProUGUI _quantityLabel;
         [SerializeField] private TextMeshProUGUI _expiresLabel;
@@ -24,6 +25,9 @@ namespace Assets.Code.UI.Screens.TradingMain
 
             if (_stationLabel)
                 _stationLabel.text = order.StationName;
+
+            if (_distanceLabel)
+                _distanceLabel.text = order.Distance;
 
             if (_priceLabel)
                 _priceLabel.text = order.Price.ToString("N0");
@@ -64,13 +68,15 @@ namespace Assets.Code.UI.Screens.TradingMain
     public readonly struct TradeOrderInfo
     {
         public readonly string StationName;
+        public readonly string Distance;
         public readonly long Price;
         public readonly int Quantity;
         public readonly long ExpiresAt;
 
-        public TradeOrderInfo(string stationName, long price, int quantity, long expiresAt)
+        public TradeOrderInfo(string stationName, string distance, long price, int quantity, long expiresAt)
         {
             StationName = stationName;
+            Distance = distance;
             Price = price;
             Quantity = quantity;
             ExpiresAt = expiresAt;
