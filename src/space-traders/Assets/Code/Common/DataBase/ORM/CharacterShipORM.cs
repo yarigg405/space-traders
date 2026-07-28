@@ -29,7 +29,7 @@ namespace Assets.Code.Common.DataBase.ORM
     public enum ShipState : byte
     {
         None = 0,
-        Stored = 1,         //in hangar, innactive
+        Stored = 1,         //in hangar, inactive
         Selected = 2,
     }
 }

@@ -34,7 +34,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     var deltaAngle = AnglesUtil.GetMinAngledDelta(entity.TargetRotation, entity.CurrentRotationY);
                     if (deltaAngle < 5f)
                     {
-                        var container = new WarpDataContainer(entity.GlobalPosition, entity.WarpFinishCoordinates);                        
+                        var container = new WarpDataContainer(entity.GlobalPosition, entity.WarpFinishCoordinates);
 
                         entity.ReplaceWarpDataContainer(container);
 

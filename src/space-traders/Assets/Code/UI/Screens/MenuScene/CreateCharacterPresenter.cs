@@ -13,7 +13,7 @@ namespace Assets.Code.UI.Screens.MenuScene
     public sealed class CreateCharacterPresenter : IPresenter<CreateCharacterView>
     {
         private readonly IUIManager _uiManager;
-        private readonly AuthentificationContainer _authentification;
+        private readonly AuthenticationContainer _authentication;
         private readonly ClientMessenger _clientMessenger;
         private readonly ILifetimeCancellationToken _lcts;
 
@@ -21,11 +21,11 @@ namespace Assets.Code.UI.Screens.MenuScene
         private CreateCharacterView _view;
 
         public CreateCharacterPresenter(IUIManager uIManager,
-            AuthentificationContainer authentification, ClientMessenger clientMessenger,
+            AuthenticationContainer authentication, ClientMessenger clientMessenger,
             ILifetimeCancellationToken cts)
         {
             _uiManager = uIManager;
-            _authentification = authentification;
+            _authentication = authentication;
             _clientMessenger = clientMessenger;
             _lcts = cts;
         }
@@ -67,7 +67,7 @@ namespace Assets.Code.UI.Screens.MenuScene
                 };
 
                 var result = await _clientMessenger
-                    .RequestForCreateNewCharacter(_authentification.Login, character, token);
+                    .RequestForCreateNewCharacter(_authentication.Login, character, token);
 
                 token.ThrowIfCancellationRequested();
                 _uiManager.BackToPreviousScreen();

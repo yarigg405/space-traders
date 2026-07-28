@@ -17,23 +17,23 @@ namespace Assets.Code.ClientPart.Networking
         private readonly IStateMachine _stateMachine;
         private readonly ClientMessenger _messenger;
         private readonly IUIManager _uiManager;
-        private readonly AuthentificationContainer _authentification;
+        private readonly AuthenticationContainer _authentication;
 
         private CancellationTokenSource _cts;
 
         internal GameEnterManager(IStateMachine stateMachine,
-           ClientMessenger messenger, IUIManager uiManager, 
-           AuthentificationContainer authentification)
+           ClientMessenger messenger, IUIManager uiManager,
+           AuthenticationContainer authentication)
         {
             _stateMachine = stateMachine;
             _messenger = messenger;
             _uiManager = uiManager;
-            _authentification = authentification;
+            _authentication = authentication;
         }
 
         internal void EnterGame(int characterId)
         {
-            _authentification.SelectedCharacterId = characterId;
+            _authentication.SelectedCharacterId = characterId;
             _cts = new();
             EnterAsync(characterId).Forget();
         }
@@ -44,7 +44,7 @@ namespace Assets.Code.ClientPart.Networking
 
             try
             {
-                var enterResult = await _messenger.RequestForEnterTheGame(_authentification.SelectedCharacterId, token);
+                var enterResult = await _messenger.RequestForEnterTheGame(_authentication.SelectedCharacterId, token);
                 token.ThrowIfCancellationRequested();
                 HandleSceneEnter(enterResult);
             }

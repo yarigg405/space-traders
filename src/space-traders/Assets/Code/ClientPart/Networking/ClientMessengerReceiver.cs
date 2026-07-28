@@ -69,7 +69,6 @@ namespace Assets.Code.ClientPart.Networking
         }
 
 
-
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]
         private static void HandleCreateEntity(Message message)
         {

@@ -19,7 +19,7 @@ namespace Assets.Code.Infrastructure.EntryPoints
         private readonly IUIManager _uiManager;
         private readonly IScenesLoader _scenesLoader;
         private readonly ClientMessenger _messenger;
-        private readonly AuthentificationContainer _authentification;
+        private readonly AuthenticationContainer _authentication;
         private readonly StationSceneDataHolder _stationSceneDataHolder;
         private readonly StationVisualApplier _stationVisualApplier;
 
@@ -27,14 +27,14 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
         public SpaceStationSceneEntryPoint(IUIManager uiManager,
             IScenesLoader scenesLoader, ClientMessenger messenger,
-            AuthentificationContainer authentification,
+            AuthenticationContainer authentication,
             StationSceneDataHolder stationSceneDataHolder,
             StationVisualApplier stationVisualApplier)
         {
             _uiManager = uiManager;
             _scenesLoader = scenesLoader;
             _messenger = messenger;
-            _authentification = authentification;
+            _authentication = authentication;
             _stationSceneDataHolder = stationSceneDataHolder;
             _stationVisualApplier = stationVisualApplier;
         }
@@ -46,7 +46,7 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
         private async UniTask LoadSceneData(CancellationToken ct)
         {
-            var data = await _messenger.RequestForLoadStation(_authentification.SelectedCharacterId, ct);
+            var data = await _messenger.RequestForLoadStation(_authentication.SelectedCharacterId, ct);
             ct.ThrowIfCancellationRequested();
 
             _stationSceneDataHolder.Current = data;

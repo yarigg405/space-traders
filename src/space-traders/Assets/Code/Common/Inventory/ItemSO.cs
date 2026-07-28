@@ -29,15 +29,6 @@ namespace Assets.Code.Common.Inventory
         internal static ItemFlags ToFlags(this ItemComponents components)
         {
             var flags = 0;
-            //if (components.HasComponent<StackInventoryComponent>())
-            //    flags += (int)ItemFlags.STACKABLE;
-
-            //if (components.HasComponent<EquipComponent>() ||
-            //    components.HasComponent<WeaponComponent>())
-            //    flags += (int)ItemFlags.EQUIPPABLE;
-
-            //if (components.HasComponent<EffectComponent>())
-            //    flags += (int)ItemFlags.EFFECTIBLE;
             return (ItemFlags)flags;
         }
     }

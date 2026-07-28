@@ -66,7 +66,6 @@ namespace Assets.Code.ClientPart.Networking
         }
 
 
-
         internal void HandleCreateEntity(Message message)
         {
             var json = message.GetString();

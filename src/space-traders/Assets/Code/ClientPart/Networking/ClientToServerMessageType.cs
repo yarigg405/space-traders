@@ -6,7 +6,7 @@
         RequestCreateCharacter = 2,
 
         RequestEnterTheGame = 3,
-        RequestForSceneEntities = 4,        
+        RequestForSceneEntities = 4,
         RequestForStationSceneData = 5,
         RequestForUndock = 6,
         RequestForDock = 7,

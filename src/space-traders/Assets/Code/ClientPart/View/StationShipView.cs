@@ -17,7 +17,7 @@ namespace Assets.Code.ClientPart.View
         private GameObject _currentModel;
 
         [Inject]
-        public void Construct(IShipViewFactory shipViewFactory, 
+        public void Construct(IShipViewFactory shipViewFactory,
             StationSceneDataHolder dataHolder, ICameraService cameraService)
         {
             _shipViewFactory = shipViewFactory;

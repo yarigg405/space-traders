@@ -40,7 +40,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.RegisterInstance(_skyboxCamera);
             Builder.RegisterInstance(_playerWarpEffectView);
 
-            Builder.Register<CameraService>(Lifetime.Scoped).AsImplementedInterfaces(); 
+            Builder.Register<CameraService>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<PlayerWarpEffectController>(Lifetime.Scoped).AsImplementedInterfaces();
             Builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<SkyboxSpaceState>(Lifetime.Scoped);

@@ -20,6 +20,6 @@ namespace Assets.Code.Common.StaticData.Repositories
                 "SELECT * FROM Characters WHERE playerId = ?",
                 playerId);
         }
-        
+
     }
 }

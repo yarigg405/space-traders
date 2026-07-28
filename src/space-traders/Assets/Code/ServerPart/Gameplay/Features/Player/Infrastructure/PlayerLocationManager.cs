@@ -95,7 +95,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
         }
 
 
-
         internal void SaveGlobalPosition(int characterId, double2 globalPosition)
         {
             var location = _locationsRepository.GetLocationForCharacter(characterId);

@@ -29,7 +29,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
         }
 
         void IInitializable.Initialize()
-        {            
+        {
             _inputReferencesContainer.Actions.Player.DoubleClick.performed += OnDoubleClick;
         }
 

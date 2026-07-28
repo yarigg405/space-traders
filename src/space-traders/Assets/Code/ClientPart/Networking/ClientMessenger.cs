@@ -212,7 +212,6 @@ namespace Assets.Code.ClientPart.Networking
         }
 
 
-
         public void SendTargetRotationToServer(float targetRotation)
         {
             var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendTargetRotation)

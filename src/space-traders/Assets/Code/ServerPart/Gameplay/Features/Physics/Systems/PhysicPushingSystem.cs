@@ -21,7 +21,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
                GameMatcher.GlobalPosition)
                .NoneOf(
                 GameMatcher.Trigger,
-                GameMatcher.IgnoreCollision                
+                GameMatcher.IgnoreCollision
                 ));
             _synchronizator = synchronizator;
         }
@@ -65,8 +65,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
                         continue;
 
 
-                    /// Collision and pushing calculations
-                     
+                    // Collision and pushing calculations
                     var dist = math.sqrt(currentDistance);
                     var penetration = minDistance - dist;
                     var normal = deltaVector / dist;

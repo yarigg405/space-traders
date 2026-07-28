@@ -3,7 +3,7 @@
 
 namespace Assets.Code.ServerPart.Worlds
 {
-    internal sealed class EcsWorldDestoyer
+    internal sealed class EcsWorldDestroyer
     {
         public void DestroyWorld(EcsWorldInstance world)
         {

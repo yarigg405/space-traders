@@ -20,7 +20,7 @@ namespace Assets.Code.UI.Screens.StationScreens
 
         private StationMainView _view;
 
-        internal StationMainPresenter(IUIManager uiManager, 
+        internal StationMainPresenter(IUIManager uiManager,
             ClientMessenger messenger, IStateMachine stateMachine)
         {
             _uiManager = uiManager;

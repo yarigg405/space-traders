@@ -94,12 +94,10 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OpenBuyOrderPopup(ItemSO item, TradeOrderInfo order)
         {
-            Debug.Log("OpenBuyOrder: " + item.Id);
         }
 
         private void OpenSellOrderPopup(ItemSO item, TradeOrderInfo order)
         {
-            Debug.Log("OpenSellOrder: " + item.Id);
         }
 
         private void FillOrders(Transform root, GameObject emptyState,

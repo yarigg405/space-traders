@@ -71,7 +71,7 @@ namespace Assets.Code.Infrastructure.Installers
 
         private void BindNetworking()
         {
-            Builder.Register<AuthentificationContainer>(Lifetime.Singleton).AsSelf();
+            Builder.Register<AuthenticationContainer>(Lifetime.Singleton).AsSelf();
             Builder.Register<GameEnterManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Builder.Register<NetworkManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Builder.Register<ClientMessenger>(Lifetime.Singleton).AsSelf();

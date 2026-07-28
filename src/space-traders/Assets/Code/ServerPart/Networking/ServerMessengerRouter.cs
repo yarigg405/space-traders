@@ -306,7 +306,6 @@ namespace Assets.Code.ServerPart.Networking
         }
 
 
-
         internal void HandleClientTargetRotation(ushort fromClientId, Message message)
         {
             var targetRotation = message.GetFloat();

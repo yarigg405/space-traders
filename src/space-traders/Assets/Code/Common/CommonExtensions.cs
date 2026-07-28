@@ -10,8 +10,8 @@ namespace Assets.Code.Common
 {
     public static class CommonExtensions
     {
-        private const double _astronomicUnitLenght = 149_597_870_700;
-        private const double _astronomicUnitMinThreshold = _astronomicUnitLenght * 0.1;
+        private const double _astronomicUnitLength = 149_597_870_700;
+        private const double _astronomicUnitMinThreshold = _astronomicUnitLength * 0.1;
 
         public static float GetDirectionAngleFromTo(double2 fromPosition, double2 toPosition)
         {
@@ -31,7 +31,7 @@ namespace Assets.Code.Common
             return new double2(vector.x, vector.y);
         }
 
-        public static double2 ToDoble2XZ(this Vector3 vector)
+        public static double2 ToDouble2XZ(this Vector3 vector)
         {
             return new double2(vector.x, vector.z);
         }
@@ -48,7 +48,7 @@ namespace Assets.Code.Common
                 return $"{distance.ToShortMoneyString()} km";
             }
 
-            var countOfUnits = distance / _astronomicUnitLenght;
+            var countOfUnits = distance / _astronomicUnitLength;
             return $"{countOfUnits.ToShortMoneyString()} au";
         }
 
@@ -56,11 +56,11 @@ namespace Assets.Code.Common
                 bool pointOnRadiusLine = false)
         {
             double angle = Random.Range(0, 360);
-            var lenght = pointOnRadiusLine ? radius :
+            var length = pointOnRadiusLine ? radius :
                 Random.Range(0, radius);
 
-            var x = math.cos(angle * Mathf.Deg2Rad) * lenght;
-            var y = math.sin(angle * Mathf.Deg2Rad) * lenght;
+            var x = math.cos(angle * Mathf.Deg2Rad) * length;
+            var y = math.sin(angle * Mathf.Deg2Rad) * length;
 
             return new double2(originalPoint.x + x, originalPoint.y + y);
         }

@@ -13,7 +13,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using Yrr.Utils;
- 
+
 
 namespace Assets.Code.UI.Screens.TradingMain
 {
