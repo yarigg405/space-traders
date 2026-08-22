@@ -12,6 +12,14 @@ namespace Yrr.UI.Elements
 
         private const string _table = "LocalizationTable";
 
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (!_messageTmp)
+                _messageTmp = GetComponent<TextMeshProUGUI>();
+        }
+#endif
+
         public void BindText(string entry, params object[] args)
         {
             Unbind();
