@@ -19,13 +19,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories
             _physicsShapesProvider = physicsShapesProvider;
         }
 
-        public GameEntity CreateSpaceStation(int databaseId, double2 at, string prefabName, Contexts contexts)
+        public GameEntity CreateSpaceStation(int databaseId, string name, double2 at, string prefabName, Contexts contexts)
         {
             var entity =
                 CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
                 .With(x => x.isStation = true)
                 .AddDatabaseId(databaseId)
+                .AddDatabaseName(name)
 
                 .AddViewPath("Prefabs/" + prefabName)
                 .AddGlobalPosition(at)

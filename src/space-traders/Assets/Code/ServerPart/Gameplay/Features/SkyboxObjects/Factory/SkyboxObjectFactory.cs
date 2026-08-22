@@ -15,12 +15,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory
             _identifier = identifier;
         }
 
-        internal GameEntity CreatePlanet(double2 at, string prefabName, Contexts contexts)
+        internal GameEntity CreatePlanet(string name, double2 at, string prefabName, Contexts contexts)
         {
             return CreateEntity.Empty(contexts)
                 .AddId(_identifier.Next())
                 .AddViewPath("Prefabs/" + prefabName)
                 .With(x => x.isPlanet = true)
+                .AddDatabaseName(name)
 
                 .AddSkyboxCoordinates(at)
                 .AddQuadrantIndex(CalculateQuadrantIndex(at))

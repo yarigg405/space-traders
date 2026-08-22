@@ -45,6 +45,9 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Navigation
         {
             if (entity == null) return string.Empty;
 
+            if (entity.hasDatabaseName && !string.IsNullOrEmpty(entity.DatabaseName))
+                return entity.DatabaseName;
+
             var type = entity.isStation ? "Station"
                 : entity.isPlanet ? "Planet"
                 : "Object";

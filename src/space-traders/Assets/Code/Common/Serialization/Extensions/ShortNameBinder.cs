@@ -42,6 +42,7 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(Mass)] = "ms",
             [typeof(ShipCanBeDocked)] = "scbd",
             [typeof(DatabaseId)] = "dbi",
+            [typeof(DatabaseName)] = "dbn",
             [typeof(StationDockingBayIndex)] = "sdi",
             [typeof(IgnoreCollision)] = "ic",
             [typeof(DockingInProccess)] = "dip",

@@ -32,4 +32,5 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class QuadrantIndex : ISerializeComponent { public int2 Value; }
 
     [Game] public sealed class DatabaseId : ISerializeComponent { public int Value; }
+    [Game] public sealed class DatabaseName : ISerializeComponent { public string Value; }
 }

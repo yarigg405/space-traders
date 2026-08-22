@@ -37,7 +37,7 @@ namespace Assets.Code.ServerPart.Worlds
             foreach (var planet in planets)
             {
                 double2 pos = new(planet.PositionX, planet.PositionY);
-                _skyboxFactory.CreatePlanet(pos, planet.PrefabName, contexts);
+                _skyboxFactory.CreatePlanet(planet.Name, pos, planet.PrefabName, contexts);
             }
         }
 
@@ -48,7 +48,7 @@ namespace Assets.Code.ServerPart.Worlds
             foreach (var station in stations)
             {
                 double2 pos = new(station.PositionX, station.PositionY);
-                _spaceStationsFactory.CreateSpaceStation(station.Id, pos, station.PrefabName, contexts);
+                _spaceStationsFactory.CreateSpaceStation(station.Id, station.Name, pos, station.PrefabName, contexts);
             }
         }
     }
