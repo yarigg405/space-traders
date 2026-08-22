@@ -1,8 +1,9 @@
 using Assets.Code.ClientPart.Networking;
+using Assets.Code.Common.Inventory;
 using Assets.Code.Common.StaticData;
 using Assets.Code.Common.TradingSystem;
-using Assets.Code.Infrastructure.Loading;
 using Assets.Code.UI.Infrastructure.Interfaces;
+using Assets.Code.UI.Screens.BuySellPopups;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
@@ -16,55 +17,73 @@ namespace Assets.Code.UI.Screens.TradingMain
         private readonly TradeItemsCategoryConfig _categoriesConfig;
         private readonly IItemsCatalog _itemsCatalog;
         private readonly ClientMessenger _messenger;
-        private readonly StationSceneDataHolder _stationSceneDataHolder;
 
-        private CancellationTokenSource _cts;
+        private TradingMainView _view;
+        private CancellationTokenSource _itemRequestCts;
 
         public TradingMainPresenter(IUIManager uiManager, TradeItemsCategoryConfig categoriesConfig,
-            IItemsCatalog itemsCatalog, ClientMessenger messenger, StationSceneDataHolder stationSceneDataHolder)
+            IItemsCatalog itemsCatalog, ClientMessenger messenger)
         {
             _uiManager = uiManager;
             _categoriesConfig = categoriesConfig;
             _itemsCatalog = itemsCatalog;
             _messenger = messenger;
-            _stationSceneDataHolder = stationSceneDataHolder;
         }
 
         void IPresenter<TradingMainView>.Show(TradingMainView view, object args)
         {
+            _view = view;
+
             view.Setup(_categoriesConfig.GetAllCategories(), _itemsCatalog.GetAllItems());
             view.CloseButton.onClick.AddListener(ClickOnClose);
-
-            _cts = new();
-            LoadTradeDataAsync(view, _cts.Token).Forget();
+            view.BuyRequested += OnBuyRequested;
+            view.ItemSelected += OnItemSelected;
         }
 
         void IPresenter<TradingMainView>.Hide(TradingMainView view)
         {
             view.CloseButton.onClick.RemoveListener(ClickOnClose);
+            view.BuyRequested -= OnBuyRequested;
+            view.ItemSelected -= OnItemSelected;
 
-            _cts?.Cancel();
-            _cts?.Dispose();
-            _cts = null;
+            _itemRequestCts?.Cancel();
+            _itemRequestCts?.Dispose();
+            _itemRequestCts = null;
+            _view = null;
         }
 
-        private async UniTask LoadTradeDataAsync(TradingMainView view, CancellationToken ct)
+        private void OnItemSelected(ItemSO item) => RequestItemOrders(item);
+
+        private void RequestItemOrders(ItemSO item)
+        {
+            _itemRequestCts?.Cancel();
+            _itemRequestCts?.Dispose();
+            _itemRequestCts = new();
+
+            LoadItemOrdersAsync(item, _itemRequestCts.Token).Forget();
+        }
+
+        private async UniTask LoadItemOrdersAsync(ItemSO item, CancellationToken ct)
         {
             try
             {
-                var stationId = _stationSceneDataHolder.Current.StationId;
-                var tradeData = await _messenger.RequestForStationTradeData(stationId, ct);
+                var data = await _messenger.RequestForItemOrders(item.Id, ct);
                 ct.ThrowIfCancellationRequested();
 
-                view.SetTradeData(tradeData);
+                _view?.SetItemOrders(item, data);
             }
             catch (System.OperationCanceledException)
             {
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"Failed to load station trade data: {ex}");
+                Debug.LogError($"Failed to load item orders: {ex}");
             }
+        }
+
+        private void OnBuyRequested(ItemSO item, TradeOrderInfo order)
+        {
+            _uiManager.OpenModal<BuyItemPopup>(new BuyItemArgs(item, order, () => RequestItemOrders(item)));
         }
 
         private void ClickOnClose()

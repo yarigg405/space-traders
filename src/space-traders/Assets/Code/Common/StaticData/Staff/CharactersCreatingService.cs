@@ -10,7 +10,7 @@ namespace Assets.Code.Common.StaticData.Staff
 {
     internal sealed class CharactersCreatingService
     {
-        private const long StartingMoney = 0;
+        private const long StartingMoney = 100_000;
         private const string StartingShipModelId = "TestShip1";
 
         private readonly CharactersRepository _charactersRepository;

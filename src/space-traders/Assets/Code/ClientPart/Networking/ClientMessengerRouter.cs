@@ -60,7 +60,12 @@ namespace Assets.Code.ClientPart.Networking
             _requestSystem.SetResponseOk(message);
         }
 
-        internal void HandleResponseStationTradeData(Message message)
+        internal void HandleResponseItemOrders(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
+        internal void HandleResponseBuyItem(Message message)
         {
             _requestSystem.SetResponseOk(message);
         }

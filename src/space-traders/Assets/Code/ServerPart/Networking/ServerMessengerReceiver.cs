@@ -56,10 +56,16 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForMoney(fromClientId, message);
         }
 
-        [MessageHandler((ushort)ClientToServerMessageType.RequestForStationTradeData)]
-        private static void HandleRequestForStationTradeData(ushort fromClientId, Message message)
+        [MessageHandler((ushort)ClientToServerMessageType.RequestItemOrders)]
+        private static void HandleRequestItemOrders(ushort fromClientId, Message message)
         {
-            _router.HandleRequestForStationTradeData(fromClientId, message);
+            _router.HandleRequestItemOrders(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestBuyItem)]
+        private static void HandleRequestBuyItem(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestBuyItem(fromClientId, message);
         }
 
 

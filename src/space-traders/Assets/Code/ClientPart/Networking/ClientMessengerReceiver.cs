@@ -62,10 +62,16 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseMoney(message);
         }
 
-        [MessageHandler((ushort)ServerToClientMessageType.ResponseStationTradeData)]
-        private static void HandleResponseStationTradeData(Message message)
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseItemOrders)]
+        private static void HandleResponseItemOrders(Message message)
         {
-            _router.HandleResponseStationTradeData(message);
+            _router.HandleResponseItemOrders(message);
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseBuyItem)]
+        private static void HandleResponseBuyItem(Message message)
+        {
+            _router.HandleResponseBuyItem(message);
         }
 
 

@@ -5,6 +5,7 @@ using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
+using Assets.Code.ServerPart.Gameplay.Features.Trading;
 using Riptide;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -31,6 +32,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly WalletsRepository _walletsRepository;
         private readonly BuyOrdersRepository _buyOrdersRepository;
         private readonly SellOrdersRepository _sellOrdersRepository;
+        private readonly PurchaseService _purchaseService;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
@@ -46,6 +48,7 @@ namespace Assets.Code.ServerPart.Networking
             WalletsRepository walletsRepository,
             BuyOrdersRepository buyOrdersRepository,
             SellOrdersRepository sellOrdersRepository,
+            PurchaseService purchaseService,
             PlayerLocationManager playerLocationManager,
             PlayerCharacterManager playerCharacterManager,
             ServerDockingService dockingService)
@@ -63,6 +66,7 @@ namespace Assets.Code.ServerPart.Networking
             _walletsRepository = walletsRepository;
             _buyOrdersRepository = buyOrdersRepository;
             _sellOrdersRepository = sellOrdersRepository;
+            _purchaseService = purchaseService;
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
             _dockingService = dockingService;
@@ -242,22 +246,44 @@ namespace Assets.Code.ServerPart.Networking
             _networkManager.Server.Send(response, fromClientId);
         }
 
-        internal void HandleRequestForStationTradeData(ushort fromClientId, Message message)
+        internal void HandleRequestItemOrders(ushort fromClientId, Message message)
         {
-            var stationId = message.GetInt();
+            var itemId = message.GetString();
             var messageId = message.GetUInt();
 
-            var stations = _spaceStationsRepository.GetAll();
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
+            var location = _characterLocationsRepository.GetLocationForCharacter(characterId);
+            var currentStation = _spaceStationsRepository.GetById(location.CurrentLocationId);
+
+            var buyOrders = _buyOrdersRepository.GetByItem(itemId);
+            var sellOrders = _sellOrdersRepository.GetByItem(itemId);
+
+            var buyByStation = new Dictionary<int, List<BuyOrderORM>>();
+            foreach (var order in buyOrders)
+                GetOrCreate(buyByStation, order.StationId).Add(order);
+
+            var sellByStation = new Dictionary<int, List<SellOrderORM>>();
+            foreach (var order in sellOrders)
+                GetOrCreate(sellByStation, order.StationId).Add(order);
+
+            var stationIds = new HashSet<int>();
+            foreach (var id in buyByStation.Keys) stationIds.Add(id);
+            foreach (var id in sellByStation.Keys) stationIds.Add(id);
 
             var systemNames = new Dictionary<int, string>();
 
-            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseStationTradeData)
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseItemOrders)
                 .AddUInt(messageId)
-                .AddInt(stationId)
-                .AddInt(stations.Count);
+                .AddInt(currentStation.Id)
+                .AddInt(currentStation.StarSystemId)
+                .AddDouble(currentStation.PositionX)
+                .AddDouble(currentStation.PositionY)
+                .AddInt(stationIds.Count);
 
-            foreach (var station in stations)
+            foreach (var stationId in stationIds)
             {
+                var station = _spaceStationsRepository.GetById(stationId);
+
                 response.AddInt(station.Id)
                         .AddString(station.Name)
                         .AddDouble(station.PositionX)
@@ -265,28 +291,33 @@ namespace Assets.Code.ServerPart.Networking
                         .AddInt(station.StarSystemId)
                         .AddString(GetStarSystemName(station.StarSystemId, systemNames));
 
-                var buyOrders = _buyOrdersRepository.GetByStation(station.Id);
-                response.AddInt(buyOrders.Count);
-                foreach (var order in buyOrders)
-                {
-                    response.AddString(order.ItemId)
-                            .AddLong(order.Price)
-                            .AddInt(order.Quantity)
-                            .AddLong(order.ExpiresAt);
-                }
+                buyByStation.TryGetValue(stationId, out var stationBuys);
+                response.AddInt(stationBuys?.Count ?? 0);
+                if (stationBuys != null)
+                    foreach (var order in stationBuys)
+                        response.AddLong(order.Id).AddString(order.ItemId).AddLong(order.Price)
+                                .AddInt(order.Quantity).AddLong(order.ExpiresAt);
 
-                var sellOrders = _sellOrdersRepository.GetByStation(station.Id);
-                response.AddInt(sellOrders.Count);
-                foreach (var order in sellOrders)
-                {
-                    response.AddString(order.ItemId)
-                            .AddLong(order.Price)
-                            .AddInt(order.Quantity)
-                            .AddLong(order.ExpiresAt);
-                }
+                sellByStation.TryGetValue(stationId, out var stationSells);
+                response.AddInt(stationSells?.Count ?? 0);
+                if (stationSells != null)
+                    foreach (var order in stationSells)
+                        response.AddLong(order.Id).AddString(order.ItemId).AddLong(order.Price)
+                                .AddInt(order.Quantity).AddLong(order.ExpiresAt);
             }
 
             _networkManager.Server.Send(response, fromClientId);
+        }
+
+        private static List<T> GetOrCreate<T>(Dictionary<int, List<T>> map, int key)
+        {
+            if (!map.TryGetValue(key, out var list))
+            {
+                list = new List<T>();
+                map[key] = list;
+            }
+
+            return list;
         }
 
         private string GetStarSystemName(int starSystemId, Dictionary<int, string> cache)
@@ -298,6 +329,31 @@ namespace Assets.Code.ServerPart.Networking
             }
 
             return name;
+        }
+
+        internal void HandleRequestBuyItem(ushort fromClientId, Message message)
+        {
+            var orderId = message.GetLong();
+            var quantity = message.GetInt();
+            var messageId = message.GetUInt();
+
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
+
+            if (_purchaseService.TryBuyFromSellOrder(characterId, orderId, quantity, out var error))
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseBuyItem)
+                    .AddUInt(messageId);
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+            else
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
+                    .AddUInt(messageId)
+                    .AddString(error);
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
         }
 
         internal void HandleEntitiesLoading(ushort fromClientId, Message message)

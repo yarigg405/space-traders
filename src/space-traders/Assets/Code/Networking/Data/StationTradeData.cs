@@ -6,6 +6,9 @@ namespace Assets.Code.Networking.Data
     public struct StationTradeData
     {
         public int CurrentStationId;
+        public int CurrentStarSystemId;
+        public double CurrentPositionX;
+        public double CurrentPositionY;
         public List<StationOrdersData> Stations;
     }
 
@@ -23,6 +26,7 @@ namespace Assets.Code.Networking.Data
 
     public struct TradeOrderData
     {
+        public long Id;
         public string ItemId;
         public long Price;
         public int Quantity;

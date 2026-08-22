@@ -31,5 +31,11 @@ namespace Assets.Code.Common.StaticData.Repositories
             return _dataBase.Query<BuyOrderORM>(
                 "SELECT * FROM BuyOrders WHERE stationId = ?", stationId);
         }
+
+        internal IReadOnlyList<BuyOrderORM> GetByItem(string itemId)
+        {
+            return _dataBase.Query<BuyOrderORM>(
+                "SELECT * FROM BuyOrders WHERE itemId = ?", itemId);
+        }
     }
 }

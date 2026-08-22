@@ -13,6 +13,7 @@ using UnityEngine;
 using VContainer;
 using Assets.Code.UI.Screens.CurrentShipInfo;
 using Assets.Code.UI.Screens.Wallet;
+using Assets.Code.UI.Screens.BuySellPopups;
 
 
 namespace Assets.Code.Infrastructure.Installers
@@ -67,6 +68,9 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<TradingMainPopup>(Lifetime.Singleton);
             Builder.Register<TradingMainPresenter>(Lifetime.Transient);
+
+            Builder.Register<BuyItemPopup>(Lifetime.Singleton);
+            Builder.Register<BuyItemPresenter>(Lifetime.Transient);
 
             Builder.Register<AwaitServerResponsePopup>(Lifetime.Singleton);
 

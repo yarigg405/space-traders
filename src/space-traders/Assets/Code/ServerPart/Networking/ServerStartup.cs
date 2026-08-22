@@ -62,6 +62,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<CharactersCreatingService>(Lifetime.Singleton).AsSelf();
 
                 builder.Register<StationOrdersGenerator>(Lifetime.Singleton).AsSelf();
+                builder.Register<PurchaseService>(Lifetime.Singleton).AsSelf();
             });
 
             _serverScope.Container.Resolve<StationOrdersGenerator>().GenerateForAllStations();

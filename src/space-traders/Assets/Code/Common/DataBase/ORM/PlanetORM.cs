@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 
 namespace Assets.Code.Common.DataBase.ORM
@@ -25,5 +26,25 @@ namespace Assets.Code.Common.DataBase.ORM
 
         [Column("positionY")]
         public double PositionY { get; set; }
+
+        [Column("radius")]
+        public int PlanetRadius { get; set; }
+
+        [Column("planetType")]
+        public PlanetType PlanetType { get; set; }
+    }
+
+    [Serializable]
+    public enum PlanetType : byte
+    {
+        None = 0,
+        Default = 1,
+        Empty = 2,
+
+        Acid = 3,
+        Desert = 4,
+        Carbon = 5,
+        Water = 6,
+        GasGiant = 7,
     }
 }

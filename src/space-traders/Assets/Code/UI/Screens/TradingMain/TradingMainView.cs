@@ -29,7 +29,8 @@ namespace Assets.Code.UI.Screens.TradingMain
         [SerializeField] private TradeItemRowView _itemRowPrefab;
 
         [Header("Filtering")]
-        [SerializeField] private TMP_Dropdown _scopeDropdown;
+        [SerializeField] private Button _scopeButton;
+        [SerializeField] private TextMeshProUGUI _scopeLabel;
         [SerializeField] private TMP_InputField _searchInput;
 
         [Header("Detail")]
@@ -39,27 +40,26 @@ namespace Assets.Code.UI.Screens.TradingMain
         private readonly Dictionary<string, ItemOrders> _ordersByItem = new();
         private readonly Dictionary<string, string> _localizedNames = new();
         private readonly Dictionary<int, string> _distanceByStation = new();
-        private readonly List<ScopeLabel> _scopeLabels = new();
 
         private IReadOnlyList<TradeItemCategory> _categories;
         private List<ItemSO> _items = new();
         private StationTradeData _tradeData;
         private ItemSO _selectedItem;
+        private LocalizedString _scopeLabelString;
+        private int _scopeIndex;
         private bool _listenersWired;
 
-        private TradeScope Scope
-        {
-            get
-            {
-                if (_scopeDropdown == null)
-                    return TradeScope.CurrentStation;
-
-                int index = Mathf.Clamp(_scopeDropdown.value, 0, ScopeOrder.Length - 1);
-                return ScopeOrder[index];
-            }
-        }
+        private TradeScope Scope => ScopeOrder[Mathf.Clamp(_scopeIndex, 0, ScopeOrder.Length - 1)];
 
         private string Search => _searchInput != null ? _searchInput.text : string.Empty;
+
+        public event Action<ItemSO, TradeOrderInfo> BuyRequested
+        {
+            add { if (_detailView) _detailView.BuyRequested += value; }
+            remove { if (_detailView) _detailView.BuyRequested -= value; }
+        }
+
+        public event Action<ItemSO> ItemSelected;
 
         public void Setup(IEnumerable<TradeItemCategory> categories, IEnumerable<ItemSO> items)
         {
@@ -71,20 +71,27 @@ namespace Assets.Code.UI.Screens.TradingMain
                     _items.Add(item);
 
             _selectedItem = null;
+            _tradeData = default;
+            _ordersByItem.Clear();
+            _distanceByStation.Clear();
+            _scopeIndex = Mathf.Max(0, Array.IndexOf(ScopeOrder, TradeScope.AllSystems));
 
             WireListeners();
+            UpdateScopeLabel();
             RefreshLocalizedNames();
-            BuildOrderLookup();
             RebuildTree();
             _detailView?.Clear();
         }
 
-        public void SetTradeData(StationTradeData tradeData)
+        public void SetItemOrders(ItemSO item, StationTradeData data)
         {
-            _tradeData = tradeData;
+            if (item != _selectedItem)
+                return;
+
+            _tradeData = data;
             BuildDistanceCache();
             BuildOrderLookup();
-            RefreshSelectedItem();
+            ShowItem(item);
         }
 
         private void WireListeners()
@@ -92,11 +99,8 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_listenersWired)
                 return;
 
-            if (_scopeDropdown)
-            {
-                PopulateScopeOptions();
-                _scopeDropdown.onValueChanged.AddListener(OnScopeChanged);
-            }
+            if (_scopeButton)
+                _scopeButton.onClick.AddListener(OnScopeButtonClicked);
 
             if (_searchInput)
                 _searchInput.onValueChanged.AddListener(OnSearchChanged);
@@ -131,35 +135,44 @@ namespace Assets.Code.UI.Screens.TradingMain
             RebuildTree();
         }
 
-        private void PopulateScopeOptions()
+        private void OnScopeButtonClicked()
         {
-            DisposeScopeLabels();
-            _scopeDropdown.ClearOptions();
-
-            var options = new List<TMP_Dropdown.OptionData>(ScopeOrder.Length);
-            foreach (var scope in ScopeOrder)
-                options.Add(new TMP_Dropdown.OptionData(scope.ToString()));
-
-            _scopeDropdown.options = options;
-            _scopeDropdown.SetValueWithoutNotify(0);
-            _scopeDropdown.RefreshShownValue();
-
-            for (int i = 0; i < ScopeOrder.Length; i++)
-                _scopeLabels.Add(new ScopeLabel(_scopeDropdown, i, ScopeOrder[i]));
-        }
-
-        private void DisposeScopeLabels()
-        {
-            foreach (var label in _scopeLabels)
-                label.Dispose();
-
-            _scopeLabels.Clear();
-        }
-
-        private void OnScopeChanged(int _)
-        {
+            _scopeIndex = (_scopeIndex + 1) % ScopeOrder.Length;
+            UpdateScopeLabel();
             BuildOrderLookup();
             RefreshSelectedItem();
+        }
+
+        private void UpdateScopeLabel()
+        {
+            if (_scopeLabel == null)
+                return;
+
+            UnbindScopeLabel();
+
+            _scopeLabelString = new LocalizedString
+            {
+                TableReference = LocalizationTable,
+                TableEntryReference = $"TradeScope.{ScopeOrder[_scopeIndex]}"
+            };
+
+            _scopeLabelString.StringChanged += OnScopeLabelChanged;
+            _scopeLabelString.RefreshString();
+        }
+
+        private void UnbindScopeLabel()
+        {
+            if (_scopeLabelString == null)
+                return;
+
+            _scopeLabelString.StringChanged -= OnScopeLabelChanged;
+            _scopeLabelString = null;
+        }
+
+        private void OnScopeLabelChanged(string value)
+        {
+            if (_scopeLabel != null && !string.IsNullOrEmpty(value))
+                _scopeLabel.text = value;
         }
 
         private void OnSearchChanged(string _) => RebuildTree();
@@ -192,7 +205,12 @@ namespace Assets.Code.UI.Screens.TradingMain
                 return;
 
             _selectedItem = item;
-            ShowItem(item);
+            _tradeData = default;
+            _ordersByItem.Clear();
+            _distanceByStation.Clear();
+
+            _detailView?.Show(item, Array.Empty<TradeOrderInfo>(), Array.Empty<TradeOrderInfo>());
+            ItemSelected?.Invoke(item);
         }
 
         private void RefreshSelectedItem()
@@ -221,14 +239,11 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_tradeData.Stations == null)
                 return;
 
-            if (!TryGetStation(_tradeData.CurrentStationId, out var current))
-                return;
-
-            double2 from = new(current.PositionX, current.PositionY);
+            double2 from = new(_tradeData.CurrentPositionX, _tradeData.CurrentPositionY);
 
             foreach (var station in _tradeData.Stations)
             {
-                if (station.StarSystemId == current.StarSystemId)
+                if (station.StarSystemId == _tradeData.CurrentStarSystemId)
                 {
                     double2 to = new(station.PositionX, station.PositionY);
                     double distance = math.distance(from, to) * GameConstants.DISTANCE_REAL_TO_UI;
@@ -241,24 +256,6 @@ namespace Assets.Code.UI.Screens.TradingMain
             }
         }
 
-        private bool TryGetStation(int stationId, out StationOrdersData station)
-        {
-            if (_tradeData.Stations != null)
-            {
-                foreach (var candidate in _tradeData.Stations)
-                {
-                    if (candidate.StationId == stationId)
-                    {
-                        station = candidate;
-                        return true;
-                    }
-                }
-            }
-
-            station = default;
-            return false;
-        }
-
         private void BuildOrderLookup()
         {
             _ordersByItem.Clear();
@@ -266,13 +263,9 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_tradeData.Stations == null)
                 return;
 
-            int currentSystemId = TryGetStation(_tradeData.CurrentStationId, out var current)
-                ? current.StarSystemId
-                : int.MinValue;
-
             foreach (var station in _tradeData.Stations)
             {
-                if (!IsInScope(station, currentSystemId))
+                if (!IsInScope(station, _tradeData.CurrentStarSystemId))
                     continue;
 
                 AddOrders(station, station.SellOrders, isSell: true);
@@ -307,7 +300,9 @@ namespace Assets.Code.UI.Screens.TradingMain
                 }
 
                 var distance = _distanceByStation.TryGetValue(station.StationId, out var d) ? d : string.Empty;
-                var info = new TradeOrderInfo(station.StationName, distance, order.Price, order.Quantity, order.ExpiresAt);
+                var isAtPlayerStation = station.StationId == _tradeData.CurrentStationId;
+                var info = new TradeOrderInfo(order.Id, station.StationId, station.StationName,
+                    station.StarSystemName, distance, order.Price, order.Quantity, order.ExpiresAt, isAtPlayerStation);
                 if (isSell)
                     bucket.Sell.Add(info);
                 else
@@ -379,57 +374,21 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OnDestroy()
         {
-            if (_scopeDropdown)
-                _scopeDropdown.onValueChanged.RemoveListener(OnScopeChanged);
+            if (_scopeButton)
+                _scopeButton.onClick.RemoveListener(OnScopeButtonClicked);
 
             if (_searchInput)
                 _searchInput.onValueChanged.RemoveListener(OnSearchChanged);
 
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
 
-            DisposeScopeLabels();
+            UnbindScopeLabel();
         }
 
         private sealed class ItemOrders
         {
             public readonly List<TradeOrderInfo> Sell = new();
             public readonly List<TradeOrderInfo> Buy = new();
-        }
-
-        private sealed class ScopeLabel
-        {
-            private readonly TMP_Dropdown _dropdown;
-            private readonly int _index;
-            private readonly LocalizedString _string;
-
-            public ScopeLabel(TMP_Dropdown dropdown, int index, TradeScope scope)
-            {
-                _dropdown = dropdown;
-                _index = index;
-
-                _string = new LocalizedString
-                {
-                    TableReference = LocalizationTable,
-                    TableEntryReference = $"TradeScope.{scope}"
-                };
-
-                _string.StringChanged += OnChanged;
-                _string.RefreshString();
-            }
-
-            public void Dispose()
-            {
-                _string.StringChanged -= OnChanged;
-            }
-
-            private void OnChanged(string value)
-            {
-                if (_dropdown == null || string.IsNullOrEmpty(value) || _index >= _dropdown.options.Count)
-                    return;
-
-                _dropdown.options[_index].text = value;
-                _dropdown.RefreshShownValue();
-            }
         }
     }
 }

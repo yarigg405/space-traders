@@ -247,6 +247,34 @@ MonoBehaviour:
     m_Key: c-electronics
     m_Metadata:
       m_Items: []
+  - m_Id: 122939459735904256
+    m_Key: buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847296
+    m_Key: sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847297
+    m_Key: location
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847298
+    m_Key: price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847299
+    m_Key: quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847300
+    m_Key: total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847301
+    m_Key: cancel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -36,6 +36,8 @@ namespace Assets.Code.UI.Screens.TradingMain
         [Header("Prefabs")]
         [SerializeField] private TradeOrderRowView _orderRowPrefab;
 
+        public event Action<ItemSO, TradeOrderInfo> BuyRequested;
+
         private LocalizedString _nameString;
         private ItemSO _item;
 
@@ -64,8 +66,8 @@ namespace Assets.Code.UI.Screens.TradingMain
             }
 
             BindName(item.Id);
-            _massTmp.BindText("massVal", item.Mass);
-            _volumeTmp.BindText("volumeVal", item.Volume);
+            _massTmp.BindText("massVal", item.Mass.ToString("N0"));
+            _volumeTmp.BindText("volumeVal", item.Volume.ToString("N0"));
 
             FillOrders(_buyOrdersRoot, _buyOrdersEmpty, buyOrders, OnBuyOrderSelected);
             FillOrders(_sellOrdersRoot, _sellOrdersEmpty, sellOrders, OnSellOrderSelected);
@@ -89,14 +91,11 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OnSellOrderSelected(TradeOrderInfo order)
         {
-            OpenSellOrderPopup(_item, order);
+            if (_item != null)
+                BuyRequested?.Invoke(_item, order);
         }
 
         private void OpenBuyOrderPopup(ItemSO item, TradeOrderInfo order)
-        {
-        }
-
-        private void OpenSellOrderPopup(ItemSO item, TradeOrderInfo order)
         {
         }
 

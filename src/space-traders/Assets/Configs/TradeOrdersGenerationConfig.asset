@@ -17,91 +17,91 @@ MonoBehaviour:
   _orderLifetimeHours: 96
   _rules:
   - ItemId: blue-pill
-    BasePrice: 750
+    BasePrice: 75000
     MinQuantity: 10
     MaxQuantity: 75
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.1
   - ItemId: canned-food
-    BasePrice: 55
+    BasePrice: 5500
     MinQuantity: 10
     MaxQuantity: 75
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.45
   - ItemId: carbon
-    BasePrice: 8
+    BasePrice: 800
     MinQuantity: 540
     MaxQuantity: 10000
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.24
   - ItemId: cocaine
-    BasePrice: 1800
+    BasePrice: 180000
     MinQuantity: 10
     MaxQuantity: 750
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.07
   - ItemId: dairy-products
-    BasePrice: 15
+    BasePrice: 1500
     MinQuantity: 50
     MaxQuantity: 1000
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.29
   - ItemId: electronic-parts
-    BasePrice: 280
+    BasePrice: 28000
     MinQuantity: 50
     MaxQuantity: 220
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.22
   - ItemId: frozen-food
-    BasePrice: 75
+    BasePrice: 7500
     MinQuantity: 15
     MaxQuantity: 570
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.22
   - ItemId: garbage
-    BasePrice: 12
+    BasePrice: 1200
     MinQuantity: 1000
     MaxQuantity: 50000
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.22
   - ItemId: hydrogen-batteries
-    BasePrice: 540
+    BasePrice: 54000
     MinQuantity: 12
     MaxQuantity: 28
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.22
   - ItemId: medicines
-    BasePrice: 170
+    BasePrice: 17000
     MinQuantity: 10
     MaxQuantity: 540
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.22
   - ItemId: metamphetamine
-    BasePrice: 2800
+    BasePrice: 280000
     MinQuantity: 10
     MaxQuantity: 28
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.03
   - ItemId: nanocontrollers
-    BasePrice: 50
+    BasePrice: 5000
     MinQuantity: 200
     MaxQuantity: 2000
     AllowBuyOrders: 1
     AllowSellOrders: 1
     AppearChance: 0.15
   - ItemId: wheat
-    BasePrice: 270
+    BasePrice: 27000
     MinQuantity: 5000
     MaxQuantity: 10000
     AllowBuyOrders: 1

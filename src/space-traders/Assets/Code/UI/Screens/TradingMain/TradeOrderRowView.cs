@@ -1,3 +1,4 @@
+using Assets.Code.Common.Extensions;
 using System;
 using TMPro;
 using UnityEngine;
@@ -23,20 +24,37 @@ namespace Assets.Code.UI.Screens.TradingMain
             _order = order;
             _onSelected = onSelected;
 
+            var color = order.IsAtPlayerStation ? Color.green : Color.white;
+
             if (_stationLabel)
+            {
                 _stationLabel.text = order.StationName;
+                _stationLabel.color = color;
+            }
 
             if (_distanceLabel)
+            {
                 _distanceLabel.text = order.Distance;
+                _distanceLabel.color = color;
+            }
 
             if (_priceLabel)
-                _priceLabel.text = order.Price.ToString("N0");
+            {
+                _priceLabel.text = order.Price.ToMoney();
+                _priceLabel.color = color;
+            }
 
             if (_quantityLabel)
+            {
                 _quantityLabel.text = order.Quantity.ToString("N0");
+                _quantityLabel.color = color;
+            }
 
             if (_expiresLabel)
+            {
                 _expiresLabel.text = FormatExpires(order.ExpiresAt);
+                _expiresLabel.color = color;
+            }
 
             if (_selectButton)
             {
@@ -67,19 +85,28 @@ namespace Assets.Code.UI.Screens.TradingMain
 
     public readonly struct TradeOrderInfo
     {
+        public readonly long OrderId;
+        public readonly int StationId;
         public readonly string StationName;
+        public readonly string SystemName;
         public readonly string Distance;
         public readonly long Price;
         public readonly int Quantity;
         public readonly long ExpiresAt;
+        public readonly bool IsAtPlayerStation;
 
-        public TradeOrderInfo(string stationName, string distance, long price, int quantity, long expiresAt)
+        public TradeOrderInfo(long orderId, int stationId, string stationName, string systemName,
+            string distance, long price, int quantity, long expiresAt, bool isAtPlayerStation)
         {
+            OrderId = orderId;
+            StationId = stationId;
             StationName = stationName;
+            SystemName = systemName;
             Distance = distance;
             Price = price;
             Quantity = quantity;
             ExpiresAt = expiresAt;
+            IsAtPlayerStation = isAtPlayerStation;
         }
     }
 }
