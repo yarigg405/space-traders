@@ -215,6 +215,38 @@ MonoBehaviour:
     m_Key: trade-system
     m_Metadata:
       m_Items: []
+  - m_Id: 122856198191157248
+    m_Key: water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198224711680
+    m_Key: algae
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198224711681
+    m_Key: salts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905984
+    m_Key: metal-alloys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905985
+    m_Key: chlorine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905986
+    m_Key: synth-resins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905987
+    m_Key: cloth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905988
+    m_Key: c-electronics
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

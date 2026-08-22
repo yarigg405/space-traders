@@ -15,14 +15,26 @@ MonoBehaviour:
   Items:
   - key: TestShip1
     value: {fileID: 11400000, guid: 883aec311a2d19f45b56a1824f31fece, type: 2}
-  - key: blue-pill
-    value: {fileID: 11400000, guid: 8b099262bb52c4f409b136046575f01c, type: 2}
+  - key: algae
+    value: {fileID: 11400000, guid: af4b38da832931045a984c9c33e1206b, type: 2}
+  - key: c-electronics
+    value: {fileID: 11400000, guid: 1c81556dd1eb41f49b808b7d78e8d79c, type: 2}
   - key: canned-food
     value: {fileID: 11400000, guid: 63c195e729a6f594ba874d56b909caa4, type: 2}
   - key: carbon
     value: {fileID: 11400000, guid: 435a51ea3de678b4185a90b578edfd75, type: 2}
+  - key: chlorine
+    value: {fileID: 11400000, guid: 4a4d310ec293126469e698edff2e59c3, type: 2}
+  - key: cloth
+    value: {fileID: 11400000, guid: f984f41ae226de54899284b93bde5a9d, type: 2}
   - key: dairy-products
     value: {fileID: 11400000, guid: 7bc3dc609f975f946b32c2fb5d5a5cb2, type: 2}
+  - key: blue-pill
+    value: {fileID: 11400000, guid: 8b099262bb52c4f409b136046575f01c, type: 2}
+  - key: cocaine
+    value: {fileID: 11400000, guid: 9838aef5b4f5df64485554bfe84aac4b, type: 2}
+  - key: metamphetamine
+    value: {fileID: 11400000, guid: 05e73cd5925ae9e4faf89ab0fda6c106, type: 2}
   - key: electronic-parts
     value: {fileID: 11400000, guid: 6e72adb9b1ca3d444888f5fd71452133, type: 2}
   - key: frozen-food
@@ -33,9 +45,15 @@ MonoBehaviour:
     value: {fileID: 11400000, guid: efbca8f25b6dc834aadd4d641559023e, type: 2}
   - key: medicines
     value: {fileID: 11400000, guid: 50a4b544f7d5b2c48bd3861a8fed0274, type: 2}
-  - key: metamphetamine
-    value: {fileID: 11400000, guid: 05e73cd5925ae9e4faf89ab0fda6c106, type: 2}
+  - key: metal-alloys
+    value: {fileID: 11400000, guid: 3f7a85dcb1f05e549b75f874c766c5e8, type: 2}
   - key: nanocontrollers
     value: {fileID: 11400000, guid: e8417586a396b024c81054fca74a51b1, type: 2}
+  - key: salts
+    value: {fileID: 11400000, guid: a0b7d047dcc848f4eb5ac960bdabb50c, type: 2}
+  - key: synth-resins
+    value: {fileID: 11400000, guid: 6746c1c0321439e409d5a30f622884de, type: 2}
+  - key: water
+    value: {fileID: 11400000, guid: 4eb91dea5f75f5d44af80cab2ec92247, type: 2}
   - key: wheat
     value: {fileID: 11400000, guid: 88c2cdf0df8beb64883b5bfef5f16154, type: 2}

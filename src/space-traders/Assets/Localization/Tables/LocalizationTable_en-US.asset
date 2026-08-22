@@ -220,6 +220,38 @@ MonoBehaviour:
     m_Localized: UNDOCK
     m_Metadata:
       m_Items: []
+  - m_Id: 122856198191157248
+    m_Localized: Water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198224711680
+    m_Localized: Algae
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198224711681
+    m_Localized: Salts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905984
+    m_Localized: Metal Alloys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905985
+    m_Localized: Chlorine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905986
+    m_Localized: Synthetic Resins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905987
+    m_Localized: Cloth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905988
+    m_Localized: Consumer Electronics
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
