@@ -38,8 +38,7 @@ namespace Assets.Code.ClientPart
         }
 
 
-
-        ///      Update values
+        // Update values
 
         public void UpdateGlobalPosition(uint entityId, double2 serverGlobalPosition)
         {

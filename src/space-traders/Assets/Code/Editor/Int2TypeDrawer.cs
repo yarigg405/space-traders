@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEditor;
 
 
-namespace Assets.Code.Editor
+namespace Assets.Code
 {
     internal class Int2TypeDrawer : ITypeDrawer
     {

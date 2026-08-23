@@ -17,21 +17,21 @@ namespace Assets.Code.UI.Screens.MenuScene
         private readonly IUIManager _uIManager;
         private readonly NetworkManager _networkManager;
         private readonly ILifetimeCancellationToken _lcts;
-        private readonly AuthentificationContainer _authentification;
+        private readonly AuthenticationContainer _authentication;
 
         private const string _playerPrefsKey = "PlayerLogin";
 
         private CancellationTokenSource _cts;
         private ClientConnectionView _view;
 
-        public ClientConnectionPresenter(IUIManager uIManager, 
-            NetworkManager networkManager, ILifetimeCancellationToken cts, 
-            AuthentificationContainer authentification)
+        public ClientConnectionPresenter(IUIManager uIManager,
+            NetworkManager networkManager, ILifetimeCancellationToken cts,
+            AuthenticationContainer authentication)
         {
             _uIManager = uIManager;
             _networkManager = networkManager;
             _lcts = cts;
-            _authentification = authentification;
+            _authentication = authentication;
         }
 
         void IPresenter<ClientConnectionView>.Show(ClientConnectionView view, object args)
@@ -76,14 +76,14 @@ namespace Assets.Code.UI.Screens.MenuScene
             {
                 _uIManager.CloseModal<MessageBoxPopup>();
                 _uIManager.OpenModal<AwaitServerResponsePopup>();
-                _authentification.Login = _view.PlayerNameIF.text;
-                _authentification.Password = serverPassword;
+                _authentication.Login = _view.PlayerNameIF.text;
+                _authentication.Password = serverPassword;
 
                 await _networkManager.StartClient(ipAddress, port, token);
                 _uIManager.GoToScreen<SelectCharacterScreen>();
             }
 
-            catch (OperationCanceledException) 
+            catch (OperationCanceledException)
             {
                 _networkManager.StopClient();
             }

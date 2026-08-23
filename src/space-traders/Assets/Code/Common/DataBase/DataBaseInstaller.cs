@@ -14,8 +14,13 @@ namespace Assets.Code.Common.DataBase
 
             db.CreateTable<PlayerORM>();
             db.CreateTable<CharacterORM>();
-            db.CreateTable<PlayerShipORM>();
+            db.CreateTable<CharacterShipORM>();
             db.CreateTable<CharacterLocationORM>();
+            db.CreateTable<WalletORM>();
+            db.CreateTable<ItemStackORM>();
+
+            db.CreateTable<BuyOrderORM>();
+            db.CreateTable<SellOrderORM>();
 
             db.CreateTable<StarSystemORM>();
             db.CreateTable<PlanetORM>();
@@ -58,40 +63,72 @@ namespace Assets.Code.Common.DataBase
         {
             yield return new PlanetORM
             {
-                Name = "Planet1",
+                Name = "Cerberus",
                 StarSystemId = 1,
-                PositionX = 0,
-                PositionY = 5_795_500_000,
+                PositionX = 58_000_000,
+                PositionY = 32_000_000,
+                PlanetRadius = 6371,
+                PlanetType = PlanetType.Acid,
 
                 PrefabName = "Planet",
             };
 
             yield return new PlanetORM
             {
-                Name = "Planet2",
+                Name = "DomProm",
                 StarSystemId = 1,
-                PositionX = 25000,
-                PositionY = 25000,
+                PositionX = 135_000_000,
+                PositionY = -27_000_000,
+                PlanetRadius = 6800,
+                PlanetType = PlanetType.Desert,
 
                 PrefabName = "Planet",
             };
 
             yield return new PlanetORM
             {
-                Name = "Planet3",
-                StarSystemId = 2,
-                PositionX = 0,
-                PositionY = 5_795_500_000,
+                Name = "Taurus",
+                StarSystemId = 1,
+                PositionX = 195_000_000,
+                PositionY = 15_000_000,
+                PlanetRadius = 10200,
+                PlanetType = PlanetType.Carbon,
 
                 PrefabName = "Planet",
             };
 
             yield return new PlanetORM
             {
-                Name = "Planet4",
-                StarSystemId = 2,
-                PositionX = 25000,
-                PositionY = 25000,
+                Name = "Pejnya",
+                StarSystemId = 1,
+                PositionX = 260_000_000,
+                PositionY = -44_000_000,
+                PlanetRadius = 8500,
+                PlanetType = PlanetType.Water,
+
+                PrefabName = "Planet",
+            };
+
+            yield return new PlanetORM
+            {
+                Name = "Ktyar Larm",
+                StarSystemId = 1,
+                PositionX = 470_000_000,
+                PositionY = 38_000_000,
+                PlanetRadius = 62000,
+                PlanetType = PlanetType.GasGiant,
+
+                PrefabName = "Planet",
+            };
+
+            yield return new PlanetORM
+            {
+                Name = "Fresno",
+                StarSystemId = 1,
+                PositionX = 540_000_000,
+                PositionY = -52_000_000,
+                PlanetRadius = 71000,
+                PlanetType = PlanetType.GasGiant,
 
                 PrefabName = "Planet",
             };
@@ -103,6 +140,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation1",
                 StarSystemId = 1,
+                StationType = 0,
                 PositionX = 0,
                 PositionY = 0,
 
@@ -113,6 +151,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation2",
                 StarSystemId = 1,
+                StationType = 1,
                 PositionX = 0,
                 PositionY = 250_000,
 
@@ -123,6 +162,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation3",
                 StarSystemId = 2,
+                StationType = 0,
                 PositionX = 0,
                 PositionY = 0,
 
@@ -133,6 +173,7 @@ namespace Assets.Code.Common.DataBase
             {
                 Name = "SpaceStation4",
                 StarSystemId = 2,
+                StationType = 1,
                 PositionX = 0,
                 PositionY = 250_000,
 

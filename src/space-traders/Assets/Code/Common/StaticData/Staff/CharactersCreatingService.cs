@@ -10,20 +10,23 @@ namespace Assets.Code.Common.StaticData.Staff
 {
     internal sealed class CharactersCreatingService
     {
+        private const long StartingMoney = 100_000;
+        private const string StartingShipModelId = "TestShip1";
+
         private readonly CharactersRepository _charactersRepository;
         private readonly StarSystemRepository _starSystemRepository;
-        private readonly SpaceStationsRepository _spacesStationsRepository;
+        private readonly SpaceStationsRepository _spaceStationsRepository;
 
-        private readonly IDataBaseManager _database;
+        private readonly IDataBaseManager _dataBase;
 
         public CharactersCreatingService(CharactersRepository charactersRepository,
             IDataBaseManager database, StarSystemRepository starSystemRepository,
-            SpaceStationsRepository spacesStationsRepository)
+            SpaceStationsRepository spaceStationsRepository)
         {
             _charactersRepository = charactersRepository;
-            _database = database;
+            _dataBase = database;
             _starSystemRepository = starSystemRepository;
-            _spacesStationsRepository = spacesStationsRepository;
+            _spaceStationsRepository = spaceStationsRepository;
         }
 
         internal bool TryCreateNewCharacter(int playerId, CharacterORM character, out string error)
@@ -46,7 +49,7 @@ namespace Assets.Code.Common.StaticData.Staff
             {
                 var startSystemName = _starSystemRepository.GetAll().First().Name;
 
-                _database.RunInTransaction(_database =>
+                _dataBase.RunInTransaction(_database =>
                 {
                     _database.CreateNew(character);
                     var characterId = character.Id;
@@ -55,13 +58,32 @@ namespace Assets.Code.Common.StaticData.Staff
                     {
                         CharacterId = characterId,
                         LocationType = LocationType.Station,
-                        CurrentLocationId = _spacesStationsRepository.GetStations(startSystemName).First().Id,
+                        CurrentLocationId = _spaceStationsRepository.GetStations(startSystemName).First().Id,
                         PositionX = 0,
                         PositionY = 0,
                         DockBayId = 0
                     };
                     _database.CreateNew(location);
 
+                    var wallet = new WalletORM
+                    {
+                        OwnerType = WalletOwnerType.Character,
+                        OwnerId = characterId,
+                        Money = StartingMoney
+                    };
+                    _database.CreateNew(wallet);
+
+                    var ship = new CharacterShipORM
+                    {
+                        OwnerCharacterId = characterId,
+                        ShipModelId = StartingShipModelId,
+                        ShipState = ShipState.Selected,
+                        ShipFitJson = string.Empty
+                    };
+                    _database.CreateNew(ship);
+
+                    character.CurrentShipId = ship.Id;
+                    _database.Update(character);
                 });
 
                 error = "";

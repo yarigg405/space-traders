@@ -10,7 +10,7 @@ namespace Assets.Code.ServerPart.Networking
 
         internal static void Initialize(ServerMessengerRouter router)
         {
-            _router = router;   
+            _router = router;
         }
 
 
@@ -50,23 +50,30 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForDock(fromClientId, message);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForMoney)]
+        private static void HandleRequestForMoney(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestForMoney(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestItemOrders)]
+        private static void HandleRequestItemOrders(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestItemOrders(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestBuyItem)]
+        private static void HandleRequestBuyItem(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestBuyItem(fromClientId, message);
+        }
+
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)
         {
             _router.HandleEntitiesLoading(fromClientId, message);
         }
-
-        //[MessageHandler((ushort)ClientToServerMessageType.RequestForChangeScene)]
-        //private static void HandleChangeScene(ushort fromClientId, Message message)
-        //{
-        //    var sceneName = message.GetString();
-        //    var scene = _playerDataProvider.GetSceneNameForPlayer(fromClientId);
-        //    if (scene.Equals(sceneName)) return;
-        //    _playerDataProvider.SetPlayerScene(fromClientId, sceneName);
-
-        //    _clientSceneConnector.ConnectPlayer(fromClientId);
-        //}
 
         [MessageHandler((ushort)ClientToServerMessageType.SendTargetRotation)]
         private static void HandleClientTargetRotation(ushort fromClientId, Message message)
@@ -83,7 +90,7 @@ namespace Assets.Code.ServerPart.Networking
         [MessageHandler((ushort)ClientToServerMessageType.SendKeepDistance)]
         private static void HandleKeepDistance(ushort fromClientId, Message message)
         {
-            _router.HandleKeepDistance(fromClientId, message);             
+            _router.HandleKeepDistance(fromClientId, message);
         }
 
         [MessageHandler((ushort)ClientToServerMessageType.SendSetOrbit)]

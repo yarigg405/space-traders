@@ -56,7 +56,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 72211444877463559
-    m_Localized: "\u041E\u0422\u0421\u0422\u042B\u041A\u041E\u0412\u0410\u0422\u042C\u0421\u042F"
+    m_Localized: DOCK
     m_Metadata:
       m_Items: []
   - m_Id: 72211444877463560
@@ -84,12 +84,200 @@ MonoBehaviour:
     m_Localized: Wrong password
     m_Metadata:
       m_Items: []
-  - m_Id: 83454847057367040
+  - m_Id: 101468646516187136
+    m_Localized: A server has already been created at this address
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265036787712
+    m_Localized: Trade Goods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730752
+    m_Localized: Industrial Goods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730753
+    m_Localized: Drugs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730754
+    m_Localized: Consumer Products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730755
+    m_Localized: Ships
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265078730756
+    m_Localized: Frigates
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925056
+    m_Localized: Cruisers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925057
+    m_Localized: Industrial Ships
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925058
+    m_Localized: Electronic Parts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925059
+    m_Localized: Garbage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925060
+    m_Localized: Hydrogen Batteries
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925061
+    m_Localized: Nanocontrollers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925062
+    m_Localized: Carbon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925063
+    m_Localized: Standart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925064
+    m_Localized: Advanced
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925065
+    m_Localized: Medicines
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925066
+    m_Localized: Wheat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925067
+    m_Localized: Dairy Products
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925068
+    m_Localized: Frozen Food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925069
+    m_Localized: Canned Food
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925070
+    m_Localized: Blue Pill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925071
+    m_Localized: Cocaine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105479265082925072
+    m_Localized: Metamphetamine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105484335509921792
+    m_Localized: Test Ship 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111401725397557248
+    m_Localized: Station
+    m_Metadata:
+      m_Items: []
+  - m_Id: 111401725439500288
+    m_Localized: System
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625472
+    m_Localized: '{0} kg'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625473
+    m_Localized: '{0} m3'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626043625474
+    m_Localized: Sellers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113103626047819776
+    m_Localized: Buyers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113177580234051584
+    m_Localized: Trade System
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113543662183374848
+    m_Localized: All Systems
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113549887474229248
     m_Localized: UNDOCK
     m_Metadata:
       m_Items: []
-  - m_Id: 101468646516187136
-    m_Localized: A server has already been created at this address
+  - m_Id: 122856198191157248
+    m_Localized: Water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198224711680
+    m_Localized: Algae
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198224711681
+    m_Localized: Salts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905984
+    m_Localized: Metal Alloys
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905985
+    m_Localized: Chlorine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905986
+    m_Localized: Synthetic Resins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905987
+    m_Localized: Cloth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122856198228905988
+    m_Localized: Consumer Electronics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459735904256
+    m_Localized: Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847296
+    m_Localized: Sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847297
+    m_Localized: Location
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847298
+    m_Localized: Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847299
+    m_Localized: Quantity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847300
+    m_Localized: Total
+    m_Metadata:
+      m_Items: []
+  - m_Id: 122939459777847301
+    m_Localized: Cancel
     m_Metadata:
       m_Items: []
   references:

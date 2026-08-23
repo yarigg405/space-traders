@@ -7,7 +7,7 @@ namespace Assets.Code.ServerPart.Worlds
     public sealed class ServerWorldsController : ITickable
     {
         private readonly EcsWorldsBuilder _worldsBuilder;
-        private readonly EcsWorldDestoyer _destoyer;
+        private readonly EcsWorldDestroyer _destroyer;
 
         private readonly Dictionary<string, EcsWorldInstance> _scenesWorldsDict;
 
@@ -15,7 +15,7 @@ namespace Assets.Code.ServerPart.Worlds
         public ServerWorldsController(EcsWorldsBuilder worldsBuilder)
         {
             _worldsBuilder = worldsBuilder;
-            _destoyer = new();
+            _destroyer = new();
 
             _scenesWorldsDict = new();
         }
@@ -41,7 +41,7 @@ namespace Assets.Code.ServerPart.Worlds
 
         public void DestroyWorld(string sceneName)
         {
-            _destoyer.DestroyWorld(_scenesWorldsDict[sceneName]);
+            _destroyer.DestroyWorld(_scenesWorldsDict[sceneName]);
             _scenesWorldsDict.Remove(sceneName);
         }
     }

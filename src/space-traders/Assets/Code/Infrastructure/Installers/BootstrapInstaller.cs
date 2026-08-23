@@ -6,6 +6,7 @@ using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.Common.StaticData;
 using Assets.Code.Common.Time;
+using Assets.Code.Common.TradingSystem;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.EntryPoints;
 using Assets.Code.Infrastructure.Loading;
@@ -25,6 +26,9 @@ namespace Assets.Code.Infrastructure.Installers
     {
         [SerializeField] private ConfigsStorage _configsStorage;
         [SerializeField] private PhysicsShapesStorage _shapesStorage;
+        [SerializeField] private ItemsCatalogSO _itemsCatalog;
+        [SerializeField] private TradeItemsCategoryConfig _categoriesConfig;
+        [SerializeField] private TradeOrdersGenerationConfig _ordersGenerationConfig;
 
         protected override void Install()
         {
@@ -50,6 +54,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<AssetProvider>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<ScenesLoader>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<SpaceSceneDataHolder>(Lifetime.Singleton).AsSelf();
+            Builder.Register<StationSceneDataHolder>(Lifetime.Singleton).AsSelf();
             Builder.Register<GameStateMachine>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<UnityTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<FeaturesContainer>(Lifetime.Singleton).AsSelf();
@@ -59,11 +64,14 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.RegisterInstance(_configsStorage);
             Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();
+            Builder.RegisterInstance(_itemsCatalog).AsImplementedInterfaces();
+            Builder.RegisterInstance(_categoriesConfig);
+            Builder.RegisterInstance(_ordersGenerationConfig);
         }
 
         private void BindNetworking()
         {
-            Builder.Register<AuthentificationContainer>(Lifetime.Singleton).AsSelf();
+            Builder.Register<AuthenticationContainer>(Lifetime.Singleton).AsSelf();
             Builder.Register<GameEnterManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Builder.Register<NetworkManager>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             Builder.Register<ClientMessenger>(Lifetime.Singleton).AsSelf();

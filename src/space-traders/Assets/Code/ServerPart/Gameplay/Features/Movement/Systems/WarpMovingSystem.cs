@@ -18,7 +18,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         private readonly ConfigsStorage _configsStorage;
 
 
-
         public WarpMovingSystem(GameContext game, ITimeService time, ConfigsStorage configsStorage)
         {
             _time = time;
@@ -72,7 +71,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 }
 
                 var remainingDistance = (container.WarpFinishPosition - entity.GlobalPosition).Magnitude();
-                var distanceModifier = remainingDistance / container.WarpTotalDistance;     //1 to 0                 
+                var distanceModifier = remainingDistance / container.WarpTotalDistance;     //1 to 0
 
 
                 if (distanceModifier < 0.5 && !container.IsBraking)

@@ -15,7 +15,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization.Systems
         {
             _entities = game.GetGroup(
                 GameMatcher.AllOf(
-                    GameMatcher.GlobalPosition, 
+                    GameMatcher.GlobalPosition,
                     GameMatcher.NeedSynchronize)
                 .NoneOf(GameMatcher.Warping));
 

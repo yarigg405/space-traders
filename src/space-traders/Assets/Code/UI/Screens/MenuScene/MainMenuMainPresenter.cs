@@ -14,17 +14,17 @@ namespace Assets.Code.UI.Screens.MenuScene
         private readonly IUIManager _uIManager;
         private readonly NetworkManager _networkManager;
         private readonly ILifetimeCancellationToken _cts;
-        private readonly AuthentificationContainer _authentification;
+        private readonly AuthenticationContainer _authentication;
 
         private MainMenuMainView _view;
 
         public MainMenuMainPresenter(IUIManager uIManager, NetworkManager networkManager,
-            ILifetimeCancellationToken cts, AuthentificationContainer authentification)
+            ILifetimeCancellationToken cts, AuthenticationContainer authentication)
         {
             _uIManager = uIManager;
             _networkManager = networkManager;
             _cts = cts;
-            _authentification = authentification;
+            _authentication = authentication;
         }
         void IPresenter<MainMenuMainView>.Show(MainMenuMainView view, object args)
         {
@@ -60,8 +60,8 @@ namespace Assets.Code.UI.Screens.MenuScene
             {
                 _uIManager.CloseModal<MessageBoxPopup>();
                 _uIManager.OpenModal<AwaitServerResponsePopup>();
-                _authentification.Login = "_server";
-                _authentification.Password = serverPassword;
+                _authentication.Login = "_server";
+                _authentication.Password = serverPassword;
 
                 await _networkManager.StartHost(port, serverPassword, _cts.Token);
                 _uIManager.GoToScreen<SelectCharacterScreen>();
@@ -82,7 +82,6 @@ namespace Assets.Code.UI.Screens.MenuScene
                 _uIManager.CloseModal<AwaitServerResponsePopup>();
             }
         }
-
 
 
         private void ClickOnJoinGame()

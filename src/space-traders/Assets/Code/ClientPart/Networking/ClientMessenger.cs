@@ -23,7 +23,6 @@ namespace Assets.Code.ClientPart.Networking
             _networkManager = networkManager;
         }
 
-
         public async UniTask<EnterGameResult> RequestForEnterTheGame(int selectedCharacterId, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestEnterTheGame)
@@ -61,9 +60,81 @@ namespace Assets.Code.ClientPart.Networking
             {
                 StationId = response.GetInt(),
                 StationName = response.GetString(),
+                StarSystemName = response.GetString(),
+                StationType = response.GetInt(),
+                ShipModelId = response.GetString(),
+                ShipFitJson = response.GetString(),
             };
 
             return result;
+        }
+
+        public async UniTask<StationTradeData> RequestForItemOrders(string itemId, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestItemOrders)
+                .AddString(itemId);
+
+            var response = await _requestSystem.SendRequest
+                (msg, ct, TimeSpan.FromSeconds(5));
+
+            var result = new StationTradeData
+            {
+                CurrentStationId = response.GetInt(),
+                CurrentStarSystemId = response.GetInt(),
+                CurrentPositionX = response.GetDouble(),
+                CurrentPositionY = response.GetDouble(),
+            };
+
+            var stationCount = response.GetInt();
+            result.Stations = new List<StationOrdersData>(stationCount);
+
+            for (int i = 0; i < stationCount; i++)
+            {
+                var station = new StationOrdersData
+                {
+                    StationId = response.GetInt(),
+                    StationName = response.GetString(),
+                    PositionX = response.GetDouble(),
+                    PositionY = response.GetDouble(),
+                    StarSystemId = response.GetInt(),
+                    StarSystemName = response.GetString(),
+                    BuyOrders = ReadOrders(response),
+                    SellOrders = ReadOrders(response),
+                };
+
+                result.Stations.Add(station);
+            }
+
+            return result;
+        }
+
+        private static List<TradeOrderData> ReadOrders(Message response)
+        {
+            var count = response.GetInt();
+            var orders = new List<TradeOrderData>(count);
+
+            for (int i = 0; i < count; i++)
+            {
+                orders.Add(new TradeOrderData
+                {
+                    Id = response.GetLong(),
+                    ItemId = response.GetString(),
+                    Price = response.GetLong(),
+                    Quantity = response.GetInt(),
+                    ExpiresAt = response.GetLong(),
+                });
+            }
+
+            return orders;
+        }
+
+        public async UniTask RequestForBuyItem(long orderId, int quantity, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestBuyItem)
+                .AddLong(orderId)
+                .AddInt(quantity);
+
+            await _requestSystem.SendRequest(msg, ct, TimeSpan.FromSeconds(5));
         }
 
         public async UniTask<IEnumerable<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)
@@ -137,12 +208,21 @@ namespace Assets.Code.ClientPart.Networking
             return result;
         }
 
+        public async UniTask<long> RequestForMoney(CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForMoney);
+
+            var response = await _requestSystem.SendRequest
+                (msg, ct, TimeSpan.FromSeconds(5));
+
+            return response.GetLong();
+        }
+
         public void RequestForLoadingSceneEntities()
         {
             var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
             _networkManager.Client.Send(message);
         }
-
 
 
         public void SendTargetRotationToServer(float targetRotation)

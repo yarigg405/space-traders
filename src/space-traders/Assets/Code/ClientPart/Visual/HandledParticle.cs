@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+using Assets.Code.ClientPart.View;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.VFX;
 using VContainer;
@@ -6,7 +7,7 @@ using VContainer;
 
 namespace Assets.Code.ClientPart.Visual
 {
-    internal sealed class HandledParticle : MonoBehaviour
+    internal sealed class HandledParticle : MonoBehaviour, IEntityComponentRegistrar
     {
         [SerializeField] private VisualEffect _vfx;
 
@@ -15,12 +16,12 @@ namespace Assets.Code.ClientPart.Visual
         private const string _teleportOffset = "TeleportOffset";
         private const string _needTeleportProperty = "ApplyTeleport";
 
-        private void OnEnable()
+        public void RegisterComponents()
         {
             _particlesHandler.AddParticle(this);
         }
 
-        private void OnDisable()
+        public void UnRegisterComponents()
         {
             _particlesHandler.RemoveParticle(this);
         }

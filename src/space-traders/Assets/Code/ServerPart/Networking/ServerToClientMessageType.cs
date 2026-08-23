@@ -9,6 +9,9 @@
         ResponseLoadStationData = 6,
         ResponseToUndock = 7,
         ResponseToDock = 8,
+        ResponseMoney = 9,
+        ResponseItemOrders = 10,
+        ResponseBuyItem = 11,
 
         CreateEntity = 50,
         DestroyEntity = 51,

@@ -2,6 +2,7 @@
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.UI;
+using Assets.Code.UI.Screens.GameMain;
 using Assets.Code.UI.Screens.GameSceneScreens.GameSceneMain;
 using VContainer.Unity;
 
@@ -36,6 +37,7 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
             _uiManager.GoToScreen<GameSceneMainScreen>();
             _uiManager.ClearHistory();
+            _uiManager.OpenModal<GameMainScreen>();
         }
     }
 }

@@ -32,7 +32,9 @@ namespace Assets.Code.UI
 
         void IScreen.Hide()
         {
-            var view = _viewsProvider.GetView<TView>();
+            if (!_viewsProvider.TryGetView<TView>(out var view))
+                return;
+
             _presenter.Hide(view);
             _screenRoot.HideView(view);
         }

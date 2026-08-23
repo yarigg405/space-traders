@@ -55,6 +55,20 @@ namespace Assets.Code.ClientPart.Networking
             _requestSystem.SetResponseOk(message);
         }
 
+        internal void HandleResponseMoney(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
+        internal void HandleResponseItemOrders(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
+        internal void HandleResponseBuyItem(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
 
 
         internal void HandleCreateEntity(Message message)

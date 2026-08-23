@@ -22,6 +22,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure
         {
             var characterId = _characterManager.GetCharacterIdForPlayer(clientId);
 
+            if (_locationManager.IsCharacterInStation(characterId))
+                return;
+
             if (playerEntity != null)
             {
                 _locationManager.SaveGlobalPosition(characterId, playerEntity.GlobalPosition);

@@ -31,7 +31,8 @@ namespace Assets.Code.UI.Screens
 
         void IScreen.Hide()
         {
-            var view = _viewsProvider.GetView<RequestDockPopupView>();
+            if (!_viewsProvider.TryGetView<RequestDockPopupView>(out var view))
+                return;
 
             _presenter.Hide(view);
             _screenRoot.HideView(view);

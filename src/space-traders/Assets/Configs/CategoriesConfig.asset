@@ -1,0 +1,274 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ba1df30b6c399a469a697de0a9ef76b, type: 3}
+  m_Name: CategoriesConfig
+  m_EditorClassIdentifier: Game::Assets.Code.Common.TradingSystem.TradeItemsCategoryConfig
+  _categories:
+  - Id: trade-goods
+    LocalizationKey: trade-goods
+    Icon: {fileID: 0}
+    FullCategoryId: trade-goods
+    SubCategories:
+    - Id: industrial-goods
+      LocalizationKey: industrial-goods
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods.industrial-goods
+      SubCategories: []
+    - Id: drugs
+      LocalizationKey: drugs
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods.drugs
+      SubCategories: []
+    - Id: consumer-goods
+      LocalizationKey: consumer-goods
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods.consumer-goods
+      SubCategories: []
+  - Id: ships
+    LocalizationKey: ships
+    Icon: {fileID: 0}
+    FullCategoryId: ships
+    SubCategories:
+    - Id: frigates
+      LocalizationKey: frigates
+      Icon: {fileID: 0}
+      FullCategoryId: ships.frigates
+      SubCategories:
+      - Id: standart
+        LocalizationKey: standart
+        Icon: {fileID: 0}
+        FullCategoryId: ships.frigates.standart
+        SubCategories: []
+      - Id: advanced
+        LocalizationKey: advanced
+        Icon: {fileID: 0}
+        FullCategoryId: ships.frigates.advanced
+        SubCategories: []
+    - Id: cruisers
+      LocalizationKey: cruisers
+      Icon: {fileID: 0}
+      FullCategoryId: ships.cruisers
+      SubCategories:
+      - Id: standart
+        LocalizationKey: standart
+        Icon: {fileID: 0}
+        FullCategoryId: ships.cruisers.standart
+        SubCategories: []
+      - Id: advanced
+        LocalizationKey: advanced
+        Icon: {fileID: 0}
+        FullCategoryId: ships.cruisers.advanced
+        SubCategories: []
+    - Id: industrial-ships
+      LocalizationKey: industrial-ships
+      Icon: {fileID: 0}
+      FullCategoryId: ships.industrial-ships
+      SubCategories:
+      - Id: standart
+        LocalizationKey: standart
+        Icon: {fileID: 0}
+        FullCategoryId: ships.industrial-ships.standart
+        SubCategories: []
+      - Id: advanced
+        LocalizationKey: advanced
+        Icon: {fileID: 0}
+        FullCategoryId: ships.industrial-ships.advanced
+        SubCategories: []
+  _cachedCategories:
+  - key: trade-goods
+    value:
+      Id: trade-goods
+      LocalizationKey: trade-goods
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods
+      SubCategories:
+      - Id: industrial-goods
+        LocalizationKey: industrial-goods
+        Icon: {fileID: 0}
+        FullCategoryId: trade-goods.industrial-goods
+        SubCategories: []
+      - Id: drugs
+        LocalizationKey: drugs
+        Icon: {fileID: 0}
+        FullCategoryId: trade-goods.drugs
+        SubCategories: []
+      - Id: consumer-goods
+        LocalizationKey: consumer-goods
+        Icon: {fileID: 0}
+        FullCategoryId: trade-goods.consumer-goods
+        SubCategories: []
+  - key: trade-goods.industrial-goods
+    value:
+      Id: industrial-goods
+      LocalizationKey: industrial-goods
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods.industrial-goods
+      SubCategories: []
+  - key: trade-goods.drugs
+    value:
+      Id: drugs
+      LocalizationKey: drugs
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods.drugs
+      SubCategories: []
+  - key: trade-goods.consumer-goods
+    value:
+      Id: consumer-goods
+      LocalizationKey: consumer-goods
+      Icon: {fileID: 0}
+      FullCategoryId: trade-goods.consumer-goods
+      SubCategories: []
+  - key: ships
+    value:
+      Id: ships
+      LocalizationKey: ships
+      Icon: {fileID: 0}
+      FullCategoryId: ships
+      SubCategories:
+      - Id: frigates
+        LocalizationKey: frigates
+        Icon: {fileID: 0}
+        FullCategoryId: ships.frigates
+        SubCategories:
+        - Id: standart
+          LocalizationKey: standart
+          Icon: {fileID: 0}
+          FullCategoryId: ships.frigates.standart
+          SubCategories: []
+        - Id: advanced
+          LocalizationKey: advanced
+          Icon: {fileID: 0}
+          FullCategoryId: ships.frigates.advanced
+          SubCategories: []
+      - Id: cruisers
+        LocalizationKey: cruisers
+        Icon: {fileID: 0}
+        FullCategoryId: ships.cruisers
+        SubCategories:
+        - Id: standart
+          LocalizationKey: standart
+          Icon: {fileID: 0}
+          FullCategoryId: ships.cruisers.standart
+          SubCategories: []
+        - Id: advanced
+          LocalizationKey: advanced
+          Icon: {fileID: 0}
+          FullCategoryId: ships.cruisers.advanced
+          SubCategories: []
+      - Id: industrial-ships
+        LocalizationKey: industrial-ships
+        Icon: {fileID: 0}
+        FullCategoryId: ships.industrial-ships
+        SubCategories:
+        - Id: standart
+          LocalizationKey: standart
+          Icon: {fileID: 0}
+          FullCategoryId: ships.industrial-ships.standart
+          SubCategories: []
+        - Id: advanced
+          LocalizationKey: advanced
+          Icon: {fileID: 0}
+          FullCategoryId: ships.industrial-ships.advanced
+          SubCategories: []
+  - key: ships.frigates
+    value:
+      Id: frigates
+      LocalizationKey: frigates
+      Icon: {fileID: 0}
+      FullCategoryId: ships.frigates
+      SubCategories:
+      - Id: standart
+        LocalizationKey: standart
+        Icon: {fileID: 0}
+        FullCategoryId: ships.frigates.standart
+        SubCategories: []
+      - Id: advanced
+        LocalizationKey: advanced
+        Icon: {fileID: 0}
+        FullCategoryId: ships.frigates.advanced
+        SubCategories: []
+  - key: ships.frigates.standart
+    value:
+      Id: standart
+      LocalizationKey: standart
+      Icon: {fileID: 0}
+      FullCategoryId: ships.frigates.standart
+      SubCategories: []
+  - key: ships.frigates.advanced
+    value:
+      Id: advanced
+      LocalizationKey: advanced
+      Icon: {fileID: 0}
+      FullCategoryId: ships.frigates.advanced
+      SubCategories: []
+  - key: ships.cruisers
+    value:
+      Id: cruisers
+      LocalizationKey: cruisers
+      Icon: {fileID: 0}
+      FullCategoryId: ships.cruisers
+      SubCategories:
+      - Id: standart
+        LocalizationKey: standart
+        Icon: {fileID: 0}
+        FullCategoryId: ships.cruisers.standart
+        SubCategories: []
+      - Id: advanced
+        LocalizationKey: advanced
+        Icon: {fileID: 0}
+        FullCategoryId: ships.cruisers.advanced
+        SubCategories: []
+  - key: ships.cruisers.standart
+    value:
+      Id: standart
+      LocalizationKey: standart
+      Icon: {fileID: 0}
+      FullCategoryId: ships.cruisers.standart
+      SubCategories: []
+  - key: ships.cruisers.advanced
+    value:
+      Id: advanced
+      LocalizationKey: advanced
+      Icon: {fileID: 0}
+      FullCategoryId: ships.cruisers.advanced
+      SubCategories: []
+  - key: ships.industrial-ships
+    value:
+      Id: industrial-ships
+      LocalizationKey: industrial-ships
+      Icon: {fileID: 0}
+      FullCategoryId: ships.industrial-ships
+      SubCategories:
+      - Id: standart
+        LocalizationKey: standart
+        Icon: {fileID: 0}
+        FullCategoryId: ships.industrial-ships.standart
+        SubCategories: []
+      - Id: advanced
+        LocalizationKey: advanced
+        Icon: {fileID: 0}
+        FullCategoryId: ships.industrial-ships.advanced
+        SubCategories: []
+  - key: ships.industrial-ships.standart
+    value:
+      Id: standart
+      LocalizationKey: standart
+      Icon: {fileID: 0}
+      FullCategoryId: ships.industrial-ships.standart
+      SubCategories: []
+  - key: ships.industrial-ships.advanced
+    value:
+      Id: advanced
+      LocalizationKey: advanced
+      Icon: {fileID: 0}
+      FullCategoryId: ships.industrial-ships.advanced
+      SubCategories: []

@@ -14,14 +14,14 @@ namespace Assets.Code.UI.Screens.MenuScene
     {
         private readonly ClientMessenger _clientMessenger;
         private readonly IUIManager _uiManager;
-        private readonly AuthentificationContainer _authentification;
+        private readonly AuthenticationContainer _authentication;
 
         public SelectCharacterIntent(ClientMessenger clientMessenger,
-            IUIManager uiManager, AuthentificationContainer authentificationContainer)
+            IUIManager uiManager, AuthenticationContainer authenticationContainer)
         {
             _clientMessenger = clientMessenger;
             _uiManager = uiManager;
-            _authentification = authentificationContainer;
+            _authentication = authenticationContainer;
         }
 
         async UniTask<object> IAsyncNavigationIntent.Load(CancellationToken token)
@@ -30,7 +30,7 @@ namespace Assets.Code.UI.Screens.MenuScene
             {
                 _uiManager.OpenModal<AwaitServerResponsePopup>();
                 var charactersData = await _clientMessenger
-                    .RequestForCharacters(_authentification.Login, _authentification.Password, token);
+                    .RequestForCharacters(_authentication.Login, _authentication.Password, token);
                 token.ThrowIfCancellationRequested();
                 return charactersData;
             }

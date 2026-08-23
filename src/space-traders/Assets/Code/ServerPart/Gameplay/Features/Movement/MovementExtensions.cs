@@ -106,8 +106,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
         }
 
 
-
-
         public static GameEntity ResetMovingComponents(this GameEntity entity)
         {
             if (entity.hasMovementTargetId)

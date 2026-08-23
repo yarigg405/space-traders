@@ -3,12 +3,17 @@ using Assets.Code.UI.Infrastructure.Impl;
 using Assets.Code.UI.Layers;
 using Assets.Code.UI.LoadingScreens;
 using Assets.Code.UI.Screens;
+using Assets.Code.UI.Screens.GameMain;
 using Assets.Code.UI.Screens.GameSceneScreens.GameSceneMain;
 using Assets.Code.UI.Screens.MenuScene;
 using Assets.Code.UI.Screens.MessageBox;
 using Assets.Code.UI.Screens.StationScreens;
+using Assets.Code.UI.Screens.TradingMain;
 using UnityEngine;
 using VContainer;
+using Assets.Code.UI.Screens.CurrentShipInfo;
+using Assets.Code.UI.Screens.Wallet;
+using Assets.Code.UI.Screens.BuySellPopups;
 
 
 namespace Assets.Code.Infrastructure.Installers
@@ -61,6 +66,12 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<RequestDockPopup>(Lifetime.Singleton);
             Builder.Register<RequestDockPopupPresenter>(Lifetime.Transient);
 
+            Builder.Register<TradingMainPopup>(Lifetime.Singleton);
+            Builder.Register<TradingMainPresenter>(Lifetime.Transient);
+
+            Builder.Register<BuyItemPopup>(Lifetime.Singleton);
+            Builder.Register<BuyItemPresenter>(Lifetime.Transient);
+
             Builder.Register<AwaitServerResponsePopup>(Lifetime.Singleton);
 
             Builder.Register<MessageBoxPopup>(Lifetime.Singleton);
@@ -68,6 +79,15 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<GameSceneMainScreen>(Lifetime.Singleton);
             Builder.Register<GameSceneMainPresenter>(Lifetime.Transient);
+
+            Builder.Register<GameMainScreen>(Lifetime.Singleton);
+            Builder.Register<GameMainPresenter>(Lifetime.Transient);
+
+            Builder.Register<WalletScreen>(Lifetime.Singleton);
+            Builder.Register<WalletPresenter>(Lifetime.Transient);
+
+            Builder.Register<CurrentShipInfoScreen>(Lifetime.Singleton);
+            Builder.Register<CurrentShipInfoPresenter>(Lifetime.Transient);
         }
     }
 }

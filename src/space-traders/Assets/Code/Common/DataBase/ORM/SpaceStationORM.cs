@@ -1,4 +1,4 @@
-﻿using SQLite;
+﻿ using SQLite;
 
 
 namespace Assets.Code.Common.DataBase.ORM
@@ -13,8 +13,12 @@ namespace Assets.Code.Common.DataBase.ORM
         [Column("name")]
         public string Name { get; set; }
 
+        [Indexed]
         [Column("starSystemId")]
         public int StarSystemId { get; set; }
+
+        [Column("stationType")]
+        public int StationType { get; set; }
 
         [Column("prefabName")]
         public string PrefabName { get; set; }

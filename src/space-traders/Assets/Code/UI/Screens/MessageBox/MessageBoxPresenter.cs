@@ -18,7 +18,7 @@ namespace Assets.Code.UI.Screens.MessageBox
             if (args is MessageBoxData data)
             {
                 view.CloseButton.onClick.AddListener(ClosePopup);
-                view.SetMessage("LocalizationTable", data.Message, data.Args);
+                view.SetMessage(data.Message, "LocalizationTable", data.Args);
                 view.Show();
                 return;
             }
@@ -26,12 +26,12 @@ namespace Assets.Code.UI.Screens.MessageBox
             if (args is string message)
             {
                 view.CloseButton.onClick.AddListener(ClosePopup);
-                view.SetMessage("LocalizationTable", message);
+                view.SetMessage(message, "LocalizationTable");
                 view.Show();
                 return;
             }
-            
-            Debug.LogError("MessageBox need MessageBoxData or string");            
+
+            Debug.LogError("MessageBox need MessageBoxData or string");
         }
 
         void IPresenter<MessageBoxView>.Hide(MessageBoxView view)

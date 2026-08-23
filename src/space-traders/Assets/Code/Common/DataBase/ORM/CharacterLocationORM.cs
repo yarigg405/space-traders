@@ -29,7 +29,7 @@ namespace Assets.Code.Common.DataBase.ORM
     }
 
     [Serializable]
-    public enum LocationType : ushort
+    public enum LocationType : byte
     {
         None,
         Space,

@@ -28,7 +28,6 @@ namespace Assets.Code.ClientPart.Visual.Player
         }
 
 
-
         async UniTask IAsyncStartable.StartAsync(CancellationToken cancellation)
         {
             await UniTask.WaitUntil(() =>
