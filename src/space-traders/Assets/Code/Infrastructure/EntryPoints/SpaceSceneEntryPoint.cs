@@ -1,4 +1,5 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features;
+using Assets.Code.ClientPart.Gameplay.Features.Movement;
 using Assets.Code.ClientPart.Networking;
 using Assets.Code.Infrastructure.Systems;
 using Assets.Code.UI;
@@ -29,9 +30,12 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
         void IStartable.Start()
         {
-            var feature = _systems.Create<ClientGameFeature>();
             _featuresContainer.Cleanup();
-            _featuresContainer.Add(feature);
+
+            _featuresContainer.AddFeature(_systems.Create<ClientGameFeature>());
+            _featuresContainer.AddFeature(_systems.Create<PresentationMovementFeature>());
+            _featuresContainer.AddFixedUpdateFeature(_systems.Create<SimulationMovementFeature>());
+
             _featuresContainer.Initialize();
             _messenger.RequestForLoadingSceneEntities();
 

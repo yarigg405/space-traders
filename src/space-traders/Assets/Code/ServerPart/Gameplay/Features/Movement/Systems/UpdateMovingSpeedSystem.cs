@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common.Time;
+﻿using Assets.Code.Common;
 using Entitas;
 using UnityEngine;
 
@@ -8,16 +8,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class UpdateMovingSpeedSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly ITimeService _time;
 
-        public UpdateMovingSpeedSystem(GameContext game, ITimeService time)
+        public UpdateMovingSpeedSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.MaxMoveSpeed,
                 GameMatcher.CurrentSpeedModifier,
                 GameMatcher.CurrentMoveSpeed
                 ));
-            _time = time;
         }
 
         void IExecuteSystem.Execute()
@@ -26,7 +24,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             {
                 var currentSpeed = entity.CurrentMoveSpeed;
                 var targetSpeed = entity.MaxMoveSpeed * entity.CurrentSpeedModifier;
-                var deltaSpeed = entity.MovingAcceleration * _time.DeltaTime;
+                var deltaSpeed = entity.MovingAcceleration * GameConstants.FIXED_DELTA_TIME;
                 var newSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deltaSpeed);
 
                 entity.ReplaceCurrentMoveSpeed(newSpeed);

@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common.Time;
+﻿using Assets.Code.Common;
 using Entitas;
 using UnityEngine;
 
@@ -8,16 +8,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class HandleVelocitySystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly ITimeService _time;
 
-        public HandleVelocitySystem(GameContext game, ITimeService time)
+        public HandleVelocitySystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.CurrentRotationY,
                 GameMatcher.CurrentMoveSpeed,
                 GameMatcher.VelocityAgility
             ));
-            _time = time;
         }
 
         void IExecuteSystem.Execute()
@@ -30,7 +28,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     Mathf.Sin(currentRadAngle),
                     Mathf.Cos(currentRadAngle)) * entity.CurrentMoveSpeed;
 
-                var newVelocity = Vector3.MoveTowards(entity.Velocity, targetVelocity, entity.VelocityAgility * _time.DeltaTime);
+                var newVelocity = Vector3.MoveTowards(entity.Velocity, targetVelocity, entity.VelocityAgility * GameConstants.FIXED_DELTA_TIME);
                 entity.ReplaceVelocity(newVelocity);
             }
         }

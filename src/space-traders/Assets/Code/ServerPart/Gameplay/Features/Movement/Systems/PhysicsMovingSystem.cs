@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common.Time;
+﻿using Assets.Code.Common;
 using Entitas;
 
 
@@ -7,12 +7,9 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class PhysicsMovingSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _movers;
-        private readonly ITimeService _time;
 
-        public PhysicsMovingSystem(GameContext game, ITimeService time)
+        public PhysicsMovingSystem(GameContext game)
         {
-            _time = time;
-
             _movers = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Moving,
                 GameMatcher.Velocity,
@@ -26,8 +23,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             {
                 var pos = mover.GlobalPosition;
 
-                pos.x += mover.Velocity.x * _time.DeltaTime;
-                pos.y += mover.Velocity.y * _time.DeltaTime;
+                pos.x += mover.Velocity.x * GameConstants.FIXED_DELTA_TIME;
+                pos.y += mover.Velocity.y * GameConstants.FIXED_DELTA_TIME;
 
                 mover.ReplaceGlobalPosition(pos);
                 mover.isNeedSynchronize = true;

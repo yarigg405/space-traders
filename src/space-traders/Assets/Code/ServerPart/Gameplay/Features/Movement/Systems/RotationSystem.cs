@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common.Time;
+﻿using Assets.Code.Common;
 using Entitas;
 using UnityEngine;
 using Yrr.Utils;
@@ -9,9 +9,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     internal sealed class RotationSystem : IExecuteSystem
     {
         private readonly IGroup<GameEntity> _entities;
-        private readonly ITimeService _time;
 
-        public RotationSystem(GameContext game, ITimeService time)
+        public RotationSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.Moving,
@@ -19,7 +18,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.TargetRotation,
                 GameMatcher.RotationSpeed
                 ));
-            _time = time;
         }
 
         void IExecuteSystem.Execute()
@@ -31,7 +29,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 var delta = Mathf.DeltaAngle(current, target);
 
                 var speedFactor = Mathf.Abs(delta) * .01f;
-                var maxRotationSpeed = entity.RotationSpeed * _time.DeltaTime;
+                var maxRotationSpeed = entity.RotationSpeed * GameConstants.FIXED_DELTA_TIME;
                 var effectiveRotationSpeed = maxRotationSpeed * speedFactor;
 
                 var newAngle = AnglesUtil.MoveTowardsAngle(current, target, effectiveRotationSpeed);

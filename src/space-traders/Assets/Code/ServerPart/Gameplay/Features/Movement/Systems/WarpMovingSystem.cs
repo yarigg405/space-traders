@@ -1,6 +1,5 @@
 ﻿using Assets.Code.Common;
 using Assets.Code.Common.StaticData;
-using Assets.Code.Common.Time;
 using Entitas;
 using System;
 using System.Collections.Generic;
@@ -14,14 +13,11 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
     {
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(64);
-        private readonly ITimeService _time;
         private readonly ConfigsStorage _configsStorage;
 
 
-        public WarpMovingSystem(GameContext game, ITimeService time, ConfigsStorage configsStorage)
+        public WarpMovingSystem(GameContext game, ConfigsStorage configsStorage)
         {
-            _time = time;
-
             _entities = game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.WarpDataContainer,
                 GameMatcher.GlobalPosition
@@ -39,7 +35,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             foreach (var entity in _entities.GetEntities(_buffer))
             {
                 var container = entity.WarpDataContainer;
-                var deltaTime = _time.DeltaTime / 2;
+                var deltaTime = GameConstants.FIXED_DELTA_TIME / 2;
 
                 if (container.IsBraking)
                     container.CurrentWarpingTime -= deltaTime;

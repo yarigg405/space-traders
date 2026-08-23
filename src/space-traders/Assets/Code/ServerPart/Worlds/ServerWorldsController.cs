@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code.Common;
+using Assets.Code.Common.Time;
+using System.Collections.Generic;
 using VContainer.Unity;
 
 
@@ -8,25 +10,39 @@ namespace Assets.Code.ServerPart.Worlds
     {
         private readonly EcsWorldsBuilder _worldsBuilder;
         private readonly EcsWorldDestroyer _destroyer;
+        private readonly ITimeService _time;
 
         private readonly Dictionary<string, EcsWorldInstance> _scenesWorldsDict;
+        private float _accumulator;
 
 
-        public ServerWorldsController(EcsWorldsBuilder worldsBuilder)
+        public ServerWorldsController(EcsWorldsBuilder worldsBuilder, ITimeService time)
         {
             _worldsBuilder = worldsBuilder;
             _destroyer = new();
 
             _scenesWorldsDict = new();
+            _time = time;
         }
 
         void ITickable.Tick()
         {
-            foreach (var world in _scenesWorldsDict.Values)
+            _accumulator += UnityEngine.Time.deltaTime;
+
+            int steps = 0;
+            while (_accumulator >= GameConstants.FIXED_DELTA_TIME && steps < GameConstants.MAX_CATCHUP_TICKS)
             {
-                world.Feature.Execute();
-                world.Feature.Cleanup();
+                foreach (var world in _scenesWorldsDict.Values)
+                {
+                    world.Feature.Execute();
+                    world.Feature.Cleanup();
+                }
+                _accumulator -= GameConstants.FIXED_DELTA_TIME;
+                steps++;
             }
+
+            if (steps == GameConstants.MAX_CATCHUP_TICKS)
+                _accumulator = 0f;
         }
 
         public EcsWorldInstance GetOrCreateWorld(string sceneName)

@@ -1,4 +1,5 @@
 ﻿using Assets.Code.ClientPart.Gameplay.Features;
+using Assets.Code.Common.Time;
 using Assets.Code.Infrastructure.States.StatesInfrastructure;
 
 
@@ -8,12 +9,16 @@ namespace Assets.Code.Infrastructure.States.GameStates
     {
         private readonly GameContext _game;
         private readonly FeaturesContainer _featuresContainer;
+        private readonly ITimeService _time;
+
         private bool _isExit;
 
-        public GameLoopState(GameContext game, FeaturesContainer featuresContainer)
+        public GameLoopState(GameContext game,
+            FeaturesContainer featuresContainer, ITimeService time)
         {
             _game = game;
             _featuresContainer = featuresContainer;
+            _time = time;
         }
 
         void IUpdatableState.Update()
@@ -21,7 +26,7 @@ namespace Assets.Code.Infrastructure.States.GameStates
             if (_isExit) return;
             if (!_featuresContainer.IsInitialized) return;
 
-            _featuresContainer.Tick();
+            _featuresContainer.Tick(_time.DeltaTime);
         }
 
         public override void Exit()

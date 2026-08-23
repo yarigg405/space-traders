@@ -2,6 +2,10 @@
 {
     public class GameConstants
     {
+        public const int TICK_RATE = 30;
+        public const float FIXED_DELTA_TIME = 1f / TICK_RATE;
+        public const int MAX_CATCHUP_TICKS = 5;
+
         public const double GAME_SCENE_QUADRANT_SIZE = 50_000;
         public const double GAME_SCENE_HALF_QUADRANT_SIZE = 25_000;
 

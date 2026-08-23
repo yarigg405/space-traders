@@ -11,7 +11,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         private readonly IGroup<GameEntity> _entities;
         private readonly List<GameEntity> _buffer = new(4);
 
-        private float _dockingTime = 5f;
+        private const float _dockingTime = 5f;
 
         public ShipStartUndockingSystem(GameContext game)
         {

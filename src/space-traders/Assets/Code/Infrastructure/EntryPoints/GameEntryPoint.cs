@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Infrastructure.States.StateMachine;
+using UnityEngine;
 using VContainer.Unity;
 
 
@@ -16,6 +17,7 @@ namespace Assets.Code.Infrastructure.EntryPoints
 
         void IStartable.Start()
         {
+           // Application.targetFrameRate = 10;
             _stateMachine.Enter<BootstrapState>();
         }
     }

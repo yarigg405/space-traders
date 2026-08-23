@@ -9,7 +9,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
 {
     internal sealed class InputWASDListenSystem : IExecuteSystem
     {
-        private readonly IGroup<InputEntity> _inputs;
         private readonly IGroup<GameEntity> _players;
 
         private readonly InputReferencesContainer _input;
@@ -39,7 +38,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
                     continue;
 
                 var dt = _time.DeltaTime;
-
 
                 var currentRotation = player.TargetRotation;
                 currentRotation += moveValue.x * _rotationModifier * dt;
