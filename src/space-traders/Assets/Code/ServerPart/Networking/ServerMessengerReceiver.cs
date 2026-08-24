@@ -73,19 +73,7 @@ namespace Assets.Code.ServerPart.Networking
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)
         {
             _router.HandleEntitiesLoading(fromClientId, message);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendTargetRotation)]
-        private static void HandleClientTargetRotation(ushort fromClientId, Message message)
-        {
-            _router.HandleClientTargetRotation(fromClientId, message);
-        }
-
-        [MessageHandler((ushort)ClientToServerMessageType.SendSpeedModifier)]
-        private static void HandleClientSpeedModifier(ushort fromClientId, Message message)
-        {
-            _router.HandleClientSpeedModifier(fromClientId, message);
-        }
+        }        
 
         [MessageHandler((ushort)ClientToServerMessageType.SendKeepDistance)]
         private static void HandleKeepDistance(ushort fromClientId, Message message)
@@ -103,6 +91,12 @@ namespace Assets.Code.ServerPart.Networking
         private static void HandleSetWarpTo(ushort fromClientId, Message message)
         {
             _router.HandleSetWarpTo(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.SendMoveInput)]
+        private static void HandeMoveInput(ushort fromClientId, Message message)
+        {
+            _router.HandleMoveInput(fromClientId, message);
         }
     }
 }

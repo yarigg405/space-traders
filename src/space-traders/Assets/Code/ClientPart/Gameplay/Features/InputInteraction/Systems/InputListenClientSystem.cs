@@ -30,7 +30,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
                     var clickPos = input.ClickedPosition;
                     var targetRotation = AnglesUtil.GetAngleDirectionY(player.LocalPosition, input.ClickedPosition);
 
-                    _messenger.SendTargetRotationToServer(targetRotation);
+                  //  _messenger.SendTargetRotationToServer(targetRotation);
                 }
             }
         }

@@ -15,11 +15,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure
             _clientMessenger = clientMessenger;
         }
 
-        internal void SetSpeedModifier(float value)
-        {
-            _clientMessenger.SendSpeedModifierToServer(value);
-        }
-
         internal void SetKeepDistance(GameEntity target, Vector2 minMaxDistance)
         {
             _clientMessenger.SendKeepDistance(target.Id, minMaxDistance);

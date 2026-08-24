@@ -179,7 +179,7 @@ namespace Assets.Code.ClientPart.Networking
             }
         }
 
-        public async UniTask<string> RequestForDock(int stationId, int dockingBayIndex,  CancellationToken ct)
+        public async UniTask<string> RequestForDock(int stationId, int dockingBayIndex, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForDock)
                 .AddInt(stationId)
@@ -187,7 +187,7 @@ namespace Assets.Code.ClientPart.Networking
                 ;
 
             var response = await _requestSystem.SendRequest
-                (msg,ct, TimeSpan.FromSeconds(5));
+                (msg, ct, TimeSpan.FromSeconds(5));
 
             var result = response.GetString();
             return result;
@@ -223,21 +223,15 @@ namespace Assets.Code.ClientPart.Networking
             var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
             _networkManager.Client.Send(message);
         }
+        
 
-
-        public void SendTargetRotationToServer(float targetRotation)
+        public void SendMoveInput(Vector2 moveValue)
         {
-            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendTargetRotation)
-                .AddFloat(targetRotation);
+            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendMoveInput)
+                .AddVector2(moveValue);
             _networkManager.Client.Send(message);
         }
 
-        public void SendSpeedModifierToServer(float speedModifier)
-        {
-            var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendSpeedModifier)
-                .AddFloat(speedModifier);
-            _networkManager.Client.Send(message);
-        }
 
         public void SendKeepDistance(uint targetId, Vector2 minMaxDistance)
         {

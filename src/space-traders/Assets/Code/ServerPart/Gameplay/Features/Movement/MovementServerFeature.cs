@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Common.Time.Systems;
 using Assets.Code.Infrastructure.Systems;
+using Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems;
 using Assets.Code.ServerPart.Gameplay.Features.Movement.Systems;
 
 
@@ -10,6 +11,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
         public MovementServerFeature(ISystemFactory systems)
         {
             Add(systems.Create<TickIncrementSystem>());
+            Add(systems.Create<ApplyMoveInputSystem>());
+            Add(systems.Create<IntegratePlayerInputSystem>());
 
             Add(systems.Create<OrbitMovingSystem>());
             Add(systems.Create<KeepDistanceSystem>());

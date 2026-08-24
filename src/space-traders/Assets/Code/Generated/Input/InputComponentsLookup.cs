@@ -13,13 +13,14 @@ public static class InputComponentsLookup {
     public const int Input = 2;
     public const int InputConsumerEntityId = 3;
     public const int KeepDistanceMinMax = 4;
-    public const int MovementTargetId = 5;
-    public const int OrbitingRadius = 6;
-    public const int PressedButtonsContainer = 7;
-    public const int TargetRotation = 8;
-    public const int WarpFinishCoordinates = 9;
+    public const int MoveInput = 5;
+    public const int MovementTargetId = 6;
+    public const int OrbitingRadius = 7;
+    public const int PressedButtonsContainer = 8;
+    public const int TargetRotation = 9;
+    public const int WarpFinishCoordinates = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "ClickedPosition",
@@ -27,6 +28,7 @@ public static class InputComponentsLookup {
         "Input",
         "InputConsumerEntityId",
         "KeepDistanceMinMax",
+        "MoveInput",
         "MovementTargetId",
         "OrbitingRadius",
         "PressedButtonsContainer",
@@ -40,6 +42,7 @@ public static class InputComponentsLookup {
         typeof(Assets.Code.Common.Components.Input),
         typeof(Assets.Code.Common.Components.InputConsumerEntityId),
         typeof(Assets.Code.Common.Components.KeepDistanceMinMax),
+        typeof(Assets.Code.Common.Components.MoveInput),
         typeof(Assets.Code.Common.Components.MovementTargetId),
         typeof(Assets.Code.Common.Components.OrbitingRadius),
         typeof(Assets.Code.Common.Components.PressedButtonsContainerComponent),

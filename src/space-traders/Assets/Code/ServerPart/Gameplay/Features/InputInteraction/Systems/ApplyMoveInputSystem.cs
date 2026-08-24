@@ -5,22 +5,24 @@ using Entitas;
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
 {
-    internal sealed class SetPlayerDirectionByInputSystem : IExecuteSystem
+    internal sealed class ApplyMoveInputSystem : IExecuteSystem
     {
         private readonly IGroup<InputEntity> _inputs;
-        private readonly EntitiesSynchronizator _synchronizator;
         private readonly GameContext _game;
+        private readonly EntitiesSynchronizator _synchronizator;
 
-        public SetPlayerDirectionByInputSystem(GameContext game,
-            InputContext input, EntitiesSynchronizator synchronizator)
+
+        public ApplyMoveInputSystem(GameContext game, InputContext input,
+            EntitiesSynchronizator synchronizator)
         {
+            _game = game;
+            _synchronizator = synchronizator;
+
             _inputs = input.GetGroup(InputMatcher.AllOf(
                 InputMatcher.Input,
-                InputMatcher.TargetRotation,
+                InputMatcher.MoveInput,
                 InputMatcher.InputConsumerEntityId
                 ));
-            _synchronizator = synchronizator;
-            _game = game;
         }
 
         void IExecuteSystem.Execute()
@@ -28,12 +30,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
             foreach (var input in _inputs)
             {
                 var player = _game.GetEntityWithId(input.InputConsumerEntityId);
-                player.ResetMovingComponents();
+                player.ReplaceMoveInput(input.MoveInput);
 
-                player.ReplaceTargetRotation(input.TargetRotation);
-
-                _synchronizator.UpdateComponentsForEntity(player,
-                   MovementExtensions.GetMovementComponentsForReset());
+                if (input.MoveInput.sqrMagnitude > 0.0001f)
+                {
+                    player.ResetMovingComponents();
+                    _synchronizator.UpdateComponentsForEntity(player, MovementExtensions.GetMovementComponentsForReset());
+                }
             }
         }
     }

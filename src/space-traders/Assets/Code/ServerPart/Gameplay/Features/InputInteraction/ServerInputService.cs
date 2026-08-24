@@ -3,6 +3,7 @@ using Assets.Code.Common.Extensions;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Networking;
 using Assets.Code.ServerPart.Worlds;
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -23,33 +24,39 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
             _clientSceneConnector = clientSceneConnector;
         }
 
-        public void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
+        internal void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
         {
             CreateNewInputEntityForPlayer(fromClientId)?
                 .AddTargetRotation(targetRotation);
         }
 
-        public void SetPlayerSpeedModifier(ushort fromClientId, float targetSpeedModifier)
+        internal void SetPlayerSpeedModifier(ushort fromClientId, float targetSpeedModifier)
         {
             CreateNewInputEntityForPlayer(fromClientId)?
                 .AddCurrentSpeedModifier(targetSpeedModifier);
         }
 
-        public void SetPlayerKeepDistance(ushort fromClientId, uint targetId, Vector2 minMaxDistance)
+        internal void SetPlayerMoveInput(ushort fromClientId, Vector2 moveInput)
+        {
+            CreateNewInputEntityForPlayer(fromClientId)?
+                .AddMoveInput(moveInput);
+        }
+
+        internal void SetPlayerKeepDistance(ushort fromClientId, uint targetId, Vector2 minMaxDistance)
         {
             CreateNewInputEntityForPlayer(fromClientId)?
                 .AddMovementTargetId(targetId)
                 .AddKeepDistanceMinMax(minMaxDistance);
         }
 
-        public void SetPlayerOrbitMoving(ushort fromClientId, uint targetId, float orbitRadius)
+        internal void SetPlayerOrbitMoving(ushort fromClientId, uint targetId, float orbitRadius)
         {
             CreateNewInputEntityForPlayer(fromClientId)?
                 .AddMovementTargetId(targetId)
                 .AddOrbitingRadius(orbitRadius);
         }
 
-        public void SetPlayerWarpTo(ushort fromClientId, double2 coordinates)
+        internal void SetPlayerWarpTo(ushort fromClientId, double2 coordinates)
         {
             CreateNewInputEntityForPlayer(fromClientId)?
                 .AddWarpFinishCoordinates(coordinates);

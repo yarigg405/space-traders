@@ -46,7 +46,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(StationDockingBayIndex)] = "sdi",
             [typeof(IgnoreCollision)] = "ic",
             [typeof(DockingInProccess)] = "dip",
-            [typeof(UndockingInProccess)] = "uip"
+            [typeof(UndockingInProccess)] = "uip",
+            [typeof(MoveInput)] = "mi"
         };
 
         private readonly Dictionary<string, Type> _typeByShortName;

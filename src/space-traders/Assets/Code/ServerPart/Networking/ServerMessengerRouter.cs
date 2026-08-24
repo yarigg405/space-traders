@@ -7,6 +7,7 @@ using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Assets.Code.ServerPart.Gameplay.Features.Trading;
 using Riptide;
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -373,6 +374,13 @@ namespace Assets.Code.ServerPart.Networking
             var speedModifier = message.GetFloat();
             _serverInputService.SetPlayerSpeedModifier(fromClientId, speedModifier);
         }
+
+        internal void HandleMoveInput(ushort fromClientId, Message message)
+        {
+            var moveInput = message.GetVector2();
+            _serverInputService.SetPlayerMoveInput(fromClientId, moveInput);
+        }
+
 
         internal void HandleKeepDistance(ushort fromClientId, Message message)
         {

@@ -32,50 +32,51 @@ public static class GameComponentsLookup {
     public const int LocalPosition = 21;
     public const int Mass = 22;
     public const int MaxMoveSpeed = 23;
-    public const int MovementTargetId = 24;
-    public const int Moving = 25;
-    public const int MovingAcceleration = 26;
-    public const int NeedSynchronize = 27;
-    public const int OrbitingRadius = 28;
-    public const int ParentEntity = 29;
-    public const int PhysicShape = 30;
-    public const int PhysicsRadius = 31;
-    public const int Planet = 32;
-    public const int Player = 33;
-    public const int PlayerNetworkId = 34;
-    public const int PreviousFrameLocalPosition = 35;
-    public const int QuadrantIndex = 36;
-    public const int ReadyToCollectCollisions = 37;
-    public const int Rigidbody = 38;
-    public const int RotationSpeed = 39;
-    public const int SelfDestructTimer = 40;
-    public const int Ship = 41;
-    public const int ShipCanBeDocked = 42;
-    public const int ShipsInDockZone = 43;
-    public const int SkyboxCoordinates = 44;
-    public const int Station = 45;
-    public const int StationDockingBay = 46;
-    public const int StationDockingBayIndex = 47;
-    public const int TargetRotation = 48;
-    public const int Transform = 49;
-    public const int Trigger = 50;
-    public const int TriggerEnterEventHandler = 51;
-    public const int TriggerExitEventHandler = 52;
-    public const int TriggerStayEventHandler = 53;
-    public const int UndockingInProccess = 54;
-    public const int UndockingTimer = 55;
-    public const int Velocity = 56;
-    public const int VelocityAgility = 57;
-    public const int View = 58;
-    public const int ViewModel = 59;
-    public const int ViewPath = 60;
-    public const int ViewPrefab = 61;
-    public const int WarpDataContainer = 62;
-    public const int WarpFinishCoordinates = 63;
-    public const int Warping = 64;
-    public const int WarpPreparation = 65;
+    public const int MoveInput = 24;
+    public const int MovementTargetId = 25;
+    public const int Moving = 26;
+    public const int MovingAcceleration = 27;
+    public const int NeedSynchronize = 28;
+    public const int OrbitingRadius = 29;
+    public const int ParentEntity = 30;
+    public const int PhysicShape = 31;
+    public const int PhysicsRadius = 32;
+    public const int Planet = 33;
+    public const int Player = 34;
+    public const int PlayerNetworkId = 35;
+    public const int PreviousFrameLocalPosition = 36;
+    public const int QuadrantIndex = 37;
+    public const int ReadyToCollectCollisions = 38;
+    public const int Rigidbody = 39;
+    public const int RotationSpeed = 40;
+    public const int SelfDestructTimer = 41;
+    public const int Ship = 42;
+    public const int ShipCanBeDocked = 43;
+    public const int ShipsInDockZone = 44;
+    public const int SkyboxCoordinates = 45;
+    public const int Station = 46;
+    public const int StationDockingBay = 47;
+    public const int StationDockingBayIndex = 48;
+    public const int TargetRotation = 49;
+    public const int Transform = 50;
+    public const int Trigger = 51;
+    public const int TriggerEnterEventHandler = 52;
+    public const int TriggerExitEventHandler = 53;
+    public const int TriggerStayEventHandler = 54;
+    public const int UndockingInProccess = 55;
+    public const int UndockingTimer = 56;
+    public const int Velocity = 57;
+    public const int VelocityAgility = 58;
+    public const int View = 59;
+    public const int ViewModel = 60;
+    public const int ViewPath = 61;
+    public const int ViewPrefab = 62;
+    public const int WarpDataContainer = 63;
+    public const int WarpFinishCoordinates = 64;
+    public const int Warping = 65;
+    public const int WarpPreparation = 66;
 
-    public const int TotalComponents = 66;
+    public const int TotalComponents = 67;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -102,6 +103,7 @@ public static class GameComponentsLookup {
         "LocalPosition",
         "Mass",
         "MaxMoveSpeed",
+        "MoveInput",
         "MovementTargetId",
         "Moving",
         "MovingAcceleration",
@@ -171,6 +173,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.LocalPosition),
         typeof(Assets.Code.Common.Components.Mass),
         typeof(Assets.Code.Common.Components.MaxMoveSpeed),
+        typeof(Assets.Code.Common.Components.MoveInput),
         typeof(Assets.Code.Common.Components.MovementTargetId),
         typeof(Assets.Code.Common.Components.Moving),
         typeof(Assets.Code.Common.Components.MovingAcceleration),
