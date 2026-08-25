@@ -225,7 +225,7 @@ namespace Assets.Code.ClientPart.Networking
         }
         
 
-        public void SendMoveInput(Vector2 moveValue)
+        public void SendMoveInput(uint tick, Vector2 moveValue)
         {
             var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendMoveInput)
                 .AddVector2(moveValue);

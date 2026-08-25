@@ -44,6 +44,7 @@ namespace Assets.Code.ClientPart
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
+            if (entity.isClientPlayer) return;
 
             var delta = serverGlobalPosition - entity.GlobalPosition;
 
@@ -56,6 +57,7 @@ namespace Assets.Code.ClientPart
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
+            if (entity.isClientPlayer) return;
 
             var current = entity.CurrentRotationY;
 
@@ -67,6 +69,7 @@ namespace Assets.Code.ClientPart
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
+            if (entity.isClientPlayer) return;
 
             foreach (var component in snapshot.ComponentsForRemoving)
             {

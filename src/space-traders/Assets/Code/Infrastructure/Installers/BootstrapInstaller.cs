@@ -80,6 +80,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<ClientMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<TickCounter>(Lifetime.Singleton);
             Builder.Register<ClockSyncService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            Builder.Register<ClientCommandBuffer>(Lifetime.Singleton).AsSelf();
         }
 
         private void BindFactories()
