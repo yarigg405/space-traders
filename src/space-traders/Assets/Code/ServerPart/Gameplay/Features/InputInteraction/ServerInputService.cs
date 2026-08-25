@@ -6,6 +6,7 @@ using Assets.Code.ServerPart.Worlds;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
@@ -15,13 +16,15 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
         private readonly PlayerLocationManager _playerDataProvider;
         private readonly ServerWorldsController _worldsController;
         private readonly ClientSceneConnector _clientSceneConnector;
+        private readonly ServerCommandBuffer _commandBuffer;
 
         public ServerInputService(PlayerLocationManager playerDataProvider,
-            ServerWorldsController worldsController, ClientSceneConnector clientSceneConnector)
+            ServerWorldsController worldsController, ClientSceneConnector clientSceneConnector, ServerCommandBuffer commandBuffer)
         {
             _playerDataProvider = playerDataProvider;
             _worldsController = worldsController;
             _clientSceneConnector = clientSceneConnector;
+            _commandBuffer = commandBuffer;
         }
 
         internal void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
@@ -36,10 +39,11 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
                 .AddCurrentSpeedModifier(targetSpeedModifier);
         }
 
-        internal void SetPlayerMoveInput(ushort fromClientId, Vector2 moveInput)
+        internal void SetPlayerMoveInput(ushort fromClientId, uint tick, Vector2 moveInput)
         {
-            CreateNewInputEntityForPlayer(fromClientId)?
-                .AddMoveInput(moveInput);
+            var entityId = _clientSceneConnector.GetEntityIdForPlayer(fromClientId);
+            if (entityId == 0) return;
+            _commandBuffer.Store(entityId, tick, moveInput);
         }
 
         internal void SetPlayerKeepDistance(ushort fromClientId, uint targetId, Vector2 minMaxDistance)

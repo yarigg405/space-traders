@@ -43,6 +43,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<ServerInputService>(Lifetime.Singleton).AsSelf();
                 builder.Register<TickCounter>(Lifetime.Scoped);
+                builder.Register<ServerCommandBuffer>(Lifetime.Singleton);
 
                 builder.Register<ServerMessenger>(Lifetime.Singleton).AsSelf();
                 builder.Register<ServerMessengerRouter>(Lifetime.Singleton).AsSelf();

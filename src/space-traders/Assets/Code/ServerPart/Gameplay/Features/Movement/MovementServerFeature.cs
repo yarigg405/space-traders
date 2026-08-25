@@ -10,7 +10,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
     {
         public MovementServerFeature(ISystemFactory systems)
         {
-            Add(systems.Create<ApplyMoveInputSystem>());
+            Add(systems.Create<TickIncrementSystem>());
+            Add(systems.Create<ConsumePlayerCommandSystem>());
             Add(systems.Create<IntegratePlayerInputSystem>());
 
             Add(systems.Create<OrbitMovingSystem>());

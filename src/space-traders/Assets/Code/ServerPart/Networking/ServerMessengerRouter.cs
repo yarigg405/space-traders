@@ -381,8 +381,9 @@ namespace Assets.Code.ServerPart.Networking
 
         internal void HandleMoveInput(ushort fromClientId, Message message)
         {
+            var tick = message.GetUInt();
             var moveInput = message.GetVector2();
-            _serverInputService.SetPlayerMoveInput(fromClientId, moveInput);
+            _serverInputService.SetPlayerMoveInput(fromClientId, tick, moveInput);
         }
 
 

@@ -223,11 +223,12 @@ namespace Assets.Code.ClientPart.Networking
             var message = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestForSceneEntities);
             _networkManager.Client.Send(message);
         }
-        
+
 
         public void SendMoveInput(uint tick, Vector2 moveValue)
         {
             var message = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.SendMoveInput)
+                .AddUInt(tick)
                 .AddVector2(moveValue);
             _networkManager.Client.Send(message);
         }
