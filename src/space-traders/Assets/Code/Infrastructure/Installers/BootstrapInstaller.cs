@@ -79,6 +79,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<ClientMessengerRouter>(Lifetime.Singleton).AsSelf();
             Builder.Register<ClientMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<TickCounter>(Lifetime.Singleton);
+            Builder.Register<InterpolationClock>(Lifetime.Singleton);
             Builder.Register<ClockSyncService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             Builder.Register<ClientCommandBuffer>(Lifetime.Singleton).AsSelf();
         }

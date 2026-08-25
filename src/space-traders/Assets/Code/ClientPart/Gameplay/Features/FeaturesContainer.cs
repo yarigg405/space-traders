@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Common;
+using Assets.Code.Common.Time;
 using System.Collections.Generic;
 
 
@@ -8,6 +9,12 @@ namespace Assets.Code.ClientPart.Gameplay.Features
     {
         private readonly List<Feature> _features = new();
         private readonly List<Feature> _fixedUpdateFeatures = new();
+        private readonly InterpolationClock _interpolation;
+
+        public FeaturesContainer(InterpolationClock interpolation)
+        {
+            _interpolation = interpolation;
+        }
 
         private float _accumulator;
 
@@ -88,6 +95,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features
 
             if (steps == GameConstants.MAX_CATCHUP_TICKS)
                 _accumulator = 0f;
+
+            _interpolation.Alpha = _accumulator / GameConstants.FIXED_DELTA_TIME;
 
             foreach (var feature in _features)
             {

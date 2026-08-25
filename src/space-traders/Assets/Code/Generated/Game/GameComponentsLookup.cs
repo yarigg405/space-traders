@@ -45,38 +45,40 @@ public static class GameComponentsLookup {
     public const int Player = 34;
     public const int PlayerNetworkId = 35;
     public const int PreviousFrameLocalPosition = 36;
-    public const int QuadrantIndex = 37;
-    public const int ReadyToCollectCollisions = 38;
-    public const int Rigidbody = 39;
-    public const int RotationSpeed = 40;
-    public const int SelfDestructTimer = 41;
-    public const int Ship = 42;
-    public const int ShipCanBeDocked = 43;
-    public const int ShipsInDockZone = 44;
-    public const int SkyboxCoordinates = 45;
-    public const int Station = 46;
-    public const int StationDockingBay = 47;
-    public const int StationDockingBayIndex = 48;
-    public const int TargetRotation = 49;
-    public const int Transform = 50;
-    public const int Trigger = 51;
-    public const int TriggerEnterEventHandler = 52;
-    public const int TriggerExitEventHandler = 53;
-    public const int TriggerStayEventHandler = 54;
-    public const int UndockingInProccess = 55;
-    public const int UndockingTimer = 56;
-    public const int Velocity = 57;
-    public const int VelocityAgility = 58;
-    public const int View = 59;
-    public const int ViewModel = 60;
-    public const int ViewPath = 61;
-    public const int ViewPrefab = 62;
-    public const int WarpDataContainer = 63;
-    public const int WarpFinishCoordinates = 64;
-    public const int Warping = 65;
-    public const int WarpPreparation = 66;
+    public const int PreviousTickGlobalPosition = 37;
+    public const int PreviousTickRotationY = 38;
+    public const int QuadrantIndex = 39;
+    public const int ReadyToCollectCollisions = 40;
+    public const int Rigidbody = 41;
+    public const int RotationSpeed = 42;
+    public const int SelfDestructTimer = 43;
+    public const int Ship = 44;
+    public const int ShipCanBeDocked = 45;
+    public const int ShipsInDockZone = 46;
+    public const int SkyboxCoordinates = 47;
+    public const int Station = 48;
+    public const int StationDockingBay = 49;
+    public const int StationDockingBayIndex = 50;
+    public const int TargetRotation = 51;
+    public const int Transform = 52;
+    public const int Trigger = 53;
+    public const int TriggerEnterEventHandler = 54;
+    public const int TriggerExitEventHandler = 55;
+    public const int TriggerStayEventHandler = 56;
+    public const int UndockingInProccess = 57;
+    public const int UndockingTimer = 58;
+    public const int Velocity = 59;
+    public const int VelocityAgility = 60;
+    public const int View = 61;
+    public const int ViewModel = 62;
+    public const int ViewPath = 63;
+    public const int ViewPrefab = 64;
+    public const int WarpDataContainer = 65;
+    public const int WarpFinishCoordinates = 66;
+    public const int Warping = 67;
+    public const int WarpPreparation = 68;
 
-    public const int TotalComponents = 67;
+    public const int TotalComponents = 69;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -116,6 +118,8 @@ public static class GameComponentsLookup {
         "Player",
         "PlayerNetworkId",
         "PreviousFrameLocalPosition",
+        "PreviousTickGlobalPosition",
+        "PreviousTickRotationY",
         "QuadrantIndex",
         "ReadyToCollectCollisions",
         "Rigidbody",
@@ -186,6 +190,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.Player),
         typeof(Assets.Code.Common.Components.PlayerNetworkId),
         typeof(Assets.Code.Common.Components.PreviousFrameLocalPosition),
+        typeof(Assets.Code.Common.Components.PreviousTickGlobalPosition),
+        typeof(Assets.Code.Common.Components.PreviousTickRotationY),
         typeof(Assets.Code.Common.Components.QuadrantIndex),
         typeof(Assets.Code.Common.Components.ReadyToCollectCollisions),
         typeof(Assets.Code.Common.Components.RigidbodyComponent),

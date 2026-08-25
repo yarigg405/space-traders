@@ -1,7 +1,4 @@
 ﻿using Entitas;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
@@ -19,7 +16,10 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
         {
             foreach (var entity in _entities)
             {
-//                entity.ReplaPre
+                entity.ReplacePreviousTickGlobalPosition(entity.GlobalPosition);
+
+                if (entity.hasCurrentRotationY)
+                    entity.ReplacePreviousTickRotationY(entity.CurrentRotationY);
             }
         }
     }

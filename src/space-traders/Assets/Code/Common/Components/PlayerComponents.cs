@@ -1,6 +1,5 @@
 ﻿using Assets.Code.Common.Serialization;
 using Entitas;
-using Unity.Mathematics;
 
 
 namespace Assets.Code.Common.Components
