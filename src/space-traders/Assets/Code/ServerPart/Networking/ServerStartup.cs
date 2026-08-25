@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Common.DataBase;
 using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Common.StaticData.Staff;
+using Assets.Code.Common.Time;
 using Assets.Code.Infrastructure.DI;
 using Assets.Code.Infrastructure.Identifiers;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
@@ -8,8 +9,8 @@ using Assets.Code.ServerPart.Gameplay.Features.Player.Factory;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Assets.Code.ServerPart.Gameplay.Features.PointsOfInterest.Factories;
-using Assets.Code.ServerPart.Gameplay.Features.Trading;
 using Assets.Code.ServerPart.Gameplay.Features.SkyboxObjects.Factory;
+using Assets.Code.ServerPart.Gameplay.Features.Trading;
 using Assets.Code.ServerPart.Worlds;
 using VContainer;
 using VContainer.Unity;
@@ -41,6 +42,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();
                 builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<ServerInputService>(Lifetime.Singleton).AsSelf();
+                builder.Register<TickCounter>(Lifetime.Scoped);
 
                 builder.Register<ServerMessenger>(Lifetime.Singleton).AsSelf();
                 builder.Register<ServerMessengerRouter>(Lifetime.Singleton).AsSelf();

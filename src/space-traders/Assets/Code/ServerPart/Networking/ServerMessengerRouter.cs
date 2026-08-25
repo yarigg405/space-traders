@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Common.DataBase.ORM;
 using Assets.Code.Common.StaticData.Repositories;
 using Assets.Code.Common.StaticData.Staff;
+using Assets.Code.Common.Time;
 using Assets.Code.Networking;
 using Assets.Code.ServerPart.Gameplay.Features.InputInteraction;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
@@ -34,6 +35,7 @@ namespace Assets.Code.ServerPart.Networking
         private readonly BuyOrdersRepository _buyOrdersRepository;
         private readonly SellOrdersRepository _sellOrdersRepository;
         private readonly PurchaseService _purchaseService;
+        private readonly TickCounter _tickCounter;
 
 
         public ServerMessengerRouter(NetworkManager networkManager,
@@ -52,7 +54,8 @@ namespace Assets.Code.ServerPart.Networking
             PurchaseService purchaseService,
             PlayerLocationManager playerLocationManager,
             PlayerCharacterManager playerCharacterManager,
-            ServerDockingService dockingService)
+            ServerDockingService dockingService,
+            TickCounter tickCounter)
         {
             _networkManager = networkManager;
             _playersRepository = playersRepository;
@@ -71,6 +74,7 @@ namespace Assets.Code.ServerPart.Networking
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
             _dockingService = dockingService;
+            _tickCounter = tickCounter;
         }
 
         internal void HandleRequestGetCharacters(ushort fromClientId, Message message)
@@ -405,6 +409,18 @@ namespace Assets.Code.ServerPart.Networking
             var coordinates = new double2(x, y);
 
             _serverInputService.SetPlayerWarpTo(fromClientId, coordinates);
+        }
+
+        internal void HandlePing(ushort fromClientId, Message message)
+        {
+            var pingId = message.GetUInt();
+
+            var response = Message.Create(MessageSendMode.Unreliable,
+                ServerToClientMessageType.Pong)
+                .AddUInt(pingId)
+                .AddUInt(_tickCounter.CurrentTick);
+
+            _networkManager.Server.Send(response, fromClientId);
         }
     }
 }

@@ -18,5 +18,6 @@
         UpdateComponentsForEntity = 52,
         SynchronizeGlobalPosition = 53,
         SynchronizeRotation = 54,
+        Pong = 60,
     }
 }

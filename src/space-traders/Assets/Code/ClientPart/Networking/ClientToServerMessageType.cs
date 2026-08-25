@@ -20,5 +20,6 @@
         SendSetOrbit = 34,
         SendSetWarpTo = 35,
         SendMoveInput = 36,
+        Ping = 60,
     }
 }

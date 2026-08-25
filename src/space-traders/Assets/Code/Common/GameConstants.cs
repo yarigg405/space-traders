@@ -2,7 +2,7 @@
 {
     public class GameConstants
     {
-        public const int TICK_RATE = 10;
+        public const int TICK_RATE = 60;
         public const float FIXED_DELTA_TIME = 1f / TICK_RATE;
         public const int MAX_CATCHUP_TICKS = 5;
 

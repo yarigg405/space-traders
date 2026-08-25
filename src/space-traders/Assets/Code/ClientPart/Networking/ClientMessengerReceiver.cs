@@ -104,5 +104,11 @@ namespace Assets.Code.ClientPart.Networking
         {
             _router.HandleUpdateComponentsForEntity(message);
         }
+
+        [MessageHandler((ushort)ServerToClientMessageType.Pong)]
+        private static void HandlePong(Message message)
+        {
+            _router.HandlePong(message);
+        }
     }
 }

@@ -40,8 +40,6 @@ namespace Assets.Code.ServerPart.Worlds
 
                 builder.Register<EntitiesSynchronizator>(Lifetime.Scoped)
                     .WithParameter(sceneName);
-
-                builder.Register<TickCounter>(Lifetime.Scoped);
             });
 
             var container = worldScope.Container;

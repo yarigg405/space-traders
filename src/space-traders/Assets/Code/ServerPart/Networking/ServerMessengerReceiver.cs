@@ -44,7 +44,7 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestForUndock(fromClientId, message);
         }
 
-        [MessageHandler((ushort) ClientToServerMessageType.RequestForDock)]
+        [MessageHandler((ushort)ClientToServerMessageType.RequestForDock)]
         private static void HandleRequestForDock(ushort fromClientId, Message message)
         {
             _router.HandleRequestForDock(fromClientId, message);
@@ -73,7 +73,7 @@ namespace Assets.Code.ServerPart.Networking
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)
         {
             _router.HandleEntitiesLoading(fromClientId, message);
-        }        
+        }
 
         [MessageHandler((ushort)ClientToServerMessageType.SendKeepDistance)]
         private static void HandleKeepDistance(ushort fromClientId, Message message)
@@ -97,6 +97,12 @@ namespace Assets.Code.ServerPart.Networking
         private static void HandeMoveInput(ushort fromClientId, Message message)
         {
             _router.HandleMoveInput(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.Ping)]
+        private static void HandlePing(ushort fromClientId, Message message)
+        {
+            _router.HandlePing(fromClientId, message);
         }
     }
 }

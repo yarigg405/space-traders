@@ -71,7 +71,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
             var entityId = _clientSceneConnector.GetEntityIdForPlayer(playerNetworkId);
 
             var player = ctxs.game.GetEntityWithId(entityId);
-            if (player != null && (player.isWarpPreparation || player.isWarping))
+            if (player == null && (player.isWarpPreparation || player.isWarping))
                 return null;
 
             var input = CreateEntity.EmptyInput(ctxs)

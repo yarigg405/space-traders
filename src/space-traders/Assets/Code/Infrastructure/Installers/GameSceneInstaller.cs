@@ -46,7 +46,6 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<EntityViewFactory>(Lifetime.Singleton).AsImplementedInterfaces();
             Builder.Register<SkyboxSpaceState>(Lifetime.Scoped);
             Builder.Register<ParticlesHandler>(Lifetime.Scoped).AsSelf().AsImplementedInterfaces();
-            Builder.Register<TickCounter>(Lifetime.Scoped);
         }
 
         private void RegisterInputServices()

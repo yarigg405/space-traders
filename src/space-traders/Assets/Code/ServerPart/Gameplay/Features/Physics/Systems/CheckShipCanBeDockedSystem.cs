@@ -44,8 +44,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Physics.Systems
                     }
                 }
 
-                foreach (var ship in entity.ShipsInDockZone)
+                foreach (var ship in entity.ShipsInDockZone.ToArray())
                 {
+                    if (ship.isDestructed || !ship.hasCurrentMoveSpeed)
+                    {
+                        entity.ShipsInDockZone.Remove(ship);
+                        continue;
+                    }
+
                     if (ship.CurrentMoveSpeed < 0.1f)
                     {
                         SetCanBeDocked(ship, entity.ParentEntity, entity.Id);

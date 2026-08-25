@@ -30,6 +30,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
             foreach (var input in _inputs)
             {
                 var player = _game.GetEntityWithId(input.InputConsumerEntityId);
+                if (player == null) continue;
                 player.ReplaceMoveInput(input.MoveInput);
 
                 if (input.MoveInput.sqrMagnitude > 0.0001f)

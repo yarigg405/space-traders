@@ -256,5 +256,13 @@ namespace Assets.Code.ClientPart.Networking
                 .AddDouble(coordinates.y);
             _networkManager.Client.Send(message);
         }
+
+        public void SendPing(uint pingId)
+        {
+            var msg = Message.Create(MessageSendMode.Unreliable, ClientToServerMessageType.Ping)
+                .AddUInt(pingId);
+
+            _networkManager.Client.Send(msg);
+        }
     }
 }

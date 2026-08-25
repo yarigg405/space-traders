@@ -10,19 +10,19 @@ namespace Assets.Code.ServerPart.Worlds
     {
         private readonly EcsWorldsBuilder _worldsBuilder;
         private readonly EcsWorldDestroyer _destroyer;
-        private readonly ITimeService _time;
+        private readonly TickCounter _tickCounter;
 
         private readonly Dictionary<string, EcsWorldInstance> _scenesWorldsDict;
         private float _accumulator;
 
 
-        public ServerWorldsController(EcsWorldsBuilder worldsBuilder, ITimeService time)
+        public ServerWorldsController(EcsWorldsBuilder worldsBuilder, TickCounter tickCounter)
         {
             _worldsBuilder = worldsBuilder;
             _destroyer = new();
 
             _scenesWorldsDict = new();
-            _time = time;
+            _tickCounter = tickCounter;
         }
 
         void ITickable.Tick()
@@ -39,6 +39,7 @@ namespace Assets.Code.ServerPart.Worlds
                 }
                 _accumulator -= GameConstants.FIXED_DELTA_TIME;
                 steps++;
+                _tickCounter.Tick();
             }
 
             if (steps == GameConstants.MAX_CATCHUP_TICKS)

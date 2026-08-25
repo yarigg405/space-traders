@@ -1,7 +1,7 @@
 ﻿using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
+using Assets.Code.Common.Time;
 using Riptide;
-using System;
 using Unity.Mathematics;
 
 
@@ -11,12 +11,15 @@ namespace Assets.Code.ClientPart.Networking
     {
         private readonly NetworkRequestSystem _requestSystem;
         private readonly ClientEntitiesController _clientEntitiesController;
+        private readonly ClockSyncService _clockSync;
 
         public ClientMessengerRouter(NetworkRequestSystem requestSystem,
-            ClientEntitiesController clientEntitiesController)
+            ClientEntitiesController clientEntitiesController,
+            ClockSyncService clockSync)
         {
             _requestSystem = requestSystem;
             _clientEntitiesController = clientEntitiesController;
+            _clockSync = clockSync;
         }
 
 
@@ -109,6 +112,14 @@ namespace Assets.Code.ClientPart.Networking
             var snapshot = JsonSerializator.FromJson<EntitySnapshot>(json);
 
             _clientEntitiesController.UpdateEntityComponents(entityId, snapshot);
+        }
+
+        internal void HandlePong(Message message)
+        {
+            var pingId = message.GetUInt();
+            var serverTick = message.GetUInt();
+
+            _clockSync.OnPong(pingId, serverTick);
         }
     }
 }

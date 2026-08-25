@@ -78,6 +78,8 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<NetworkRequestSystem>(Lifetime.Singleton).AsSelf();
             Builder.Register<ClientMessengerRouter>(Lifetime.Singleton).AsSelf();
             Builder.Register<ClientMessengerDependencySetupper>(Lifetime.Singleton).AsImplementedInterfaces();
+            Builder.Register<TickCounter>(Lifetime.Singleton);
+            Builder.Register<ClockSyncService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
 
         private void BindFactories()
