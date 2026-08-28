@@ -1,4 +1,4 @@
-﻿using Assets.Code.Common;
+﻿using Assets.Code.Common.Extensions;
 using Entitas;
 
 
@@ -14,19 +14,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.Moving,
                 GameMatcher.Velocity,
                 GameMatcher.GlobalPosition
-            ));
+            ).NoneOf(GameMatcher.ClientPlayer));
         }
 
         void IExecuteSystem.Execute()
         {
             foreach (var mover in _movers)
             {
-                var pos = mover.GlobalPosition;
-
-                pos.x += mover.Velocity.x * GameConstants.FIXED_DELTA_TIME;
-                pos.y += mover.Velocity.y * GameConstants.FIXED_DELTA_TIME;
-
-                mover.ReplaceGlobalPosition(pos);
+                MovementFormulas.Move(mover); 
                 mover.isNeedSynchronize = true;
             }
         }

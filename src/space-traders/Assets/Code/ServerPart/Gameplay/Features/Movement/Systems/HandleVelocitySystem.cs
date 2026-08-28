@@ -1,6 +1,5 @@
-﻿using Assets.Code.Common;
+﻿using Assets.Code.Common.Extensions;
 using Entitas;
-using UnityEngine;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -15,21 +14,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.CurrentRotationY,
                 GameMatcher.CurrentMoveSpeed,
                 GameMatcher.VelocityAgility
-            ));
+            ).NoneOf(GameMatcher.ClientPlayer));
         }
 
         void IExecuteSystem.Execute()
         {
             foreach (var entity in _entities)
             {
-                var currentRadAngle = entity.CurrentRotationY * Mathf.Deg2Rad;
-
-                var targetVelocity = new Vector2(
-                    Mathf.Sin(currentRadAngle),
-                    Mathf.Cos(currentRadAngle)) * entity.CurrentMoveSpeed;
-
-                var newVelocity = Vector3.MoveTowards(entity.Velocity, targetVelocity, entity.VelocityAgility * GameConstants.FIXED_DELTA_TIME);
-                entity.ReplaceVelocity(newVelocity);
+                MovementFormulas.HandleVelocity(entity);
             }
         }
     }

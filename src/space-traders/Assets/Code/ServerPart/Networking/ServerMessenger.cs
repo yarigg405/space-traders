@@ -3,6 +3,7 @@ using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Networking;
 using Riptide;
 using Unity.Mathematics;
+using UnityEngine;
 
 
 namespace Assets.Code.ServerPart.Networking
@@ -62,6 +63,24 @@ namespace Assets.Code.ServerPart.Networking
                 .AddString(snapshotJson);
 
             _networkManager.Server.Send(message, client);
+        }
+
+        public void SendPlayerSnapshot(ushort clientId, uint entityId, uint serverTick,
+            double2 pos, float rotationY, Vector2 velocity, float moveSpeed,
+            float targetRotation, float speedModifier)
+        {
+            var msg = Message.Create(MessageSendMode.Unreliable,
+                ServerToClientMessageType.PlayerStateSnapshot)
+                .AddUInt(entityId)
+                .AddUInt(serverTick)
+                .AddDouble(pos.x).AddDouble(pos.y)
+                .AddFloat(rotationY)
+                .AddVector2(velocity)
+                .AddFloat(moveSpeed)
+                .AddFloat(targetRotation)
+                .AddFloat(speedModifier);
+
+            _networkManager.Server.Send(msg, clientId);
         }
 
         #endregion

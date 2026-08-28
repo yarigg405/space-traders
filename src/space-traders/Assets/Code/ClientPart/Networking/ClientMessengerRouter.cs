@@ -1,4 +1,5 @@
-﻿using Assets.Code.Common.Serialization;
+﻿using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
+using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Common.Time;
 using Riptide;
@@ -12,14 +13,17 @@ namespace Assets.Code.ClientPart.Networking
         private readonly NetworkRequestSystem _requestSystem;
         private readonly ClientEntitiesController _clientEntitiesController;
         private readonly ClockSyncService _clockSync;
+        private readonly PlayerReconciler _reconciler;
 
         public ClientMessengerRouter(NetworkRequestSystem requestSystem,
             ClientEntitiesController clientEntitiesController,
-            ClockSyncService clockSync)
+            ClockSyncService clockSync,
+            PlayerReconciler reconciler)
         {
             _requestSystem = requestSystem;
             _clientEntitiesController = clientEntitiesController;
             _clockSync = clockSync;
+            _reconciler = reconciler;
         }
 
 
@@ -120,6 +124,21 @@ namespace Assets.Code.ClientPart.Networking
             var serverTick = message.GetUInt();
 
             _clockSync.OnPong(pingId, serverTick);
+        }
+
+        internal void HandlePlayerStateSnapshot(Message message)
+        {
+            var entityId = message.GetUInt();
+            var serverTick = message.GetUInt();
+            var pos = new double2(message.GetDouble(), message.GetDouble());
+            var rotationY = message.GetFloat();
+            var velocity = message.GetVector2();
+            var moveSpeed = message.GetFloat();
+            var targetRotation = message.GetFloat();
+            var speedModifier = message.GetFloat();
+
+            _reconciler.OnSnapshot(entityId, serverTick, pos, rotationY, velocity, 
+                moveSpeed, targetRotation, speedModifier);
         }
     }
 }

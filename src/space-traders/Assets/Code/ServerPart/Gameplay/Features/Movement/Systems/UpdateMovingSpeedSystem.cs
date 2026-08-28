@@ -1,6 +1,5 @@
-﻿using Assets.Code.Common;
+﻿using Assets.Code.Common.Extensions;
 using Entitas;
-using UnityEngine;
 
 
 namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
@@ -15,19 +14,14 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.MaxMoveSpeed,
                 GameMatcher.CurrentSpeedModifier,
                 GameMatcher.CurrentMoveSpeed
-                ));
+                ).NoneOf(GameMatcher.ClientPlayer));
         }
 
         void IExecuteSystem.Execute()
         {
             foreach (var entity in _entities)
             {
-                var currentSpeed = entity.CurrentMoveSpeed;
-                var targetSpeed = entity.MaxMoveSpeed * entity.CurrentSpeedModifier;
-                var deltaSpeed = entity.MovingAcceleration * GameConstants.FIXED_DELTA_TIME;
-                var newSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deltaSpeed);
-
-                entity.ReplaceCurrentMoveSpeed(newSpeed);
+                MovementFormulas.UpdateMoveSpeed(entity);
             }
         }
     }

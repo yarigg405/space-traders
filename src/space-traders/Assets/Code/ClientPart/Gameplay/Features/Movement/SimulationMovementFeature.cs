@@ -14,10 +14,11 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
             Add(systems.Create<CapturePreviousTickStateSystem>());
 
             Add(systems.Create<PlayerCommandSystem>());
-            Add(systems.Create<PredictPlayerInputSystem>());
 
             Add(systems.Create<OrbitMovingSystem>());
             Add(systems.Create<KeepDistanceSystem>());
+
+            Add(systems.Create<PlayerPredictionStepSystem>());
 
             Add(systems.Create<UpdateMovingSpeedSystem>());
             Add(systems.Create<RotationSystem>());

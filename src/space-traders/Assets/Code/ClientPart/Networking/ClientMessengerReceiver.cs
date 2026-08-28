@@ -110,5 +110,11 @@ namespace Assets.Code.ClientPart.Networking
         {
             _router.HandlePong(message);
         }
+
+        [MessageHandler((ushort)ServerToClientMessageType.PlayerStateSnapshot)]
+        private static void HandlePlayerStateSnapshot(Message message)
+        {
+            _router.HandlePlayerStateSnapshot(message);
+        }
     }
 }

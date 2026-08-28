@@ -42,7 +42,7 @@ namespace Assets.Code.ServerPart.Networking
                 builder.Register<EcsWorldsBuilder>(Lifetime.Singleton).AsSelf();
                 builder.Register<ServerWorldsController>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
                 builder.Register<ServerInputService>(Lifetime.Singleton).AsSelf();
-                builder.Register<TickCounter>(Lifetime.Scoped);
+                builder.Register<TickCounter>(Lifetime.Singleton);
                 builder.Register<ServerCommandBuffer>(Lifetime.Singleton);
 
                 builder.Register<ServerMessenger>(Lifetime.Singleton).AsSelf();

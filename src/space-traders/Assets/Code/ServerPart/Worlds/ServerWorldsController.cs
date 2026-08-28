@@ -32,14 +32,16 @@ namespace Assets.Code.ServerPart.Worlds
             int steps = 0;
             while (_accumulator >= GameConstants.FIXED_DELTA_TIME && steps < GameConstants.MAX_CATCHUP_TICKS)
             {
+                _tickCounter.Tick();
+
                 foreach (var world in _scenesWorldsDict.Values)
                 {
                     world.Feature.Execute();
                     world.Feature.Cleanup();
                 }
+
                 _accumulator -= GameConstants.FIXED_DELTA_TIME;
                 steps++;
-                _tickCounter.Tick();
             }
 
             if (steps == GameConstants.MAX_CATCHUP_TICKS)
