@@ -35,7 +35,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             {
                 _messenger.SendPlayerSnapshot(player.PlayerNetworkId, player.Id, _tick.CurrentTick,
                     player.GlobalPosition, player.CurrentRotationY, player.Velocity, player.CurrentMoveSpeed,
-                    player.TargetRotation, player.CurrentSpeedModifier);
+                    player.TargetRotation, player.CurrentSpeedModifier, player.isWarping || player.isWarpPreparation);
             }
         }
     }

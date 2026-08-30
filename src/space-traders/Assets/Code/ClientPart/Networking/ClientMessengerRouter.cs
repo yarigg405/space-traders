@@ -141,9 +141,10 @@ namespace Assets.Code.ClientPart.Networking
             var moveSpeed = message.GetFloat();
             var targetRotation = message.GetFloat();
             var speedModifier = message.GetFloat();
+            var isWarping = message.GetBool();
 
             _reconciler.OnSnapshot(entityId, serverTick, pos, rotationY, velocity, 
-                moveSpeed, targetRotation, speedModifier);
+                moveSpeed, targetRotation, speedModifier, isWarping);
         }
 
         internal void HandleWorldSnapshot(Message message)

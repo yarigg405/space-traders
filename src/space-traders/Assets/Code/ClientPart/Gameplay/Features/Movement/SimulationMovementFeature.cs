@@ -19,9 +19,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
             Add(systems.Create<KeepDistanceSystem>());
 
             Add(systems.Create<PlayerPredictionStepSystem>());
-
-            Add(systems.Create<WarpPreparationSystem>());
-            Add(systems.Create<WarpMovingSystem>());
+            
             Add(systems.Create<ShipStartDockingSystem>());
             Add(systems.Create<ShipStartUndockingSystem>());
             Add(systems.Create<ShipFinishUndockSystem>());

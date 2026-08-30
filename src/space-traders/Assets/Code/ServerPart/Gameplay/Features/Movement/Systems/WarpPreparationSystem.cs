@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Common;
 using Assets.Code.Common.DataContainers;
+using Assets.Code.Common.Extensions;
 using Entitas;
 using System.Collections.Generic;
 using Yrr.Utils;
@@ -28,6 +29,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 entity.ReplaceTargetRotation(direction);
                 entity.ReplaceCurrentSpeedModifier(1f);
 
+                MovementFormulas.Rotate(entity);
 
                 if (entity.CurrentSpeedModifier > 0.3)
                 {

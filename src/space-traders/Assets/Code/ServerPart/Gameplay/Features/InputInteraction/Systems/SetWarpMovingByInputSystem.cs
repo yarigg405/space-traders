@@ -12,8 +12,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
         private readonly GameContext _game;
         private readonly EntitiesSynchronizator _synchronizator;
 
-        private readonly IGroup<GameEntity> _players;
-
         public SetWarpMovingByInputSystem(GameContext game, InputContext input,
             EntitiesSynchronizator synchronizator)
         {
@@ -23,7 +21,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
                 InputMatcher.InputConsumerEntityId
                 ));
 
-            _players = game.GetGroup(GameMatcher.Player);
             _synchronizator = synchronizator;
             _game = game;
         }
@@ -32,13 +29,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction.Systems
         {
             foreach (var input in _inputs)
             {
-                foreach (var player in _players)
-                {
-                    player.SetWarpTo(input.WarpFinishCoordinates.GetRandomCoordinatesAroundPointZX(50f));
+                var player = _game.GetEntityWithId(input.InputConsumerEntityId);
+                if (player == null) continue;
 
-                    _synchronizator.UpdateComponentsForEntity(player,
-                        MovementExtensions.GetMovementComponentsForReset());
-                }
+                player.SetWarpTo(input.WarpFinishCoordinates.GetRandomCoordinatesAroundPointZX(50f));
+
+                _synchronizator.UpdateComponentsForEntity(player,
+                    MovementExtensions.GetMovementComponentsForReset());
             }
         }
     }

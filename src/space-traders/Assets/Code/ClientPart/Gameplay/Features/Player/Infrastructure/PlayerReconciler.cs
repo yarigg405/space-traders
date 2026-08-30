@@ -18,8 +18,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure
             _buffer = buffer;
         }
 
-        public void OnSnapshot(uint entityId, uint serverTick, double2 pos, float rot, 
-            Vector2 vel, float moveSpeed, float targetRotation, float speedModifier)
+        public void OnSnapshot(uint entityId, uint serverTick, double2 pos, float rot,
+            Vector2 vel, float moveSpeed, float targetRotation, float speedModifier, bool isWarping)
         {
             if (serverTick <= _lastTick) return;
             _lastTick = serverTick;
@@ -28,6 +28,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure
             if (player == null) return;
 
             _buffer.AckUpTo(serverTick);
+            player.isWarping = isWarping;
 
             player.ReplaceGlobalPosition(pos);
             player.ReplaceCurrentRotationY(rot);
@@ -36,11 +37,12 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure
             player.ReplaceTargetRotation(targetRotation);
             player.ReplaceCurrentSpeedModifier(speedModifier);
 
-            foreach (var cmd in _buffer.Unacked)
-            {
-                player.ReplaceMoveInput(cmd.MoveInput);
-                PlayerSimulationStep.Apply(player);
-            }
+            if (!isWarping)
+                foreach (var cmd in _buffer.Unacked)
+                {
+                    player.ReplaceMoveInput(cmd.MoveInput);
+                    PlayerSimulationStep.Apply(player);
+                }
 
             player.ReplaceQuadrantIndex(player.GlobalPosition.ToQuadrantIndex());
 

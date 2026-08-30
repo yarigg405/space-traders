@@ -68,7 +68,7 @@ namespace Assets.Code.ServerPart.Networking
 
         public void SendPlayerSnapshot(ushort clientId, uint entityId, uint serverTick,
             double2 pos, float rotationY, Vector2 velocity, float moveSpeed,
-            float targetRotation, float speedModifier)
+            float targetRotation, float speedModifier, bool isWarping)
         {
             var msg = Message.Create(MessageSendMode.Unreliable,
                 ServerToClientMessageType.PlayerStateSnapshot)
@@ -79,7 +79,8 @@ namespace Assets.Code.ServerPart.Networking
                 .AddVector2(velocity)
                 .AddFloat(moveSpeed)
                 .AddFloat(targetRotation)
-                .AddFloat(speedModifier);
+                .AddFloat(speedModifier)
+                .AddBool(isWarping);
 
             _networkManager.Server.Send(msg, clientId);
         }

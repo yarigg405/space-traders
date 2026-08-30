@@ -16,7 +16,8 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
         void IExecuteSystem.Execute()
         {
             foreach (var player in _players)
-                PlayerSimulationStep.Apply(player);
+                if (!player.isWarping)
+                    PlayerSimulationStep.Apply(player);
         }
     }
 }
