@@ -17,13 +17,13 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization.Systems
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
             return context.CreateCollector(GameMatcher.AllOf(
-                GameMatcher.DockingInProccess)
+                GameMatcher.DockingInProcess)
                  .Added());
         }
 
         protected override bool Filter(GameEntity entity)
         {
-            return entity.isDockingInProccess;
+            return entity.isDockingInProcess;
         }
 
         protected override void Execute(List<GameEntity> entities)
@@ -31,7 +31,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization.Systems
             foreach (var entity in entities)
             {
                 _synchronizator.UpdateComponentsForEntity(entity,
-                    GameComponentsLookup.DockingInProccess,
+                    GameComponentsLookup.DockingInProcess,
                     GameComponentsLookup.ShipCanBeDocked);
             }
         }

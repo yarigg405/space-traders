@@ -8,22 +8,20 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int ClickedPosition = 0;
-    public const int CurrentSpeedModifier = 1;
-    public const int Input = 2;
-    public const int InputConsumerEntityId = 3;
-    public const int KeepDistanceMinMax = 4;
-    public const int MoveInput = 5;
-    public const int MovementTargetId = 6;
-    public const int OrbitingRadius = 7;
-    public const int PressedButtonsContainer = 8;
-    public const int TargetRotation = 9;
-    public const int WarpFinishCoordinates = 10;
+    public const int CurrentSpeedModifier = 0;
+    public const int Input = 1;
+    public const int InputConsumerEntityId = 2;
+    public const int KeepDistanceMinMax = 3;
+    public const int MoveInput = 4;
+    public const int MovementTargetId = 5;
+    public const int OrbitingRadius = 6;
+    public const int PressedButtonsContainer = 7;
+    public const int TargetRotation = 8;
+    public const int WarpFinishCoordinates = 9;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
-        "ClickedPosition",
         "CurrentSpeedModifier",
         "Input",
         "InputConsumerEntityId",
@@ -37,7 +35,6 @@ public static class InputComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Assets.Code.Common.Components.ClickedPosition),
         typeof(Assets.Code.Common.Components.CurrentSpeedModifier),
         typeof(Assets.Code.Common.Components.Input),
         typeof(Assets.Code.Common.Components.InputConsumerEntityId),

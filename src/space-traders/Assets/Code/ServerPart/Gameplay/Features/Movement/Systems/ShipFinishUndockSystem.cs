@@ -15,8 +15,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.AllOf(
                     GameMatcher.AnimatedMovingDataContainer)
                 .NoneOf(
-                    GameMatcher.DockingInProccess,
-                    GameMatcher.UndockingInProccess));
+                    GameMatcher.DockingInProcess,
+                    GameMatcher.UndockingInProcess));
         }
 
         void IExecuteSystem.Execute()

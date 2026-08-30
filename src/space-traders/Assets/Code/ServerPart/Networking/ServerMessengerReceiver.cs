@@ -82,9 +82,9 @@ namespace Assets.Code.ServerPart.Networking
         }
 
         [MessageHandler((ushort)ClientToServerMessageType.SendSetOrbit)]
-        private static void HandleSetOrbig(ushort fromClientId, Message message)
+        private static void HandleSetOrbit(ushort fromClientId, Message message)
         {
-            _router.HandleSetOrbig(fromClientId, message);
+            _router.HandleSetOrbit(fromClientId, message);
         }
 
         [MessageHandler((ushort)ClientToServerMessageType.SendSetWarpTo)]
@@ -94,7 +94,7 @@ namespace Assets.Code.ServerPart.Networking
         }
 
         [MessageHandler((ushort)ClientToServerMessageType.SendMoveInput)]
-        private static void HandeMoveInput(ushort fromClientId, Message message)
+        private static void HandleMoveInput(ushort fromClientId, Message message)
         {
             _router.HandleMoveInput(fromClientId, message);
         }

@@ -23,7 +23,7 @@ public static class GameComponentsLookup {
     public const int DatabaseName = 12;
     public const int Destructed = 13;
     public const int Disposed = 14;
-    public const int DockingInProccess = 15;
+    public const int DockingInProcess = 15;
     public const int EntityLink = 16;
     public const int GlobalPosition = 17;
     public const int Id = 18;
@@ -65,7 +65,7 @@ public static class GameComponentsLookup {
     public const int TriggerEnterEventHandler = 54;
     public const int TriggerExitEventHandler = 55;
     public const int TriggerStayEventHandler = 56;
-    public const int UndockingInProccess = 57;
+    public const int UndockingInProcess = 57;
     public const int UndockingTimer = 58;
     public const int Velocity = 59;
     public const int VelocityAgility = 60;
@@ -96,7 +96,7 @@ public static class GameComponentsLookup {
         "DatabaseName",
         "Destructed",
         "Disposed",
-        "DockingInProccess",
+        "DockingInProcess",
         "EntityLink",
         "GlobalPosition",
         "Id",
@@ -138,7 +138,7 @@ public static class GameComponentsLookup {
         "TriggerEnterEventHandler",
         "TriggerExitEventHandler",
         "TriggerStayEventHandler",
-        "UndockingInProccess",
+        "UndockingInProcess",
         "UndockingTimer",
         "Velocity",
         "VelocityAgility",
@@ -168,7 +168,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.DatabaseName),
         typeof(Assets.Code.Common.Components.Destructed),
         typeof(Assets.Code.Common.Components.Disposed),
-        typeof(Assets.Code.Common.Components.DockingInProccess),
+        typeof(Assets.Code.Common.Components.DockingInProcess),
         typeof(Assets.Code.Common.Components.EntityLink),
         typeof(Assets.Code.Common.Components.GlobalPosition),
         typeof(Assets.Code.Common.Components.Id),
@@ -210,7 +210,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.TriggerEnterEventHandler),
         typeof(Assets.Code.Common.Components.TriggerExitEventHandler),
         typeof(Assets.Code.Common.Components.TriggerStayEventHandler),
-        typeof(Assets.Code.Common.Components.UndockingInProccess),
+        typeof(Assets.Code.Common.Components.UndockingInProcess),
         typeof(Assets.Code.Common.Components.UndockingTimer),
         typeof(Assets.Code.Common.Components.Velocity),
         typeof(Assets.Code.Common.Components.VelocityAgility),

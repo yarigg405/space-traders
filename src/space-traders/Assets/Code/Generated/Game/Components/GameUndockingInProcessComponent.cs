@@ -8,17 +8,17 @@
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherDockingInProccess;
+    static Entitas.IMatcher<GameEntity> _matcherUndockingInProcess;
 
-    public static Entitas.IMatcher<GameEntity> DockingInProccess {
+    public static Entitas.IMatcher<GameEntity> UndockingInProcess {
         get {
-            if (_matcherDockingInProccess == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.DockingInProccess);
+            if (_matcherUndockingInProcess == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.UndockingInProcess);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherDockingInProccess = matcher;
+                _matcherUndockingInProcess = matcher;
             }
 
-            return _matcherDockingInProccess;
+            return _matcherUndockingInProcess;
         }
     }
 }
@@ -33,18 +33,18 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Common.Components.DockingInProccess dockingInProccessComponent = new Assets.Code.Common.Components.DockingInProccess();
+    static readonly Assets.Code.Common.Components.UndockingInProcess undockingInProcessComponent = new Assets.Code.Common.Components.UndockingInProcess();
 
-    public bool isDockingInProccess {
-        get { return HasComponent(GameComponentsLookup.DockingInProccess); }
+    public bool isUndockingInProcess {
+        get { return HasComponent(GameComponentsLookup.UndockingInProcess); }
         set {
-            if (value != isDockingInProccess) {
-                var index = GameComponentsLookup.DockingInProccess;
+            if (value != isUndockingInProcess) {
+                var index = GameComponentsLookup.UndockingInProcess;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : dockingInProccessComponent;
+                            : undockingInProcessComponent;
 
                     AddComponent(index, component);
                 } else {

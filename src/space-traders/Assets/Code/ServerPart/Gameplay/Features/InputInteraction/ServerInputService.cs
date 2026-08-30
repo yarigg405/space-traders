@@ -26,18 +26,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.InputInteraction
             _clientSceneConnector = clientSceneConnector;
             _commandBuffer = commandBuffer;
         }
-
-        internal void SetPlayerTargetRotation(ushort fromClientId, float targetRotation)
-        {
-            CreateNewInputEntityForPlayer(fromClientId)?
-                .AddTargetRotation(targetRotation);
-        }
-
-        internal void SetPlayerSpeedModifier(ushort fromClientId, float targetSpeedModifier)
-        {
-            CreateNewInputEntityForPlayer(fromClientId)?
-                .AddCurrentSpeedModifier(targetSpeedModifier);
-        }
+        
 
         internal void SetPlayerMoveInput(ushort fromClientId, uint tick, Vector2 moveInput)
         {

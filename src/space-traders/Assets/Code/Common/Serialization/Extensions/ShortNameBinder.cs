@@ -45,8 +45,8 @@ namespace Assets.Code.Common.Serialization.Extensions
             [typeof(DatabaseName)] = "dbn",
             [typeof(StationDockingBayIndex)] = "sdi",
             [typeof(IgnoreCollision)] = "ic",
-            [typeof(DockingInProccess)] = "dip",
-            [typeof(UndockingInProccess)] = "uip",
+            [typeof(DockingInProcess)] = "dip",
+            [typeof(UndockingInProcess)] = "uip",
             [typeof(MoveInput)] = "mi"
         };
 

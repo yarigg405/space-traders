@@ -8,7 +8,6 @@ using Assets.Code.ServerPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ServerPart.Gameplay.Features.Player.Services;
 using Assets.Code.ServerPart.Gameplay.Features.Trading;
 using Riptide;
-using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
@@ -365,19 +364,7 @@ namespace Assets.Code.ServerPart.Networking
         {
             _clientSceneConnector.FillWorldForClient(fromClientId);
         }
-
-
-        internal void HandleClientTargetRotation(ushort fromClientId, Message message)
-        {
-            var targetRotation = message.GetFloat();
-            _serverInputService.SetPlayerTargetRotation(fromClientId, targetRotation);
-        }
-
-        internal void HandleClientSpeedModifier(ushort fromClientId, Message message)
-        {
-            var speedModifier = message.GetFloat();
-            _serverInputService.SetPlayerSpeedModifier(fromClientId, speedModifier);
-        }
+       
 
         internal void HandleMoveInput(ushort fromClientId, Message message)
         {
@@ -395,7 +382,7 @@ namespace Assets.Code.ServerPart.Networking
             _serverInputService.SetPlayerKeepDistance(fromClientId, targetId, minMaxDistance);
         }
 
-        internal void HandleSetOrbig(ushort fromClientId, Message message)
+        internal void HandleSetOrbit(ushort fromClientId, Message message)
         {
             var targetId = message.GetUInt();
             var orbitRadius = message.GetFloat();

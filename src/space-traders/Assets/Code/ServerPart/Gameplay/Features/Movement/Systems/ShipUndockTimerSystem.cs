@@ -33,8 +33,8 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                     _synchronizator.UpdateComponentsForEntity(entity,
                         GameComponentsLookup.Moving,
                         GameComponentsLookup.IgnoreCollision,
-                        GameComponentsLookup.UndockingInProccess,
-                        GameComponentsLookup.DockingInProccess
+                        GameComponentsLookup.UndockingInProcess,
+                        GameComponentsLookup.DockingInProcess
                         );
                 }
             }

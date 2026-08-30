@@ -8,8 +8,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
     {
         public InputClientFeature(ISystemFactory systems)
         {
-            Add(systems.Create<InputListenClientSystem>());
-
             Add(systems.Create<InputCleanupSystem>());
         }
     }

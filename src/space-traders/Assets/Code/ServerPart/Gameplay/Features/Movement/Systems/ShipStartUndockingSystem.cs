@@ -16,7 +16,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         public ShipStartUndockingSystem(GameContext game)
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
-               GameMatcher.UndockingInProccess
+               GameMatcher.UndockingInProcess
                )
                 .NoneOf(GameMatcher.AnimatedMovingDataContainer));
         }

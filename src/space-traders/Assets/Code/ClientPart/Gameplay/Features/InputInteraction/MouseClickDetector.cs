@@ -66,13 +66,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction
                     OnObjectClicked?.Invoke(clickable);
                     return;
                 }
-
-                var clickPos = raycastHit.point;
-                OnMouseClickEvent?.Invoke(clickPos);
-
-                CreateEntity.EmptyInput(_ctx)
-                    .AddClickedPosition(clickPos)
-                    .isInput = true;
             }
         }
     }

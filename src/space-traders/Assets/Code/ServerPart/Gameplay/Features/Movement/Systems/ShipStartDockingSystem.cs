@@ -17,7 +17,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
         {
             _entities = game.GetGroup(GameMatcher.AllOf(
                GameMatcher.ShipCanBeDocked,
-               GameMatcher.DockingInProccess
+               GameMatcher.DockingInProcess
                )
                 .NoneOf(GameMatcher.AnimatedMovingDataContainer));
         }

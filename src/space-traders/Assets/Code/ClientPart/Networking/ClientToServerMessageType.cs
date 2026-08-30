@@ -14,8 +14,6 @@
         RequestItemOrders = 9,
         RequestBuyItem = 10,
 
-       // SendTargetRotation = 31,
-       // SendSpeedModifier = 32,
         SendKeepDistance = 33,
         SendSetOrbit = 34,
         SendSetWarpTo = 35,

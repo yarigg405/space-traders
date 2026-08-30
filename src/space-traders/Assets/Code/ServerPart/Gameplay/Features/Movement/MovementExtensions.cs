@@ -64,7 +64,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                 .With(x => x.isMoving = false)
                 .With(x => x.isIgnoreCollision = true)
-                .With(x => x.isDockingInProccess = true)
+                .With(x => x.isDockingInProcess = true)
                 ;
 
             return entity;
@@ -75,7 +75,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                 .With(x => x.isMoving = true)
                 .With(x => x.isIgnoreCollision = false)
-                .With(x => x.isDockingInProccess = false)
+                .With(x => x.isDockingInProcess = false)
                 ;
 
             return entity;
@@ -86,7 +86,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                .With(x => x.isMoving = false)
                .With(x => x.isIgnoreCollision = true)
-               .With(x => x.isUndockingInProccess = true)
+               .With(x => x.isUndockingInProcess = true)
                .AddUndockingTimer(5f)
                ;
 
@@ -98,7 +98,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement
             entity
                 .With(x => x.isMoving = true)
                 .With(x => x.isIgnoreCollision = false)
-                .With(x => x.isUndockingInProccess = false)
+                .With(x => x.isUndockingInProcess = false)
                 .RemoveUndockingTimer()
                 ;
 
