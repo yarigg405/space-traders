@@ -14,7 +14,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.MaxMoveSpeed,
                 GameMatcher.CurrentSpeedModifier,
                 GameMatcher.CurrentMoveSpeed
-                ).NoneOf(GameMatcher.ClientPlayer));
+                ));
         }
 
         void IExecuteSystem.Execute()

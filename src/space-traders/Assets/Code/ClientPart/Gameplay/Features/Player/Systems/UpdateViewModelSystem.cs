@@ -9,7 +9,10 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Player.Systems
 
         public UpdateViewModelSystem(GameContext game)
         {
-            _entities = game.GetGroup(GameMatcher.ViewModel);
+            _entities = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.ViewModel,
+                GameMatcher.QuadrantIndex
+                ));
         }
 
         void IExecuteSystem.Execute()

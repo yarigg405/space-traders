@@ -1,9 +1,11 @@
-﻿using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
+﻿using Assets.Code.ClientPart.Gameplay.Features.Movement;
+using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Common.Time;
 using Riptide;
 using Unity.Mathematics;
+using UnityEngine;
 
 
 namespace Assets.Code.ClientPart.Networking
@@ -14,16 +16,19 @@ namespace Assets.Code.ClientPart.Networking
         private readonly ClientEntitiesController _clientEntitiesController;
         private readonly ClockSyncService _clockSync;
         private readonly PlayerReconciler _reconciler;
+        private readonly RemoteSnapshotBuffer _remoteBuffer;
 
         public ClientMessengerRouter(NetworkRequestSystem requestSystem,
             ClientEntitiesController clientEntitiesController,
             ClockSyncService clockSync,
-            PlayerReconciler reconciler)
+            PlayerReconciler reconciler,
+            RemoteSnapshotBuffer remoteBuffer)
         {
             _requestSystem = requestSystem;
             _clientEntitiesController = clientEntitiesController;
             _clockSync = clockSync;
             _reconciler = reconciler;
+            _remoteBuffer = remoteBuffer;
         }
 
 
@@ -139,6 +144,21 @@ namespace Assets.Code.ClientPart.Networking
 
             _reconciler.OnSnapshot(entityId, serverTick, pos, rotationY, velocity, 
                 moveSpeed, targetRotation, speedModifier);
+        }
+
+        internal void HandleWorldSnapshot(Message message)
+        {
+            var serverTick = message.GetUInt();
+            var count = message.GetInt();
+            for (int i = 0; i < count; i++)
+            {
+                var id = message.GetUInt();
+                var pos = new double2(message.GetDouble(), message.GetDouble());
+                var rot = message.GetFloat();
+                
+                _remoteBuffer .Add(id,serverTick, pos, rot);
+            }
+            Debug.Log($"[WORLD] tick={serverTick} count={count}");
         }
     }
 }

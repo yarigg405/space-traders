@@ -2,6 +2,7 @@
 using Assets.Code.ClientPart.AssetManagement;
 using Assets.Code.ClientPart.Gameplay.Features;
 using Assets.Code.ClientPart.Gameplay.Features.InputInteraction;
+using Assets.Code.ClientPart.Gameplay.Features.Movement;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Infrastructure;
 using Assets.Code.ClientPart.Gameplay.Features.Player.Services;
 using Assets.Code.ClientPart.Networking;
@@ -84,6 +85,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.Register<ClockSyncService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             Builder.Register<ClientCommandBuffer>(Lifetime.Singleton).AsSelf();
             Builder.Register<PlayerReconciler>(Lifetime.Singleton).AsSelf();
+            Builder.Register<RemoteSnapshotBuffer>(Lifetime.Singleton).AsSelf();
         }
 
         private void BindFactories()

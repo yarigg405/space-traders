@@ -31,6 +31,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Player.Factory
                 .AddViewPath(shipComponent.PrefabName)
                 .With(x => x.isPlayer = true)
                 .With(x => x.isShip = true)
+                .With(x=> x.isNetworkTransform = true)
 
                 .AddGlobalPosition(at)
                 .AddCurrentSpeedModifier(0)

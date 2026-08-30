@@ -2,6 +2,7 @@
 using Assets.Code.Common.Serialization;
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Common.Serialization.Extensions;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using Yrr.Utils;
@@ -12,6 +13,16 @@ namespace Assets.Code.ClientPart
     public sealed class ClientEntitiesController
     {
         private readonly GameContext _gameContext;
+        private static readonly HashSet<int> _reconciled = new()
+            {
+                GameComponentsLookup.GlobalPosition,
+                GameComponentsLookup.CurrentRotationY,
+                GameComponentsLookup.Velocity,
+                GameComponentsLookup.CurrentMoveSpeed,
+                GameComponentsLookup.TargetRotation,
+                GameComponentsLookup.CurrentSpeedModifier,
+            };
+
 
         public ClientEntitiesController(GameContext gameContext)
         {
@@ -69,17 +80,19 @@ namespace Assets.Code.ClientPart
         {
             var entity = _gameContext.GetEntityWithId(entityId);
             if (entity == null) return;
-            if (entity.isClientPlayer) return;
+
+            bool predicted = entity.isClientPlayer;
 
             foreach (var component in snapshot.ComponentsForRemoving)
             {
-                if (entity.HasComponent(component))
-                    entity.RemoveComponent(component);
+                if (predicted && _reconciled.Contains(component)) continue;
+                if (entity.HasComponent(component)) entity.RemoveComponent(component);
             }
 
             foreach (var component in snapshot.Components)
             {
                 var lookupIndex = ComponentIndexByType.IndexByType(component.GetType());
+                if (predicted && _reconciled.Contains(lookupIndex)) continue;
                 entity.With(x => x.ReplaceComponent(lookupIndex, component), when: lookupIndex >= 0);
             }
         }

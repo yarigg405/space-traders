@@ -36,7 +36,7 @@ public static class GameComponentsLookup {
     public const int MovementTargetId = 25;
     public const int Moving = 26;
     public const int MovingAcceleration = 27;
-    public const int NeedSynchronize = 28;
+    public const int NetworkTransform = 28;
     public const int OrbitingRadius = 29;
     public const int ParentEntity = 30;
     public const int PhysicShape = 31;
@@ -109,7 +109,7 @@ public static class GameComponentsLookup {
         "MovementTargetId",
         "Moving",
         "MovingAcceleration",
-        "NeedSynchronize",
+        "NetworkTransform",
         "OrbitingRadius",
         "ParentEntity",
         "PhysicShape",
@@ -181,7 +181,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.MovementTargetId),
         typeof(Assets.Code.Common.Components.Moving),
         typeof(Assets.Code.Common.Components.MovingAcceleration),
-        typeof(Assets.Code.Common.Components.NeedSynchronize),
+        typeof(Assets.Code.Common.Components.NetworkTransform),
         typeof(Assets.Code.Common.Components.OrbitingRadius),
         typeof(Assets.Code.Common.Components.ParentEntity),
         typeof(Assets.Code.Common.Components.PhysicShape),

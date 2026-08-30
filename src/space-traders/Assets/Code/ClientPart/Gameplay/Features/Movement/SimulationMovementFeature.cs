@@ -20,11 +20,6 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
 
             Add(systems.Create<PlayerPredictionStepSystem>());
 
-            Add(systems.Create<UpdateMovingSpeedSystem>());
-            Add(systems.Create<RotationSystem>());
-            Add(systems.Create<HandleVelocitySystem>());
-            Add(systems.Create<PhysicsMovingSystem>());
-
             Add(systems.Create<WarpPreparationSystem>());
             Add(systems.Create<WarpMovingSystem>());
             Add(systems.Create<ShipStartDockingSystem>());

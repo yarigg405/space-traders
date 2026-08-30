@@ -2,6 +2,7 @@
 using Assets.Code.Common.Serialization.Data;
 using Assets.Code.Networking;
 using Riptide;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -81,6 +82,30 @@ namespace Assets.Code.ServerPart.Networking
                 .AddFloat(speedModifier);
 
             _networkManager.Server.Send(msg, clientId);
+        }
+
+        private const int MaxShipsPerMessage = 40;
+        public void SendWorldSnapshot(ushort clientId, uint serverTick, List<GameEntity> ships)
+        {
+            for (int start = 0; start < ships.Count; start += MaxShipsPerMessage)
+            {
+                int chunk = Mathf.Min(MaxShipsPerMessage, ships.Count - start);
+                var msg = Message.Create(MessageSendMode.Unreliable, ServerToClientMessageType.WorldSnapshot)
+                    .AddUInt(serverTick)
+                    .AddInt(chunk);
+
+                for (int i = start; i < start + chunk; i++)
+                {
+                    var e = ships[i];
+                    msg.AddUInt(e.Id)
+                        .AddDouble(e.GlobalPosition.x)
+                        .AddDouble(e.GlobalPosition.y)
+                        .AddFloat(e.CurrentRotationY);
+                    ;
+                }
+
+                _networkManager.Server.Send(msg, clientId);
+            }
         }
 
         #endregion

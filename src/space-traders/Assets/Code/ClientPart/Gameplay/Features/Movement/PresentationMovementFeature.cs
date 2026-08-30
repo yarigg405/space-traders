@@ -12,6 +12,7 @@ namespace Assets.Code.ClientPart.Gameplay.Features.Movement
         {
             Add(systems.Create<PlayerPreviousFramePositionSystem>());
 
+            Add(systems.Create<InterpolateNetworkEntitiesSystem>());
             Add(systems.Create<UpdateLocalPositionSystem>());
             Add(systems.Create<UpdateViewModelSystem>());
 

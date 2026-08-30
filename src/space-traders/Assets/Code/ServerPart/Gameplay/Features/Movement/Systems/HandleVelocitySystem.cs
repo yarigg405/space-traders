@@ -14,7 +14,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.CurrentRotationY,
                 GameMatcher.CurrentMoveSpeed,
                 GameMatcher.VelocityAgility
-            ).NoneOf(GameMatcher.ClientPlayer));
+            ));
         }
 
         void IExecuteSystem.Execute()

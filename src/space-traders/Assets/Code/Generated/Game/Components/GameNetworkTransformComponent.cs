@@ -8,17 +8,17 @@
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherNeedSynchronize;
+    static Entitas.IMatcher<GameEntity> _matcherNetworkTransform;
 
-    public static Entitas.IMatcher<GameEntity> NeedSynchronize {
+    public static Entitas.IMatcher<GameEntity> NetworkTransform {
         get {
-            if (_matcherNeedSynchronize == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.NeedSynchronize);
+            if (_matcherNetworkTransform == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.NetworkTransform);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherNeedSynchronize = matcher;
+                _matcherNetworkTransform = matcher;
             }
 
-            return _matcherNeedSynchronize;
+            return _matcherNetworkTransform;
         }
     }
 }
@@ -33,18 +33,18 @@ public sealed partial class GameMatcher {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Assets.Code.Common.Components.NeedSynchronize needSynchronizeComponent = new Assets.Code.Common.Components.NeedSynchronize();
+    static readonly Assets.Code.Common.Components.NetworkTransform networkTransformComponent = new Assets.Code.Common.Components.NetworkTransform();
 
-    public bool isNeedSynchronize {
-        get { return HasComponent(GameComponentsLookup.NeedSynchronize); }
+    public bool isNetworkTransform {
+        get { return HasComponent(GameComponentsLookup.NetworkTransform); }
         set {
-            if (value != isNeedSynchronize) {
-                var index = GameComponentsLookup.NeedSynchronize;
+            if (value != isNetworkTransform) {
+                var index = GameComponentsLookup.NetworkTransform;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : needSynchronizeComponent;
+                            : networkTransformComponent;
 
                     AddComponent(index, component);
                 } else {

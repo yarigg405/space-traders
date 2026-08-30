@@ -15,7 +15,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.CurrentRotationY,
                 GameMatcher.TargetRotation,
                 GameMatcher.RotationSpeed
-                ).NoneOf(GameMatcher.ClientPlayer));
+                ));
         }
 
         void IExecuteSystem.Execute()
@@ -23,7 +23,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             foreach (var entity in _entities)
             {
                 MovementFormulas.Rotate(entity); 
-                entity.isNeedSynchronize = true;
             }
         }
     }

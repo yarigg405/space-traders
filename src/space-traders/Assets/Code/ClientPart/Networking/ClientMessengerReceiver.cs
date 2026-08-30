@@ -116,5 +116,11 @@ namespace Assets.Code.ClientPart.Networking
         {
             _router.HandlePlayerStateSnapshot(message);
         }
+
+        [MessageHandler((ushort)ServerToClientMessageType.WorldSnapshot)]
+        private static void HandleWorldSnapshot(Message message)
+        {
+            _router.HandleWorldSnapshot(message);
+        }
     }
 }

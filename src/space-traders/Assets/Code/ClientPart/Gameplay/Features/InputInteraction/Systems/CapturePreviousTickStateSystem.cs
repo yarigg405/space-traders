@@ -9,7 +9,10 @@ namespace Assets.Code.ClientPart.Gameplay.Features.InputInteraction.Systems
 
         public CapturePreviousTickStateSystem(GameContext game)
         {
-            _entities = game.GetGroup(GameMatcher.GlobalPosition);
+            _entities = game.GetGroup(GameMatcher.AllOf(
+                GameMatcher.ClientPlayer,
+                GameMatcher.GlobalPosition
+                ));
         }
 
         void IExecuteSystem.Execute()

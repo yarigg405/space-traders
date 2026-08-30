@@ -8,12 +8,10 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Synchronization
     public sealed class SynchronizationFeature : Feature
     {
         public SynchronizationFeature(ISystemFactory systems)
-        {
-            Add(systems.Create<NetworkSynchronizationSystem>());
+        {            
             Add(systems.Create<DockingProcessSynchronizationSystem>());
             Add(systems.Create<SendPlayerSnapshotSystem>());
-
-            Add(systems.Create<SynchronizationCleanupSystem>());
+            Add(systems.Create<SendWorldSnapshotSystem>());
         }
     }
 }

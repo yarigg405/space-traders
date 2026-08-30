@@ -14,7 +14,7 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
                 GameMatcher.Moving,
                 GameMatcher.Velocity,
                 GameMatcher.GlobalPosition
-            ).NoneOf(GameMatcher.ClientPlayer));
+            ));
         }
 
         void IExecuteSystem.Execute()
@@ -22,7 +22,6 @@ namespace Assets.Code.ServerPart.Gameplay.Features.Movement.Systems
             foreach (var mover in _movers)
             {
                 MovementFormulas.Move(mover); 
-                mover.isNeedSynchronize = true;
             }
         }
     }
