@@ -10,80 +10,76 @@ public static class GameComponentsLookup {
 
     public const int Active = 0;
     public const int AnimatedMovingDataContainer = 1;
-    public const int ChaseTargetId = 2;
-    public const int ChildrenEntities = 3;
-    public const int ClientPlayer = 4;
-    public const int CollectCollisionsInterval = 5;
-    public const int CollectCollisionsTimer = 6;
-    public const int CollisionsBuffer = 7;
-    public const int CurrentMoveSpeed = 8;
-    public const int CurrentRotationY = 9;
-    public const int CurrentSpeedModifier = 10;
-    public const int DatabaseId = 11;
-    public const int DatabaseName = 12;
-    public const int Destructed = 13;
-    public const int Disposed = 14;
-    public const int DockingInProcess = 15;
-    public const int EntityLink = 16;
-    public const int GlobalPosition = 17;
-    public const int Id = 18;
-    public const int IgnoreCollision = 19;
-    public const int KeepDistanceMinMax = 20;
-    public const int LocalPosition = 21;
-    public const int Mass = 22;
-    public const int MaxMoveSpeed = 23;
-    public const int MoveInput = 24;
-    public const int MovementTargetId = 25;
-    public const int Moving = 26;
-    public const int MovingAcceleration = 27;
-    public const int NetworkTransform = 28;
-    public const int OrbitingRadius = 29;
-    public const int ParentEntity = 30;
-    public const int PhysicShape = 31;
-    public const int PhysicsRadius = 32;
-    public const int Planet = 33;
-    public const int Player = 34;
-    public const int PlayerNetworkId = 35;
-    public const int PreviousFrameLocalPosition = 36;
-    public const int PreviousTickGlobalPosition = 37;
-    public const int PreviousTickRotationY = 38;
-    public const int QuadrantIndex = 39;
-    public const int ReadyToCollectCollisions = 40;
-    public const int Rigidbody = 41;
-    public const int RotationSpeed = 42;
-    public const int SelfDestructTimer = 43;
-    public const int Ship = 44;
-    public const int ShipCanBeDocked = 45;
-    public const int ShipsInDockZone = 46;
-    public const int SkyboxCoordinates = 47;
-    public const int Station = 48;
-    public const int StationDockingBay = 49;
-    public const int StationDockingBayIndex = 50;
-    public const int TargetRotation = 51;
-    public const int Transform = 52;
-    public const int Trigger = 53;
-    public const int TriggerEnterEventHandler = 54;
-    public const int TriggerExitEventHandler = 55;
-    public const int TriggerStayEventHandler = 56;
-    public const int UndockingInProcess = 57;
-    public const int UndockingTimer = 58;
-    public const int Velocity = 59;
-    public const int VelocityAgility = 60;
-    public const int View = 61;
-    public const int ViewModel = 62;
-    public const int ViewPath = 63;
-    public const int ViewPrefab = 64;
-    public const int WarpDataContainer = 65;
-    public const int WarpFinishCoordinates = 66;
-    public const int Warping = 67;
-    public const int WarpPreparation = 68;
+    public const int ChildrenEntities = 2;
+    public const int ClientPlayer = 3;
+    public const int CollectCollisionsInterval = 4;
+    public const int CollectCollisionsTimer = 5;
+    public const int CollisionsBuffer = 6;
+    public const int CurrentMoveSpeed = 7;
+    public const int CurrentRotationY = 8;
+    public const int CurrentSpeedModifier = 9;
+    public const int DatabaseId = 10;
+    public const int DatabaseName = 11;
+    public const int Destructed = 12;
+    public const int Disposed = 13;
+    public const int DockingInProcess = 14;
+    public const int EntityLink = 15;
+    public const int GlobalPosition = 16;
+    public const int Id = 17;
+    public const int IgnoreCollision = 18;
+    public const int KeepDistanceMinMax = 19;
+    public const int LocalPosition = 20;
+    public const int Mass = 21;
+    public const int MaxMoveSpeed = 22;
+    public const int MoveInput = 23;
+    public const int MovementTargetId = 24;
+    public const int Moving = 25;
+    public const int MovingAcceleration = 26;
+    public const int NetworkTransform = 27;
+    public const int OrbitingRadius = 28;
+    public const int ParentEntity = 29;
+    public const int PhysicsRadius = 30;
+    public const int Planet = 31;
+    public const int Player = 32;
+    public const int PlayerNetworkId = 33;
+    public const int PreviousFrameLocalPosition = 34;
+    public const int PreviousTickGlobalPosition = 35;
+    public const int PreviousTickRotationY = 36;
+    public const int QuadrantIndex = 37;
+    public const int ReadyToCollectCollisions = 38;
+    public const int RotationSpeed = 39;
+    public const int SelfDestructTimer = 40;
+    public const int Ship = 41;
+    public const int ShipCanBeDocked = 42;
+    public const int ShipsInDockZone = 43;
+    public const int SkyboxCoordinates = 44;
+    public const int Station = 45;
+    public const int StationDockingBay = 46;
+    public const int StationDockingBayIndex = 47;
+    public const int TargetRotation = 48;
+    public const int Transform = 49;
+    public const int Trigger = 50;
+    public const int TriggerEnterEventHandler = 51;
+    public const int TriggerExitEventHandler = 52;
+    public const int TriggerStayEventHandler = 53;
+    public const int UndockingInProcess = 54;
+    public const int UndockingTimer = 55;
+    public const int Velocity = 56;
+    public const int VelocityAgility = 57;
+    public const int View = 58;
+    public const int ViewModel = 59;
+    public const int ViewPath = 60;
+    public const int ViewPrefab = 61;
+    public const int WarpDataContainer = 62;
+    public const int WarpFinishCoordinates = 63;
+    public const int Warping = 64;
+    public const int WarpPreparation = 65;
 
-    public const int TotalComponents = 69;
+    public const int TotalComponents = 66;
 
     public static readonly string[] componentNames = {
         "Active",
         "AnimatedMovingDataContainer",
-        "ChaseTargetId",
         "ChildrenEntities",
         "ClientPlayer",
         "CollectCollisionsInterval",
@@ -112,7 +108,6 @@ public static class GameComponentsLookup {
         "NetworkTransform",
         "OrbitingRadius",
         "ParentEntity",
-        "PhysicShape",
         "PhysicsRadius",
         "Planet",
         "Player",
@@ -122,7 +117,6 @@ public static class GameComponentsLookup {
         "PreviousTickRotationY",
         "QuadrantIndex",
         "ReadyToCollectCollisions",
-        "Rigidbody",
         "RotationSpeed",
         "SelfDestructTimer",
         "Ship",
@@ -155,7 +149,6 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Assets.Code.Common.Components.Active),
         typeof(Assets.Code.Common.Components.AnimatedMovingDataContainerComponent),
-        typeof(Assets.Code.Common.Components.ChaseTargetId),
         typeof(Assets.Code.Common.Components.ChildrenEntities),
         typeof(Assets.Code.Common.Components.ClientPlayer),
         typeof(Assets.Code.Common.Components.CollectCollisionsInterval),
@@ -184,7 +177,6 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.NetworkTransform),
         typeof(Assets.Code.Common.Components.OrbitingRadius),
         typeof(Assets.Code.Common.Components.ParentEntity),
-        typeof(Assets.Code.Common.Components.PhysicShape),
         typeof(Assets.Code.Common.Components.PhysicsRadius),
         typeof(Assets.Code.Common.Components.Planet),
         typeof(Assets.Code.Common.Components.Player),
@@ -194,7 +186,6 @@ public static class GameComponentsLookup {
         typeof(Assets.Code.Common.Components.PreviousTickRotationY),
         typeof(Assets.Code.Common.Components.QuadrantIndex),
         typeof(Assets.Code.Common.Components.ReadyToCollectCollisions),
-        typeof(Assets.Code.Common.Components.RigidbodyComponent),
         typeof(Assets.Code.Common.Components.RotationSpeed),
         typeof(Assets.Code.Common.Components.SelfDestructTimer),
         typeof(Assets.Code.Common.Components.Ship),

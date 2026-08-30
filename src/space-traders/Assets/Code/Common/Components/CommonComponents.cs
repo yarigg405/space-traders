@@ -15,7 +15,6 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class ChildrenEntities : IComponent { public List<GameEntity> Value; }
 
     [Game] public sealed class TransformComponent : IComponent { public Transform Value; }
-    [Game] public sealed class RigidbodyComponent : IComponent { public Rigidbody Value; }
     [Game] public sealed class Active : ISerializeComponent { }
 
     [Game] public sealed class View : IComponent { public EntityBehaviour Value; }

@@ -23,7 +23,6 @@ namespace Assets.Code.Common.Components
     [Game] public sealed class CurrentRotationY : IComponent { public float Value; }
     [Game] public sealed class RotationSpeed : ISerializeComponent { public float Value; }
 
-    [Game] public sealed class ChaseTargetId : ISerializeComponent { public uint Value; }
     [Game, Input] public sealed class MovementTargetId : ISerializeComponent { public uint Value; }
     [Game, Input] public sealed class OrbitingRadius : ISerializeComponent { public float Value; }
     [Game, Input] public sealed class KeepDistanceMinMax : ISerializeComponent { public Vector2 Value; }

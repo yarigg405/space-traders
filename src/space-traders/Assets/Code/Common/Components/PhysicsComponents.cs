@@ -7,7 +7,6 @@ using System.Collections.Generic;
 namespace Assets.Code.Common.Components
 {
     [Game] public sealed class PhysicsRadius : ISerializeComponent { public float Value; }
-    [Game] public sealed class PhysicShape : IComponent { public PhysicsShape[] Value; }
     [Game] public sealed class Trigger : IComponent { }
     [Game] public sealed class IgnoreCollision : ISerializeComponent { }
 
