@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 namespace Assets.Code.Common.Inventory.Components
 {
@@ -8,5 +9,10 @@ namespace Assets.Code.Common.Inventory.Components
         public string PrefabName;
 
         public float MaxCargo;
+
+        public override IEnumerable<ItemAttribute> GetAttributes()
+        {
+            yield return new ItemAttribute(ItemAttributeKeys.MaxCargo, MaxCargo.ToString("N0"));
+        }
     }
 }

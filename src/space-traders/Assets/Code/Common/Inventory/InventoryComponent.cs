@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Yrr.Utils;
 
@@ -14,6 +15,11 @@ namespace Assets.Code.Common.Inventory
         public InventoryComponent()
         {
             _type = GetType().Name;
+        }
+
+        public virtual IEnumerable<ItemAttribute> GetAttributes()
+        {
+            return Array.Empty<ItemAttribute>();
         }
     }
 }

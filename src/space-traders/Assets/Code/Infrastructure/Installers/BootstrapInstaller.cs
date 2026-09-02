@@ -29,6 +29,7 @@ namespace Assets.Code.Infrastructure.Installers
         [SerializeField] private ConfigsStorage _configsStorage;
         [SerializeField] private PhysicsShapesStorage _shapesStorage;
         [SerializeField] private ItemsCatalogSO _itemsCatalog;
+        [SerializeField] private AttributeIconsConfigSO _attributeIconsConfig;
         [SerializeField] private TradeItemsCategoryConfig _categoriesConfig;
         [SerializeField] private TradeOrdersGenerationConfig _ordersGenerationConfig;
 
@@ -67,6 +68,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.RegisterInstance(_configsStorage);
             Builder.RegisterInstance(_shapesStorage).AsImplementedInterfaces();
             Builder.RegisterInstance(_itemsCatalog).AsImplementedInterfaces();
+            Builder.RegisterInstance(_attributeIconsConfig).AsImplementedInterfaces();
             Builder.RegisterInstance(_categoriesConfig);
             Builder.RegisterInstance(_ordersGenerationConfig);
         }

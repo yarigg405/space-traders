@@ -275,6 +275,34 @@ MonoBehaviour:
     m_Key: cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 126878311009738752
+    m_Key: error-not-enough-money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681792
+    m_Key: error-order-not-found
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681793
+    m_Key: error-not-enough-items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681794
+    m_Key: attr-mass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681795
+    m_Key: attr-volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681796
+    m_Key: attr-max-cargo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681797
+    m_Key: context-item-info
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

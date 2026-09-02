@@ -280,6 +280,34 @@ MonoBehaviour:
     m_Localized: Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 126878311009738752
+    m_Localized: Not enough money
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681792
+    m_Localized: Order not found
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681793
+    m_Localized: Not enough items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681794
+    m_Localized: Mass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681795
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681796
+    m_Localized: Cargo Size
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126878311051681797
+    m_Localized: Information
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

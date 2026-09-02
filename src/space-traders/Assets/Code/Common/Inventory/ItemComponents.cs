@@ -15,6 +15,18 @@ namespace Assets.Code.Common.Inventory
             _components.Add(component);
         }
 
+        public IEnumerable<ItemAttribute> GetAttributes()
+        {
+            foreach (var component in _components)
+            {
+                if (component is InventoryComponent inventoryComponent)
+                {
+                    foreach (var attribute in inventoryComponent.GetAttributes())
+                        yield return attribute;
+                }
+            }
+        }
+
         public bool HasComponent<T>()
         {
             foreach (var component in _components)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Assets.Code.Common.Inventory
@@ -12,6 +13,15 @@ namespace Assets.Code.Common.Inventory
         [field: SerializeField] public float Volume { get; private set; }
         [field: SerializeField] public ItemComponents Components { get; private set; }
         [HideInInspector] public ItemFlags Flags { get; private set; }
+
+        public IEnumerable<ItemAttribute> GetAttributes()
+        {
+            yield return new ItemAttribute(ItemAttributeKeys.Mass, Mass.ToString("N0"));
+            yield return new ItemAttribute(ItemAttributeKeys.Volume, Volume.ToString("N0"));
+
+            foreach (var attribute in Components.GetAttributes())
+                yield return attribute;
+        }
 
         internal void AddComponent(object component)
         {
