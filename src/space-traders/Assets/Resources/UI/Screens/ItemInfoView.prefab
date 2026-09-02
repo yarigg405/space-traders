@@ -1106,10 +1106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa9de661f5f05b4bbf15fd07ca98e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.UI.Screens.ItemInfo.ItemInfoTabView
-  <TabId>k__BackingField: attributes
   <TabButton>k__BackingField: {fileID: 6146707195454387968}
   _selectedIndicator: {fileID: 0}
   _page: {fileID: 3635866144254513636}
+  <TabId>k__BackingField: attributes
 --- !u!1 &5737593551300745486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,10 +1309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa9de661f5f05b4bbf15fd07ca98e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.UI.Screens.ItemInfo.ItemInfoTabView
-  <TabId>k__BackingField: attributes
   <TabButton>k__BackingField: {fileID: 1627150416919772669}
   _selectedIndicator: {fileID: 8168546857710753685}
   _page: {fileID: 8908349174434601460}
+  <TabId>k__BackingField: attributes11
 --- !u!1 &6668642205702328013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,10 +1877,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa9de661f5f05b4bbf15fd07ca98e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.UI.Screens.ItemInfo.ItemInfoTabView
-  <TabId>k__BackingField: attributes
   <TabButton>k__BackingField: {fileID: 5837572757441527216}
   _selectedIndicator: {fileID: 0}
   _page: {fileID: 3635866144254513636}
+  <TabId>k__BackingField: attributes
 --- !u!1 &8687941987694876140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa9de661f5f05b4bbf15fd07ca98e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.UI.Screens.ItemInfo.ItemInfoTabView
-  <TabId>k__BackingField: attributes
   <TabButton>k__BackingField: {fileID: 2261156806551400728}
   _selectedIndicator: {fileID: 5188044393536348213}
   _page: {fileID: 3635866144254513636}
+  <TabId>k__BackingField: attributes
