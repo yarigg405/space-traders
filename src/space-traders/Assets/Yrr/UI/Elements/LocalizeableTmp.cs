@@ -40,7 +40,7 @@ namespace Yrr.UI.Elements
             _messageTmp.text = value;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Unbind();
         }
