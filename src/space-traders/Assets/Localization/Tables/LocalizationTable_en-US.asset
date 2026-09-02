@@ -293,7 +293,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 126878311051681794
-    m_Localized: Mass
+    m_Localized: Not enough items
     m_Metadata:
       m_Items: []
   - m_Id: 126878311051681795
@@ -306,6 +306,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 126878311051681797
     m_Localized: Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126945522713071616
+    m_Localized: Attributes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126945522746626048
+    m_Localized: Assets
     m_Metadata:
       m_Items: []
   references:

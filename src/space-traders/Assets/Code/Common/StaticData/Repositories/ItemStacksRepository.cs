@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Common.DataBase;
 using Assets.Code.Common.DataBase.ORM;
+using System.Collections.Generic;
 
 
 namespace Assets.Code.Common.StaticData.Repositories
@@ -24,6 +25,51 @@ namespace Assets.Code.Common.StaticData.Repositories
                 OwnerType = ItemStackOwnerType.Character,
                 OwnerId = ownerCharacterId,
             });
+        }
+
+        internal IReadOnlyList<ItemStackORM> GetStationStacksByOwner(int characterId)
+        {
+            return _dataBase.Query<ItemStackORM>(
+                "SELECT * FROM ItemStacks WHERE ownerType = ? AND ownerId = ? AND containerType = ?",
+                (int)ItemStackOwnerType.Character, characterId, (int)ContainerType.StationHangar);
+        }
+
+        internal int GetOwnedAmount(int characterId, int stationId, string itemId)
+        {
+            var rows = _dataBase.Query<ItemStackORM>(
+                "SELECT * FROM ItemStacks WHERE ownerType = ? AND ownerId = ? AND containerType = ? AND containerId = ? AND itemId = ?",
+                (int)ItemStackOwnerType.Character, characterId, (int)ContainerType.StationHangar, stationId, itemId);
+
+            var total = 0;
+            foreach (var row in rows)
+                total += row.Amount;
+
+            return total;
+        }
+
+        internal void RemoveFromStation(int characterId, int stationId, string itemId, int quantity)
+        {
+            var rows = _dataBase.Query<ItemStackORM>(
+                "SELECT * FROM ItemStacks WHERE ownerType = ? AND ownerId = ? AND containerType = ? AND containerId = ? AND itemId = ? ORDER BY id",
+                (int)ItemStackOwnerType.Character, characterId, (int)ContainerType.StationHangar, stationId, itemId);
+
+            var remaining = quantity;
+            foreach (var row in rows)
+            {
+                if (remaining <= 0)
+                    break;
+
+                if (row.Amount <= remaining)
+                {
+                    remaining -= row.Amount;
+                    _dataBase.Execute("DELETE FROM ItemStacks WHERE id = ?", row.Id);
+                }
+                else
+                {
+                    _dataBase.Execute("UPDATE ItemStacks SET amount = ? WHERE id = ?", row.Amount - remaining, row.Id);
+                    remaining = 0;
+                }
+            }
         }
     }
 }

@@ -56,14 +56,11 @@ namespace Assets.Code.UI.Screens.TradingMain
 
             _item = item;
 
-            if (_emptyState) _emptyState.SetActive(false);
-            if (_content) _content.SetActive(true);
+            _emptyState.SetActive(false);
+            _content.SetActive(true);
 
-            if (_icon)
-            {
-                _icon.sprite = item.Icon;
-                _icon.enabled = item.Icon;
-            }
+            _icon.sprite = item.Icon;
+            _icon.enabled = item.Icon;
 
             BindName(item.Id);
             _massTmp.BindText("massVal", item.Mass.ToString("N0"));
@@ -77,8 +74,8 @@ namespace Assets.Code.UI.Screens.TradingMain
         {
             _item = null;
 
-            if (_content) _content.SetActive(false);
-            if (_emptyState) _emptyState.SetActive(true);
+            _content.SetActive(false);
+            _emptyState.SetActive(true);
 
             ClearOrders(_buyOrdersRoot, _buyOrdersEmpty);
             ClearOrders(_sellOrdersRoot, _sellOrdersEmpty);
@@ -102,14 +99,10 @@ namespace Assets.Code.UI.Screens.TradingMain
         private void FillOrders(Transform root, GameObject emptyState,
             IReadOnlyList<TradeOrderInfo> orders, Action<TradeOrderInfo> onSelected)
         {
-            if (root == null)
-                return;
-
             root.ClearChildren();
 
             bool hasOrders = orders != null && orders.Count > 0;
-            if (emptyState)
-                emptyState.SetActive(!hasOrders);
+            emptyState.SetActive(!hasOrders);
 
             if (!hasOrders)
                 return;
@@ -123,11 +116,9 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void ClearOrders(Transform root, GameObject emptyState)
         {
-            if (root != null)
-                root.ClearChildren();
+            root.ClearChildren();
 
-            if (emptyState)
-                emptyState.SetActive(true);
+            emptyState.SetActive(true);
         }
 
         private void BindName(string entryKey)
@@ -155,8 +146,7 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OnNameChanged(string value)
         {
-            if (_nameLabel)
-                _nameLabel.text = value;
+            _nameLabel.text = value;
         }
 
         private void OnDestroy()

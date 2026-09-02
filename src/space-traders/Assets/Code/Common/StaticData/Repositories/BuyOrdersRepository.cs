@@ -37,5 +37,19 @@ namespace Assets.Code.Common.StaticData.Repositories
             return _dataBase.Query<BuyOrderORM>(
                 "SELECT * FROM BuyOrders WHERE itemId = ?", itemId);
         }
+
+        internal BuyOrderORM GetById(long id)
+        {
+            return _dataBase.QuerySingle<BuyOrderORM>(
+                "SELECT * FROM BuyOrders WHERE id = ?", id);
+        }
+
+        internal void SetQuantity(long id, int quantity)
+        {
+            if (quantity <= 0)
+                _dataBase.Execute("DELETE FROM BuyOrders WHERE id = ?", id);
+            else
+                _dataBase.Execute("UPDATE BuyOrders SET quantity = ? WHERE id = ?", quantity, id);
+        }
     }
 }

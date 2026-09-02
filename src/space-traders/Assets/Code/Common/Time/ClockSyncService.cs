@@ -21,8 +21,6 @@ namespace Assets.Code.Common.Time
         private uint _pingId;
         private uint _lastPongId;
         private float _sincePing;
-        private float sentAt;
-        private bool _synced;
         private float _smoothedRtt;
 
         public float TimeScale { get; private set; } = 1f;
@@ -39,7 +37,6 @@ namespace Assets.Code.Common.Time
         {
             if (!_network.Client.IsConnected)
             {
-                _synced = false;
                 TimeScale = 1f;
                 return;
             }

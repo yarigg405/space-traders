@@ -34,11 +34,8 @@ namespace Assets.Code.UI.Screens.TradingMain
 
             BindLabel(category.LocalizationKey);
 
-            if (_icon)
-            {
-                _icon.sprite = category.Icon;
-                _icon.enabled = category.Icon;
-            }
+            _icon.sprite = category.Icon;
+            _icon.enabled = category.Icon;
 
             BuildChildCategories();
             BuildItems();
@@ -46,13 +43,9 @@ namespace Assets.Code.UI.Screens.TradingMain
             HasContent = ComputeHasContent();
             _hasChildren = HasContent;
 
-            if (_expandArrow)
-                _expandArrow.gameObject.SetActive(_hasChildren);
-
+            _expandArrow.gameObject.SetActive(_hasChildren);
             SetExpanded(_context.ExpandByDefault);
-
             _headerButton.onClick.AddListener(OnHeaderClicked);
-
             gameObject.SetActive(HasContent);
         }
 
@@ -106,13 +99,8 @@ namespace Assets.Code.UI.Screens.TradingMain
         private void SetExpanded(bool expanded)
         {
             _expanded = expanded && _hasChildren;
-
-            if (_childrenRoot)
-                _childrenRoot.gameObject.SetActive(_expanded);
-
-            if (_expandArrow)
-                _expandArrow.localRotation = Quaternion.Euler(0f, 0f, _expanded ? 180f : 270f);
-
+            _childrenRoot.gameObject.SetActive(_expanded);
+            _expandArrow.localRotation = Quaternion.Euler(0f, 0f, _expanded ? 180f : 270f);
             _context.OnHierarchyChanged?.Invoke();
         }
 

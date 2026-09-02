@@ -51,12 +51,12 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private TradeScope Scope => ScopeOrder[Mathf.Clamp(_scopeIndex, 0, ScopeOrder.Length - 1)];
 
-        private string Search => _searchInput != null ? _searchInput.text : string.Empty;
+        private string Search => _searchInput.text;
 
         public event Action<ItemSO, TradeOrderInfo> BuyRequested
         {
-            add { if (_detailView) _detailView.BuyRequested += value; }
-            remove { if (_detailView) _detailView.BuyRequested -= value; }
+            add { _detailView.BuyRequested += value; }
+            remove { _detailView.BuyRequested -= value; }
         }
 
         public event Action<ItemSO> ItemSelected;
@@ -80,7 +80,7 @@ namespace Assets.Code.UI.Screens.TradingMain
             UpdateScopeLabel();
             RefreshLocalizedNames();
             RebuildTree();
-            _detailView?.Clear();
+            _detailView.Clear();
         }
 
         public void SetItemOrders(ItemSO item, StationTradeData data)
@@ -99,11 +99,9 @@ namespace Assets.Code.UI.Screens.TradingMain
             if (_listenersWired)
                 return;
 
-            if (_scopeButton)
-                _scopeButton.onClick.AddListener(OnScopeButtonClicked);
+            _scopeButton.onClick.AddListener(OnScopeButtonClicked);
 
-            if (_searchInput)
-                _searchInput.onValueChanged.AddListener(OnSearchChanged);
+            _searchInput.onValueChanged.AddListener(OnSearchChanged);
 
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
 
@@ -145,9 +143,6 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void UpdateScopeLabel()
         {
-            if (_scopeLabel == null)
-                return;
-
             UnbindScopeLabel();
 
             _scopeLabelString = new LocalizedString
@@ -171,7 +166,7 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OnScopeLabelChanged(string value)
         {
-            if (_scopeLabel != null && !string.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
                 _scopeLabel.text = value;
         }
 
@@ -209,7 +204,7 @@ namespace Assets.Code.UI.Screens.TradingMain
             _ordersByItem.Clear();
             _distanceByStation.Clear();
 
-            _detailView?.Show(item, Array.Empty<TradeOrderInfo>(), Array.Empty<TradeOrderInfo>());
+            _detailView.Show(item, Array.Empty<TradeOrderInfo>(), Array.Empty<TradeOrderInfo>());
             ItemSelected?.Invoke(item);
         }
 
@@ -217,7 +212,7 @@ namespace Assets.Code.UI.Screens.TradingMain
         {
             if (_selectedItem == null)
             {
-                _detailView?.Clear();
+                _detailView.Clear();
                 return;
             }
 
@@ -227,9 +222,9 @@ namespace Assets.Code.UI.Screens.TradingMain
         private void ShowItem(ItemSO item)
         {
             if (_ordersByItem.TryGetValue(item.Id, out var orders))
-                _detailView?.Show(item, orders.Buy, orders.Sell);
+                _detailView.Show(item, orders.Buy, orders.Sell);
             else
-                _detailView?.Show(item, Array.Empty<TradeOrderInfo>(), Array.Empty<TradeOrderInfo>());
+                _detailView.Show(item, Array.Empty<TradeOrderInfo>(), Array.Empty<TradeOrderInfo>());
         }
 
         private void BuildDistanceCache()
@@ -374,11 +369,9 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OnDestroy()
         {
-            if (_scopeButton)
-                _scopeButton.onClick.RemoveListener(OnScopeButtonClicked);
+            _scopeButton.onClick.RemoveListener(OnScopeButtonClicked);
 
-            if (_searchInput)
-                _searchInput.onValueChanged.RemoveListener(OnSearchChanged);
+            _searchInput.onValueChanged.RemoveListener(OnSearchChanged);
 
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
 

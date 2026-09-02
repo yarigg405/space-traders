@@ -137,6 +137,77 @@ namespace Assets.Code.ClientPart.Networking
             await _requestSystem.SendRequest(msg, ct, TimeSpan.FromSeconds(5));
         }
 
+        public async UniTask RequestForSellItem(long orderId, int quantity, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestSellItem)
+                .AddLong(orderId)
+                .AddInt(quantity);
+
+            await _requestSystem.SendRequest(msg, ct, TimeSpan.FromSeconds(5));
+        }
+
+        public async UniTask<BestBuyOrderData> RequestForBestBuyOrder(string itemId, int stationId, CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestBestBuyOrder)
+                .AddString(itemId)
+                .AddInt(stationId);
+
+            var response = await _requestSystem.SendRequest(msg, ct, TimeSpan.FromSeconds(5));
+
+            var result = new BestBuyOrderData
+            {
+                Found = response.GetBool(),
+            };
+
+            if (result.Found)
+            {
+                result.OrderId = response.GetLong();
+                result.Price = response.GetLong();
+                result.Quantity = response.GetInt();
+            }
+
+            return result;
+        }
+
+        public async UniTask<PlayerInventoryData> RequestForPlayerInventory(CancellationToken ct)
+        {
+            var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestPlayerInventory);
+
+            var response = await _requestSystem.SendRequest(msg, ct, TimeSpan.FromSeconds(5));
+
+            var stationCount = response.GetInt();
+            var result = new PlayerInventoryData
+            {
+                Stations = new List<StationInventoryData>(stationCount),
+            };
+
+            for (int i = 0; i < stationCount; i++)
+            {
+                var station = new StationInventoryData
+                {
+                    StationId = response.GetInt(),
+                    StationName = response.GetString(),
+                    SystemName = response.GetString(),
+                };
+
+                var itemCount = response.GetInt();
+                station.Items = new List<InventoryItemData>(itemCount);
+
+                for (int j = 0; j < itemCount; j++)
+                {
+                    station.Items.Add(new InventoryItemData
+                    {
+                        ItemId = response.GetString(),
+                        Amount = response.GetInt(),
+                    });
+                }
+
+                result.Stations.Add(station);
+            }
+
+            return result;
+        }
+
         public async UniTask<IEnumerable<CharacterData>> RequestForCharacters(string login, string password, CancellationToken ct)
         {
             var msg = Message.Create(MessageSendMode.Reliable, ClientToServerMessageType.RequestGetCharacters)

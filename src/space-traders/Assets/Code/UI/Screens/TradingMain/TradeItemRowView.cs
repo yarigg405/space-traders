@@ -26,19 +26,13 @@ namespace Assets.Code.UI.Screens.TradingMain
             _item = item;
             _onSelected = onSelected;
 
-            if (_icon)
-            {
-                _icon.sprite = item.Icon;
-                _icon.enabled = item.Icon;
-            }
+            _icon.sprite = item.Icon;
+            _icon.enabled = item.Icon;
 
             BindLabel(item.Id);
 
-            if (_selectButton)
-            {
-                _selectButton.onClick.RemoveListener(OnSelectClicked);
-                _selectButton.onClick.AddListener(OnSelectClicked);
-            }
+            _selectButton.onClick.RemoveListener(OnSelectClicked);
+            _selectButton.onClick.AddListener(OnSelectClicked);
         }
 
         private void OnSelectClicked()
@@ -78,8 +72,7 @@ namespace Assets.Code.UI.Screens.TradingMain
         {
             UnbindLabel();
 
-            if (_selectButton)
-                _selectButton.onClick.RemoveListener(OnSelectClicked);
+            _selectButton.onClick.RemoveListener(OnSelectClicked);
         }
     }
 }

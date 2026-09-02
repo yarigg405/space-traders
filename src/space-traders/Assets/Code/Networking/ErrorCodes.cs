@@ -8,6 +8,7 @@
         public const string WrongPassword = "error-password";
         public const string ServerAlreadyCreated = "error-server-already-created";
         public const string NotEnoughMoney = "error-not-enough-money";
+        public const string NotEnoughItems = "error-not-enough-items";
         public const string OrderNotFound = "error-order-not-found";
     }
 }

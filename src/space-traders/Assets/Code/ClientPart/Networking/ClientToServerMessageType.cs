@@ -13,6 +13,9 @@
         RequestForMoney = 8,
         RequestItemOrders = 9,
         RequestBuyItem = 10,
+        RequestSellItem = 11,
+        RequestBestBuyOrder = 12,
+        RequestPlayerInventory = 13,
 
         SendKeepDistance = 33,
         SendSetOrbit = 34,

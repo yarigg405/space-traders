@@ -33,7 +33,9 @@ namespace Assets.Code.ServerPart.Networking
         private readonly WalletsRepository _walletsRepository;
         private readonly BuyOrdersRepository _buyOrdersRepository;
         private readonly SellOrdersRepository _sellOrdersRepository;
+        private readonly ItemStacksRepository _itemStacksRepository;
         private readonly PurchaseService _purchaseService;
+        private readonly SellService _sellService;
         private readonly TickCounter _tickCounter;
 
 
@@ -50,7 +52,9 @@ namespace Assets.Code.ServerPart.Networking
             WalletsRepository walletsRepository,
             BuyOrdersRepository buyOrdersRepository,
             SellOrdersRepository sellOrdersRepository,
+            ItemStacksRepository itemStacksRepository,
             PurchaseService purchaseService,
+            SellService sellService,
             PlayerLocationManager playerLocationManager,
             PlayerCharacterManager playerCharacterManager,
             ServerDockingService dockingService,
@@ -69,7 +73,9 @@ namespace Assets.Code.ServerPart.Networking
             _walletsRepository = walletsRepository;
             _buyOrdersRepository = buyOrdersRepository;
             _sellOrdersRepository = sellOrdersRepository;
+            _itemStacksRepository = itemStacksRepository;
             _purchaseService = purchaseService;
+            _sellService = sellService;
             _playerLocationManager = playerLocationManager;
             _playerCharacterManager = playerCharacterManager;
             _dockingService = dockingService;
@@ -358,6 +364,99 @@ namespace Assets.Code.ServerPart.Networking
 
                 _networkManager.Server.Send(response, fromClientId);
             }
+        }
+
+        internal void HandleRequestSellItem(ushort fromClientId, Message message)
+        {
+            var orderId = message.GetLong();
+            var quantity = message.GetInt();
+            var messageId = message.GetUInt();
+
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
+
+            if (_sellService.TrySellToBuyOrder(characterId, orderId, quantity, out var error))
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseSellItem)
+                    .AddUInt(messageId);
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+            else
+            {
+                var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.RequestFailed)
+                    .AddUInt(messageId)
+                    .AddString(error);
+
+                _networkManager.Server.Send(response, fromClientId);
+            }
+        }
+
+        internal void HandleRequestPlayerInventory(ushort fromClientId, Message message)
+        {
+            var messageId = message.GetUInt();
+            var characterId = _playerCharacterManager.GetCharacterIdForPlayer(fromClientId);
+
+            var stacks = _itemStacksRepository.GetStationStacksByOwner(characterId);
+
+            var byStation = new Dictionary<int, Dictionary<string, int>>();
+            foreach (var stack in stacks)
+            {
+                if (!byStation.TryGetValue(stack.ContainerId, out var items))
+                {
+                    items = new Dictionary<string, int>();
+                    byStation[stack.ContainerId] = items;
+                }
+
+                items.TryGetValue(stack.ItemId, out var amount);
+                items[stack.ItemId] = amount + stack.Amount;
+            }
+
+            var systemNames = new Dictionary<int, string>();
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponsePlayerInventory)
+                .AddUInt(messageId)
+                .AddInt(byStation.Count);
+
+            foreach (var stationPair in byStation)
+            {
+                var station = _spaceStationsRepository.GetById(stationPair.Key);
+
+                response.AddInt(stationPair.Key)
+                        .AddString(station.Name)
+                        .AddString(GetStarSystemName(station.StarSystemId, systemNames))
+                        .AddInt(stationPair.Value.Count);
+
+                foreach (var itemPair in stationPair.Value)
+                    response.AddString(itemPair.Key).AddInt(itemPair.Value);
+            }
+
+            _networkManager.Server.Send(response, fromClientId);
+        }
+
+        internal void HandleRequestBestBuyOrder(ushort fromClientId, Message message)
+        {
+            var itemId = message.GetString();
+            var stationId = message.GetInt();
+            var messageId = message.GetUInt();
+
+            BuyOrderORM best = null;
+            foreach (var order in _buyOrdersRepository.GetByStation(stationId))
+            {
+                if (order.ItemId != itemId || order.Quantity <= 0)
+                    continue;
+
+                if (best == null || order.Price > best.Price)
+                    best = order;
+            }
+
+            var response = Message.Create(MessageSendMode.Reliable, ServerToClientMessageType.ResponseBestBuyOrder)
+                .AddUInt(messageId)
+                .AddBool(best != null);
+
+            if (best != null)
+                response.AddLong(best.Id).AddLong(best.Price).AddInt(best.Quantity);
+
+            _networkManager.Server.Send(response, fromClientId);
         }
 
         internal void HandleEntitiesLoading(ushort fromClientId, Message message)

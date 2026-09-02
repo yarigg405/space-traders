@@ -303,6 +303,14 @@ MonoBehaviour:
     m_Key: context-item-info
     m_Metadata:
       m_Items: []
+  - m_Id: 126945522713071616
+    m_Key: attributes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126945522746626048
+    m_Key: assets
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -26,41 +26,23 @@ namespace Assets.Code.UI.Screens.TradingMain
 
             var color = order.IsAtPlayerStation ? Color.green : Color.white;
 
-            if (_stationLabel)
-            {
-                _stationLabel.text = order.StationName;
-                _stationLabel.color = color;
-            }
+            _stationLabel.text = order.StationName;
+            _stationLabel.color = color;
 
-            if (_distanceLabel)
-            {
-                _distanceLabel.text = order.Distance;
-                _distanceLabel.color = color;
-            }
+            _distanceLabel.text = order.Distance;
+            _distanceLabel.color = color;
 
-            if (_priceLabel)
-            {
-                _priceLabel.text = order.Price.ToMoney();
-                _priceLabel.color = color;
-            }
+            _priceLabel.text = order.Price.ToMoney();
+            _priceLabel.color = color;
 
-            if (_quantityLabel)
-            {
-                _quantityLabel.text = order.Quantity.ToString("N0");
-                _quantityLabel.color = color;
-            }
+            _quantityLabel.text = order.Quantity.ToString("N0");
+            _quantityLabel.color = color;
 
-            if (_expiresLabel)
-            {
-                _expiresLabel.text = FormatExpires(order.ExpiresAt);
-                _expiresLabel.color = color;
-            }
+            _expiresLabel.text = FormatExpires(order.ExpiresAt);
+            _expiresLabel.color = color;
 
-            if (_selectButton)
-            {
-                _selectButton.onClick.RemoveListener(OnSelectClicked);
-                _selectButton.onClick.AddListener(OnSelectClicked);
-            }
+            _selectButton.onClick.RemoveListener(OnSelectClicked);
+            _selectButton.onClick.AddListener(OnSelectClicked);
         }
 
         private void OnSelectClicked()
@@ -78,8 +60,7 @@ namespace Assets.Code.UI.Screens.TradingMain
 
         private void OnDestroy()
         {
-            if (_selectButton)
-                _selectButton.onClick.RemoveListener(OnSelectClicked);
+            _selectButton.onClick.RemoveListener(OnSelectClicked);
         }
     }
 

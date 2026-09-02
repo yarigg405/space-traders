@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Infrastructure.DI;
+using Assets.Code.UI.Elements;
 using Assets.Code.UI.Infrastructure.Impl;
 using Assets.Code.UI.Layers;
 using Assets.Code.UI.LoadingScreens;
@@ -14,6 +15,8 @@ using VContainer;
 using Assets.Code.UI.Screens.CurrentShipInfo;
 using Assets.Code.UI.Screens.Wallet;
 using Assets.Code.UI.Screens.BuySellPopups;
+using Assets.Code.UI.Screens.ItemInfo;
+using Assets.Code.UI.Screens.StationsInventory;
 
 
 namespace Assets.Code.Infrastructure.Installers
@@ -32,6 +35,8 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.RegisterInstance(_layerScreen).AsSelf();
             Builder.RegisterInstance(_layerOverlay).AsSelf();
             Builder.RegisterInstance(_layerPopups).AsSelf();
+
+            Builder.Register<ContextMenuController>(Lifetime.Singleton).AsSelf();
 
             Builder.Register<ScreensProvider>(Lifetime.Transient).AsImplementedInterfaces();
             Builder.Register<NavigationIntentFactory>(Lifetime.Transient).AsImplementedInterfaces();
@@ -71,6 +76,15 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<BuyItemPopup>(Lifetime.Singleton);
             Builder.Register<BuyItemPresenter>(Lifetime.Transient);
+
+            Builder.Register<SellItemPopup>(Lifetime.Singleton);
+            Builder.Register<SellItemPresenter>(Lifetime.Transient);
+
+            Builder.Register<ItemInfoPopup>(Lifetime.Singleton);
+            Builder.Register<ItemInfoPresenter>(Lifetime.Transient);
+
+            Builder.Register<AllAssetsPopup>(Lifetime.Singleton);
+            Builder.Register<AllAssetsPresenter>(Lifetime.Transient);
 
             Builder.Register<AwaitServerResponsePopup>(Lifetime.Singleton);
 

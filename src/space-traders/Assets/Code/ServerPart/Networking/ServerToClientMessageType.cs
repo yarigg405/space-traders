@@ -12,6 +12,9 @@
         ResponseMoney = 9,
         ResponseItemOrders = 10,
         ResponseBuyItem = 11,
+        ResponseSellItem = 12,
+        ResponseBestBuyOrder = 13,
+        ResponsePlayerInventory = 14,
 
         CreateEntity = 50,
         DestroyEntity = 51,

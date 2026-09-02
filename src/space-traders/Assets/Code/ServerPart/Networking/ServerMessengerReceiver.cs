@@ -68,6 +68,24 @@ namespace Assets.Code.ServerPart.Networking
             _router.HandleRequestBuyItem(fromClientId, message);
         }
 
+        [MessageHandler((ushort)ClientToServerMessageType.RequestSellItem)]
+        private static void HandleRequestSellItem(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestSellItem(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestBestBuyOrder)]
+        private static void HandleRequestBestBuyOrder(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestBestBuyOrder(fromClientId, message);
+        }
+
+        [MessageHandler((ushort)ClientToServerMessageType.RequestPlayerInventory)]
+        private static void HandleRequestPlayerInventory(ushort fromClientId, Message message)
+        {
+            _router.HandleRequestPlayerInventory(fromClientId, message);
+        }
+
 
         [MessageHandler((ushort)ClientToServerMessageType.RequestForSceneEntities)]
         private static void HandleEntitiesLoading(ushort fromClientId, Message message)

@@ -18,11 +18,8 @@ namespace Assets.Code.UI.Screens.ItemInfo
 
         public void Bind(ItemAttribute attribute, Sprite icon)
         {
-            if (_icon)
-            {
-                _icon.sprite = icon;
-                _icon.enabled = icon;
-            }
+            _icon.sprite = icon;
+            _icon.enabled = icon;
 
             _valueLabel.text = attribute.Value;
             _nameLabel.BindText(attribute.NameKey);
