@@ -12,7 +12,8 @@ namespace Assets.Code.Common.Inventory.Components
 
         public override IEnumerable<ItemAttribute> GetAttributes()
         {
-            yield return new ItemAttribute(ItemAttributeKeys.MaxCargo, MaxCargo.ToString("N0"));
+            yield return new ItemAttribute(ItemAttributeKeys.MaxCargo,
+                AttributeValueFormat.Format(ItemAttributeKeys.VolumeValueFormat, MaxCargo));
         }
     }
 }

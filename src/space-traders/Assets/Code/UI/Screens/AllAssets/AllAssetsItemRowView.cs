@@ -38,7 +38,7 @@ namespace Assets.Code.UI.Screens.StationsInventory
 
             _quantityLabel.text = amount.ToString("N0");
 
-            _volumeLabel.text = (item.Volume * amount).ToString("N0");
+            _volumeLabel.text = AttributeValueFormat.Format(ItemAttributeKeys.VolumeValueFormat, item.Volume * amount);
 
             _infoButton.onClick.RemoveListener(OnInfoClicked);
             _infoButton.onClick.AddListener(OnInfoClicked);

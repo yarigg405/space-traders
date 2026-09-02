@@ -74,6 +74,24 @@ namespace Assets.Code.ClientPart.Networking
             _router.HandleResponseBuyItem(message);
         }
 
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseSellItem)]
+        private static void HandleResponseSellItem(Message message)
+        {
+            _router.HandleResponseSellItem(message);
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.ResponseBestBuyOrder)]
+        private static void HandleResponseBestBuyOrder(Message message)
+        {
+            _router.HandleResponseBestBuyOrder(message);
+        }
+
+        [MessageHandler((ushort)ServerToClientMessageType.ResponsePlayerInventory)]
+        private static void HandleResponsePlayerInventory(Message message)
+        {
+            _router.HandleResponsePlayerInventory(message);
+        }
+
 
         [MessageHandler((ushort)ServerToClientMessageType.CreateEntity)]
         private static void HandleCreateEntity(Message message)

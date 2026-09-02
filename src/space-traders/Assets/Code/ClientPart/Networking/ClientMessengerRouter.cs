@@ -82,6 +82,21 @@ namespace Assets.Code.ClientPart.Networking
             _requestSystem.SetResponseOk(message);
         }
 
+        internal void HandleResponseSellItem(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
+        internal void HandleResponseBestBuyOrder(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
+        internal void HandleResponsePlayerInventory(Message message)
+        {
+            _requestSystem.SetResponseOk(message);
+        }
+
 
         internal void HandleCreateEntity(Message message)
         {
@@ -159,7 +174,6 @@ namespace Assets.Code.ClientPart.Networking
                 
                 _remoteBuffer .Add(id,serverTick, pos, rot);
             }
-            Debug.Log($"[WORLD] tick={serverTick} count={count}");
         }
     }
 }

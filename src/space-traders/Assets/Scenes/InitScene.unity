@@ -682,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a964051d6b79bc45abae0926230e957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Assets.Code.UI.Infrastructure.LayerUI_Popups
+  _baseSortingOrder: 101
 --- !u!1001 &2985691963363836535
 PrefabInstance:
   m_ObjectHideFlags: 0

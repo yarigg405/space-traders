@@ -16,8 +16,10 @@ namespace Assets.Code.Common.Inventory
 
         public IEnumerable<ItemAttribute> GetAttributes()
         {
-            yield return new ItemAttribute(ItemAttributeKeys.Mass, Mass.ToString("N0"));
-            yield return new ItemAttribute(ItemAttributeKeys.Volume, Volume.ToString("N0"));
+            yield return new ItemAttribute(ItemAttributeKeys.Mass,
+                AttributeValueFormat.Format(ItemAttributeKeys.MassValueFormat, Mass));
+            yield return new ItemAttribute(ItemAttributeKeys.Volume,
+                AttributeValueFormat.Format(ItemAttributeKeys.VolumeValueFormat, Volume));
 
             foreach (var attribute in Components.GetAttributes())
                 yield return attribute;

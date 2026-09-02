@@ -115,11 +115,16 @@ namespace Assets.Code.UI.Infrastructure.Impl
         public void OpenModal<TPopup>(object args = null) where TPopup : IScreen
         {
             var type = typeof(TPopup);
+            var modal = _screensProvider.GetScreen<TPopup>();
 
             if (_openedModals.Contains(type))
+            {
+                modal.Hide();
+                modal.Show(args);
+                OnScreenOpened?.Invoke(modal);
                 return;
+            }
 
-            var modal = _screensProvider.GetScreen<TPopup>();
             modal.Show(args);
             _openedModals.Add(type);
             OnScreenOpened?.Invoke(modal);
