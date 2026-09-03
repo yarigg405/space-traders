@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Infrastructure.DI;
+using Assets.Code.UI.DragAndDrop;
 using Assets.Code.UI.Elements;
 using Assets.Code.UI.Infrastructure.Impl;
 using Assets.Code.UI.Layers;
@@ -17,6 +18,7 @@ using Assets.Code.UI.Screens.Wallet;
 using Assets.Code.UI.Screens.BuySellPopups;
 using Assets.Code.UI.Screens.ItemInfo;
 using Assets.Code.UI.Screens.StationsInventory;
+using Assets.Code.UI.Screens.StationStorage;
 
 
 namespace Assets.Code.Infrastructure.Installers
@@ -37,6 +39,7 @@ namespace Assets.Code.Infrastructure.Installers
             Builder.RegisterInstance(_layerPopups).AsSelf();
 
             Builder.Register<ContextMenuController>(Lifetime.Singleton).AsSelf();
+            Builder.Register<ItemDragController>(Lifetime.Singleton).AsSelf();
 
             Builder.Register<ScreensProvider>(Lifetime.Transient).AsImplementedInterfaces();
             Builder.Register<NavigationIntentFactory>(Lifetime.Transient).AsImplementedInterfaces();
@@ -85,6 +88,9 @@ namespace Assets.Code.Infrastructure.Installers
 
             Builder.Register<AllAssetsPopup>(Lifetime.Singleton);
             Builder.Register<AllAssetsPresenter>(Lifetime.Transient);
+
+            Builder.Register<StationItemsStoragePopup>(Lifetime.Singleton);
+            Builder.Register<StationItemsStoragePresenter>(Lifetime.Transient);
 
             Builder.Register<AwaitServerResponsePopup>(Lifetime.Singleton);
 

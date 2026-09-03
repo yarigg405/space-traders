@@ -3,6 +3,7 @@ using Assets.Code.Infrastructure.States.GameStates;
 using Assets.Code.Networking.Data;
 using Assets.Code.Infrastructure.States.StateMachine;
 using Assets.Code.UI.Infrastructure.Interfaces;
+using Assets.Code.UI.Screens.StationStorage;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
@@ -42,6 +43,7 @@ namespace Assets.Code.UI.Screens.StationScreens
             view.StationNameTmp.text = data.StationName;
             view.StarSystemNameTmp.text = data.StarSystemName;
             view.UndockButton.onClick.AddListener(ClickUndock);
+            view.StorageButton.onClick.AddListener(OpenStorage);
 
             _cts = new();
         }
@@ -49,12 +51,22 @@ namespace Assets.Code.UI.Screens.StationScreens
         void IPresenter<StationMainView>.Hide(StationMainView view)
         {
             view.UndockButton.onClick.RemoveListener(ClickUndock);
+            view.StorageButton.onClick.RemoveListener(OpenStorage);
+
+            _uiManager.CloseModal<StationItemsStoragePopup>();
+
             _cts?.Cancel();
             _cts?.Dispose();
         }
 
+        private void OpenStorage()
+        {
+            _uiManager.OpenModal<StationItemsStoragePopup>();
+        }
+
         private void ClickUndock()
         {
+            _uiManager.CloseModal<StationItemsStoragePopup>();
             UndockShipAsync(_cts.Token).Forget();
         }
 

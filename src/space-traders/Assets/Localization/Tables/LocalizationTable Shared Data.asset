@@ -311,6 +311,10 @@ MonoBehaviour:
     m_Key: assets
     m_Metadata:
       m_Items: []
+  - m_Id: 127319708884000768
+    m_Key: stationStorage
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

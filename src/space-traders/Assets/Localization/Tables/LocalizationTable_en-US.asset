@@ -316,6 +316,10 @@ MonoBehaviour:
     m_Localized: Assets
     m_Metadata:
       m_Items: []
+  - m_Id: 127319708884000768
+    m_Localized: Station Storage
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
