@@ -23,9 +23,7 @@ namespace Assets.Code.UI.DragAndDrop
                 _icon.enabled = icon;
             }
 
-            if (_root)
-                _root.SetActive(true);
-
+            _root.SetActive(true);
             Move(screenPosition);
         }
 
@@ -44,8 +42,7 @@ namespace Assets.Code.UI.DragAndDrop
 
         public void Hide()
         {
-            if (_root)
-                _root.SetActive(false);
+            _root.SetActive(false);
         }
     }
 }
